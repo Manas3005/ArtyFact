@@ -28,8 +28,7 @@ export function TopBarView(props){
                     <img  src = "image/signinIcon.png" />
                 </button>
 
-                <button  className="signInlogo"> 
-
+                <button  className="signInlogo">    
                     Sign in
                    {/*<img  src="/image/signinLogo.png"/>*/}
                 </button>
