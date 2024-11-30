@@ -2,11 +2,21 @@
     display: flex;
     justify-content: center; 
     align-items: center;    
-    height: 100px;     
+    height: 200px;     
     background-color: #f5f5f5; 
     font-size: 36px;        
     font-weight: bold;      
     color: #333;
+}
+
+.logo{
+
+    position: center;          
+    margin-bottom: 100px;
+    top: 3%;  
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+
 }
 
 .Explore {
@@ -14,18 +24,80 @@
     left: 15px;                  
     top: 3%;                                  
     cursor: pointer;   
-    border: none;   
-          
+    border: bold;   
+    filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
+
+    width: 189px;
+    height: 45px;
+
+    position: absolute;
+
+    font-family: 'Jomolhari';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    background-color: ABB4C1;
+
+
+
+
 }
 .searchBar {
     position: absolute;
     border: bold;        
-    left: 20px;                   
-    top: 10%;                                  
+    left: 15px;                   
+    top: 10%;   
+    width: 197px;
+    height: 33px;                               
     cursor: text;
+ 
+}
+
+.signInlogo {
+    position: absolute;
+    border: bold;        
+    right: 50px;                   
+    top: 3%;                                  
+    cursor: pointer;
+   
+
+width: 92px;
+height: 38px;
+
 
           
 }
+
+.signInIcon {
+    position: absolute;
+    border: none;        
+    right: 150;                   
+    top: 3%;                                  
+    cursor: pointer;
+
+          
+}
+
+.Myjournal {
+margin-left: 200px;
+margin-top: 120px;
+position: absolute;
+width: 159px;
+height: 33.2px;
+
+}
+
+.Mycollections{
+margin-right: 200px;
+margin-top: 120px;
+position: absolute;
+width: 151px;
+height: 34px;
+
+}
+
 
 
 

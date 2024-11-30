@@ -1,4 +1,4 @@
-import { TopBarView } from "../views/topbarView";
+import { TopBarView } from "../../views/homePageViews/topbarView";
 import { observer } from "mobx-react-lite";
 
 
