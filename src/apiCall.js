@@ -17,7 +17,7 @@ export function testAPI() {
 
 
 function gotResponseACB(result) {
-    return result.json();
+    console.log("this is the result",result) ;  // removed json as the data is already json formated(read API documentation)
 }
 
 function printResponseACB(result) {
@@ -32,9 +32,9 @@ function checkResultStatusACB(result){
     else {
         return result;
     }
-}
-function getJSONDataACB (result){
-    return result.data
+} 
+function getJSONDataACB (result){ // maybe not needed as it is redundant ? 
+    return result
 }
 
 export function getArtWorks(searchParams) {

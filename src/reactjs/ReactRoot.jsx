@@ -1,11 +1,14 @@
 import { testAPI, getArtWorks } from "../apiCall.js"
+import { TopBar } from "./topBarPresenter.jsx"
 
-function ReactRoot (props){
+function ReactRoot(props){
 
     return (
-        testAPI()
+        <div>{testAPI()}
+        <TopBar/></div>
+        
     )
-    
+        
 
 }
 
