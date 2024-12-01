@@ -156,8 +156,37 @@ border-color: rgba(63, 110, 202, 0.89);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
 }
 
-.ArtDescPanel{
-    
-    width: 600px;
-    height: 450px;
-    }
+.horizontalFlexParent{
+    display:flex;  
+    flex-direction:row;
+}
+
+.ArtDescImage{
+    max-height: 380px;
+    flex: 0.4;
+    border:2px solid;
+}
+
+.ArtDescTextPanel{
+    height: 380px;
+    flex: 0.6;
+    background-color: #E19898;
+    border:2px solid; 
+    border-color: #000000;
+    padding-right:40px;
+    padding-left:40px;
+}
+
+.ArtDescName{
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: #000000;
+}
+
+.ArtDescText{
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    font-size: 25px;
+    color: #000000;
+}
