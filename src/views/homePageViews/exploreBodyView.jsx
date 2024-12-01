@@ -12,7 +12,6 @@ function ExploreBodyView (props) {
             <button className = "findMyTaste">Find My Taste!</button>
         </div>
         
-  
     )
 }
 
