@@ -180,7 +180,7 @@ border-color: rgba(63, 110, 202, 0.89);
 .ArtDescName{
     font-family: 'Inter', sans-serif;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px;
     color: #000000;
 }
 
@@ -189,4 +189,13 @@ border-color: rgba(63, 110, 202, 0.89);
     font-weight: normal;
     font-size: 25px;
     color: #000000;
+}
+
+.explorePanel{
+    flex: 0.4;
+}
+
+.exploreImage{
+    flex: 0.6;
+    height: 300px;
 }
