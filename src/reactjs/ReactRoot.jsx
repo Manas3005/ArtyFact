@@ -14,12 +14,10 @@ function ReactRoot(props){
             <div> <ExploreBody/></div>
 
             <div> <ArtDescBody/> </div>
-        
-        
+
+                
         </div>
         
-        
-       
          
     )
         

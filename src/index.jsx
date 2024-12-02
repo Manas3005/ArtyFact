@@ -1,12 +1,29 @@
 import {createRoot} from "react-dom/client";
 import { ReactRoot } from "/src/reactjs/ReactRoot.jsx";
 import { createElement } from "react";
-import { observable, configure , reaction} from "mobx";
-import {model} from '/src/artModel.js';
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { myCollections} from "./store/collectionsSlice";
 
-const reactiveModel= observable(model);
+
+
+//Store
+export const store = configureStore({
+    reducer: {
+        myCollections: myCollections.reducer,
+        //to be added as separate slices
+        //artWorks: artWorks.reducer,
+        //journalEntryName: journalEntryName.reducer,
+        //journalEntryImage: journalEntryName.reducer
+    }
+        
+    },
+)
 
 createRoot(document.getElementById('root'))
-    .render(<ReactRoot model={reactiveModel} />);
+    .render(
 
-window.myModel= reactiveModel;
+    <Provider store = {store}>    
+        <ReactRoot />;
+    </Provider>
+    );

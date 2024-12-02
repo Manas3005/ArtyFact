@@ -4,6 +4,7 @@ function ExploreBodyView (props) {
     return (
 
         <div className="horizontalFlexParent">
+
             <div className="explorePanel">
                 <img
                 src= "image/exploreNewArtPanel.png" 
@@ -13,7 +14,8 @@ function ExploreBodyView (props) {
                 <button className = "findMyTaste">Find My Taste!</button>
             </div>
 
-                <img className="exploreImage" src="image/Palazzo-Spada-Rome.png"></img>
+                <img className="exploreImage" src="image/Palazzo-Spada-Rome.png">
+                </img>
 
         </div>
         
