@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { ArtDescBodyView } from "../../views/homePageViews/artDescBodyView";
-import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage } from '/src/apiCall.js';
+import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
 
 
 
@@ -11,7 +11,7 @@ function ArtDescBody(props){
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        getArtWorks({id: 1234}).then(data => iterateThroughData(data)).catch(error => setError(error.message));
+        getArtWorks().then(data => iterateThroughData(data)).catch(error => setError(error.message));
     }, []); 
     if (error) return <div>Error: {error}</div>;
     if (!artData) return <div>Loading...</div>;
