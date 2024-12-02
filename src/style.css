@@ -187,8 +187,15 @@ border-color: rgba(63, 110, 202, 0.89);
 .ArtDescText{
     font-family: 'Inter', sans-serif;
     font-weight: normal;
-    font-size: 25px;
+    font-size: 20px;
     color: #000000;
+}
+
+.ArtContext{
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+    text-align: right;
 }
 
 .explorePanel{

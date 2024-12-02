@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { ArtDescBodyView } from "../../views/homePageViews/artDescBodyView";
 import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
-
+import sanitizeHtml from 'sanitize-html'; 
 
 
 function ArtDescBody(props){
@@ -22,11 +22,20 @@ function ArtDescBody(props){
         const filteredData = array.data.filter(artwork => artwork.description && artwork.title && artwork.title !== "Untitled" && artwork.image_id !== null && artwork.image_id);
         setArtData(filteredData);
     }
+
+    const cleanHtmlContent = (html) => {
+        return sanitizeHtml(html, {
+            allowedTags: [ 'strong', 'em', 'ul', 'ol', 'li', 'br' ], 
+            allowedAttributes: { '*': ['href'] },
+        });
+    };
     
   
     const randomArt = artData ? artData[Math.floor(Math.random() * artData.length)] : null;
-
     const image = randomArt ? URLParamsForImage(randomArt.image_id) : null;
+    const cleanedDescription = randomArt ? cleanHtmlContent(randomArt.description) : '';
+    console.log("cleaned", cleanedDescription);
+
 
     console.log("this is artData", artData);
     console.log("Selected random art:", randomArt);
@@ -35,6 +44,7 @@ function ArtDescBody(props){
     return <ArtDescBodyView 
                 artData={randomArt} 
                 image={image}
+                description={cleanedDescription}
                 />
 }
 

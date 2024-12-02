@@ -2,7 +2,6 @@ import "/src/style.css"
 
 function ArtDescBodyView (props) {
     console.log("-----THIS IS PROPS", props)
-    console.log("PROPS ONE", props.artData)
     console.log(props.image)
 
     return (
@@ -13,7 +12,10 @@ function ArtDescBodyView (props) {
             <div className="ArtDescTextPanel"> 
 
                 <p className="ArtDescName">{props.artData.title}</p>
-                <p className="ArtDescText">{props.artData.description}</p>
+                <p className="ArtDescText">{props.description}</p>
+                <p className="ArtContext" >  {props.artData.date_display}    </p>
+                <p className="ArtContext"> {props.artData.artist_display}  </p>
+                <p className="ArtContext"> {props.artData.classification_title}</p>
             </div>
         </div>
     )
