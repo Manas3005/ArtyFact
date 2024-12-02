@@ -4,7 +4,9 @@ import {MAIN_URL, IMAGE_URL, IMAGE_DIM} from "/src/apiConfig.js";
 const options = {
     method: "GET",
     headers: {
-        "AIC-User-Agent": "ArtyFact (teoman@kth.se)"
+        "AIC-User-Agent": "ArtyFact (teoman@kth.se)",
+        mode: 'no-cors',
+        
     },
 }
 
@@ -17,11 +19,11 @@ export function testAPI() {
 
 
 function gotResponseACB(result) {
-    console.log("this is the result",result) ;  // removed json as the data is already json formated(read API documentation)
+    return result.json();  
 }
 
 function printResponseACB(result) {
-    console.log(result);
+    return result;
 }
 
 function checkResultStatusACB(result){
@@ -33,18 +35,28 @@ function checkResultStatusACB(result){
         return result;
     }
 } 
-function getJSONDataACB (result){ // maybe not needed as it is redundant ? 
-    return result
-}
 
 export function getArtWorks(searchParams) {
     return fetch(createURLParamsForArtWork(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
 
 export function getArtWorkImage(result){
-    const imageID = result.image_id //check gotResponseACB
-    return (imageID + IMAGE_DIM)
-    
+    console.log("This is result", result);
+    const imageID = result;
+    const imagePath = imageID + IMAGE_DIM;
+    return fetch(URLParamsForImage(imagePath), options).then(gotImageACB)
+}
+function gotImageACB(result) {
+    console.log("this is result", result);
+    return result.url;
+}
+function printGotImageACB(result) {
+    console.log("this is image result", result);
+}
+
+export function URLParamsForImage(searchParams) {
+    console.log("the path in image", IMAGE_URL + searchParams)
+    return IMAGE_URL + searchParams + IMAGE_DIM;
 }
 /**
  * An example of searchParams would be
@@ -55,7 +67,7 @@ export function getArtWorkImage(result){
  * @returns An API promise object.
  */
 function createURLParamsForArtWork(searchParams) {
-    return MAIN_URL + "/artworks/" + "?" + new URLSearchParams(searchParams);
+    return MAIN_URL + "artworks/" + "?" + new URLSearchParams(searchParams);
 }
 const searchParams1 = {
     title: "example",
@@ -63,3 +75,4 @@ const searchParams1 = {
 function createURLParamsForSpecificArtWork(id, searchParams1) {
     return MAIN_URL + "/artworks/" + id + "?" + new URLSearchParams(searchParams1);
 }
+//Create API calls for gathering images
