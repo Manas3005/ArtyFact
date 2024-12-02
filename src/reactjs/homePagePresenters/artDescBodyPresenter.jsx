@@ -10,6 +10,9 @@ function ArtDescBody(props){
     const [artData, setArtData] = useState(null); 
     const [error, setError] = useState(null);
 
+    //The first argument is an anonomyous ACB function that we define inside the argument.
+    // We could might as well have defined it elsewhere and simply have given the functionACB reference as: useEffect(functionACB, []);
+    //The name of this function could be "fetchArtWork" and its sole purpose would be to call the getArtWorks etc.
     useEffect(() => {
         getArtWorks().then(data => iterateThroughData(data)).catch(error => setError(error.message));
     }, []); 
@@ -25,7 +28,7 @@ function ArtDescBody(props){
 
     const cleanHtmlContent = (html) => {
         return sanitizeHtml(html, {
-            allowedTags: [ 'strong', 'em', 'ul', 'ol', 'li', 'br' ], 
+            allowedTags: [ ], 
             allowedAttributes: { '*': ['href'] },
         });
     };
