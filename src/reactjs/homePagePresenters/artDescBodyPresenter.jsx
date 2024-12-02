@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 
 import { ArtDescBodyView } from "../../views/homePageViews/artDescBodyView";
 import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
-import sanitizeHtml from 'sanitize-html'; 
+import {cleanHtmlContent} from '/src/utilities.js'
 
 
 function ArtDescBody(props){
 
+    //Redux specific hooks
+    //const selector = useSelector(); //Allows you to observe the latest data in the store (model)
+    //const dispatch = useDispatch(); //Allows you to call upon setters in redux. So when u call setters, u just dispatch actions
+
+    //This is component state - not anything to do with the model or store.
     const [artData, setArtData] = useState(null); 
     const [error, setError] = useState(null);
 
@@ -26,13 +31,9 @@ function ArtDescBody(props){
         setArtData(filteredData);
     }
 
-    const cleanHtmlContent = (html) => {
-        return sanitizeHtml(html, {
-            allowedTags: [ ], 
-            allowedAttributes: { '*': ['href'] },
-        });
-    };
-    
+    function customEventHandlerForClickingACB(evt) {
+        props.model.setNumberOfGuests(evt.target.value)
+    }
   
     const randomArt = artData ? artData[Math.floor(Math.random() * artData.length)] : null;
     const image = randomArt ? URLParamsForImage(randomArt.image_id) : null;
