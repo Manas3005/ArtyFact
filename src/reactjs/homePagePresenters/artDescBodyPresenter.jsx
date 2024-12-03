@@ -16,9 +16,9 @@ function ArtDescBody(props){
     const [error, setError] = useState(null);
 
     function fetchArtWorkACB() {
-         {
+         
             getArtWorks().then(data => iterateThroughData(data)).catch(error => setError(error.message));
-        }
+        
     }
 
     //The first argument is an anonomyous ACB function that we define inside the argument.
