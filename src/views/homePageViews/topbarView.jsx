@@ -5,6 +5,7 @@ import "/src/style.css"
 
 
 export function TopBarView(props){
+    
 
     return (
         <div>
@@ -34,8 +35,8 @@ export function TopBarView(props){
                 </button>
                 
                 
-                <button className="Myjournal">My Journal</button>
-                <button className="Mycollections">My Collections</button>
+                <button className="Myjournal" >My Journal</button>
+                <button className="Mycollections" >My Collections</button>
                 
             
             </div>
@@ -44,6 +45,7 @@ export function TopBarView(props){
 
         </div>
 
+        
 
     ) 
 
