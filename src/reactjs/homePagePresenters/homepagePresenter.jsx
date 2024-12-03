@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { ArtDescBodyView } from "../../views/homePageViews/artDescBodyView";
 import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
 import {cleanHtmlContent} from '/src/utilities.js'
+import { TopBarView } from "../../views/homePageViews/topbarView";
+import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
 
 
-function ArtDescBody(props){
+
+function HomePage(props){
 
     //Redux specific hooks
     //const selector = useSelector(); //Allows you to observe the latest data in the store (model)
@@ -45,11 +48,15 @@ function ArtDescBody(props){
     console.log("Selected random art:", randomArt);
     console.log("The image URL:", image);
    
-    return <ArtDescBodyView 
+    return <div>
+        <TopBarView> </TopBarView>
+        <ExploreBodyView> </ExploreBodyView>
+        <ArtDescBodyView 
                 artData={randomArt} 
                 image={image}
                 description={cleanedDescription}
                 />
+        </div>
 }
 
-export {ArtDescBody}
+export {HomePage}

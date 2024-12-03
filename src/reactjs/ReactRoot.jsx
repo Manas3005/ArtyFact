@@ -1,7 +1,5 @@
 import { testAPI, getArtWorks } from "../apiCall.js"
-import { ExploreBody } from "./homePagePresenters/exploreBodyPresenter.jsx"
-import { TopBar } from "./homePagePresenters/topBarPresenter.jsx"
-import { ArtDescBody } from "./homePagePresenters/artDescBodyPresenter.jsx"
+import { HomePage } from "./homePagePresenters/homepagePresenter.jsx"
 
 function ReactRoot(props){
 
@@ -9,11 +7,7 @@ function ReactRoot(props){
 
         <div>
 
-            <div> {testAPI()} <TopBar/> </div>
-        
-            <div> <ExploreBody/></div>
-
-            <div> <ArtDescBody/> </div>
+             {testAPI()} <HomePage></HomePage>
 
                 
         </div>
