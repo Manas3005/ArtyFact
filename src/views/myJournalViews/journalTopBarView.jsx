@@ -2,6 +2,9 @@ import "/src/style.css"
 
 export function JournalTopBarView(props){
     
+    function handleBackToHomeClickedACB (){
+        return window.location.hash = '#/homepage'
+    }
 
     return (
         <div>
@@ -9,7 +12,7 @@ export function JournalTopBarView(props){
             <div className="topBar">
                 
                 <button className="Mycollections" >My Collections</button>
-                <button className="backToHome"> Back To Home</button> 
+                <button className="backToHome" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
                 <img  className = "logo" src = "image/myJournalsLogo.png" />
                 
