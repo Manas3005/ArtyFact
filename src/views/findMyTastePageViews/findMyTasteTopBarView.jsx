@@ -15,12 +15,13 @@ function FindMyTasteTopBarView (props){
     }
     /*Overall the functions above are meant to improve usability to better indicate to the user which tab they are currently on*/
     
-    return <div>
+    return <div className = "topBarFMT">
                 <a href = "#/homepage">
-                <img className = "backToHomeButton" src = "image/backToHome.png"></img></a>
+                    <img className = "backToHomeButton" src = "image/backToHome.png"></img>
+                </a>
                 <div className = "artyFactHeader">ArtyFact</div>
-                <button id = "describeButton" className = "dreamArtDescButton" onClick = {setDescGreyACB}>Describe</button>
-                <button id = "artQuizButton" className = "dreamArtQuizButton" onClick = {setQuizGreyACB}>Take the Art Quiz</button>
+                <button id = "describeButton" className = "dreamArtDescButton" onClick = {setDescGreyACB}> Describe </button>
+                <button id = "artQuizButton" className = "dreamArtQuizButton" onClick = {setQuizGreyACB}> Take the Art Quiz </button>
            </div>
 }
 

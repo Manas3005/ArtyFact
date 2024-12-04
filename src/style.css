@@ -106,8 +106,8 @@ height: 300px;
 
 .findMyTaste {
     margin-top: 70;
-    top: 42%;                     
-    left: 2.8%;                    
+    top: 52%;                     
+    left: 4%;                    
     position: absolute;
     width: 227px;
     height: 50px;
@@ -122,19 +122,19 @@ height: 300px;
     }
 
 .Myjournal {
-margin-left: 200px;
-margin-top: 120px;
-position: absolute;
-width: 159px;
-height: 33.2px;
+    margin-left: 200px;
+    margin-top: 120px;
+    position: absolute;
+    width: 159px;
+    height: 33.2px;
 
 }
 
 
 .confusedText {
     position: absolute;
-    top: 45%; 
-    left: 2.8%; 
+    top: 57%; 
+    left: 4%; 
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 19px; 
     color: #000000; 
@@ -192,13 +192,23 @@ height: 33.2px;
     height: 300px;
 }
 
+
+/*FindMyTaste page styling begins below*/
+
+.topBarFMT{
+    height: 30vh;
+    width: 100%;
+    background-color: #dacdbf;
+    border-radius: 20px;
+    
+}
+
 .artyFactHeader{
     position:absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Junge';
-    font-style: normal;
-    font-size: 55px;
+    font-size: 60px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     line-height: 90px;
     color: #000000;
 }
@@ -206,7 +216,7 @@ height: 33.2px;
 .dreamArtDescButton{
 
     position: absolute;
-    left: 31%;
+    left: 22%;
     transform: translateX(100%);
     margin-top: 130px;
     width: 170px;
@@ -218,7 +228,7 @@ height: 33.2px;
 
 .dreamArtQuizButton{
     position: absolute;
-    right: 48%;
+    right: 46%;
     transform: translateX(100%);
     margin-top: 130px;
     width: 170px;
@@ -229,18 +239,43 @@ height: 33.2px;
 
 .backToHomeButton {
     position: absolute;
-    top: 15px; 
-    left: 3%; 
+    left: 4%;
+    padding: 20px;
     transform: translateX(-50%); 
-    background-color: #ffffff; 
-    border: 2px bold #000000;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
     cursor: pointer;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
     width: 60px;
     height: 60px;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));    
+    
+    
 }
+
+.dreamDescInputBox{
+    margin-left: 365px;
+    margin-top: 70px;
+    width: 700px;
+    height: 300px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: #dacdbf;
+    
+}
+
+.seeDescResultsButton{
+    top: 90%;
+    left: 46%;
+    position: absolute;
+    font-family: "Junge";
+    font-size: 15px;
+    width: 128px;
+    height: 33px;
+    background: #F6F6F6;
+    border: 15px;
+    border-radius: 10px;
+    background-color: #dacdbf;
+    cursor: pointer;
+}
+
 
