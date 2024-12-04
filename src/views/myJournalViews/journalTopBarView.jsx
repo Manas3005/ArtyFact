@@ -11,16 +11,20 @@ export function JournalTopBarView(props){
             
             <div className="topBar">
                 
-                <button className="Mycollections" >My Collections</button>
+                <button className="myJournalsMyCollections" >My Collections</button>
                 <button className="backToHome" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
                 <img  className = "logo" src = "image/myJournalsLogo.png" />
                 
-                <button className="signInIcon">
-                    <img  src = "image/signinIcon.png" />
+                <button className="loggedInButton">
+                    <img className="Icon" src = "image/signinIcon.png" />
+                    <text className="loggedInText">Logged In</text>
                 </button>
 
-                <button  className="signInlogo"> Logged In </button>
+                <button className="addNewEntry">
+                    <img className="Icon" src = "image/plusIcon.png" />
+                    <text >Add New Journal Entry</text>
+                </button>
                             
             </div>
 
