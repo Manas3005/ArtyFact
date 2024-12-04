@@ -1,7 +1,7 @@
-import { DreamArtDescriptionView } from "../views/findMyTastePageViews/dreamArtDescriptionView"
+import { FindMyTasteTopBarView } from "../views/findMyTastePageViews/findMyTasteTopBarView"
 
 export function FindMyTaste(props){
     return <div>
-                <DreamArtDescriptionView></DreamArtDescriptionView>
+                <FindMyTasteTopBarView></FindMyTasteTopBarView>
            </div>
 }

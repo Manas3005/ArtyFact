@@ -191,3 +191,56 @@ height: 33.2px;
     flex: 0.6;
     height: 300px;
 }
+
+.artyFactHeader{
+    position:absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Junge';
+    font-style: normal;
+    font-size: 55px;
+    line-height: 90px;
+    color: #000000;
+}
+
+.dreamArtDescButton{
+
+    position: absolute;
+    left: 31%;
+    transform: translateX(100%);
+    margin-top: 130px;
+    width: 170px;
+    height: 50px;
+    background: #fffefe;
+    border-radius: 19px;
+
+}
+
+.dreamArtQuizButton{
+    position: absolute;
+    right: 48%;
+    transform: translateX(100%);
+    margin-top: 130px;
+    width: 170px;
+    height: 50px;
+    background: #fffefe;
+    border-radius: 19px;
+}
+
+.backToHomeButton {
+    position: absolute;
+    top: 15px; 
+    left: 3%; 
+    transform: translateX(-50%); 
+    background-color: #ffffff; 
+    border: 2px bold #000000;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    width: 60px;
+    height: 60px;
+}
+

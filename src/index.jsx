@@ -22,7 +22,7 @@ export function App (){
     return (
     <div>
         <Provider store = {store}>    
-            <ReactRoot />;
+            <ReactRoot />
         </Provider>
     </div>)
 }
