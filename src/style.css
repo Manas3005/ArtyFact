@@ -51,7 +51,7 @@
     position: absolute;
     border: bold;        
     left: 15px;                   
-    top: 10%;   
+    top: 30%;   
     width: 197px;
     height: 33px;                               
     cursor: text;
@@ -255,7 +255,7 @@ height: 33.2px;
     gap: 10px;                    
     padding: 10px;                
     border: bold;                
-    background-color: #86a59e; 
+    background-color: BACD92; 
     cursor: pointer;              
 }
 
@@ -292,6 +292,23 @@ height: 33.2px;
     border: bold; 
     align-items: center; 
     
+    font-family: 'Jomolhari';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.entriesList{
+    display: flex;
+    flex-direction:column; 
+    justify-content: center; 
+    align-items: center;    
+         
+    position: relative;
+    height: 600px;
+}
+
+.alertText{
     font-family: 'Jomolhari';
     font-style: normal;
     font-weight: 400;
