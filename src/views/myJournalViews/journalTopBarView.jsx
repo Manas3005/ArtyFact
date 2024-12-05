@@ -6,6 +6,10 @@ export function JournalTopBarView(props){
         return window.location.hash = '#/homepage'
     }
 
+    function handleAddNewEntryClickedACB (){
+        return window.location.hash = '#/editentry'
+    }
+
     return (
         <div>
             
@@ -21,7 +25,7 @@ export function JournalTopBarView(props){
                     <text className="loggedInText">Logged In</text>
                 </button>
 
-                <button className="addNewEntry">
+                <button className="addNewEntry" onClick={handleAddNewEntryClickedACB}>
                     <img className="Icon" src = "image/plusIcon.png" />
                     <text >Add New Journal Entry</text>
                 </button>
