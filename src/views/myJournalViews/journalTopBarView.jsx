@@ -16,7 +16,7 @@ export function JournalTopBarView(props){
                
                 <img  className = "logo" src = "image/myJournalsLogo.png" />
                 
-                <button className="loggedInButton">
+                <button className="buttonWithIcon">
                     <img className="Icon" src = "image/signinIcon.png" />
                     <text className="loggedInText">Logged In</text>
                 </button>

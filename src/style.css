@@ -242,7 +242,7 @@ height: 33.2px;
     background-color: #f5f5f5;
 }
 
-.loggedInButton {
+.buttonWithIcon {
     position: absolute;
     width: 189px;
     height: 45px;
@@ -315,4 +315,28 @@ height: 33.2px;
     font-size: 25px;
 }
 
+.saveChanges{
+    position: absolute;
+    width: 189px;
+    height: 45px;
+
+    right: 15px;                  
+    top: 35%;
+
+    display: flex;                
+    align-items: center;          
+    gap: 10px;                    
+    padding: 10px;                
+    border: bold;                
+    background-color: BEEFA9; 
+    cursor: pointer;  
+
+    font-family: 'Jomolhari';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    background-color: E7DCDC;
+}
 
