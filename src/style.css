@@ -221,7 +221,9 @@ height: 300px;
     margin-top: 130px;
     width: 170px;
     height: 50px;
-    background: #fffefe;
+    background: #e6e6e6;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
     border-radius: 19px;
 
 }
@@ -234,8 +236,11 @@ height: 300px;
     width: 170px;
     height: 50px;
     background: #fffefe;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
     border-radius: 19px;
 }
+
 
 .backToHomeButton {
     position: absolute;
@@ -260,7 +265,9 @@ height: 300px;
     border-radius: 15px;
     padding: 15px;
     background-color: #dacdbf;
-    
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;    
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .seeDescResultsButton{
@@ -272,7 +279,7 @@ height: 300px;
     width: 128px;
     height: 33px;
     background: #F6F6F6;
-    border: 15px;
+    border: 0.5px solid #000000;
     border-radius: 10px;
     background-color: #dacdbf;
     cursor: pointer;

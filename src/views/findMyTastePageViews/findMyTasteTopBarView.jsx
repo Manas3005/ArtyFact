@@ -13,16 +13,31 @@ function FindMyTasteTopBarView (props){
         document.getElementById("describeButton").style.backgroundColor = "white"
 
     }
-    /*Overall the functions above are meant to improve usability to better indicate to the user which tab they are currently on*/
+    /*Basically the functions above are meant to improve usability to better indicate to the user which tab they are currently on (through the grey color)*/
     
-    return <div className = "topBarFMT">
+
+    function handleDescribeClickACB(){ 
+        setDescGreyACB()
+        props.onDescribeButtonClicked() //Firing custom event
+    }
+
+    function handleArtQuizClickACB(){
+        setQuizGreyACB()
+        props.onArtQuizButtonClicked() //Firing custom event
+    }
+
+    return (<div className = "topBarFMT">
+                
                 <a href = "#/homepage">
                     <img className = "backToHomeButton" src = "image/backToHome.png"></img>
                 </a>
+                
                 <div className = "artyFactHeader">ArtyFact</div>
-                <button id = "describeButton" className = "dreamArtDescButton" onClick = {setDescGreyACB}> Describe </button>
-                <button id = "artQuizButton" className = "dreamArtQuizButton" onClick = {setQuizGreyACB}> Take the Art Quiz </button>
-           </div>
+                
+                <button id = "describeButton" className = "dreamArtDescButton" onClick = {handleDescribeClickACB}> Describe </button>
+                <button id = "artQuizButton" className = "dreamArtQuizButton" onClick = {handleArtQuizClickACB}> Take the Art Quiz </button>
+           
+           </div>)
 }
 
 export {FindMyTasteTopBarView}
