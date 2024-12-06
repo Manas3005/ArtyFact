@@ -9,26 +9,19 @@ export function EntryEditContentView(props){
 
             <div className="editEntryLeftContent">
 
-                <div className="titleDiv">
+                <div className="titleAndDateDiv">
+                   
+                    <input className="entryTitleTextBox" placeholder="Journal Entry Title "></input>
 
-                    <text>Journal Entry Title : </text>
-                    <input className="entryTitleTextBox" placeholder="Journal Entry Title"></input>
+                    <input className="entryTextBox" placeholder="Journal Entry Date "></input>
 
                 </div> 
 
-                <div className="dateAndMoodDiv">
+                <div className="moodDiv">
 
                     <div>
 
-                        <text>Journal Entry Date : </text>
-                        <input className="entryTitleTextBox" placeholder="Journal Entry Date"></input>
-
-                    </div>
-
-                    <div>
-
-                        <text>Mood :</text>
-                        <input className="entryTitleTextBox" placeholder="Current Mood"></input>
+                        <input className="entryTextBox" placeholder="Current Mood (Optional)"></input>
 
                     </div>
                 </div>

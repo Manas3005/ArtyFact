@@ -329,40 +329,51 @@
     
 }
 
-.entryTitleTextBox{
+.entryTextBox{
     width: 300px;
     height: 40px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 16px;
+    font-size: 20px;
 
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+    
     transition: all 0.3s ease; /* Smooth transition for interactions */
-}
 
-.entryTitleTextBox:hover {
-    border-color: #888; /* Change border color on hover */
-}
-
-.entryTitleTextBox:focus {
-    border-color: #007BFF; 
-    outline: none; 
-    background-color: #eef; /* Slightly change background color */
-
-    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
+    border: none;
+    border-bottom: 2px solid #000; /* A line below the input */
+    outline: none; /* Removes focus ring for a cleaner look */
+    
+    padding: 5px 0;
     
 }
 
-.titleDiv{
-    flex: 0.1;
-    display:flex;
-    justify-content: center;
+.entryTitleTextBox{
+    width: 450px;
+    height: 40px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+
+    
+    transition: all 0.3s ease; /* Smooth transition for interactions */
+
+    border: none;
+    border-bottom: 2px solid #000; /* A line below the input */
+    outline: none; /* Removes focus ring for a cleaner look */
+    
+    padding: 5px 0;
+    
 }
 
-.dateAndMoodDiv{
+.titleAndDateDiv{
+    flex: 0.1;
+    display:flex;
+    margin-left: 40px;
+    gap: 18%;
+}
+
+.moodDiv{
     flex: 0.1;
     display: flex;
-    justify-content: center;
-    gap: 100px;
+    margin-left: 40px;
 }
 
 .journalEntryDiv{
@@ -380,7 +391,7 @@
     width: 95%; /* Take full width */
     height: 100%; /* Take full height */
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 20px;
+    font-size: 24px;
 
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
     transition: all 0.3s ease; /* Smooth transition for interactions */
