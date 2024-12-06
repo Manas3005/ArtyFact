@@ -10,13 +10,10 @@
 }
 
 .logo{
-
     position: center;          
     margin-bottom: 100px;
     top: 3%;  
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-
-
 }
 
 .Explore {
@@ -127,8 +124,8 @@ margin-top: 120px;
 position: absolute;
 width: 159px;
 height: 33.2px;
-
 }
+
 
 
 .confusedText {
@@ -191,3 +188,11 @@ height: 33.2px;
     flex: 0.6;
     height: 300px;
 }
+
+.backToHome{
+position: absolute;
+width: 155.79px;
+height: 36.54px;
+}
+
+

@@ -1,5 +1,6 @@
 import { testAPI, getArtWorks } from "../apiCall.js"
 import { HomePage } from "./homepagePresenter.jsx"
+import {MyCollectionsPresenter} from "./myCollectionsPresenter.jsx"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
 import { store} from "../index.jsx";
 
@@ -12,6 +13,10 @@ export function makeRouter(model){
         {
             path:"/homepage",
             element: <HomePage store ={store}></HomePage>
+        },
+        {
+            path: "/collections",
+            element: <MyCollectionsPresenter store ={store}></MyCollectionsPresenter>
         }
         
     ])
