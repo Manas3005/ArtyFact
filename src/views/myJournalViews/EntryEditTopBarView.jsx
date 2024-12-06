@@ -1,6 +1,6 @@
 import "/src/style.css"
 
-export function JournalEntryEditView(props){
+export function EntryEditTopBarView(props){
 
     function handleBackToMyJournalsClickedACB (){
         return window.location.hash = '#/myjournals'
@@ -10,7 +10,7 @@ export function JournalEntryEditView(props){
         <div>
             <div className="topBar">
                 
-                <button className="backToHome" onClick={handleBackToMyJournalsClickedACB}> Back To My Journals</button> 
+                <button className="backToMyJournals" onClick={handleBackToMyJournalsClickedACB}> Back To My Journals</button> 
                
                 <img  className = "logo" src = "image/editJournalEntryLogo.png" />
                 
