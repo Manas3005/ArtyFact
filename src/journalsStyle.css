@@ -141,6 +141,15 @@
     color: #000000;
 }
 
+.saveChanges:hover {
+    border-color: #6fc341; 
+    outline: none; 
+    background-color: rgb(79, 226, 71); /* Slightly change background color */
+
+    box-shadow: 0px 4px 10px rgba(21, 203, 94, 0.5); /* Glow effect on focus */
+    
+}
+
 .backToMyJournals{
     position: absolute;
     width: 189px;
@@ -178,6 +187,8 @@
 
 .editEntryLeftContent{
     flex: 0.75;
+    display:flex;  
+    flex-direction:column;
 }
 
 .sidebarVerticalFlexParent{
@@ -249,8 +260,6 @@
     height: 45px;
 
     bottom: 200;          
-    
-
     display: flex;                
     align-items: center;
     justify-content: center;          
@@ -265,7 +274,86 @@
     font-family: 'Jomolhari';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 26px;
     color: #000000;
+}
+
+.deleteEntry:hover {
+    border-color: #ff0000; 
+    outline: none; 
+    background-color: rgb(226, 78, 71); /* Slightly change background color */
+
+    box-shadow: 0px 4px 10px rgba(203, 55, 21, 0.5); /* Glow effect on focus */
+    
+}
+
+.entryTitleTextBox{
+    width: 300px;
+    height: 40px;
+    font-family: 'Jomolhari';
+    font-size: 16px;
+
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+    transition: all 0.3s ease; /* Smooth transition for interactions */
+}
+
+.entryTitleTextBox:hover {
+    border-color: #888; /* Change border color on hover */
+}
+
+.entryTitleTextBox:focus {
+    border-color: #007BFF; 
+    outline: none; 
+    background-color: #eef; /* Slightly change background color */
+
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
+    
+}
+
+.titleDiv{
+    flex: 0.1;
+    display:flex;
+    justify-content: center;
+}
+
+.dateAndMoodDiv{
+    flex: 0.1;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.journalEntryDiv{
+    flex: 0.8;
+    display:flex;
+    justify-content: center;
+    
+    width: 100%; /* Set parent width */
+    height: 300px; /* Example height */
+    box-sizing: border-box; /* Ensures padding and borders don't affect dimensions */
+    
+}
+
+.journalEntryContentTextBox{
+    width: 95%; /* Take full width */
+    height: 100%; /* Take full height */
+    font-family: 'Jomolhari';
+    font-size: 16px;
+
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+    transition: all 0.3s ease; /* Smooth transition for interactions */
+}
+
+.journalEntryContentTextBox:hover {
+    border-color: #888; /* Change border color on hover */
+}
+
+.journalEntryContentTextBox:focus {
+    border-color: #007BFF; 
+    outline: none; 
+    background-color: #eef; /* Slightly change background color */
+
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
+    
 }

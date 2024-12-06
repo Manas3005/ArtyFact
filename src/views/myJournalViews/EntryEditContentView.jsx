@@ -9,8 +9,36 @@ export function EntryEditContentView(props){
 
             <div className="editEntryLeftContent">
 
-                
-                            
+                <div className="titleDiv">
+
+                    <text>Journal Entry Title : </text>
+                    <input className="entryTitleTextBox" placeholder="Journal Entry Title"></input>
+
+                </div> 
+
+                <div className="dateAndMoodDiv">
+
+                    <div>
+
+                        <text>Journal Entry Date : </text>
+                        <input className="entryTitleTextBox" placeholder="Journal Entry Date"></input>
+
+                    </div>
+
+                    <div>
+
+                        <text>Mood :</text>
+                        <input className="entryTitleTextBox" placeholder="Current Mood"></input>
+
+                    </div>
+                </div>
+
+                <div className="journalEntryDiv">
+
+                    <textarea className="journalEntryContentTextBox" placeholder="What are you thinking about? Start Typing here ..."></textarea>
+
+                </div>
+
             </div>
 
             <div className="editEntryRightSideBar">
