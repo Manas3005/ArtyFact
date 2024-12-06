@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 
 import { ArtDescBodyView } from "../views/homePageViews/artDescBodyView";
 import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
-import {cleanHtmlContent,iterateThroughData } from '/src/utilities.js'
+import {cleanHtmlContent } from '/src/utilities.js'
 import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
-
-
 
 function HomePage(props){
 
@@ -31,6 +29,13 @@ function HomePage(props){
     if (error) return <div>Error: {error}</div>;
     if (!artData) return <div>Loading...</div>;
 
+
+ function iterateThroughData(array) {
+    console.log("This is the array", array);
+    console.log("This is it", array.data.filter(artwork => artwork.title && artwork.title !== "Untitled"));
+    const filteredData = array.data.filter(artwork => artwork.description && artwork.title && artwork.title !== "Untitled" && artwork.image_id !== null && artwork.image_id);
+    setArtData(filteredData);
+}
   
     const randomArt = artData ? artData[Math.floor(Math.random() * artData.length)] : null;
     const image = randomArt ? URLParamsForImage(randomArt.image_id) : null;
@@ -43,6 +48,7 @@ function HomePage(props){
     console.log("The image URL:", image);
    
     return <div>
+       
         <TopBarView> </TopBarView>
         <ExploreBodyView> </ExploreBodyView>
         <ArtDescBodyView 

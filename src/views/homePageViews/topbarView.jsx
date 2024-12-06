@@ -1,24 +1,36 @@
 import "/src/style.css"
-
-
-
+//import Drawer from '@mui/material/Drawer';
+import React, { useState } from 'react';
+import ExploreDrawer from './ThirdPartyWrittenComponents/sideBarNav';
+import "/src/style.css";
 
 
 export function TopBarView(props){
-    
 
+    const [open, setOpen] = useState(false);
+
+    const toggleDrawer = (newOpen) => () => {
+      setOpen(newOpen);
+    };
+  
+    
     return (
         <div>
             
             <div className="topBar">
                 
-                <button  className="Explore"> 
+                <button  onClick={toggleDrawer(true)} className="Explore"> 
                     
                    ☰ Explore
                 {/*<img  src="image/explore.png"/>*/}
 
 
                 </button>
+
+                <ExploreDrawer open={open} toggleDrawer={toggleDrawer} />
+
+
+
 
                <input className="searchBar" placeholder = "Search..."/> 
 
