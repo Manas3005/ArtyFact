@@ -3,12 +3,13 @@ import { ReactRoot } from "/src/reactjs/ReactRoot.jsx";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { myCollections} from "./store/collectionsSlice";
-
+import { findMyTaste } from "./store/findMyTasteSlice";
 
 //Store
 export const store = configureStore({
     reducer: {
         myCollections: myCollections.reducer,
+        findMyTaste: findMyTaste.reducer,
         //to be added as separate slices
         //artWorks: artWorks.reducer,
         //journalEntryName: journalEntryName.reducer,

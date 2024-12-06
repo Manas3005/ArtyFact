@@ -8,7 +8,7 @@ export function FindMyTaste(props){
 
     const [currentView, setCurrentView] = useState('describe'); /*here component state is used because it aids the change of views depnding
     on the tab button clicked only on findMyTaste so it has no connection with the application state*/
-    
+
     function setArtDescViewACB(){ //handling custom event 
         setCurrentView('describe') 
     }
@@ -20,8 +20,12 @@ export function FindMyTaste(props){
     useEffect(function() { //this is taking currentView as a dependency so whenever the functions above are called, the view below updates
       }, [currentView]);
 
-    
+    function showProgressACB (){
 
+    }
+
+    
+    
     return (<div>
                 <FindMyTasteTopBarView onDescribeButtonClicked = {setArtDescViewACB} 
                                        onArtQuizButtonClicked = {setArtQuizViewACB}              
