@@ -1,4 +1,5 @@
 import "/src/style.css"
+import "/src/journalsStyle.css"
 
 export function JournalEntriesListView(props){
     
