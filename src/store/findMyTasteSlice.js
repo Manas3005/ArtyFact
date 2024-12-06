@@ -2,12 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const findMyTaste = createSlice({
     name : "findMyTaste",
-    initialState: [{
+    initialState: {
         progress: 0,
-    }],
+    },
     reducers:{
-        progressIncrement: (state, action)=> {
+        incrementProgress: (state, action)=> {
             state.progress += action.payload
         }
     }
 })
+
+export const { incrementProgress } = findMyTaste.actions;
+

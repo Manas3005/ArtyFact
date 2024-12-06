@@ -2,9 +2,12 @@ import { FindMyTasteTopBarView } from "../views/findMyTastePageViews/findMyTaste
 import { DreamArtDescView } from "../views/findMyTastePageViews/dreamArtDescView"
 import { ArtQuizView } from "../views/findMyTastePageViews/artQuizView"
 import { useEffect, useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { incrementProgress } from "../store/findMyTasteSlice";
 
 export function FindMyTaste(props){
+
+    const dispatch = useDispatch()
 
     const [currentView, setCurrentView] = useState('describe'); /*here component state is used because it aids the change of views depnding
     on the tab button clicked only on findMyTaste so it has no connection with the application state*/
@@ -17,19 +20,25 @@ export function FindMyTaste(props){
         setCurrentView('quiz') 
     }
 
+    function incrementQuizProgressACB(){
+        dispatch(incrementProgress(10))
+    }
+
+    const updatedProgress = useSelector((state) => state.findMyTaste.progress); //this is to actually update the artQuiz view
+
+
     useEffect(function() { //this is taking currentView as a dependency so whenever the functions above are called, the view below updates
       }, [currentView]);
 
-    function showProgressACB (){
-
-    }
-
-    
     
     return (<div>
                 <FindMyTasteTopBarView onDescribeButtonClicked = {setArtDescViewACB} 
                                        onArtQuizButtonClicked = {setArtQuizViewACB}              
                 ></FindMyTasteTopBarView> 
-                {currentView === 'describe' ? (<DreamArtDescView/>) : (<ArtQuizView />)}
+
+                {currentView === 'describe' ? (<DreamArtDescView/>) : (<ArtQuizView 
+                                                                        onNextButtonClicked = {incrementQuizProgressACB}
+                                                                        updatedProgress = {updatedProgress} //Passing down the updated progress to the ArtQuiz view
+                                                                        />)}
             </div>)
 }

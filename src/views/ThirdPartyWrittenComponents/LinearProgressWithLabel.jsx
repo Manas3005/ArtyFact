@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useSelector } from 'react-redux';
 
 function LinearProgressWithLabel(props) {
   return (
@@ -28,10 +27,10 @@ LinearProgressWithLabel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function LinearWithValueLabel() {
+export default function LinearWithValueLabel(props) {
   return (
     <Box sx={{ width: '100%' }}>
-      <LinearProgressWithLabel value={useSelector((state) => state.findMyTaste[0].progress)} />
+      <LinearProgressWithLabel value = {props.updatedProgress} /> {/*Showing the updated value passed from the presenter through the artQuiz view*/}
     </Box>
   );
 }
