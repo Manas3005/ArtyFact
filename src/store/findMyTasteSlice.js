@@ -6,11 +6,19 @@ export const findMyTaste = createSlice({
         progress: 0,
     },
     reducers:{
-        incrementProgress: (state, action)=> {
-            state.progress += action.payload
+        incrementProgress: (state, action) => {
+            if(state.progress<100){
+                state.progress += action.payload
+            }
+        },
+
+        decrementProgress: (state, action) => {
+            if(state.progress>0){
+                state.progress -= action.payload
+            }
         }
     }
 })
 
-export const { incrementProgress } = findMyTaste.actions;
+export const { incrementProgress, decrementProgress } = findMyTaste.actions;
 

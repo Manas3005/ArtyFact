@@ -283,6 +283,7 @@ height: 300px;
     border-radius: 10px;
     background-color: #dacdbf;
     cursor: pointer;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .quizQuestions{
@@ -290,6 +291,48 @@ height: 300px;
     margin-top: 25px;
     font-size: 30;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.progressBar {
+    margin-top: 10px;
+    border-radius: 15px;
+}
+
+.quizPreviousQuestion{
+    top: 90%;
+    left: 20%;
+    position: absolute;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15px;
+    width: 128px;
+    height: 33px;
+    background: #F6F6F6;
+    border: 0.2px solid #585757;
+    border-radius: 10px;
+    background-color: #dacdbf;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+}
+
+.quizNextQuestion{
+    top: 90%;
+    right: 20%;
+    position: absolute;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15px;
+    width: 128px;
+    height: 33px;
+    background: #F6F6F6;
+    border: 0.2px solid #585757;
+    border-radius: 10px;
+    background-color: #dacdbf;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+}   
+
+.quizPreviousQuestion:hover, .quizNextQuestion:hover, .seeDescResultsButton:hover{
+    transform: scale(1.1); 
+    box-shadow: 0px 4px 10px #dacdbf; 
 }
 
 
