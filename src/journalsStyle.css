@@ -12,7 +12,7 @@
     height: 45px;
 
 
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -20,6 +20,13 @@
     color: #000000;
     background-color: E7DCDC;
 
+}
+
+.backToHome:hover {
+    background-color: rgb(219, 184, 145);  
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    transform: translateY(-3px); 
+    transition: all 0.3s ease; 
 }
 
 .myJournalsMyCollections{
@@ -35,13 +42,20 @@
 
     position: absolute;
 
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 26px;
     color: #000000;
     background-color: #f5f5f5;
+}
+
+.myJournalsMyCollections:hover {
+    background-color: rgb(242, 196, 158);  
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    transform: translateY(-3px); 
+    transition: all 0.3s ease; 
 }
 
 .buttonWithIcon {
@@ -68,7 +82,7 @@
 }
 
 .loggedInText{
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;;
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
@@ -94,11 +108,19 @@
     border: bold; 
     align-items: center; 
     
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;;
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
 }
+
+.addNewEntry:hover {
+    background-color: rgb(176, 204, 128);  
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    transform: translateY(-3px); 
+    transition: all 0.3s ease; 
+}
+
 
 .entriesList{
     display: flex;
@@ -133,7 +155,7 @@
     background-color: BEEFA9; 
     cursor: pointer;  
 
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -144,9 +166,11 @@
 .saveChanges:hover {
     border-color: #6fc341; 
     outline: none; 
-    background-color: rgb(79, 226, 71); /* Slightly change background color */
+    background-color: rgb(79, 226, 71); 
 
-    box-shadow: 0px 4px 10px rgba(21, 203, 94, 0.5); /* Glow effect on focus */
+    box-shadow: 0px 4px 10px rgba(21, 203, 94, 0.5); 
+    transform: translateY(-3px); 
+    transition: all 0.3s ease; 
     
 }
 
@@ -164,7 +188,7 @@
     background-color: E7DCDC; 
     cursor: pointer;  
 
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -172,6 +196,14 @@
     color: #000000;
   
     filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
+}
+
+
+.backToMyJournals:hover {
+    background-color: rgb(219, 184, 145);  
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    transform: translateY(-3px); 
+    transition: all 0.3s ease; 
 }
 
 .editEntryHorizontalFlexParent{
@@ -241,12 +273,19 @@
     background-color: E7DCDC;
     cursor: pointer;  
 
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 26px;
     color: #000000;
+}
+
+.addArtwork:hover {
+    background-color: rgb(219, 184, 145); 
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    transform: translateY(-3px); 
+    transition: all 0.3s ease; 
 }
 
 .starryNightIcon{
@@ -271,7 +310,7 @@
     background-color: FF8A8A; 
     cursor: pointer;  
 
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -282,16 +321,18 @@
 .deleteEntry:hover {
     border-color: #ff0000; 
     outline: none; 
-    background-color: rgb(226, 78, 71); /* Slightly change background color */
+    background-color: rgb(226, 78, 71); 
 
-    box-shadow: 0px 4px 10px rgba(203, 55, 21, 0.5); /* Glow effect on focus */
+    box-shadow: 0px 4px 10px rgba(203, 55, 21, 0.5); 
+    transform: translateY(-3px); 
+    transition: all 0.3s ease; 
     
 }
 
 .entryTitleTextBox{
     width: 300px;
     height: 40px;
-    font-family: 'Jomolhari';
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 16px;
 
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
@@ -338,8 +379,8 @@
 .journalEntryContentTextBox{
     width: 95%; /* Take full width */
     height: 100%; /* Take full height */
-    font-family: 'Jomolhari';
-    font-size: 16px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
 
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
     transition: all 0.3s ease; /* Smooth transition for interactions */
