@@ -30,11 +30,6 @@ export function FindMyTaste(props){
 
     const updatedProgress = useSelector((state) => state.findMyTaste.progress); //this is to actually update the artQuiz view
 
-
-    useEffect(function() { //this is taking currentView as a dependency so whenever the functions above are called, the view below updates
-      }, [currentView]);
-
-    
     return (<div>
                 <FindMyTasteTopBarView onDescribeButtonClicked = {setArtDescViewACB} 
                                        onArtQuizButtonClicked = {setArtQuizViewACB}              
