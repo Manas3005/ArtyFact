@@ -9,7 +9,7 @@ export function MyCollectionsPresenter(props) {
 
     //useEffect((testingAnAPICallForMostSimilar), []);
 
-    const images= [ {
+    /*const images= [ {
             image: '/image/miyazaki.png',
             title: "Miyazaki In Japan",
         },
@@ -25,8 +25,51 @@ export function MyCollectionsPresenter(props) {
             image: '/image/paris.jpg',
             title: 'Paris Street'
         }
-    ]
-    console.log("The imagess!!!!", images);
+    ]*/
+
+    const collections = [
+            {
+                title: "Surrealism",
+                images: [
+                    '/image/miyazaki.png',
+                    '/image/paris.jpg',
+                    '/image/artdeschomepage.png',
+                ],
+            },
+            {
+                title: "Collection 2",
+                images: [
+                    '/image/artdeschomepage.png',
+                    '/image/paris.jpg',
+                    '/image/miyazaki.png',
+                ]
+            },
+            {
+                title: "Absurdities..",
+                images: [
+                    '/image/CalfsHead.jpg',
+                    '/image/TheLoire.jpg',
+                    '/image/TheSeine.png',
+                ]
+            },
+            {
+                title: "Collection 4",
+                images: [
+                    '/image/EdouardManet.jpg',
+                    '/image/EntranceToThePort.jpg',
+                    '/image/StreetInMoret.jpg',
+                ]
+            },
+            {
+                title: "Collection 5",
+                images: [
+                    '/image/CalfsHead.jpg',
+                    '/image/TheLoire.jpg',
+                    '/image/TheSeine.png',
+                ]
+            }
+        ]
+
 
 
 
@@ -34,7 +77,7 @@ export function MyCollectionsPresenter(props) {
     return(
         <div>
             <TopbarCollectionsView ></TopbarCollectionsView> 
-            <ListOfCollectionsView images={images}> </ListOfCollectionsView>
+            <ListOfCollectionsView collections={collections} />
         </div>
             
 
