@@ -3,7 +3,7 @@ import { ReactRoot } from "/src/reactjs/ReactRoot.jsx";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { myCollections} from "./store/collectionsSlice";
-import "src/firebaseModel.js";
+import "./firebaseModel.js";
 
 
 //Store
