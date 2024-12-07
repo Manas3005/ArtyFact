@@ -83,3 +83,8 @@ function createURLParamsForSpecificArtWork(id, searchParams1) {
     return MAIN_URL + "/artworks/" + id + "?" + new URLSearchParams(searchParams1);
 }
 //Create API calls for gathering images
+
+export function testingAnAPICallForMostSimilar() {
+    return fetch("https://www.artic.edu/artworks/129884/exploreFurther?ef-most-similar_ids=most-similar", options)
+    .then(gotResponseACB).then(printGotImageACB);
+}

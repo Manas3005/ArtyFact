@@ -71,8 +71,6 @@ font-size: 12px;
 line-height: 15px;
 
 color: #000000;
-
-
           
 }
 
@@ -82,8 +80,6 @@ color: #000000;
     right: 150;                   
     top: 3%;                                  
     cursor: pointer;
-
-          
 }
 
 .Mycollections{
@@ -194,5 +190,7 @@ position: absolute;
 width: 155.79px;
 height: 36.54px;
 }
+
+
 
 

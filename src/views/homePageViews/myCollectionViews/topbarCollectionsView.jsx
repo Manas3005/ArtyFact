@@ -1,35 +1,35 @@
-import "/src/style.css"
+import "/src/collectionsCSS/collectionsStyle.css"
 
 
 function TopbarCollectionsView(props) {
 
     function backToHomeACB() {
-        window.location.hash="/";
+        window.location.hash="#/";
     }
 
     function goToJournalACB() {
         window.location.hash="/myJournal";
     }
+
+    const boxes = [
+
+    ]
     
     return (
 
         <div>
 
-            <div className="">
-                <button className="myJournal" onClick={goToJournalACB}>My Journals</button>
+            <div className="topbarCollection">
+                <button className="MyJournalCollection" onClick={goToJournalACB}>My Journals</button>
                 
-                <button className="backToHome" onClick={backToHomeACB}>Back To Home</button>
+                <button className="backToHomeCollection" onClick={backToHomeACB}>Back To Home</button>
                 <button className="signInlogo">Sign in</button>
                 <button className="signInIcon" >
                 <img src = "image/signinIcon.png" />
                 </button>
                 <img className = "logo" src="image/Logo.png" />
-
             </div>
-
-
-
-
+            
         </div>
 
 
