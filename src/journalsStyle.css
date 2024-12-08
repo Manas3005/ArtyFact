@@ -431,11 +431,10 @@
     flex:0.8;
     width: 90%;
     text-align: center;
-    
-    
+       
     overflow-y: auto;       
-    border: 1px solid #ccc;  
     padding: 30px;
+    margin: 10px;
       
 }
 
