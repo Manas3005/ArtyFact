@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { ArtDescBodyView } from "../views/homePageViews/artDescBodyView";
-import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
+import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch, getArtWorksWithLog} from '/src/apiCall.js';
 import {cleanHtmlContent } from '/src/utilities.js'
 import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
@@ -19,8 +19,10 @@ function HomePage(props){
     function fetchArtWorkACB() {
          
         getArtWorks().then(data => iterateThroughData(data)).catch(error => setError(error.message));
-        
     }
+
+    getArtWorksWithLog()
+
 
     //The first argument is an anonomyous ACB function that we define inside the argument.
     // We could might as well have defined it elsewhere and simply have given the functionACB reference as: useEffect(functionACB, []);

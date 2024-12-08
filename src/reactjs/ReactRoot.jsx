@@ -5,7 +5,7 @@ import { store} from "../index.jsx";
 
 export function makeRouter(model){
     return createHashRouter([
-        {
+        {    
             path:"/",
             element: <HomePage store ={store}></HomePage>
         },

@@ -13,7 +13,8 @@ export function TopBarView(props){
       setOpen(newOpen);
     };
   
-    
+    console.log("we are here and this is props"+ props)
+
     return (
         <div>
             
@@ -24,7 +25,7 @@ export function TopBarView(props){
                    ☰ Explore
                 {/*<img  src="image/explore.png"/>*/}
 
-
+               
                 </button>
 
                 <ExploreDrawer open={open} toggleDrawer={toggleDrawer} />

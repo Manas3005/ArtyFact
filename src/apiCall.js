@@ -39,9 +39,18 @@ function checkResultStatusACB(result){
 export function getArtWorks(searchParams) {
     return fetch(createURLParamsForArtWork(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
+
+export function getArtWorksWithLog(searchParams) {
+    return fetch(createURLParamsForArtWork(searchParams), options).then(gotResponseACB).then((result) => console.log("this is where we are now ",result));
+}
+
+
+
 export function getArtWorksSearch(searchParams) {
     return fetch(createURLParamsForArtWorkSearch(searchParams), options).then(gotResponseACB).then(printResponseACB);
-}
+}   
+
+
 
 export function getArtWorkImage(result){
     console.log("This is result", result);
@@ -82,4 +91,5 @@ const searchParams1 = {
 function createURLParamsForSpecificArtWork(id, searchParams1) {
     return MAIN_URL + "/artworks/" + id + "?" + new URLSearchParams(searchParams1);
 }
+
 //Create API calls for gathering images
