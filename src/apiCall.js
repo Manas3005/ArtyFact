@@ -70,7 +70,7 @@ export function URLParamsForImage(searchParams) {
  * @returns An API promise object.
  */
 function createURLParamsForArtWork(searchParams) {
-    return MAIN_URL + "artworks/" + "?" + new URLSearchParams(searchParams);
+    return MAIN_URL + "artworks/" +  "?" + new URLSearchParams(searchParams);
 }
 function createURLParamsForArtWorkSearch(searchParams) {
     console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams))

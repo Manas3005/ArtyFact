@@ -17,15 +17,14 @@ export const myCollections = createSlice({
             state.searchQuery = action.payload;
         },
         setCollectionsArray: (state, action) => {
+            console.log("This is the payload", action.payload);
             state.collectionsArray = action.payload;
+            console.log("This is the collections array after storing", state.collectionsArray);
         },
         
     }
 })
 
-    export const selectCollectionsArray = (state) => {
-        return state.collectionsArray;
-    }
 
 export const { setSearchQuery, setCollectionsArray } = myCollections.actions;
 

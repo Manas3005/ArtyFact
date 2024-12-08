@@ -1,7 +1,9 @@
 import "/src/collectionsCSS/collectionsStyle.css"
-import { useEffect, useState } from "react";
 
 function TopbarCollectionsView(props) {
+
+    console.log("These are the props in collections view", props);
+
 
     function backToHomeACB() {
         window.location.hash="#/";
@@ -11,13 +13,19 @@ function TopbarCollectionsView(props) {
         window.location.hash="/myJournal";
     }
 
-    const [collectionSearchQuery, setCollectionSearchQuery] = useState();
+    function handleClearButtonACB(evt) {
+        console.log("inside handle clear");
+        props.setClearButton(false);
+        //Vi vill även att tryckningen ska deleta texten inuti searchBar
+    }
+    
 
     function handleSearchACB(evt) {
         console.log("This is the evt", evt.target.value);
         console.log("Setting the search query to: ", evt.target.value);
-        setCollectionSearchQuery(evt.target.value);
-        console.log("This is the current search query", collectionSearchQuery);
+        //setCollectionSearchQuery(evt.target.value);
+        props.setSearch(evt.target.value);
+        //console.log("This is the current search query", collectionSearchQuery);
     }
     /**
      * Det vi vill göra är att vi vill skapa en search query.
@@ -41,10 +49,14 @@ function TopbarCollectionsView(props) {
                 <button className="MyJournalCollection" onClick={goToJournalACB}>My Journals</button>
                 
                 <button className="backToHomeCollection" onClick={backToHomeACB}>Back To Home</button>
-                <input className="collectionsSearchBar" placeholder = "Search Collections..." onChange={handleSearchACB}/> 
+                <input className="collectionsSearchBar" placeholder = "Search Collections..." onChange={handleSearchACB}/>
+                <button className="buttonX"
+                    onClick={handleClearButtonACB} 
+                    style={{display: props.clearButton ? 'block' : 'none' }}>
+                    x</button> 
                 <button className="signInlogo">Sign in</button>
                 <button className="signInIcon" >
-                <img src = "image/signinIcon.png" />
+                <img src = "image/signinIcon.png"/>
                 </button>
                 <img className = "collectionsLogo" src="image/collectionsLogo.png" />
 

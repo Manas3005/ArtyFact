@@ -68,6 +68,25 @@
     cursor: text;
 }
 
+.buttonX {
+    position: absolute;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color:dimgray;
+    font-size: 30px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-right: 970px;
+    margin-top: 178px;
+}
+
+.buttonX:hover {
+    color:bisque;
+}
+
+
 
 .backToHomeCollection:hover{
     background-color: rgb(244, 201, 145); 

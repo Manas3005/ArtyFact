@@ -5,6 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { myCollections} from "./store/collectionsSlice";
 
 
+
 //Store
 export const store = configureStore({
     reducer: {
