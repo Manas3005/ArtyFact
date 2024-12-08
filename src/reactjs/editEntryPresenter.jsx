@@ -3,6 +3,13 @@ import { EntryEditContentView } from "../views/myJournalViews/EntryEditContentVi
 
 function EntryEdit (props){
     console.log("Rendering EntryEdit")
+
+    const [title, setTitle] = useState('');
+    const [date, setDate] = useState('');
+    const [mood, setMood] = useState('');
+    const [actualText, setActualText] = useState('');
+    const [entryID, setEntryID] = useState('');
+
     return (<div>
 
         <EntryEditTopBarView></EntryEditTopBarView>

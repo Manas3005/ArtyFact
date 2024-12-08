@@ -1,0 +1,193 @@
+.topBar {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 200px;     
+    background-color: #f5f5f5; 
+    font-size: 36px;        
+    font-weight: bold;      
+    color: #333;
+}
+
+.logo{
+
+    position: center;          
+    margin-bottom: 100px;
+    top: 3%;  
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+
+}
+
+.Explore {
+    position: absolute;          
+    left: 15px;                  
+    top: 3%;                                  
+    cursor: pointer;   
+    border: bold;   
+    filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
+
+    width: 189px;
+    height: 45px;
+
+    position: absolute;
+
+    font-family: 'Jomolhari';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    background-color: ABB4C1;
+
+
+
+
+}
+.searchBar {
+    position: absolute;
+    border: bold;        
+    left: 15px;                   
+    top: 10%;   
+    width: 197px;
+    height: 33px;                               
+    cursor: text;
+ 
+}
+
+.signInlogo {
+    position: absolute;
+    border: bold;        
+    right: 50px;                   
+    top: 3%;                                  
+    cursor: pointer;
+   
+
+width: 92px;
+height: 38px;
+
+
+font-family: 'Junge';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 15px;
+
+color: #000000;
+
+
+          
+}
+
+.signInIcon {
+    position: absolute;
+    border: none;        
+    right: 150;                   
+    top: 3%;                                  
+    cursor: pointer;
+
+          
+}
+
+.Mycollections{
+margin-right: 200px;
+margin-top: 120px;
+position: absolute;
+width: 151px;
+height: 34px;
+
+}
+
+.exploreNewArtPanel{
+
+width: 900px;
+height: 300px;
+}
+
+.findMyTaste {
+    margin-top: 70;
+    top: 42%;                     
+    left: 2.8%;                    
+    position: absolute;
+    width: 227px;
+    height: 50px;
+    background: rgba(63, 110, 202, 0.89);
+    border-radius: 10px;
+    font-family: 'Jacques Francois';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: #000000;
+    border-color: rgba(63, 110, 202, 0.89);
+    }
+
+.Myjournal {
+margin-left: 200px;
+margin-top: 120px;
+position: absolute;
+width: 159px;
+height: 33.2px;
+
+}
+
+
+.confusedText {
+    position: absolute;
+    top: 45%; 
+    left: 2.8%; 
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 19px; 
+    color: #000000; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
+}
+
+.horizontalFlexParent{
+    display:flex;  
+    flex-direction:row;
+}
+
+.ArtDescImage{
+    max-height: 380px;
+    flex: 0.4;
+    border:2px solid;
+}
+
+.ArtDescTextPanel{
+    height: 380px;
+    flex: 0.6;
+    background-color: #E19898;
+    border:2px solid; 
+    border-color: #000000;
+    padding-right:40px;
+    padding-left:40px;
+}
+
+.ArtDescName{
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    color: #000000;
+}
+
+.ArtDescText{
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    color: #000000;
+}
+
+.ArtContext{
+    font-family: 'Inter', sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+    text-align: right;
+}
+
+.explorePanel{
+    flex: 0.4;
+}
+
+.exploreImage{
+    flex: 0.6;
+    height: 300px;
+}
