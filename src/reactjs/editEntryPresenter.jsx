@@ -35,6 +35,7 @@ function EntryEdit (props){
     return (<div>
 
         <EntryEditTopBarView onSaveChanges={saveChangesACB}></EntryEditTopBarView>
+        
         <EntryEditContentView onEntryTitleChange={setTitle} 
                             onEntryDateChange={setDate} 
                             onEntryMoodChange={setMood} 

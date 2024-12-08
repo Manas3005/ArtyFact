@@ -7,3 +7,7 @@ export const cleanHtmlContent = (html) => {
         allowedAttributes: { '*': ['href'] },
     });
 };
+
+export function transformJournalTitleCB(entry) {
+    return entry.title;
+}

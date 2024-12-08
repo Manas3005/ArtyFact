@@ -129,7 +129,7 @@
     align-items: center;    
          
     position: relative;
-    height: 600px;
+    height: 100%;
 }
 
 .alertText{
@@ -409,3 +409,33 @@
     box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
     
 }
+
+.previousEntriesText{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+}
+
+.entriesLabelList{
+    top: 3%;
+    flex: 0.2;
+    justify-content: center; 
+    align-items: center;        
+    position: absolute;
+    
+}
+
+.scrollable {
+    
+    flex:0.8;
+    width: 90%;
+    justify-content: center; 
+    align-items: center;
+
+    
+    overflow-y: auto;       
+    border: 1px solid #ccc;  
+    padding: 10px;  
+}
+
