@@ -32,33 +32,17 @@ export function JournalEntriesListView(props){
 
                 <div id="scrollableArea" className="scrollable">
 
-                {addDynamicJournalEntries(props.entries)}
+                {props.entries.map((entry, index) => (
+                        <div key={index} className="journalEntryListDiv">
+                            <img src="image/starry-night.png" className="journalEntryListImage" />
+                            <span className="journalEntryListText">{transformJournalTitleCB(entry)}</span>
+                        </div>
+                    ))}
 
                 </div>
 
             </div>
         )
-
-        function addDynamicJournalEntries (journalEntries){ 
-            const entryTitles = journalEntries.map(transformJournalTitleCB)
-    
-            entryTitles.forEach(entryTitle => {
-    
-                const scrollableArea = document.getElementById("scrollableArea");
-                const wrapper = document.createElement("div"); // Create a container
-              
-                const img = document.createElement("img");
-                img.src = "image/starry-night.png"                 
-    
-                const text = document.createElement("span"); // Create text element
-                text.textContent = entryTitle;        // Set the text content
-    
-                wrapper.appendChild(img);            // Add image to the wrapper
-                wrapper.appendChild(text);           // Add text to the wrapper
-                scrollableArea.appendChild(wrapper); // Add wrapper to the container
-            });
-        }
-
     } 
 
 

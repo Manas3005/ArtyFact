@@ -430,12 +430,33 @@
     
     flex:0.8;
     width: 90%;
-    justify-content: center; 
-    align-items: center;
-
+    text-align: center;
+    
     
     overflow-y: auto;       
     border: 1px solid #ccc;  
-    padding: 10px;  
+    padding: 30px;
+      
+}
+
+.journalEntryListDiv{
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+    height:300px;
+    width: 300px;
+
+    background-color: bisque;
+}
+
+.journalEntryListImage{
+    display: block;
+    width: 100%;
+    
+}
+
+.journalEntryListText{
+    display: block;
+    
 }
 
