@@ -12,9 +12,9 @@ export function ListOfCollectionsView(props) {
     useEffect(() => {
         const interval = setInterval(() => {
             setActiveIndex((prevIndex) => (prevIndex + 1) % props.collections[0].images.length);
-        }, 6000); // Change image every 3 seconds
+        }, 6000); 
 
-        return () => clearInterval(interval); // Cleanup on unmount
+        return () => clearInterval(interval); 
     }, [props.collections]);
 
     function renderSlideShowCB(images) {

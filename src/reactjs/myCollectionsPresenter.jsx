@@ -67,6 +67,30 @@ export function MyCollectionsPresenter(props) {
                     '/image/TheLoire.jpg',
                     '/image/TheSeine.png',
                 ]
+            },
+            {
+                title: "Collection 6",
+                images: [
+                    '/image/CalfsHead.jpg',
+                    '/image/TheLoire.jpg',
+                    '/image/TheSeine.png',
+                ]
+            },
+            {
+                title: "Collection 7",
+                images: [
+                    '/image/CalfsHead.jpg',
+                    '/image/TheLoire.jpg',
+                    '/image/TheSeine.png',
+                ]
+            },
+            {
+                title: "Collection 8",
+                images: [
+                    '/image/CalfsHead.jpg',
+                    '/image/TheLoire.jpg',
+                    '/image/TheSeine.png',
+                ]
             }
         ]
 
