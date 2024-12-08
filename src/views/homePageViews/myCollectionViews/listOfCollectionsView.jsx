@@ -3,19 +3,13 @@ import { useEffect, useState } from "react";
 
 export function ListOfCollectionsView(props) {
 
+    console.log("This is the props", props);
+
     function handleNavigateACB() {
-        window.location.hash='/thecollection'
+        window.location.hash='/thecollection';
     }
 
-    const [activeIndex, setActiveIndex] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveIndex((prevIndex) => (prevIndex + 1) % props.collections[0].images.length);
-        }, 6000); 
-
-        return () => clearInterval(interval); 
-    }, [props.collections]);
 
     function renderSlideShowCB(images) {
         return [...images].map((image, i) => (
@@ -23,7 +17,7 @@ export function ListOfCollectionsView(props) {
                 key={i}
                 src={image}
                 alt={`Slide ${i}`}
-                className={`collection-image ${i === activeIndex ? "active" : "hidden"}`}
+                className={`collection-image ${i === props.activeIndex ? "active" : "hidden"}`}
                 onClick={handleNavigateACB}
                 
             />

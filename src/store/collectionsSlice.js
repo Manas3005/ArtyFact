@@ -28,3 +28,4 @@ export const myCollections = createSlice({
     }
 
 export const { setSearchQuery, setCollectionsArray } = myCollections.actions;
+
