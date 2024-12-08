@@ -6,6 +6,10 @@ export function EntryEditTopBarView(props){
     function handleBackToMyJournalsClickedACB (){
         return window.location.hash = '#/myjournals'
     }
+
+    function handleSaveChangesClickedACB (){
+        props.onSaveChanges();
+    }
     
     return (
         <div>
@@ -15,7 +19,7 @@ export function EntryEditTopBarView(props){
                
                 <img  className = "logo" src = "image/editJournalEntryLogo.png" />
                 
-                <button className="saveChanges">
+                <button className="saveChanges" onClick={handleSaveChangesClickedACB}>
                     <img className="Icon" src = "image/saveIcon.png" />
                     <text >Save Changes</text>
                 </button>

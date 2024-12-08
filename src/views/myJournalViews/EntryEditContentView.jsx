@@ -3,6 +3,21 @@ import "/src/journalsStyle.css"
 
 export function EntryEditContentView(props){
 
+    function onEntryTitleChangeACB (event){
+        props.onEntryTitleChange(event.target.value)
+    }
+
+    function onEntryDateChangeACB (event){
+        props.onEntryDateChange(event.target.value)
+    }
+
+    function onEntryMoodChangeACB (event){
+        props.onEntryMoodChange(event.target.value)
+    }
+
+    function onEntryTextChangeACB (event){
+        props.onEntryTextChange(event.target.value)
+    }
     
     return (
         <div className="editEntryHorizontalFlexParent">
@@ -11,9 +26,9 @@ export function EntryEditContentView(props){
 
                 <div className="titleAndDateDiv">
                    
-                    <input className="entryTitleTextBox" placeholder="Journal Entry Title "></input>
+                    <input className="entryTitleTextBox" placeholder="Journal Entry Title " onBlur={onEntryTitleChangeACB}></input>
 
-                    <input className="entryTextBox" placeholder="Journal Entry Date "></input>
+                    <input className="entryTextBox" placeholder="Journal Entry Date " onBlur={onEntryDateChangeACB}></input>
 
                 </div> 
 
@@ -21,14 +36,14 @@ export function EntryEditContentView(props){
 
                     <div>
 
-                        <input className="entryTextBox" placeholder="Current Mood (Optional)"></input>
+                        <input className="entryTextBox" placeholder="Current Mood (Optional)" onBlur={onEntryMoodChangeACB}></input>
 
                     </div>
                 </div>
 
                 <div className="journalEntryDiv">
 
-                    <textarea className="journalEntryContentTextBox" placeholder="What are you thinking about? Start Typing here ..."></textarea>
+                    <textarea className="journalEntryContentTextBox" placeholder="What are you thinking about? Start Typing here ..." onBlur={onEntryTextChangeACB}></textarea>
 
                 </div>
 
