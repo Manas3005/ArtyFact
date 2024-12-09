@@ -11,12 +11,16 @@ export function JournalTopBarView(props){
         return window.location.hash = '#/editentry'
     }
 
+    function handleMyCollectionsClickedACB (){
+        return window.location.hash = '#/collections'
+    }
+
     return (
         <div>
             
             <div className="topBar">
                 
-                <button className="myJournalsMyCollections" >My Collections</button>
+                <button className="myJournalsMyCollections" onClick={handleMyCollectionsClickedACB}>My Collections</button>
                 <button className="backToHome" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
                 <img  className = "logo" src = "https://i.imgur.com/i2maDv0.png" />
