@@ -3,6 +3,7 @@ import { ReactRoot } from "/src/reactjs/ReactRoot.jsx";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { myCollections} from "./store/collectionsSlice";
+import "./firebaseModel.js";
 import { myJournalEntries } from "./store/journalsSlice";
 
 
@@ -11,7 +12,7 @@ export const store = configureStore({
     reducer: {
         myCollections: myCollections.reducer,
         myJournals: myJournalEntries.reducer,
-        
+
         //to be added as separate slices
         //artWorks: artWorks.reducer,
         //journalEntryName: journalEntryName.reducer,
