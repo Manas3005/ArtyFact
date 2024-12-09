@@ -1,5 +1,5 @@
-import "/src/style.css"
-import "/src/journalsStyle.css"
+import "/src/css/style.css"
+import "/src/css/journalsStyle.css"
 import { transformJournalTitleCB } from "../../utilities"; 
 
 

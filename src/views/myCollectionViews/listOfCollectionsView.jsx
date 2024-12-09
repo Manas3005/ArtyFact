@@ -1,4 +1,4 @@
-import "/src/collectionsCSS/collectionsStyle.css";
+import "/src/css/collectionsStyle.css";
 import { useEffect, useState } from "react";
 
 export function ListOfCollectionsView(props) {

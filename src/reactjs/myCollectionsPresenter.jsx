@@ -1,6 +1,6 @@
 import { testingAnAPICallForMostSimilar } from "../apiCall";
-import { TopbarCollectionsView } from "../views/homePageViews/myCollectionViews/topbarCollectionsView"
-import { ListOfCollectionsView } from "../views/homePageViews/myCollectionViews/listOfCollectionsView";
+import { TopbarCollectionsView } from "../views/myCollectionViews/topbarCollectionsView"
+import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCollectionsArray } from "../store/collectionsSlice";
@@ -14,67 +14,67 @@ export function MyCollectionsPresenter(props) {
 
     const collections = [
         {
-            title: "Surrealism",
+            title: "Japanese Art",
             images: [
-                '/image/miyazaki.png',
-                '/image/paris.jpg',
-                '/image/artdeschomepage.png',
+                '/image/Japan/Waves.jpg',
+                '/image/Japan/AutumnMaples.jpg',
+                '/image/Japan/Maisaka.jpg',
             ],
         },
         {
-            title: "Collection 2",
+            title: "Impressionism... oh",
             images: [
-                '/image/artdeschomepage.png',
-                '/image/paris.jpg',
-                '/image/miyazaki.png',
+                '/image/impressionism/SundayImpressionism.jpg',
+                '/image/impressionism/TwoSistersImpressionism.jpg',
+                '/image/impressionism/wheatImpressionism/TheSeine.png',
             ]
         },
         {
-            title: "Absurdities..",
+            title: "Gustave Caillebotte..",
             images: [
                 '/image/CalfsHead.jpg',
-                '/image/TheLoire.jpg',
-                '/image/TheSeine.png',
+                '/image/Paris.jpg',
+                '/image/SelfPortrait.png',
             ]
         },
         {
-            title: "Collection 4",
+            title: "are you coming home soon dear?",
             images: [
-                '/image/EdouardManet.jpg',
-                '/image/EntranceToThePort.jpg',
-                '/image/StreetInMoret.jpg',
+                '/image/ComeHome/IsabellaWolf.jpg',
+                '/image/ComeHome/TheHerringNet.jpg',
+                '/image/ComeHome/Merahi.jpg',
             ]
         },
         {
             title: "Collection 5",
             images: [
-                '/image/CalfsHead.jpg',
-                '/image/TheLoire.jpg',
-                '/image/TheSeine.png',
+                '/image/city/FromTheBackWindow.jpg',
+                '/image/city/LeNeptune.jpg',
+                '/image/city/TheStreet.png',
             ]
         },
         {
             title: "Collection 6",
             images: [
-                '/image/CalfsHead.jpg',
-                '/image/TheLoire.jpg',
+                '/image/thelandingplace.jpg',
+                '/image/theobelisk.jpg',
                 '/image/TheSeine.png',
             ]
         },
         {
             title: "Collection 7",
             images: [
-                '/image/CalfsHead.jpg',
-                '/image/TheLoire.jpg',
-                '/image/TheSeine.png',
+                '/image/collections/Arlesiennes.jpg',
+                '/image/collections/atMouquin.jpg',
+                '/image/collections/Bahamas.jpg',
             ]
         },
         {
-            title: "Collection 8",
+            title: "what are these streets?",
             images: [
-                '/image/CalfsHead.jpg',
-                '/image/TheLoire.jpg',
-                '/image/TheSeine.png',
+                '/image/humans/MarcandAbat-jours.jpg',
+                '/image/humans/PorteuseDePain.jpg',
+                '/image/Versailles.png',
             ]
         }
     ]

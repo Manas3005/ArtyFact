@@ -1,4 +1,4 @@
-import "/src/collectionsCSS/collectionsStyle.css"
+import "/src/css/collectionsStyle.css"
 
 function TopbarCollectionsView(props) {
 

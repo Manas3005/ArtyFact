@@ -1,4 +1,4 @@
-import "/src/style.css"
+import "/src/css/style.css"
 
 function ArtDescBodyView (props) {
     console.log("-----THIS IS PROPS", props)
