@@ -10,7 +10,7 @@ function TopbarCollectionsView(props) {
     }
 
     function goToJournalACB() {
-        window.location.hash="/myJournal";
+        window.location.hash="/myjournals";
     }
 
     function handleClearButtonACB(evt) {
