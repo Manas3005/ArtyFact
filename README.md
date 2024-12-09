@@ -42,7 +42,7 @@ The resulting artworks should be associated to responses from all quiz questions
 - User will be able to click on an artwork and see its details.
 - User would also have a "see more like this" that would display artworks --similar to the one they were recommended on the details page. 
 
-#### myJournal
+#### My Jorunal
 - Delete a specific journal entry (implement unique entryID for each journal entry)
 - Search, choose and add a specific artwork for individual journal entries (through Add artwork button on the “edit journal entry” page)
 - User should be able to check the actual contents of a previously added journal entry
