@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ArtDescBodyView } from "../views/homePageViews/artDescBodyView";
 
 import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch, getArtWorksWithLog} from '/src/apiCall.js';
+import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
 import {cleanHtmlContent } from '/src/utilities.js'
 import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
@@ -18,7 +19,6 @@ function HomePage(props){
     const [error, setError] = useState(null);
 
     function fetchArtWorkACB() {
-         
         getArtWorks().then(data => iterateThroughData(data)).catch(error => setError(error.message));
     }
 
@@ -40,8 +40,6 @@ function HomePage(props){
         const filteredData = array.data.filter(artwork => artwork.description && artwork.title && artwork.title !== "Untitled" && artwork.image_id !== null && artwork.image_id);
         setArtData(filteredData);
     }
-
-
   
     const randomArt = artData ? artData[Math.floor(Math.random() * artData.length)] : null;
     const image = randomArt ? URLParamsForImage(randomArt.image_id) : null;

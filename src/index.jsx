@@ -7,6 +7,7 @@ import "./firebaseModel.js";
 import { myJournalEntries } from "./store/journalsSlice";
 
 
+
 //Store
 export const store = configureStore({
     reducer: {

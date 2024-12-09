@@ -21,6 +21,9 @@ export function TopBarView(props){
   
     console.log("we are here and this is props"+ props)
 
+    function handleClickForMyCollectionACB() {
+        window.location.hash="#/collections";
+    }
 
     return (
         <div>
@@ -56,7 +59,8 @@ export function TopBarView(props){
                 
                 
                 <button className="Myjournal" onClick={handleMyJournalsClickedACB} >My Journal</button>
-                <button className="Mycollections" >My Collections</button>
+                <button className="Mycollections" onClick={handleClickForMyCollectionACB}>My Collections</button>
+
                 
             
             </div>

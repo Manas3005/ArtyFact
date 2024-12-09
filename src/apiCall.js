@@ -79,7 +79,7 @@ export function URLParamsForImage(searchParams) {
  * @returns An API promise object.
  */
 function createURLParamsForArtWork(searchParams) {
-    return MAIN_URL + "artworks/" + "?" + new URLSearchParams(searchParams);
+    return MAIN_URL + "artworks/" +  "?" + new URLSearchParams(searchParams);
 }
 function createURLParamsForArtWorkSearch(searchParams) {
     console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams))
@@ -93,3 +93,8 @@ function createURLParamsForSpecificArtWork(id, searchParams1) {
 }
 
 //Create API calls for gathering images
+
+export function testingAnAPICallForMostSimilar() {
+    return fetch("https://www.artic.edu/artworks/129884/exploreFurther?ef-most-similar_ids=most-similar", options)
+    .then(gotResponseACB).then(printGotImageACB);
+}

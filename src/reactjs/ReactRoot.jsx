@@ -2,6 +2,7 @@ import { testAPI, getArtWorks } from "../apiCall.js"
 import { HomePage } from "./homepagePresenter.jsx"
 import { MyJournalsMain } from "./myJournalsMainPresenter.jsx";
 import { EntryEdit } from "./editEntryPresenter.jsx";
+import {MyCollectionsPresenter} from "./myCollectionsPresenter.jsx"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
 import { store} from "../index.jsx";
 
@@ -22,7 +23,11 @@ export function makeRouter(store){
         {
             path:"/editentry",
             element: <EntryEdit store ={store}></EntryEdit>
-        }
+        },
+        {
+            path: "/collections",
+            element: <MyCollectionsPresenter store ={store}></MyCollectionsPresenter>
+        },
         
     ])
 }
