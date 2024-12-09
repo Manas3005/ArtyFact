@@ -1,7 +1,5 @@
 # ArtyFact
 
-## ArtyFact
-
 The site is a place for the user to explore new art, and read about various artworks. Users can browse collections and generate their own. Users will be able to create journal entries. These journal entries serve as a blogspot to write about art and discuss it. Logged in users will be able to save their collections and journal entries. Users who are not sure of what they like can take the art quiz or describe their dream art piece, so that they can get recommended artworks that would be interesting to them. Users can search for artworks, or “explore” by category.
 
 ### What We Have Done So Far
@@ -15,7 +13,7 @@ The site is a place for the user to explore new art, and read about various artw
 The Find My Taste button from the home page takes the user to a page where there are two tabs. "Describe" and "Take the Art Quiz". For "Describe", so far there is some standard UI that allows the user to describe their dream artwork and click on See Results (non-functional at the moment). The second tab consists of an implemented third party component (progress bar) with a label showing the quiz progress. There are 10 questions of which two are completed with their options. Upon clicking submit after the last question, the user sees a list of artworks only associated with their favorite artists.
 Finally, if the user leaves the quiz in the middle, they will be told on the homepage with their quiz progress displayed.
 
-#### myJournal
+#### My Journals
 The “My Journals” page of the website allows users to write down their thoughts regarding specific artworks they came across through our website, helping users organize their thoughts. The “My Journals” page provides the following functionality to the user:
 - Add and edit new journal entries
 - Each Journal Entry has input fields (journal entry title, date, mood(optional) and actual text content of the journal) for the user
@@ -42,7 +40,7 @@ The resulting artworks should be associated to responses from all quiz questions
 - User will be able to click on an artwork and see its details.
 - User would also have a "see more like this" that would display artworks --similar to the one they were recommended on the details page. 
 
-#### My Jorunal
+#### My Journal
 - Delete a specific journal entry (implement unique entryID for each journal entry)
 - Search, choose and add a specific artwork for individual journal entries (through Add artwork button on the “edit journal entry” page)
 - User should be able to check the actual contents of a previously added journal entry
@@ -64,6 +62,9 @@ The project is divided into different folders, each responsible for a certain pa
 - homePagePresenter.jsx: Displays the homepage with random artwork, descriptions, and exploration features.
 - myJournalsMainPresenter.jsx: Renders the main journal view, showing a list of journal entries with a top navigation bar.
 - reactRoot.jsx: Sets up routing for the app, linking different views (homepage, journals, entry editor) using react-router-dom.
+
+#### index
+- index: Sets up the Redux store with myCollections and myJournalEntries, wraps the ReactRoot component in a Provider, and renders the app in the DOM.
 
 ##### Store
 Since we are using Redux we have a store folder which replaces what we normally would call the model. Each file (slice) in this folder contains a part of the model. We have therefore divided the workload into different slices i.e different parts of the model.
@@ -101,7 +102,7 @@ Contains the view files of the project, responsible for displaying different par
 - apiConfig: Configurations to connect with the API.
 - firebaseConfig: Firebase configurations.
 - firebaseModel: Initializes the firebase with the app.
-- index: Sets up the Redux store with myCollections and myJournalEntries, wraps the ReactRoot component in a Provider, and renders the app in the DOM.
+
 
 #### Third Party Components
 - LinearWithValueLabel: A third-party component that displays a linear progress bar with a label showing the current progress percentage, using Material-UI components and accepting a value prop to determine the progress.
