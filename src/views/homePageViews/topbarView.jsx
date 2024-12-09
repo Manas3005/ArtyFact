@@ -6,6 +6,9 @@ import "/src/style.css"
 
 export function TopBarView(props){
     
+    function handleMyJournalsClickedACB (){
+        return window.location.hash = '#/myjournals'
+    }
 
     return (
         <div>
@@ -35,7 +38,7 @@ export function TopBarView(props){
                 </button>
                 
                 
-                <button className="Myjournal" >My Journal</button>
+                <button className="Myjournal" onClick={handleMyJournalsClickedACB} >My Journal</button>
                 <button className="Mycollections" >My Collections</button>
                 
             

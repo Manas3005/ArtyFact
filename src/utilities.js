@@ -8,3 +8,7 @@ export const cleanHtmlContent = (html) => {
     });
 };
 
+export function transformJournalTitleCB(entry) {
+    return entry.title;
+}
+
