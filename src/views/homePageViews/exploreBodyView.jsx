@@ -1,9 +1,18 @@
 import "/src/style.css"
+import { useSelector } from "react-redux"
 
-function ExploreBodyView (props) {
+function ExploreBodyView () {
+
+    const quizProgress = useSelector((state) => state.findMyTaste.progress)
 
     function handleFindMyTasteClickACB () {
         return window.location.hash = "#/findMyTaste"
+    }
+
+    function renderQuizProgressACB(){
+        if(quizProgress>0){
+            return (<div className = "quizProgress"> (Finish Art Quiz: {quizProgress} %)</div>
+        )}
     }
 
     return (
@@ -17,6 +26,7 @@ function ExploreBodyView (props) {
                 />
                 <div className="confusedText">Not sure what you like yet?</div>
                 <button className = "findMyTaste" onClick = {handleFindMyTasteClickACB}>Find My Taste!</button>
+                {renderQuizProgressACB()}
             </div>
 
                 <img className="exploreImage" src="image/Palazzo-Spada-Rome.png">

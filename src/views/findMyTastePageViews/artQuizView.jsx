@@ -15,7 +15,7 @@ export function ArtQuizView (props){
             return (
                 <button
                     key={artist}
-                    className={"favoriteArtist" + (isSelected ? " Selected" : "")}
+                    className={"favoriteArtist" + (isSelected ? "Selected" : "")}
                     onClick={function() { handleChoiceSelectionACB(artist); }}
                 >
                     <input
