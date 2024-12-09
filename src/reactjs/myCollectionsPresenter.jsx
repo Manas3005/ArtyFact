@@ -16,65 +16,65 @@ export function MyCollectionsPresenter(props) {
         {
             title: "Japanese Art",
             images: [
-                '/image/Japan/Waves.jpg',
-                '/image/Japan/AutumnMaples.jpg',
-                '/image/Japan/Maisaka.jpg',
+                'https://i.imgur.com/4MWnofa.jpeg',
+                'https://i.imgur.com/pzHx8kg.jpeg',
+                'https://i.imgur.com/6APpUgV.jpeg',
             ],
         },
         {
             title: "Impressionism... oh",
             images: [
-                '/image/impressionism/SundayImpressionism.jpg',
-                '/image/impressionism/TwoSistersImpressionism.jpg',
-                '/image/impressionism/wheatImpressionism/TheSeine.png',
+                'https://i.imgur.com/nsBGeNZ.jpeg',
+                'https://i.imgur.com/qrycgCT.jpeg',
+                'https://i.imgur.com/HsSDEwa.jpeg',
             ]
         },
         {
             title: "Gustave Caillebotte..",
             images: [
-                '/image/CalfsHead.jpg',
-                '/image/Paris.jpg',
-                '/image/SelfPortrait.png',
+                'https://i.imgur.com/3ShRSaq.jpeg',
+                'https://i.imgur.com/YLqzq73.jpeg',
+                'https://i.imgur.com/TsygFcL.jpeg',
             ]
         },
         {
             title: "are you coming home soon dear?",
             images: [
-                '/image/ComeHome/IsabellaWolf.jpg',
-                '/image/ComeHome/TheHerringNet.jpg',
-                '/image/ComeHome/Merahi.jpg',
+                'https://i.imgur.com/dAy5xeF.jpeg',
+                'https://i.imgur.com/U9sQ5eE.jpeg',
+                'https://i.imgur.com/T58LnpG.jpeg',
             ]
         },
         {
             title: "Collection 5",
             images: [
-                '/image/city/FromTheBackWindow.jpg',
-                '/image/city/LeNeptune.jpg',
-                '/image/city/TheStreet.png',
+                'https://i.imgur.com/AyszSmi.jpeg',
+                'https://i.imgur.com/JpfMWE3.jpeg',
+                'https://i.imgur.com/6xIuGyG.jpeg',
             ]
         },
         {
             title: "Collection 6",
             images: [
-                '/image/thelandingplace.jpg',
-                '/image/theobelisk.jpg',
-                '/image/TheSeine.png',
+                'https://i.imgur.com/WdLAx8y.jpeg',
+                'https://i.imgur.com/sURNEFc.jpeg',
+                'https://i.imgur.com/HsSDEwa.jpeg',
             ]
         },
         {
             title: "Collection 7",
             images: [
-                '/image/collections/Arlesiennes.jpg',
-                '/image/collections/atMouquin.jpg',
-                '/image/collections/Bahamas.jpg',
+                'https://i.imgur.com/IMoyBfZ.jpeg',
+                'https://i.imgur.com/NWXkwWK.jpeg',
+                'https://i.imgur.com/CNFcZQu.jpeg',
             ]
         },
         {
             title: "what are these streets?",
             images: [
-                '/image/humans/MarcandAbat-jours.jpg',
-                '/image/humans/PorteuseDePain.jpg',
-                '/image/Versailles.png',
+                'https://i.imgur.com/lqYOlkP.jpeg',
+                'https://i.imgur.com/5PAjcHE.jpeg',
+                'https://i.imgur.com/pJOfSc3.jpeg',
             ]
         }
     ]

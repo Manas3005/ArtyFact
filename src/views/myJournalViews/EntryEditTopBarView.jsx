@@ -17,10 +17,10 @@ export function EntryEditTopBarView(props){
                 
                 <button className="backToMyJournals" onClick={handleBackToMyJournalsClickedACB}> Back To My Journals</button> 
                
-                <img  className = "logo" src = "image/editJournalEntryLogo.png" />
+                <img  className = "logo" src = "blob:https://imgur.com/33fccdbf-7cd2-48ab-badb-0eb6013b1059" />
                 
                 <button className="saveChanges" onClick={handleSaveChangesClickedACB}>
-                    <img className="Icon" src = "image/saveIcon.png" />
+                    <img className="Icon" src = "https://i.imgur.com/7gI19MR.png" />
                     <text >Save Changes</text>
                 </button>
 
