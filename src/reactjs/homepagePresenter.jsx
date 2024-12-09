@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { ArtDescBodyView } from "../views/homePageViews/artDescBodyView";
 
 import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch, getArtWorksWithLog} from '/src/apiCall.js';
-import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
 import {cleanHtmlContent } from '/src/utilities.js'
 import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
