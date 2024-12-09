@@ -7,6 +7,7 @@ import "./firebaseModel.js";
 import { myJournalEntries } from "./store/journalsSlice";
 
 
+import { findMyTaste } from "./store/findMyTasteSlice";
 
 //Store
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
         myCollections: myCollections.reducer,
         myJournals: myJournalEntries.reducer,
 
+        findMyTaste: findMyTaste.reducer,
         //to be added as separate slices
         //artWorks: artWorks.reducer,
         //journalEntryName: journalEntryName.reducer,
@@ -27,7 +29,7 @@ export function App (){
     return (
     <div>
         <Provider store = {store}>    
-            <ReactRoot />;
+            <ReactRoot />
         </Provider>
     </div>)
 }

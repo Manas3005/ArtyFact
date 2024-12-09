@@ -5,6 +5,7 @@ import { EntryEdit } from "./editEntryPresenter.jsx";
 import {MyCollectionsPresenter} from "./myCollectionsPresenter.jsx"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
 import { store} from "../index.jsx";
+import { FindMyTaste } from "./findMyTastePresenter.jsx";
 
 export function makeRouter(store){
     return createHashRouter([
@@ -28,6 +29,10 @@ export function makeRouter(store){
             path: "/collections",
             element: <MyCollectionsPresenter store ={store}></MyCollectionsPresenter>
         },
+        {   
+            path: "/findMyTaste",
+            element: <FindMyTaste store = {store}></FindMyTaste>
+        }
         
     ])
 }
@@ -39,6 +44,7 @@ function ReactRoot(props){
 
         
         <div>
+            
              <RouterProvider router={makeRouter(store)}/>
    
         </div>
