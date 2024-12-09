@@ -7,7 +7,7 @@ import { store} from "../index.jsx";
 
 export function makeRouter(store){
     return createHashRouter([
-        {
+        {    
             path:"/",
             element: <HomePage store ={store}></HomePage>
         },
@@ -32,6 +32,7 @@ function ReactRoot(props){
 
     return (
 
+        
         <div>
              <RouterProvider router={makeRouter(store)}/>
    
