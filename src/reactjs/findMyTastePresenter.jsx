@@ -1,7 +1,8 @@
 import { FindMyTasteTopBarView } from "../views/findMyTastePageViews/findMyTasteTopBarView"
 import { DreamArtDescView } from "../views/findMyTastePageViews/dreamArtDescView"
 import { ArtQuizView } from "../views/findMyTastePageViews/artQuizView"
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
 
@@ -28,6 +29,10 @@ export function FindMyTaste(props){
         dispatch(decrementProgress(10))
     }
 
+    function fetchArtlistFromArtistACB(){
+
+    }
+
     const updatedProgress = useSelector((state) => state.findMyTaste.progress); //this is to actually update the artQuiz view
 
     return (<div>
@@ -38,6 +43,7 @@ export function FindMyTaste(props){
                 {currentView === 'describe' ? (<DreamArtDescView/>) : (<ArtQuizView 
                                                                         onNextButtonClicked = {incrementQuizProgressACB}
                                                                         onPreviousButtonClicked = {decrementQuizProgressACB}
+                                                                        onArtistSelected = {fetchArtlistFromArtistACB}
                                                                         updatedProgress = {updatedProgress} //Passing down the updated progress to the ArtQuiz view
                                                                         />)}
             </div>)

@@ -15,6 +15,10 @@ export function ArtQuizView (props){
         props.onPreviousButtonClicked();
     }
 
+    function handleChoiceSelectionACB(){
+        props.onArtistSelected();
+    }
+
 
     return (
     
@@ -22,13 +26,23 @@ export function ArtQuizView (props){
 
         <LinearWithValueLabel updatedProgress = {updatedProgress}></LinearWithValueLabel> {/*Passing down the updated progress to the third party component*/}
         
-        <div>
-            {updatedProgress === 0 ? (<div className = "quizQuestions">Select your favorite artists </div>) : 
-             updatedProgress=== 10 ? (<div className = "quizQuestions">New Question</div>): 
-             (<div className = "quizQuestions">Done</div>) }
+        <div className = "quizQuestions">
+            {updatedProgress === 0 ? (<div >Select your favorite artists {/*Parameter used: "artist_title" */}
+                                        <div className="favoriteArtistsContainer">
+                                            <button className="favoriteArtist" >Picasso</button>
+                                            <button className="favoriteArtist">Van Gogh</button>
+                                            <button className="favoriteArtist">Da Vinci</button>
+                                            <button className="favoriteArtist">Monet</button>
+                                            <button className="favoriteArtist">Dali</button>
+                                            <button className="favoriteArtist">Rembrandt</button>
+                                            <button className="favoriteArtist">Matisse</button>
+                                        </div>
+                                     </div>) 
+            :updatedProgress=== 10 ? (<div >Select your favorite color that you would like your art to be dominated with</div>)
+            :(<div >Done</div>) }
 
             <button onClick = {handlePreviousClickACB} className = "quizPreviousQuestion"> Previous</button>
-            <button onClick = {handleNextClickACB} className = "quizNextQuestion"> Next</button>
+            <button onClick = {handleNextClickACB} className = "quizNextQuestion"> Next</button> 
 
         </div>
 
