@@ -1,5 +1,4 @@
-import "/src/style.css"
-
+import "/src/css/findMyTasteStyle.css"
 export function DreamArtDescView (props){
     return (
     <div>

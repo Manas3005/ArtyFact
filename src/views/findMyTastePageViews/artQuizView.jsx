@@ -1,4 +1,5 @@
-import "/src/style.css"
+import "/src/css/findMyTasteStyle.css";
+
 import LinearWithValueLabel from "../ThirdPartyWrittenComponents/LinearProgressWithLabel"
 
 

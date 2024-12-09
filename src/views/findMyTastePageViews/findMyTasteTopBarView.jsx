@@ -1,4 +1,4 @@
-import "/src/style.css"
+import "/src/css/findMyTasteStyle.css";
 
 function FindMyTasteTopBarView (props){
 
