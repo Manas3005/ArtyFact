@@ -354,6 +354,11 @@ height: 300px;
     margin-bottom: calc(5px + 1.5%);
 }
 
+.favoriteArtistSelected {
+    background-color: #b2a88e; /* Highlight selected */
+    border-color: #444;
+}
+
 
 
 .quizPreviousQuestion:hover, .quizNextQuestion:hover, .seeDescResultsButton{
