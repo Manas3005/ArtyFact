@@ -29,8 +29,8 @@ function ExploreBodyView () {
                 {renderQuizProgressACB()}
             </div>
 
-                <img className="exploreImage" src="image/Palazzo-Spada-Rome.png">
-                </img>
+                <img className="exploreImage" src="image/Palazzo-Spada-Rome.png"
+                />
 
         </div>
         

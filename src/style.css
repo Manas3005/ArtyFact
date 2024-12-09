@@ -329,8 +329,25 @@ height: 300px;
     border-radius: 10px;
     background-color: #dacdbf;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
+}  
 
-}   
+.submitQuizButton{
+    top: 87%;
+    right: 44%;
+    position: absolute;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    width: 160px;
+    height: 60px;
+    background: #F6F6F6;
+    border: 0.2px solid #585757;
+    border-radius: 10px;
+    background-color: #dacdbf;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+}
+
+
 .favoriteArtistsContainer {
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
@@ -366,19 +383,19 @@ height: 300px;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     margin-right: calc(5px + 1%); 
     margin-bottom: calc(5px + 1.5%);
-    background-color: rgb(151, 194, 233); /* Highlight selected */
+    background-color: rgb(151, 194, 233); 
 }
 
 .quizProgress {
-    position: relative; /* Ensures proper positioning under the button */
+    position: relative; 
     bottom: 42px;
     left: 95px;
     font-family: 'Jacques Francois';
-    font-size: 13px; /* Adjusts font size */
-    color: #333333; /* Neutral color for readability */
-    padding: 10px; /* Adds space around the text */
-    border-radius: 8px; /* Smooths edges */
-    width: fit-content; /* Ensures the width matches the content */
+    font-size: 13px; 
+    color: #333333; 
+    padding: 10px; 
+    border-radius: 8px; 
+    width: fit-content; 
 }
 
 

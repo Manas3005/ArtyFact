@@ -6,7 +6,7 @@ import { getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} fro
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
 
-export function FindMyTaste(){
+export function FindMyTaste(props){
 
     const dispatch = useDispatch()
 
@@ -15,6 +15,7 @@ export function FindMyTaste(){
 
     const [selectedArtists, setSelectedArtists ] = useState([]) /*component state used here to keep track of the selected choices for artists
     (only needed until the quiz session lasts hence not application state)*/
+
 
 
     function setArtDescViewACB(){ //handling custom event 
@@ -44,19 +45,46 @@ export function FindMyTaste(){
         }
     }
 
+    function getArtworksByArtistsACB(){ //This function is yet to be finished and implemented correctly 
+        selectedArtists.forEach(artist => {
+            const searchParams = { artist_title: artist };
+            getArtWorks(searchParams)
+                .then(artworks => {
+                    artworks.forEach(artwork => {
+                        getArtWorkImage(artwork.image_id) 
+                            .then(imageURL => {
+                                renderArtResults(imageURL); 
+                            })
+                            .catch(error => console.error("Error fetching image:", error));
+                    });
+                })
+                .catch(error => console.error("Error fetching artworks:", error));
+        });
+        
+    }
+
+    function renderArtResults(imageURL) {
+        return (
+            <div className="ArtDescImageContainer">
+                <img className="ArtDescImage" src={imageURL} alt="Artwork" />
+            </div>
+        );
+    }
+
     const updatedProgress = useSelector((state) => state.findMyTaste.progress); //this is to actually update the artQuiz view
 
     return (<div>
                 <FindMyTasteTopBarView onDescribeButtonClicked = {setArtDescViewACB} 
                                        onArtQuizButtonClicked = {setArtQuizViewACB}              
                 ></FindMyTasteTopBarView> 
-
+        
                 {currentView === 'describe' ? (<DreamArtDescView/>) : (<ArtQuizView 
                                                                         onNextButtonClicked = {incrementQuizProgressACB}
                                                                         onPreviousButtonClicked = {decrementQuizProgressACB}
                                                                         onArtistSelected = {selectArtistACB}
                                                                         updatedProgress = {updatedProgress} //Passing down the updated progress to the ArtQuiz view
                                                                         selectedArtists = {selectedArtists} 
+                                                                        onSubmitButtonClicked = {getArtworksByArtistsACB}
                                                                         />)}
             </div>)
 }
