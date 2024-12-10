@@ -58,7 +58,7 @@ export function EntryEditContentView(props){
                         <div className="up">
 
                             <div className="artWorkBox">
-                                    <img className="starryNightIcon" src="image/starry-night.png"></img>
+                                    <img className="starryNightIcon" src="https://i.imgur.com/b3r8xMO.png"></img>
                             </div>
 
                         </div>
@@ -69,7 +69,7 @@ export function EntryEditContentView(props){
                             <button className="addArtwork">Add Artwork</button>
 
                             <button className="deleteEntry">
-                                <img className="Icon" src = "image/deleteIcon.png" />
+                                <img className="Icon" src = "https://i.imgur.com/xNXJSLZ.png" />
                                 <text >Delete Journal Entry</text>
                             </button>
                     

@@ -11,23 +11,27 @@ export function JournalTopBarView(props){
         return window.location.hash = '#/editentry'
     }
 
+    function handleMyCollectionsClickedACB (){
+        return window.location.hash = '#/collections'
+    }
+
     return (
         <div>
             
             <div className="topBar">
                 
-                <button className="myJournalsMyCollections" >My Collections</button>
+                <button className="myJournalsMyCollections" onClick={handleMyCollectionsClickedACB}>My Collections</button>
                 <button className="backToHome" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
-                <img  className = "logo" src = "image/myJournalsLogo.png" />
+                <img  className = "logo" src = "https://i.imgur.com/i2maDv0.png" />
                 
                 <button className="buttonWithIcon">
-                    <img className="Icon" src = "image/signinIcon.png" />
+                    <img className="Icon" src = "https://i.imgur.com/uf8TJb6.png" />
                     <text className="loggedInText">Logged In</text>
                 </button>
 
                 <button className="addNewEntry" onClick={handleAddNewEntryClickedACB}>
-                    <img className="Icon" src = "image/plusIcon.png" />
+                    <img className="Icon" src = "https://i.imgur.com/U5BgrwK.png" />
                     <text >Add New Journal Entry</text>
                 </button>
                             

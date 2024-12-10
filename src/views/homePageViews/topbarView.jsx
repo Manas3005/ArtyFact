@@ -44,10 +44,10 @@ export function TopBarView(props){
                <input className="searchBar" placeholder = "Search..."/> 
 
 
-                <img  className = "logo" src = "image/Logo.png" />
+                <img  className = "logo" src = "https://i.imgur.com/viSeXcY.png" />
                 
                 <button className="signInIcon">
-                    <img  src = "image/signinIcon.png" />
+                    <img  src = "https://i.imgur.com/4OM4nvs.png" />
                 </button>
 
                 <button  className="signInlogo">    

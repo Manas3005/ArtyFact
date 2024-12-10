@@ -12,7 +12,7 @@ export function JournalEntriesListView(props){
         console.log("journal entries array is empty");
         return (
         <div className="entriesList">
-            <img src="image/thinkingMan.png"></img>
+            <img src="https://i.imgur.com/OrjnUdl.png"></img>
             <p className="alertText">No Journal Entries Added Yet. </p>
             <p className="alertText">Add Journal Entries using the button above. </p>                       
         </div>
@@ -34,7 +34,7 @@ export function JournalEntriesListView(props){
 
                 {props.entries.map((entry, index) => (
                         <div key={index} className="journalEntryListDiv">
-                            <img src="image/starry-night.png" className="journalEntryListImage" />
+                            <img src="https://i.imgur.com/b3r8xMO.png" className="journalEntryListImage" />
                             <span className="journalEntryListText">{transformJournalTitleCB(entry)}</span>
                         </div>
                     ))}
