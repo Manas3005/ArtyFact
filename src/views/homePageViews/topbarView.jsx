@@ -1,7 +1,7 @@
 import "/src/css/style.css"
 //import Drawer from '@mui/material/Drawer';
 import React, { useState } from 'react';
-import ExploreDrawer from './ThirdPartyWrittenComponents/sideBarNav';
+import ExploreDrawer from "/src/views/ThirdPartyWrittenComponents/sideBarNav.jsx";
 
 export function TopBarView(props){
 
