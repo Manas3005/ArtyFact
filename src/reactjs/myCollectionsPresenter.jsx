@@ -1,4 +1,3 @@
-import { testingAnAPICallForMostSimilar } from "../apiCall";
 import { TopbarCollectionsView } from "../views/myCollectionViews/topbarCollectionsView"
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"

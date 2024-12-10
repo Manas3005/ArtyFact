@@ -39,18 +39,13 @@ function checkResultStatusACB(result){
 export function getArtWorks(searchParams) {
     return fetch(createURLParamsForArtWork(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
-
-export function getArtWorksWithLog(searchParams) {
-    return fetch(createURLParamsForArtWork(searchParams), options).then(gotResponseACB).then((result) => console.log("this is where we are now ",result));
+export function getArtWorkByID(searchParams) {
+    console.log("This is params", searchParams);
+    return fetch(createURLParamsForArtWorksByID(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
-
-
-
 export function getArtWorksSearch(searchParams) {
     return fetch(createURLParamsForArtWorkSearch(searchParams), options).then(gotResponseACB).then(printResponseACB);
-}   
-
-
+}
 
 export function getArtWorkImage(result){
     console.log("This is result", result);
@@ -79,11 +74,17 @@ export function URLParamsForImage(searchParams) {
  * @returns An API promise object.
  */
 function createURLParamsForArtWork(searchParams) {
-    return MAIN_URL + "artworks/" +  "?" + new URLSearchParams(searchParams);
-}
+    console.log("This is the query", searchParams);
+    return MAIN_URL + "artworks/" + "?" + new URLSearchParams(searchParams);
+} 
+
 function createURLParamsForArtWorkSearch(searchParams) {
-    console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams))
+    console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams));
     return MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams);
+}
+function createURLParamsForArtWorksByID(searchParams) {
+    console.log("this is the url for fetching the single artwork by alma thomas", MAIN_URL + "artworks/" + searchParams);
+    return MAIN_URL + "artworks/" + searchParams;
 }
 const searchParams1 = {
     title: "example",
@@ -91,10 +92,4 @@ const searchParams1 = {
 function createURLParamsForSpecificArtWork(id, searchParams1) {
     return MAIN_URL + "/artworks/" + id + "?" + new URLSearchParams(searchParams1);
 }
-
 //Create API calls for gathering images
-
-export function testingAnAPICallForMostSimilar() {
-    return fetch("https://www.artic.edu/artworks/129884/exploreFurther?ef-most-similar_ids=most-similar", options)
-    .then(gotResponseACB).then(printGotImageACB);
-}

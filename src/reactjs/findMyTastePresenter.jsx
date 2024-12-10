@@ -2,9 +2,10 @@ import { FindMyTasteTopBarView } from "../views/findMyTastePageViews/findMyTaste
 import { DreamArtDescView } from "../views/findMyTastePageViews/dreamArtDescView"
 import { ArtQuizView } from "../views/findMyTastePageViews/artQuizView"
 import { useState } from "react";
-import { getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
+import { getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch, getArtWorkByID} from '/src/apiCall.js';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
+import { useEffect } from "react";
 
 export function FindMyTaste(props){
 
@@ -15,6 +16,9 @@ export function FindMyTaste(props){
 
     const [selectedArtists, setSelectedArtists ] = useState([]) /*component state used here to keep track of the selected choices for artists
     (only needed until the quiz session lasts hence not application state)*/
+    const [artData, setArtData] = useState([]);
+
+    const [filteredArray, setFilteredArray] = useState([]);
 
 
 
@@ -45,7 +49,7 @@ export function FindMyTaste(props){
         }
     }
 
-    function getArtworksByArtistsACB(){ //This function is yet to be finished and implemented correctly 
+    /*function getArtworksByArtistsACB(){ //This function is yet to be finished and implemented correctly 
         selectedArtists.forEach(artist => {
             const searchParams = { artist_title: artist };
             getArtWorks(searchParams)
@@ -61,7 +65,62 @@ export function FindMyTaste(props){
                 .catch(error => console.error("Error fetching artworks:", error));
         });
         
+    }*/
+
+    function filterSearchResultACB(artWork, currentArtist) {
+        console.log("FILTER FUNCTION", artWork);
+        console.log("dataaaaa", artWork.data);
+        console.log("the current artist", currentArtist);
+        if(artWork.data.artist_title == currentArtist) {
+            setFilteredArray([...filteredArray, artWork]);
+        }
+        /*const newArray = artWorks.data.filter((artwork) => {
+            return artwork.artist_title !== currentArtist;
+        })*/
+        console.log("FILTERED ARRAY: ", filteredArray);
     }
+       
+   
+
+     
+    function getArtworksByArtistsACB(){
+        selectedArtists.forEach(
+            function(currentArtist){ 
+                const searchParams = {artist_title: currentArtist}
+                console.log("THIS IS THE ART WORKS SEARCH RESULT", getArtWorksSearch(searchParams));
+                getArtWorksSearch(searchParams).then((artWork) => apiToApi(artWork, currentArtist))
+                /*.then((artWorks) => console.log("ARTWORKS", artWorks)/*filterSearchResultACB(artWorks, currentArtist)*/
+            }   
+        )
+    }
+
+    function apiToApi(artWork, currentArtist) {
+        [artWork.data].forEach((element) => {
+
+            console.log("This IS THE ELEMENT", element);
+            const artWorkID = element.id;
+            console.log("This is the artWORK ID", artWorkID);
+            getArtWorkByID(element.id).then((artWork) => console.log(artWork));
+        })
+    }
+
+    useEffect(() => {
+        console.log("This is the artData", artData);
+    },[artData]);
+
+     /*console.log("This is THE API LINK", element.api_link);
+            const image_id = element.image_id;
+            const image_URL = URLParamsForImage(image_id);
+            console.log("This is the image_url for the data element", element, "in the for each", image_URL);*/
+
+    const result = getArtWorks({
+        artist_title: "Alma Thomas",
+    })
+
+    console.log("This is the result from getArtWorks", result);
+
+    console.log("HEJ");
+    
 
     function renderArtResults(imageURL) {
         return (

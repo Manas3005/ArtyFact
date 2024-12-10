@@ -202,7 +202,7 @@
 }
 
 
-.quizPreviousQuestion:hover, .quizNextQuestion:hover, .seeDescResultsButton{
+.quizPreviousQuestion:hover, .quizNextQuestion:hover, .seeDescResultsButton:hover, .submitQuizButton:hover{
     transform: scale(1.1); 
     box-shadow: 0px 4px 10px #dacdbf; 
 }

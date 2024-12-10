@@ -6,7 +6,7 @@ import LinearWithValueLabel from "../ThirdPartyWrittenComponents/LinearProgressW
 export function ArtQuizView (props){
 
     const updatedProgress = props.updatedProgress;
-    const artists = ["Picasso", "Van Gogh", "Da Vinci", "Monet", "Dali", "Rembrandt", "Matisse", "Mary Cassatt", "Edgar Degas", "Georges Seurat"] // List of artist options to be rendered
+    const artists = ["Picasso", "Van Gogh", "Da Vinci", "Monet", "Dali", "Alma Thomas", "Matisse", "Mary Cassatt", "Edgar Degas", "Georges Seurat"] // List of artist options to be rendered
     const selectedArtists = props.selectedArtists;
     let quizDone = false;
 
