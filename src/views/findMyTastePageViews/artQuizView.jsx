@@ -81,22 +81,22 @@ export function ArtQuizView (props){
           : updatedProgress === 100 ? (
             resultsReady ? (
               <div>
-                  <button
-                  onClick={handleBackToQuizACB}
-                  className="quizBackButton"
-                  > Back to Quiz </button>
-
+                
                   <div className="resultsContainer">
                     {imageURLs.map((url, index) => (
-                    <img
-                      key={url}
+                    <img  
+                      key={index}
                       src={url}
                       alt={`Artwork ${index + 1}`}
                       className="resultImage"
                     />
                     ))}
+                    <button
+                  onClick={handleBackToQuizACB}
+                  className="quizBackButton"
+                  > Back to Quiz 
+                  </button>
                   </div>
-
               </div>
             ) 
             

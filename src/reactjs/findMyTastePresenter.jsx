@@ -82,12 +82,16 @@ export function FindMyTaste(props){
                 return selectedArtists.includes(artwork.artist_title);
             });
         
-            console.log("FILTERED ARTWORKS: ", filteredArtworks);
-        
-            const newImageURLs = filteredArtworks.map(function (artwork) { //the filteredArtworks are taken and mapped to their image URLs through a utility function in apiCall.js
-                return getArtWorkImageModified(artwork.image_id);
+            console.log("FILTERED ARTWORKS: ", filteredArtworks); //for dbugging
+            //the filteredArtworks are taken and mapped to their image URLs through a utility function in apiCall.js
+            const newImageURLs = [];
+            filteredArtworks.forEach(function (artwork) {
+                const imageURL = getArtWorkImageModified(artwork.image_id);       
+                if (!newImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again because the asynchronous flow can lead to that
+                    newImageURLs.push(imageURL);
+                }
             });
-            console.log("IMAGE URLS: ", newImageURLs)
+            console.log("IMAGE URLS: ", newImageURLs) //for debugging
         
             setImageURLs(newImageURLs); // this will be passed down to artQuizView
             setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
