@@ -9,6 +9,9 @@ export function ArtQuizView (props){
     const updatedProgress = props.updatedProgress;
     const artists = ["Picasso", "Van Gogh", "Da Vinci", "Monet", "Dali", "Alma Thomas", "Matisse", "Mary Cassatt", "Edgar Degas", "Georges Seurat"] // List of artist options to be rendered
     const selectedArtists = props.selectedArtists;
+    const resultsReady = props.resultsReady;
+    const imageURLs = props.imageURLs;
+
 
     function renderArtistOptions() {
         return artists.map(function organizeAsOptionCB(artist) {
@@ -49,7 +52,9 @@ export function ArtQuizView (props){
 
     function handleSubmitClickACB(){ //firing custom event to fetch art by selectedArtists 
         props.onSubmitButtonClicked(selectedArtists);
+        
     }
+
 
 
     return (
@@ -72,22 +77,48 @@ export function ArtQuizView (props){
             :(<div >Done  </div>) }
 
             
-            {updatedProgress === 100 ? (<div>
-                                            <button onClick = {handlePreviousClickACB} className = "quizPreviousQuestion"> Previous</button>
-                                            <button onClick = {handleSubmitClickACB} className = "submitQuizButton"> Submit</button>
-                                            
-                                        </div>)                            
-            :(<div>
-                <button onClick = {handlePreviousClickACB} className = "quizPreviousQuestion"> Previous</button>
-                <button onClick = {handleNextClickACB} className = "quizNextQuestion"> Next</button>
-             </div>)}
-
-        
-        </div>
-
-
-    </div>
-
-
-    )
+            {updatedProgress === 100 ? (
+                    resultsReady ? (
+                      <div>
+                        <img
+                          src={imageURLs?.[0] || "default-image.png"}
+                          alt="Resulting Artwork"
+                          className="resultImage"
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <button
+                          onClick={handlePreviousClickACB}
+                          className="quizPreviousQuestion"
+                        >
+                          Previous
+                        </button>
+                        <button
+                          onClick={handleSubmitClickACB}
+                          className="submitQuizButton"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    )
+                  ) : (
+                    <div>
+                      <button
+                        onClick={handlePreviousClickACB}
+                        className="quizPreviousQuestion"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        onClick={handleNextClickACB}
+                        className="quizNextQuestion"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
 }

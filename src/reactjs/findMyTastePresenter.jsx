@@ -17,9 +17,9 @@ export function FindMyTaste(props){
 
     const [selectedArtists, setSelectedArtists ] = useState([]) /*component state used here to keep track of the selected choices for artists
     (only needed until the quiz session lasts hence not application state)*/
-    const [filteredArray, setFilteredArray] = useState([]);
     const [allArtworkData, setAllArtworkData] = useState([])
     const [imageURLs, setImageURLs] = useState([]);
+    const [resultsReady, setResultsReady] = useState(false);
 
 
 
@@ -54,7 +54,7 @@ export function FindMyTaste(props){
 
     
     
-    function getArtworksByArtistsACB(){
+    /*function getArtworksByArtistsACB(){
         
         selectedArtists.forEach(
             function(currentArtist){ 
@@ -79,6 +79,8 @@ export function FindMyTaste(props){
         
     }
 
+        
+
 
     function filterSearchResultACB(currentArtist) {//filtering the artworks such that only artworks with artist as currentArtist is kept
         const filteredArtworks = allArtworkData.filter(function(artworkData){
@@ -92,11 +94,51 @@ export function FindMyTaste(props){
                 setImageURLs((prevImageURLs) => [...prevImageURLs, imageURL])
                 console.log("Appended Image URL: ", imageURL)
                 console.log("IMAGE URL FROM ARRAY ", imageURLs[0])
-                 
+                setResultsReady(true);
             }
         )
         
-    }
+    }*/
+
+        function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
+            //so that filterAndSetResultsACB is called only when all promises/fetches are resolved
+            const tempAllArtworkData = []; 
+    
+            selectedArtists.forEach(function (currentArtist) {
+                const searchParams = { artist_title: currentArtist };
+        
+                getArtWorksSearch(searchParams).then(function (allArtworks) { //searching all artworks including ones by currentArtist in selectedArtists
+                    let remainingArtworks = allArtworks.data.length; // this is to track the number of artworks left to process, i.e. getArtWorkByID
+        
+                    allArtworks.data.forEach(function (currentArtwork) {
+                        getArtWorkByID(currentArtwork.id).then(function (artworkDetails) { //PROCESSING STAGE: this fetches each artwork by its id so the artist_title property is accessible
+                            tempAllArtworkData.push(artworkDetails.data); 
+                            remainingArtworks--;
+
+                            if (remainingArtworks === 0 && tempAllArtworkData.length === allArtworks.data.length * selectedArtists.length) { //since this can run before the async callbacks, it is important to check that all data has been fetched
+                                filterAndSetResultsACB(tempAllArtworkData);
+                            }
+                        });
+                    });
+                });
+            });
+        }
+        
+        function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by alma thomas and retrieve its image URL
+            const filteredArtworks = allArtworkData.filter(function (artwork) {
+                return selectedArtists.includes(artwork.artist_title);
+            });
+        
+            console.log("FILTERED ARTWORKS: ", filteredArtworks);
+        
+            const newImageURLs = filteredArtworks.map(function (artwork) { //the filteredArtworks are taken and mapped to their image URLs through a utility function in apiCall.js
+                return getArtWorkImageModified(artwork.image_id);
+            });
+            console.log("IMAGE URLS: ", newImageURLs)
+        
+            setImageURLs(newImageURLs); // this will be passed down to artQuizView
+            setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
+        }
 
     const updatedProgress = useSelector((state) => state.findMyTaste.progress); //this is to actually update the artQuiz view
 
@@ -112,6 +154,8 @@ export function FindMyTaste(props){
                                                                         updatedProgress = {updatedProgress} //Passing down the updated progress to the ArtQuiz view
                                                                         selectedArtists = {selectedArtists} 
                                                                         onSubmitButtonClicked = {getArtworksByArtistsACB}
+                                                                        imageURLs = {imageURLs}
+                                                                        resultsReady = {resultsReady}
                                                                         />)}
             </div>)
 }
