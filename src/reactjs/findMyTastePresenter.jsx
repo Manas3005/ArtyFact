@@ -22,9 +22,6 @@ export function FindMyTaste(props){
     const [resultsReady, setResultsReady] = useState(false);
 
 
-
-
-
     function setArtDescViewACB(){ //handling custom event 
         setCurrentView('describe') 
     }
@@ -52,55 +49,11 @@ export function FindMyTaste(props){
         }
     }
 
-    
-    
-    /*function getArtworksByArtistsACB(){
-        
-        selectedArtists.forEach(
-            function(currentArtist){ 
-                const searchParams = {artist_title: currentArtist}
-                const allArtworks = getArtWorksSearch((searchParams)) //searching all artworks including by alma thomas
-                console.log("HERE ARE ALL THE ARTWORKS IMAGE DETAILS WITH FIRST ONE AS BY ALMA THOMAS: ", allArtworks)
-                
-                allArtworks.then(function (artworks){
-                    artworks.data.forEach(function (currentArtwork){ 
-                            getArtWorkByID(currentArtwork.id) //fetching each artwork by its id so artist_title is accessible
-                            .then(function(artworkDetails){
-                                setAllArtworkData((prevData) => [...prevData, artworkDetails.data])
-                                
-                            })
-                         });
-                    
-                });
-
-                filterSearchResultACB(currentArtist)
-            }   
-        )
-        
+    function setResultsBackToPendingACB(){
+        setResultsReady(false);
     }
 
-        
-
-
-    function filterSearchResultACB(currentArtist) {//filtering the artworks such that only artworks with artist as currentArtist is kept
-        const filteredArtworks = allArtworkData.filter(function(artworkData){
-            return artworkData.artist_title === currentArtist;
-        })
-
-        console.log("FILTERED ARTWORK: ", filteredArtworks)
-                
-        filteredArtworks.forEach(function(artwork){
-                const imageURL = getArtWorkImageModified(artwork.image_id)
-                setImageURLs((prevImageURLs) => [...prevImageURLs, imageURL])
-                console.log("Appended Image URL: ", imageURL)
-                console.log("IMAGE URL FROM ARRAY ", imageURLs[0])
-                setResultsReady(true);
-            }
-        )
-        
-    }*/
-
-        function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
+    function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
             //so that filterAndSetResultsACB is called only when all promises/fetches are resolved
             const tempAllArtworkData = []; 
     
@@ -122,9 +75,9 @@ export function FindMyTaste(props){
                     });
                 });
             });
-        }
+    }
         
-        function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by alma thomas and retrieve its image URL
+    function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by alma thomas and retrieve its image URL
             const filteredArtworks = allArtworkData.filter(function (artwork) {
                 return selectedArtists.includes(artwork.artist_title);
             });
@@ -138,7 +91,7 @@ export function FindMyTaste(props){
         
             setImageURLs(newImageURLs); // this will be passed down to artQuizView
             setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
-        }
+    }
 
     const updatedProgress = useSelector((state) => state.findMyTaste.progress); //this is to actually update the artQuiz view
 
@@ -154,6 +107,7 @@ export function FindMyTaste(props){
                                                                         updatedProgress = {updatedProgress} //Passing down the updated progress to the ArtQuiz view
                                                                         selectedArtists = {selectedArtists} 
                                                                         onSubmitButtonClicked = {getArtworksByArtistsACB}
+                                                                        onBackToQuizButtonClicked = {setResultsBackToPendingACB}
                                                                         imageURLs = {imageURLs}
                                                                         resultsReady = {resultsReady}
                                                                         />)}

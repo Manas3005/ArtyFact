@@ -55,70 +55,89 @@ export function ArtQuizView (props){
         
     }
 
+    function handleBackToQuizACB() {
+      props.onBackToQuizButtonClicked();
+    }
+
 
 
     return (
-    
-    <div>
-
-        <LinearWithValueLabel updatedProgress = {updatedProgress}></LinearWithValueLabel> {/*Passing down the updated progress to the third party component*/}
-        
-        <div className = "quizQuestions">
-            
-            
-            {updatedProgress === 0 ? (<div >Select your favorite artists {/*Parameter used: "artist_title" */}
-                                        <div className="favoriteArtistsContainer">
-                                           {renderArtistOptions()}
-                                        
-                                        </div>
-                                     </div>
-                                     ) 
-            :updatedProgress=== 10 ? (<div >Select a color that you would like your art to be dominated with</div>)
-            :(<div >Done  </div>) }
-
-            
-            {updatedProgress === 100 ? (
-                    resultsReady ? (
-                      <div>
-                        <img
-                          src={imageURLs?.[0] || "default-image.png"}
-                          alt="Resulting Artwork"
-                          className="resultImage"
-                        />
-                      </div>
-                    ) : (
-                      <div>
-                        <button
-                          onClick={handlePreviousClickACB}
-                          className="quizPreviousQuestion"
-                        >
-                          Previous
-                        </button>
-                        <button
-                          onClick={handleSubmitClickACB}
-                          className="submitQuizButton"
-                        >
-                          Submit
-                        </button>
-                      </div>
-                    )
-                  ) : (
-                    <div>
-                      <button
-                        onClick={handlePreviousClickACB}
-                        className="quizPreviousQuestion"
-                      >
-                        Previous
-                      </button>
-                      <button
-                        onClick={handleNextClickACB}
-                        className="quizNextQuestion"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  )}
-                </div>
+      <div>
+        <LinearWithValueLabel updatedProgress={updatedProgress} />
+        <div className="quizQuestions">
+          {updatedProgress === 0 ? (
+            <div>
+              Select your favorite artists
+              <div className="favoriteArtistsContainer">
+                {renderArtistOptions()}
               </div>
-            );
+            </div>
+          ) 
+          
+          : updatedProgress === 10 ? (
+            <div>Select a color that you would like your art to be dominated with</div>
+          ) 
+          
+          : updatedProgress === 100 ? (
+            resultsReady ? (
+              <div>
+                  <button
+                  onClick={handleBackToQuizACB}
+                  className="quizPreviousQuestion"
+                  > Back to Quiz </button>
+
+                  <div className="resultsContainer">
+                    {imageURLs.map((url, index) => (
+                    <img
+                      key={url}
+                      src={url}
+                      alt={`Artwork ${index + 1}`}
+                      className="resultImage"
+                    />
+                    ))}
+                  </div>
+
+              </div>
+            ) 
+            
+            : (
+              <div>
+                <button
+                  onClick={handlePreviousClickACB}
+                  className="quizPreviousQuestion"
+                >
+                  Previous
+                </button>
+                <div>Select a color that you would like your art to be dominated with</div>
+                <button
+                  onClick={handleSubmitClickACB}
+                  className="submitQuizButton"
+                >
+                  Submit
+                </button>
+              </div>
+            )
+          ) : (
+            <div>Done</div>
+          )}
+          {updatedProgress < 100 && (
+            <div>
+              <button
+                onClick={handlePreviousClickACB}
+                className="quizPreviousQuestion"
+              >
+                Previous
+              </button>
+              <button
+                onClick={handleNextClickACB}
+                className="quizNextQuestion"
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+    
 }
