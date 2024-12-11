@@ -23,15 +23,15 @@ export function JournalTopBarView(props){
                 <button className="myJournalsMyCollections" onClick={handleMyCollectionsClickedACB}>My Collections</button>
                 <button className="backToHome" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
-                <img  className = "logo" src = "https://i.imgur.com/i2maDv0.png" />
+                <img  className = "logo" src = "/image/myJournalsLogo.png" />
                 
                 <button className="buttonWithIcon">
-                    <img className="Icon" src = "https://i.imgur.com/uf8TJb6.png" />
+                    <img className="Icon" src = "/image/signinIcon.png" />
                     <text className="loggedInText">Logged In</text>
                 </button>
 
                 <button className="addNewEntry" onClick={handleAddNewEntryClickedACB}>
-                    <img className="Icon" src = "https://i.imgur.com/U5BgrwK.png" />
+                    <img className="Icon" src = "/image/plusIcon.png" />
                     <text >Add New Journal Entry</text>
                 </button>
                             

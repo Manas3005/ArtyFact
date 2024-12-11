@@ -20,7 +20,7 @@ export function EntryEditTopBarView(props){
                 
                 <div className="editJournalEntryLogo">Edit Journal Entry</div>
                 <button className="saveChanges" onClick={handleSaveChangesClickedACB}>
-                    <img className="Icon" src = "https://i.imgur.com/7gI19MR.png" />
+                    <img className="Icon" src = "/image/saveIcon.png" />
                     <text >Save Changes</text>
                 </button>
 
