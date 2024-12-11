@@ -1,6 +1,7 @@
 import "/src/css/findMyTasteStyle.css";
 
 import LinearWithValueLabel from "../ThirdPartyWrittenComponents/LinearProgressWithLabel"
+import { useState } from "react";
 
 
 export function ArtQuizView (props){
@@ -8,7 +9,6 @@ export function ArtQuizView (props){
     const updatedProgress = props.updatedProgress;
     const artists = ["Picasso", "Van Gogh", "Da Vinci", "Monet", "Dali", "Alma Thomas", "Matisse", "Mary Cassatt", "Edgar Degas", "Georges Seurat"] // List of artist options to be rendered
     const selectedArtists = props.selectedArtists;
-    let quizDone = false;
 
     function renderArtistOptions() {
         return artists.map(function organizeAsOptionCB(artist) {
@@ -64,23 +64,24 @@ export function ArtQuizView (props){
             {updatedProgress === 0 ? (<div >Select your favorite artists {/*Parameter used: "artist_title" */}
                                         <div className="favoriteArtistsContainer">
                                            {renderArtistOptions()}
-                                           {quizDone = false}
+                                        
                                         </div>
                                      </div>
                                      ) 
-            :updatedProgress=== 10 ? (<div >Select a color that you would like your art to be dominated with {quizDone = false}</div>)
-            :(<div >Done {quizDone = false} </div>) }
+            :updatedProgress=== 10 ? (<div >Select a color that you would like your art to be dominated with</div>)
+            :(<div >Done  </div>) }
 
             
             {updatedProgress === 100 ? (<div>
                                             <button onClick = {handlePreviousClickACB} className = "quizPreviousQuestion"> Previous</button>
                                             <button onClick = {handleSubmitClickACB} className = "submitQuizButton"> Submit</button>
-                                            {quizDone = true}
+                                            
                                         </div>)                            
             :(<div>
                 <button onClick = {handlePreviousClickACB} className = "quizPreviousQuestion"> Previous</button>
                 <button onClick = {handleNextClickACB} className = "quizNextQuestion"> Next</button>
              </div>)}
+
         
         </div>
 
