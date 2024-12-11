@@ -1,5 +1,6 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
+import { monthArray, dateArray } from "../../utilities"
 
 export function EntryEditContentView(props){
 
@@ -28,7 +29,23 @@ export function EntryEditContentView(props){
                    
                     <input className="entryTitleTextBox" placeholder="Journal Entry Title " onBlur={onEntryTitleChangeACB}></input>
 
-                    <input className="entryTextBox" placeholder="Journal Entry Date " onBlur={onEntryDateChangeACB}></input>
+                    <div className="dateDropdownsDiv">
+                        
+                        <label>Date:</label>
+                        
+                        <select className="dropdown" size="1"> 
+                            {monthArray.map((month, index) => (
+                                 <option key={index}>{month}</option>
+                            ))}
+                        </select>
+
+                        <select className="dropdown" size="1"> 
+                            {dateArray.map((date, index) => (
+                                 <option key={index}>{date}</option>
+                            ))}
+                        </select>
+
+                    </div>
 
                 </div> 
 

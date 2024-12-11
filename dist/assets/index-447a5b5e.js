@@ -25328,8 +25328,8 @@ function TopBarView(props) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: toggleDrawer(true), className: "Explore", children: "☰ Explore" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(ExploreDrawer, { open, toggleDrawer }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("input", { className: "searchBar", placeholder: "Search..." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "logo", src: "https://i.imgur.com/viSeXcY.png" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "signInIcon", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://i.imgur.com/4OM4nvs.png" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "logo", src: "/image/Logo.png" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "signInIcon", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/image/signinIcon.png" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "signInlogo", children: "Sign in" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "Myjournal", onClick: handleMyJournalsClickedACB, children: "My Journal" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "Mycollections", onClick: handleClickForMyCollectionACB, children: "My Collections" })
@@ -25691,7 +25691,7 @@ function ExploreBodyView() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
         {
-          src: "https://i.imgur.com/hsLQCvu.png",
+          src: "/image/exploreNewArtPanel.png",
           className: "exploreNewArtPanel"
         }
       ),
@@ -25703,7 +25703,7 @@ function ExploreBodyView() {
       "img",
       {
         className: "exploreImage",
-        src: "https://i.ibb.co/bg8f7q5/Palazzo-Spada-Rome.webp"
+        src: "/image/Palazzo-Spada-Rome.png"
       }
     )
   ] });
@@ -27360,8 +27360,8 @@ function TopbarCollectionsView(props) {
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "signInlogo", children: "Sign in" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "signInIcon", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://i.imgur.com/uf8TJb6.png" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "collectionsLogo", src: "https://i.imgur.com/0MOeBLR.png" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "signInIcon", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/image/signinIcon.png" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "collectionsLogo", src: "/image/collectionsLogo.png" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "addNewCollection", children: "Create New Collection" })
   ] }) });
 }
@@ -31736,7 +31736,7 @@ function FindMyTasteTopBarView(props) {
     props.onArtQuizButtonClicked();
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "topBarFMT", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#/homepage", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "backToHomeButton", src: "https://i.imgur.com/JcHVFK7.png" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#/homepage", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "backToHomeButton", src: "/image/backToHome.png" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "artyFactHeader", children: "ArtyFact" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "describeButton", className: "dreamArtDescButton", onClick: handleDescribeClickACB, children: " Describe " }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { id: "artQuizButton", className: "dreamArtQuizButton", onClick: handleArtQuizClickACB, children: " Take the Art Quiz " })
@@ -34223,4 +34223,4 @@ function App() {
 createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(App, {})
 );
-//# sourceMappingURL=index-d79d0408.js.map
+//# sourceMappingURL=index-447a5b5e.js.map
