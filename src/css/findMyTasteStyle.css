@@ -119,6 +119,21 @@
 
 }
 
+.quizBackButton {
+    position: absolute;
+    bottom: 10px; /* Position the button at the bottom */
+    left: 2%; /* Place it slightly from the left */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    width: 160px;
+    height: 60px;
+    background: #F6F6F6;
+    border: 0.2px solid #585757;
+    border-radius: 10px;
+    background-color: #dacdbf;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
 .quizNextQuestion{
     top: 87%;
     right: 20%;
@@ -164,7 +179,7 @@
     font-family: "Junge";
     font-size: 15px;
     width: 128px;
-    height: 33px;
+    height: fit-content + 2px;
     border: 0.5px solid #000000;
     border-radius: 10px;
     background-color: #f8f5f2;
@@ -208,6 +223,7 @@
     justify-content: flex-start; 
     align-items: flex-start; 
     padding: 10px;
+    position: relative;
   }
   
   .resultImage {

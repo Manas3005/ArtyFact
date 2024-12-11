@@ -7,7 +7,7 @@ import { useState } from "react";
 export function ArtQuizView (props){
 
     const updatedProgress = props.updatedProgress;
-    const artists = ["Picasso", "Van Gogh", "Da Vinci", "Monet", "Dali", "Alma Thomas", "Matisse", "Mary Cassatt", "Edgar Degas", "Georges Seurat"] // List of artist options to be rendered
+    const artists = ["Pablo Picasso", "Vincent van Gogh", "Kerry James Marshall", "Tanaka Atsuko", "Gustave Caillebotte", "Alma Thomas", "Edgar Degas", "Georges Seurat", "Diego Rivera", "Joan Mitchell", "Aztec (Mexica)"] // List of artist options to be rendered
     const selectedArtists = props.selectedArtists;
     const resultsReady = props.resultsReady;
     const imageURLs = props.imageURLs;
@@ -83,7 +83,7 @@ export function ArtQuizView (props){
               <div>
                   <button
                   onClick={handleBackToQuizACB}
-                  className="quizPreviousQuestion"
+                  className="quizBackButton"
                   > Back to Quiz </button>
 
                   <div className="resultsContainer">
