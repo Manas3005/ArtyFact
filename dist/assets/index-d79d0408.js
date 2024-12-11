@@ -25763,13 +25763,13 @@ function JournalTopBarView(props) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "topBar", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "myJournalsMyCollections", onClick: handleMyCollectionsClickedACB, children: "My Collections" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "backToHome", onClick: handleBackToHomeClickedACB, children: " Back To Home" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "logo", src: "https://i.imgur.com/i2maDv0.png" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "logo", src: "/image/myJournalsLogo.png" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "buttonWithIcon", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "Icon", src: "https://i.imgur.com/uf8TJb6.png" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "Icon", src: "/image/signinIcon.png" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("text", { className: "loggedInText", children: "Logged In" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "addNewEntry", onClick: handleAddNewEntryClickedACB, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "Icon", src: "https://i.imgur.com/U5BgrwK.png" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "Icon", src: "/image/plusIcon.png" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("text", { children: "Add New Journal Entry" })
     ] })
   ] }) });
@@ -25778,7 +25778,7 @@ function JournalEntriesListView(props) {
   if (props.entries.length === 0) {
     console.log("journal entries array is empty");
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "entriesList", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://i.imgur.com/OrjnUdl.png" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/image/thinkingMan.png" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "alertText", children: "No Journal Entries Added Yet. " }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "alertText", children: "Add Journal Entries using the button above. " })
     ] });
@@ -25787,7 +25787,7 @@ function JournalEntriesListView(props) {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "entriesList", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "entriesLabelList", children: /* @__PURE__ */ jsxRuntimeExports.jsx("text", { className: "previousEntriesText", children: "Previous Journal Entries" }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "scrollableArea", className: "scrollable", children: props.entries.map((entry, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "journalEntryListDiv", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://i.imgur.com/b3r8xMO.png", className: "journalEntryListImage" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/image/starry-night.png", className: "journalEntryListImage" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "journalEntryListText", children: transformJournalTitleCB(entry) })
       ] }, index)) })
     ] });
@@ -25812,7 +25812,7 @@ function EntryEditTopBarView(props) {
     /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "backToMyJournals", onClick: handleBackToMyJournalsClickedACB, children: " Back To My Journals" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "editJournalEntryLogo", children: "Edit Journal Entry" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "saveChanges", onClick: handleSaveChangesClickedACB, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "Icon", src: "https://i.imgur.com/7gI19MR.png" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "Icon", src: "/image/saveIcon.png" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("text", { children: "Save Changes" })
     ] })
   ] }) });
@@ -25840,11 +25840,11 @@ function EntryEditContentView(props) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "journalEntryDiv", children: /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { className: "journalEntryContentTextBox", placeholder: "What are you thinking about? Start Typing here ...", onBlur: onEntryTextChangeACB }) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "editEntryRightSideBar", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "sidebarVerticalFlexParent", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "up", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "artWorkBox", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "starryNightIcon", src: "https://i.imgur.com/b3r8xMO.png" }) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "up", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "artWorkBox", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "starryNightIcon", src: "/image/starry-night.png" }) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "down", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "addArtwork", children: "Add Artwork" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "deleteEntry", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "Icon", src: "https://i.imgur.com/xNXJSLZ.png" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { className: "Icon", src: "/image/deleteIcon.png" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("text", { children: "Delete Journal Entry" })
         ] })
       ] })
@@ -34223,4 +34223,4 @@ function App() {
 createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(App, {})
 );
-//# sourceMappingURL=index-04f9f1b9.js.map
+//# sourceMappingURL=index-d79d0408.js.map

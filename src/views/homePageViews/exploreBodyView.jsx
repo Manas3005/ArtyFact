@@ -21,7 +21,7 @@ function ExploreBodyView () {
 
             <div className="explorePanel">
                 <img
-                src= "https://i.imgur.com/hsLQCvu.png" 
+                src= "/image/exploreNewArtPanel.png" 
                 className = "exploreNewArtPanel"
                 />
                 <div className="confusedText">Not sure what you like yet?</div>
@@ -29,7 +29,7 @@ function ExploreBodyView () {
                 {renderQuizProgressACB()}
             </div>
 
-                <img className="exploreImage" src="https://i.ibb.co/bg8f7q5/Palazzo-Spada-Rome.webp"
+                <img className="exploreImage" src="/image/Palazzo-Spada-Rome.png"
                 />
 
         </div>

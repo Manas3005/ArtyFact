@@ -56,9 +56,9 @@ function TopbarCollectionsView(props) {
                     x</button> 
                 <button className="signInlogo">Sign in</button>
                 <button className="signInIcon" >
-                <img src = "https://i.imgur.com/uf8TJb6.png"/>
+                <img src = "/image/signinIcon.png"/>
                 </button>
-                <img className = "collectionsLogo" src="https://i.imgur.com/0MOeBLR.png" />
+                <img className = "collectionsLogo" src="/image/collectionsLogo.png" />
 
                 <button className="addNewCollection">Create New Collection</button>
             </div>
