@@ -9,7 +9,6 @@ function EntryEdit (props){
 
     let entryID = useSelector(state => state.myJournals.latestEntryID)
 
-    console.log("Rendering EntryEdit")
 
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');

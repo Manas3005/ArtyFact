@@ -28,7 +28,6 @@ export const myJournalEntries = createSlice({
         },
         setSelectedEntryID: (state, action) => { //sets the selected entry ID, when a journal entry is clicked in the entry list
             state.selectedEntryID = action.payload
-            console.log("selectedID:" + state.selectedEntryID)
         }
         }
     }
