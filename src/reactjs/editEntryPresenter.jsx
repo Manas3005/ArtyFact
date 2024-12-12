@@ -2,12 +2,12 @@ import { EntryEditTopBarView } from "../views/myJournalViews/EntryEditTopBarView
 import { EntryEditContentView } from "../views/myJournalViews/EntryEditContentView";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { addEntry, increaseEntryID } from "../store/journalsSlice";
+import { addEntry, increaseLatestEntryID } from "../store/journalsSlice";
 import { useSelector } from "react-redux"
 
 function EntryEdit (props){
 
-    let entryID = useSelector(state => state.myJournals.currentEntryID)
+    let entryID = useSelector(state => state.myJournals.latestEntryID)
 
     console.log("Rendering EntryEdit")
 
@@ -33,7 +33,7 @@ function EntryEdit (props){
          
           console.log(newEntry)
         dispatch(addEntry(newEntry))
-        dispatch(increaseEntryID())
+        dispatch(increaseLatestEntryID())
     }
 
     return (<div>

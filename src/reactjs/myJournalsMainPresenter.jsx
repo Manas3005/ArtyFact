@@ -10,7 +10,7 @@ function MyJournalsMain (props){
     return (<div>
 
         <JournalTopBarView></JournalTopBarView>
-        <JournalEntriesListView entries={journalEntries}></JournalEntriesListView>
+        <JournalEntriesListView entries={journalEntries} ></JournalEntriesListView>
     </div>)
 
     

@@ -1,11 +1,17 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
-import { transformJournalTitleCB } from "../../utilities"; 
+import { transformJournalTitleCB } from "../../utilities";
 
-
+import { useDispatch } from "react-redux";
+import { setSelectedEntryID } from "../../store/journalsSlice";
 
 export function JournalEntriesListView(props){
 
+    let dispatch = useDispatch()
+
+    function onJournalEntryClickedACB (entry){
+        dispatch(setSelectedEntryID(entry.entryID))
+    }
     
     if (props.entries.length === 0){
         
@@ -32,8 +38,8 @@ export function JournalEntriesListView(props){
 
                 <div id="scrollableArea" className="scrollable">
 
-                {props.entries.map((entry, index) => (
-                        <div key={index} className="journalEntryListDiv">
+                {props.entries.map((entry, index) => ( //Dynamically renders the exisitng journal entries in the journal entries list
+                        <div key={index} className="journalEntryListDiv" onClick={() => onJournalEntryClickedACB(entry)}>
                             <img src="/image/starry-night.png" className="journalEntryListImage" />
                             <span className="journalEntryListText">{transformJournalTitleCB(entry)}</span>
                         </div>
