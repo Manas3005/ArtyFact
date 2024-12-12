@@ -29,11 +29,11 @@ export function EntryEditContentView(props){
                    
                     <input className="entryTitleTextBox" placeholder="Journal Entry Title " onBlur={onEntryTitleChangeACB}></input>
 
-                    <div className="dateDropdownsDiv">
+                    <div className="dateDropdownsDiv"> {/* Select a month and date */}
                         
                         <label>Date:</label>
                         
-                        <select className="dropdown" size="1"> 
+                        <select className="dropdown" size="1"> {/* dynamically generated from provided arrays */}
                             {monthArray.map((month, index) => (
                                  <option key={index}>{month}</option>
                             ))}

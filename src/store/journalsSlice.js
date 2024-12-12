@@ -5,6 +5,7 @@ export const myJournalEntries = createSlice({
     name : "myJournalEntries",
     initialState: {
         entries: [], // Array to store journal entries
+        currentEntryID:0
     },
     reducers:{
         addEntry: (state, action) => {
@@ -20,9 +21,13 @@ export const myJournalEntries = createSlice({
                 }
                 state.entries= state.entries.filter(entryFilterCB); // Remove the current entry you are viewing from entries array
             
+        },
+        increaseEntryID: (state) => {
+            state.currentEntryID ++;
         }
+
         }
     }
 )
 
-export const { addEntry, removeEntry } = myJournalEntries.actions;
+export const { addEntry, removeEntry, increaseEntryID} = myJournalEntries.actions;
