@@ -104,9 +104,9 @@
 }
 
 .quizPreviousQuestion{
-    top: 87%;
-    left: 20%;
-    position: absolute;
+    position:fixed;
+    bottom: 2%;
+    left: 15%;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 25px;
     width: 160px;
@@ -137,8 +137,8 @@
 
 .quizNextQuestion{
     top: 87%;
-    right: 20%;
-    position: absolute;
+    right: 15%;
+    position: fixed;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 25px;
     width: 160px;
@@ -151,7 +151,7 @@
 }  
 
 .submitQuizButton{
-    top: 87%;
+    top: 88.9%;
     right: 44%;
     position: absolute;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -204,6 +204,23 @@
     margin-bottom: calc(5px + 1.5%);
     background-color: rgb(151, 194, 233); 
 }
+
+.artDetails {
+    text-align: center; 
+    margin-top: 8px; 
+  }
+  
+  .artTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; 
+  }
+  
+  .artistTitle {
+    font-size: 15px;
+    font-style: italic; 
+    color: #555; 
+  }
 
 .quizProgress {
     position: relative; 

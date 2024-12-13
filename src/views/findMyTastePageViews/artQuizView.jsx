@@ -7,34 +7,14 @@ import { useState } from "react";
 export function ArtQuizView (props){
 
     const updatedProgress = props.updatedProgress;
-    const artists = ["Pablo Picasso", "Vincent van Gogh", "Kerry James Marshall", "Tanaka Atsuko", "Gustave Caillebotte", "Alma Thomas", "Edgar Degas", "Georges Seurat", "Diego Rivera", "Joan Mitchell", "Aztec (Mexica)"] // List of artist options to be rendered
+    const artists = ["Vincent van Gogh", "Kerry James Marshall", "Tanaka Atsuko", "Gustave Caillebotte", "Alma Thomas", "Edgar Degas", "Georges Seurat", "Diego Rivera", "Joan Mitchell", "Aztec (Mexica)"] // List of artist options to be rendered
     const selectedArtists = props.selectedArtists;
     const resultsReady = props.resultsReady;
     const imageURLs = props.imageURLs;
+    const artTitles = props.artTitles;
+    const artistTitles = props.artistTitles;
 
 
-    function renderArtistOptions() {
-        return artists.map(function organizeAsOptionCB(artist) {
-        const isSelected = selectedArtists.includes(artist);
-   
-            return (
-                <button
-                    key={artist}
-                    className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
-                    onClick={function() { handleChoiceSelectionACB(artist); }}
-                >
-                    <input
-                        type="checkbox"
-                        readOnly
-                        checked={isSelected}
-                    />
-                    {artist}
-                    {console.log(selectedArtists)} {/*TESTING - REMOVE*/}
-                </button>
-            );
-        });
-    }
-    
 
     function handleNextClickACB(){
         props.onNextButtonClicked(); //Firing custom event to dispatch mutation of progress variable in findMyTaste presenter
@@ -61,16 +41,46 @@ export function ArtQuizView (props){
 
 
 
+    function renderArtistOptions() {
+      return artists.map(function organizeAsOptionCB(artist) {
+      const isSelected = selectedArtists.includes(artist);
+ 
+          return (
+              <button
+                  key={artist}
+                  className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
+                  onClick={function() { handleChoiceSelectionACB(artist); }}
+              >
+                  <input
+                      type="checkbox"
+                      readOnly
+                      checked={isSelected}
+                  />
+                  {artist}
+                  {console.log(selectedArtists)} {/*TESTING - REMOVE*/}
+              </button>
+          );
+      });
+  }
+
+
+
     return (
+
       <div>
+
+
         <LinearWithValueLabel updatedProgress={updatedProgress} />
         <div className="quizQuestions">
+
           {updatedProgress === 0 ? (
             <div>
+
               Select your favorite artists
               <div className="favoriteArtistsContainer">
                 {renderArtistOptions()}
               </div>
+
             </div>
           ) 
           
@@ -83,38 +93,55 @@ export function ArtQuizView (props){
               <div>
                 
                   <div className="resultsContainer">
-                    {imageURLs.map((url, index) => (
-                    <img  
-                      key={index}
-                      src={url}
-                      alt={`Artwork ${index + 1}`}
-                      className="resultImage"
-                    />
-                    ))}
+                    
+                  {imageURLs.map((url, index) => (
+                    
+                    <div key={index} className="resultItem">
+                        
+                        <img  
+                          src={url}
+                          className="resultImage"
+                        />
+
+                        <div div className="artDetails">
+                          <div className="artTitle">{artTitles[index]}</div>
+                          <div className="artistTitle">by {artistTitles[index]}</div>
+                        </div>
+
+                    </div>
+
+                  ))}
+  
                     <button
-                  onClick={handleBackToQuizACB}
-                  className="quizBackButton"
-                  > Back to Quiz 
-                  </button>
+                    onClick={handleBackToQuizACB}
+                    className="quizBackButton"
+                    > Back to Quiz 
+                    </button>
+
                   </div>
+
               </div>
             ) 
             
             : (
               <div>
+
                 <button
                   onClick={handlePreviousClickACB}
                   className="quizPreviousQuestion"
                 >
                   Previous
                 </button>
+
                 <div>Select a color that you would like your art to be dominated with</div>
+
                 <button
                   onClick={handleSubmitClickACB}
                   className="submitQuizButton"
                 >
                   Submit
                 </button>
+
               </div>
             )
           ) : (
@@ -137,6 +164,8 @@ export function ArtQuizView (props){
             </div>
           )}
         </div>
+
+
       </div>
     );
     
