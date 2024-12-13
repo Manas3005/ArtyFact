@@ -108,7 +108,8 @@
 }
 
 .addNewEntry{
-    display: flex; 
+    display: flex;
+    right: 42.5%; 
     
     width: 260px;                  
     height: 70px;
@@ -524,4 +525,6 @@
     transition: all 0.3s ease; 
     
 }
+
+
 

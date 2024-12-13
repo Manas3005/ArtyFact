@@ -11,8 +11,37 @@ export function JournalTopBarView(props){
         return window.location.hash = '#/editentry'
     }
 
-    function handleMyCollectionsClickedACB (){
-        return window.location.hash = '#/collections'
+    function handletopRightButtonClickedACB (){
+       
+        if (!props.isJournalEntrySelected){
+            return window.location.hash = '#/collections'
+        } else {
+            return window.location.hash = '#/myjournals'
+        }
+    }
+
+    //conditionally rendering the title of the page where the user currently is
+    function handleRenderPageTitleACB(){ 
+
+        if (!props.isJournalEntrySelected){
+            
+            return (
+            
+            <div>
+            <img  className = "logo" src = "/image/myJournalsLogo.png" />
+                
+            <button className="addNewEntry" onClick={handleAddNewEntryClickedACB}>
+                    <img className="Icon" src = "/image/plusIcon.png" />
+                    <text >Add New Journal Entry</text>
+                </button>
+            </div>   
+            )
+
+
+            
+        } else {
+            return (<div className="editJournalEntryLogo">{props.pageHeading}</div>)
+        }    
     }
 
     return (
@@ -20,19 +49,14 @@ export function JournalTopBarView(props){
             
             <div className="topBar">
                 
-                <button className="myJournalsMyCollections" onClick={handleMyCollectionsClickedACB}>My Collections</button>
+                <button className="myJournalsMyCollections" onClick={handletopRightButtonClickedACB}>{props.topRightButtonText}</button>
                 <button className="backToHome" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
-                <img  className = "logo" src = "/image/myJournalsLogo.png" />
-                
+                <div>{handleRenderPageTitleACB()}</div>
+
                 <button className="buttonWithIcon">
                     <img className="Icon" src = "/image/signinIcon.png" />
                     <text className="loggedInText">Logged In</text>
-                </button>
-
-                <button className="addNewEntry" onClick={handleAddNewEntryClickedACB}>
-                    <img className="Icon" src = "/image/plusIcon.png" />
-                    <text >Add New Journal Entry</text>
                 </button>
                             
             </div>
