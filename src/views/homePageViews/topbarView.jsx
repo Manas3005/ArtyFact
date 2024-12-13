@@ -23,6 +23,17 @@ export function TopBarView(props){
         window.location.hash="#/collections";
     }
 
+    function eventHandlerForEnterACB(evt) {
+        console.log("this is the event for search...", evt);
+        if(evt.which == "13") {
+
+        console.log("button has been pressed")
+       // props.onSearchedDish();
+
+        }
+    }
+
+
     return (
         <div>
             
@@ -40,8 +51,8 @@ export function TopBarView(props){
 
 
 
-
-               <input className="searchBar" placeholder = "Search..."/> 
+                
+               <input className="searchBar" placeholder = "Search..." onKeyDown={eventHandlerForEnterACB}/> 
 
 
                 <img  className = "logo" src = "https://i.imgur.com/viSeXcY.png" />
