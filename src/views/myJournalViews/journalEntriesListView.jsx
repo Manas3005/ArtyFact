@@ -10,7 +10,13 @@ export function JournalEntriesListView(props){
     let dispatch = useDispatch()
 
     function handleJournalEntryClickedACB (entry){
-        dispatch(setSelectedEntryID(entry.entryID))
+        const ID = entry.entryID
+        dispatch(setSelectedEntryID(ID))
+
+        // parametric routing depending on selected journal entry ID
+        const idString = ID.toString()
+        const path = "#/journalEntryContent/" + idString
+        return window.location.hash = path
     }
     
     if (props.entries.length === 0){

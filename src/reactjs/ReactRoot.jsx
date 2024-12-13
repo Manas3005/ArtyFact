@@ -6,6 +6,7 @@ import {MyCollectionsPresenter} from "./myCollectionsPresenter.jsx"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
 import { store} from "../index.jsx";
 import { FindMyTaste } from "./findMyTastePresenter.jsx";
+import { JournalEntryContent } from "./journalEntryContentPresenter.jsx";
 
 export function makeRouter(store){
     return createHashRouter([
@@ -32,6 +33,10 @@ export function makeRouter(store){
         {   
             path: "/findMyTaste",
             element: <FindMyTaste store = {store}></FindMyTaste>
+        },
+        {
+            path:"/journalEntryContent/:ID",
+            element: <JournalEntryContent store={store}></JournalEntryContent>
         }
         
     ])
