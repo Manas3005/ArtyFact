@@ -24,11 +24,9 @@ export function TopBarView(props){
     }
 
     function eventHandlerForEnterACB(evt) {
-        console.log("this is the event for search...", evt);
         if(evt.which == "13") {
-
         console.log("button has been pressed")
-       // props.onSearchedDish();
+        window.location.hash="#/searchResult";
 
         }
     }
