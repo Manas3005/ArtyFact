@@ -2,15 +2,15 @@ import { FindMyTasteTopBarView } from "../views/findMyTastePageViews/findMyTaste
 import { DreamArtDescView } from "../views/findMyTastePageViews/dreamArtDescView"
 import { ArtQuizView } from "../views/findMyTastePageViews/artQuizView"
 import { useState } from "react";
-import { getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch, getArtWorkByID, getArtWorkImageModified} from '/src/apiCall.js';
+import { getArtWorksSearch, getArtWorkByID, getArtWorkImageModified, fetchAllArtworks} from '/src/apiCall.js';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
+import { useEffect } from "react";
 
 
 export function FindMyTaste(props){
 
-
-
+    
     const dispatch = useDispatch()
 
     const [currentView, setCurrentView] = useState('describe'); /*here component state is used because it aids the change of views depnding
@@ -24,6 +24,11 @@ export function FindMyTaste(props){
     const [artistTitles, setArtistTitles] = useState([]);
 
 
+    useEffect(() => { //testing if the new method in apiCall.js works
+        fetchAllArtworks();
+    }, []);
+    
+
 
     function setArtDescViewACB(){ //handling custom event 
         setCurrentView('describe') 
@@ -36,12 +41,12 @@ export function FindMyTaste(props){
 
 
     function incrementQuizProgressACB(){
-        dispatch(incrementProgress(10)) 
+        dispatch(incrementProgress(20)) 
     }
 
 
     function decrementQuizProgressACB(){
-        dispatch(decrementProgress(10))
+        dispatch(decrementProgress(20))
     }
 
     function setResultsBackToPendingACB(){
@@ -63,10 +68,10 @@ export function FindMyTaste(props){
 
 
 
+
     function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
             //so that filterAndSetResultsACB is called only when all promises/fetches are resolved
-            const tempAllArtworkData = []; 
-    
+            const tempAllArtworkData = [];             
             selectedArtists.forEach(function (currentArtist) {
                 const searchParams = { artist_title: currentArtist };
         
@@ -86,6 +91,8 @@ export function FindMyTaste(props){
                 });
             });
     }
+
+
 
 
         

@@ -89,7 +89,7 @@ export function ArtQuizView (props){
       } else if (updatedProgress < 100) {
         return (
           <div>
-            <div>Question {updatedProgress / 10}</div>
+            <div>Question {updatedProgress / 20}</div>
             <div>
               <button
                 onClick={handlePreviousClickACB}

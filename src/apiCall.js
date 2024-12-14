@@ -62,6 +62,22 @@ export function getArtWorkImageModified(result){ //This function directly return
     return URLParamsForImage(imagePath);
 }
 
+export function fetchAllArtworks() { //allows to fetch all artworks (limit 100) can be used for anything i.e. option instances for the quiz 
+    fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=100")
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: `, response.status);
+            }
+            return response.json();
+        })
+        .then(function(data){
+            console.log("Fetched all artworks:", data.data);
+        })
+        .catch(function(error){
+            console.error("Error fetching all artworks:", error);
+        });
+}
+
 
 
 
