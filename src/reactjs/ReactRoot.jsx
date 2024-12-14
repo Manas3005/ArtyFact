@@ -4,9 +4,9 @@ import { MyJournalsMain } from "./myJournalsMainPresenter.jsx";
 import { EntryEdit } from "./editEntryPresenter.jsx";
 import {MyCollectionsPresenter} from "./myCollectionsPresenter.jsx"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
-import { store} from "../index.jsx";
+import {store} from "../index.jsx";
 import { FindMyTaste } from "./findMyTastePresenter.jsx";
-import {searchResult} from "/Users/dawaarkhang/Desktop/Dynamiska/ArtyFact/src/reactjs/searchResultPresenter.jsx"
+import {SearchResult} from "./searchResultPresenter.jsx"
 
 export function makeRouter(store){
     return createHashRouter([
@@ -36,7 +36,7 @@ export function makeRouter(store){
         },
         {   
             path: "/searchResult",
-            element: <searchResult store = {store}></searchResult>
+            element: <SearchResult store = {store}></SearchResult>
         }
     ])
 }

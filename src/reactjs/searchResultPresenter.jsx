@@ -1,12 +1,22 @@
+import { useSelector } from "react-redux"
 
- function searchResult(){
+import {SearchTopBar} from "/src/views/SearchBar/SearchTopBarView.jsx"
 
-<div>
+function SearchResult(props){
 
-<button></button>
+    let search = useSelector(state => state.SearchResults.resuts)
+
+return(
+<div>    
+
+
+<SearchTopBar  results={search} >  </SearchTopBar>
+
 
 </div>
 
+)
+
 }
 
-export {searchResult}
+export {SearchResult}
