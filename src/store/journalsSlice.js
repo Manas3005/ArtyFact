@@ -13,12 +13,13 @@ export const myJournalEntries = createSlice({
             state.entries.push(action.payload); // Add new entry to entries array
           },
 
-        removeEntry: (state, action) => {
+        removeEntry: (state) => {
             
                 function entryFilterCB(entry){
-                    if (state.entries.id != entryToRemove.id){
-                        return true
+                    if (entry.entryID === state.selectedEntryID){
+                        return false
                     }
+                    return true
                 }
                 state.entries= state.entries.filter(entryFilterCB); // Remove the current entry you are viewing from entries array
             

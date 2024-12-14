@@ -3,6 +3,10 @@ import "/src/css/journalsStyle.css"
 
 export function EntryContentView(props){
 
+    function handleDeleteEntryClickedACB (){
+        props.onDeleteEntryClick()
+        return window.location.hash = "#/myjournals"
+    }
     
     return (
         <div className="journalsHorizontalFlexParent">
@@ -31,7 +35,7 @@ export function EntryContentView(props){
                     </div>
 
                     <div className="bottomFlex">
-                        <button className="deleteEntry">
+                        <button id="delete" className="deleteEntry" onClick={handleDeleteEntryClickedACB}>
                                 <img className="Icon" src = "/image/deleteIcon.png" />
                                 <text >Delete Journal Entry</text>        
                         </button>

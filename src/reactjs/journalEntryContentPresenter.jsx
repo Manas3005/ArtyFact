@@ -1,12 +1,16 @@
 import { EntryContentView } from "../views/myJournalViews/entryContentView";
 import { JournalTopBarView } from "../views/myJournalViews/journalTopBarView";
+import { removeEntry } from "../store/journalsSlice";
 import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux";
 
 
 function JournalEntryContent (props){
 
     let journalEntries = useSelector(state => state.myJournals.entries)
     let selectedID = useSelector(state => state.myJournals.selectedEntryID)
+
+    let dispatch = useDispatch()
 
     //helper function to finding matching entryID as current selected Journal entry
     function selectedEntryFinderCB(entry) {
@@ -20,6 +24,9 @@ function JournalEntryContent (props){
     console.log("Selected ID:", selectedID);
     console.log("Selected Entry:", selectedEntry);
     
+    function onDeleteEntryClickedACB (){
+        dispatch(removeEntry())
+    }
         return (<div>
         
             <JournalTopBarView isJournalEntrySelected={true} 
@@ -30,8 +37,9 @@ function JournalEntryContent (props){
             
             <EntryContentView lastUpdated={selectedEntry.date}
                                 mood={selectedEntry.mood}
-                                content={selectedEntry.actualText}>
-                                    
+                                content={selectedEntry.actualText}
+                                onDeleteEntryClick={onDeleteEntryClickedACB} >
+
                                 </EntryContentView>
         
         </div>)   
