@@ -5,10 +5,11 @@ import { useState } from "react";
 import { getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch, getArtWorkByID, getArtWorkImageModified} from '/src/apiCall.js';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
-import { useEffect } from "react";
-import { current } from "@reduxjs/toolkit";
+
 
 export function FindMyTaste(props){
+
+
 
     const dispatch = useDispatch()
 
