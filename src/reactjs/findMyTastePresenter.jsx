@@ -80,7 +80,7 @@ export function FindMyTaste(props){
         }
     }
 
-
+    
 
 
     function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
@@ -114,7 +114,7 @@ export function FindMyTaste(props){
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
             
             const filteredArtworks = allArtworkData.filter(function (artwork) {
-                return selectedArtists.includes(artwork.artist_title);
+                return selectedArtists.includes(artwork.artist_title); 
             });
             console.log("HERE ARE THE ARTISTS", artistsOptions)
             console.log("FILTERED ARTWORKS: ", filteredArtworks); //for debugging
@@ -131,7 +131,7 @@ export function FindMyTaste(props){
                 const imageTitle = artwork.title         //same process as above but for the image titles
                 const artistTitle = artwork.artist_title
 
-                if (!newImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again because the asynchronous flow can lead to that
+                if (!newImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again as duplicate artworks from the same artist from the API can lead to this
                     newImageURLs.push(imageURL);
                     newImageTitles.push(imageTitle);
                     newArtistTitles.push(artistTitle);

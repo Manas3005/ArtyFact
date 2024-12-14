@@ -119,6 +119,11 @@
 
 }
 
+.quizCompleted{
+    height: 100px;
+    width: 100px;
+}
+
 .quizBackButton {
     position: fixed; 
     top: 88%; 

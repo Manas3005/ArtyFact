@@ -13,8 +13,8 @@ export function ArtQuizView (props){
     const imageURLs = props.imageURLs;
     const artTitles = props.artTitles;
     const artistTitles = props.artistTitles;
-    const artistsOptions = ["Tanaka Atsuko", "Diego Rivera", "Alma Thomas", "Kerry James Marshall", "Joan Mitchell", "Aztec (Mexica)", "Gustave Caillebotte", "Georges Seurat", "Vincent van Gogh", ]
-
+    const artistsOptions = ["Tanaka Atsuko", "Diego Rivera", "Alma Thomas", "Kerry James Marshall", "Joan Mitchell", "Aztec (Mexica)", "Gustave Caillebotte", "Georges Seurat", "Vincent van Gogh"]
+    const [quizCompleted, setQuizCompleted] = useState(false);
 
     function handleNextClickACB(){
         props.onNextButtonClicked(); //Firing custom event to dispatch mutation of progress variable in findMyTaste presenter
@@ -34,11 +34,13 @@ export function ArtQuizView (props){
 
     function handleSubmitClickACB(){ //firing custom event to fetch art by selectedArtists 
         props.onSubmitButtonClicked(selectedArtists);
+        setQuizCompleted(true);
     }
 
 
     function handleBackToQuizACB() {
       props.onBackToQuizButtonClicked();
+      setQuizCompleted(false);
     }
 
 
@@ -111,7 +113,7 @@ export function ArtQuizView (props){
           </div>
         );
       } else if (updatedProgress === 100) {
-        if (!resultsReady) {
+        if (!resultsReady && !quizCompleted) {
           return (
             <div>
               <div>Final Question: Select your preferred art style</div>
@@ -131,7 +133,12 @@ export function ArtQuizView (props){
               </div>
             </div>
           );
-        } else {
+        } else if(!resultsReady && quizCompleted){
+
+            return (
+              <img src = "https://i.gifer.com/ZKZg.gif"></img>
+            )
+        } else if(resultsReady && quizCompleted){
           return (
             <div>
               <div className="resultsContainer">
