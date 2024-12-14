@@ -8,6 +8,14 @@ export function Button({ className, onClick, children}) {
     )
 }
 
+export function SignInButton({className}) {
+    const handleclick = () => {
+        //Locate to sign in
+    }
+    return (
+        <button className={className}>Sign In</button>
+    )
+}
 
 /**
  * 

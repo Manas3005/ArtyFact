@@ -1,4 +1,6 @@
 import { TopbarCollectionView } from "../views/collectionViews/topbarCollectionView";
+import { CollectionListview } from "../views/collectionViews/collectionListView";
+
 
 export function CollectionPresenter() {
 
@@ -7,8 +9,8 @@ export function CollectionPresenter() {
 
         <div>
             <TopbarCollectionView>
-
             </TopbarCollectionView>
+            <CollectionListview></CollectionListview>
         </div>
 
 
