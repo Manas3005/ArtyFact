@@ -9,6 +9,7 @@ export function EntryEditTopBarView(props){
 
     function handleSaveChangesClickedACB (){
         props.onSaveChanges();
+        return window.location.hash = '#/myjournals'
     }
     
     return (

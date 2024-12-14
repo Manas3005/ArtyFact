@@ -6,10 +6,6 @@ import { useSelector } from "react-redux"
 function MyJournalsMain (props){
 
     let journalEntries = useSelector(state => state.myJournals.entries)
-    let selectedID = useSelector(state => state.myJournals.selectedEntryID)
-
-    console.log("Selected ID:", selectedID);
-    
     
         return (<div>
         

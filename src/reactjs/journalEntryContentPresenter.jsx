@@ -1,3 +1,4 @@
+import { EntryContentView } from "../views/myJournalViews/entryContentView";
 import { JournalTopBarView } from "../views/myJournalViews/journalTopBarView";
 import { useSelector } from "react-redux"
 
@@ -13,7 +14,6 @@ function JournalEntryContent (props){
     }
     
     // updates selectedEntry using reacts re-render cycle, when component re-renders
-
     // passed down to views as selectedEntry and accessed as props.selectedEntry when editing or viewing
     const selectedEntry = journalEntries.find(selectedEntryFinderCB);  
 
@@ -27,6 +27,12 @@ function JournalEntryContent (props){
                                 topRightButtonText={"Back To My Journals"}>
 
                                 </JournalTopBarView>
+            
+            <EntryContentView lastUpdated={selectedEntry.date}
+                                mood={selectedEntry.mood}
+                                content={selectedEntry.actualText}>
+                                    
+                                </EntryContentView>
         
         </div>)   
 }

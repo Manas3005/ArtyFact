@@ -45,10 +45,14 @@ export function JournalEntriesListView(props){
                 <div id="scrollableArea" className="scrollable">
 
                 {props.entries.map((entry, index) => ( //Dynamically renders the exisitng journal entries in the journal entries list
+                        
                         <div key={index} className="journalEntryListDiv" onClick={() => handleJournalEntryClickedACB(entry)}>
+                            
                             <img src="/image/starry-night.png" className="journalEntryListImage" />
                             <span className="journalEntryListText">{transformJournalTitleCB(entry)}</span>
+                            
                         </div>
+
                     ))}
 
                 </div>

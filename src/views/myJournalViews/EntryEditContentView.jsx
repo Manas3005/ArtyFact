@@ -21,9 +21,9 @@ export function EntryEditContentView(props){
     }
     
     return (
-        <div className="editEntryHorizontalFlexParent">
+        <div className="horizontalFlexParent">
 
-            <div className="editEntryLeftContent">
+            <div className="leftContent">
 
                 <div className="titleAndDateDiv">
                    
@@ -66,7 +66,7 @@ export function EntryEditContentView(props){
 
             </div>
 
-            <div className="editEntryRightSideBar">
+            <div className="rightContent">
 
                 
 
