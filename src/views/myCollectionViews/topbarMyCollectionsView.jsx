@@ -1,4 +1,6 @@
+import { MyJournalsButton } from "../customViewComponents/backToHomeButton";
 import "/src/css/collectionsStyle.css"
+import {BackToHomeButton} from "/src/views/customViewComponents/BackToHomeButton"
 
 function TopbarCollectionsView(props) {
 
@@ -46,9 +48,9 @@ function TopbarCollectionsView(props) {
         <div>
 
             <div className="topbarCollection">
-                <button className="MyJournalCollection" onClick={goToJournalACB}>My Journals</button>
-                
-                <button className="backToHomeCollection" onClick={backToHomeACB}>Back To Home</button>
+                <MyJournalsButton className="myJournalCollection"></MyJournalsButton>
+
+                <BackToHomeButton className="backToHomeCollection" ></BackToHomeButton>
                 <input className="collectionsSearchBar" placeholder = "Search Collections..." onChange={handleSearchACB}/>
                 <button className="buttonX"
                     onClick={handleClearButtonACB} 

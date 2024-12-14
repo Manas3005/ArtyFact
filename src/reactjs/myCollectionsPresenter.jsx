@@ -1,5 +1,5 @@
 import { testingAnAPICallForMostSimilar } from "../apiCall";
-import { TopbarCollectionsView } from "../views/myCollectionViews/topbarCollectionsView"
+import { TopbarCollectionsView } from "../views/myCollectionViews/topbarMyCollectionsView"
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
@@ -79,6 +79,12 @@ export function MyCollectionsPresenter(props) {
         }
     ]
     
+    /**
+     * Denna useEffect är endast för att se att vår collections array fylls i store korrekt, men det den egentligen gör nu
+     * är att den sätter hela arrayen direkt in i store.
+     * Det vi vill göra senare är att låta reducern setCollectionsArray spreada gamla datan och fylla med senaste artwork.
+     * Den ska inte alltså vara en "setCollectionsArray" utan mer lik en "addArtworkToCollection"
+     */
     useEffect(() => {
         console.log("This is the useEffect", collections);
         dispatch(setCollectionsArray(collections));
@@ -198,24 +204,6 @@ export function MyCollectionsPresenter(props) {
 
 
     //useEffect((testingAnAPICallForMostSimilar), []);
-
-    /*const images= [ {
-            image: '/image/miyazaki.png',
-            title: "Miyazaki In Japan",
-        },
-        {
-            image: '/image/artdeschomepage.png',
-            title: 'Unknown',
-        },
-        {
-            image: '/image/luigiloir.png',
-            title: 'Boulevard Saint'
-        },
-        {
-            image: '/image/paris.jpg',
-            title: 'Paris Street'
-        }
-    ]*/
 
         function setClearButtonACB(value) {
             console.log("Just pressed X button");

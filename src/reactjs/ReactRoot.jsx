@@ -2,7 +2,8 @@ import { testAPI, getArtWorks } from "../apiCall.js"
 import { HomePage } from "./homepagePresenter.jsx"
 import { MyJournalsMain } from "./myJournalsMainPresenter.jsx";
 import { EntryEdit } from "./editEntryPresenter.jsx";
-import {MyCollectionsPresenter} from "./myCollectionsPresenter.jsx"
+import {MyCollectionsPresenter} from "./myCollectionsPresenter.jsx";
+import {CollectionPresenter} from "./collectionPresenter.jsx";
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
 import { store} from "../index.jsx";
 import { FindMyTaste } from "./findMyTastePresenter.jsx";
@@ -32,6 +33,10 @@ export function makeRouter(store){
         {   
             path: "/findMyTaste",
             element: <FindMyTaste store = {store}></FindMyTaste>
+        },
+        {
+            path: "/thecollection",
+            element: <CollectionPresenter store = {store} ></CollectionPresenter>
         }
         
     ])
