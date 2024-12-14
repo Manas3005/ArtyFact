@@ -7,13 +7,12 @@ import { useState } from "react";
 export function ArtQuizView (props){
 
     const updatedProgress = props.updatedProgress;
-    const artists = ["Vincent van Gogh", "Kerry James Marshall", "Tanaka Atsuko", "Gustave Caillebotte", "Alma Thomas", "Edgar Degas", "Georges Seurat", "Diego Rivera", "Joan Mitchell", "Aztec (Mexica)"] // List of artist options to be rendered
+    const artistsOptions = props.artistsOptions // List of artist options to be rendered
     const selectedArtists = props.selectedArtists;
     const resultsReady = props.resultsReady;
     const imageURLs = props.imageURLs;
     const artTitles = props.artTitles;
     const artistTitles = props.artistTitles;
-
 
 
     function handleNextClickACB(){
@@ -40,7 +39,8 @@ export function ArtQuizView (props){
 
 
     function renderArtistOptions() {
-      return artists.map(function organizeAsOptionCB(artist) {
+
+      return artistsOptions.map(function organizeAsOptionCB(artist) {
       const isSelected = selectedArtists.includes(artist);
  
       return (

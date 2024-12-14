@@ -22,12 +22,24 @@ export function FindMyTaste(props){
     const [resultsReady, setResultsReady] = useState(false);
     const [artTitles, setArtTitles] = useState([]);
     const [artistTitles, setArtistTitles] = useState([]);
+    const [artistsOptions, setArtistsOptions] = useState([]);
 
-
-    useEffect(() => { //testing if the new method in apiCall.js works
-        fetchAllArtworks();
+    useEffect(() => {
+        fetchAllArtworks().then(function (data) {
+            const artists = data.data.map((artwork) => artwork.artist_title);
+            const filteredArtists = []
+            artists.forEach((artist) => { //this is done so if multiple artworks of the 100 have the same artists, they are not repeated as the options
+                if (artist && !filteredArtists.includes(artist)) {
+                  filteredArtists.push(artist);
+                }
+              });
+            setArtistsOptions(filteredArtists); 
+        })
+        .catch((error) =>
+            console.error("Error fetching artworks and hence artist options:", error)
+        );
     }, []);
-    
+
 
 
     function setArtDescViewACB(){ //handling custom event 
@@ -95,9 +107,11 @@ export function FindMyTaste(props){
 
 
 
+
+
         
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
-            
+            debugger;
             const filteredArtworks = allArtworkData.filter(function (artwork) {
                 return selectedArtists.includes(artwork.artist_title);
             });
@@ -153,6 +167,8 @@ export function FindMyTaste(props){
                                                                         resultsReady = {resultsReady}
                                                                         artTitles = {artTitles}
                                                                         artistTitles = {artistTitles}
+                                                                        artistsOptions = {artistsOptions}
+                                                                        
                                                                         />)}
             </div>)
 }
