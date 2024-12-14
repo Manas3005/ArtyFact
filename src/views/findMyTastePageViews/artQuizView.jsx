@@ -7,21 +7,24 @@ import { useState } from "react";
 export function ArtQuizView (props){
 
     const updatedProgress = props.updatedProgress;
-    const artistsOptions = props.artistsOptions // List of artist options to be rendered
+    //const artistsOptions = props.artistsOptions // List of artist options to be rendered
     const selectedArtists = props.selectedArtists;
     const resultsReady = props.resultsReady;
     const imageURLs = props.imageURLs;
     const artTitles = props.artTitles;
     const artistTitles = props.artistTitles;
+    const artistsOptions = ["Tanaka Atsuko", "Diego Rivera", "Alma Thomas", "Kerry James Marshall", "Joan Mitchell", "Aztec (Mexica)", "Gustave Caillebotte", "Georges Seurat", "Vincent van Gogh", ]
 
 
     function handleNextClickACB(){
         props.onNextButtonClicked(); //Firing custom event to dispatch mutation of progress variable in findMyTaste presenter
     }
 
+
     function handlePreviousClickACB(){
         props.onPreviousButtonClicked();
     }
+
 
     function handleChoiceSelectionACB(artist){
         props.onArtistSelected(artist); /*firing custom event to select artist and store in selectedArtists to later fetch related art
@@ -32,6 +35,7 @@ export function ArtQuizView (props){
     function handleSubmitClickACB(){ //firing custom event to fetch art by selectedArtists 
         props.onSubmitButtonClicked(selectedArtists);
     }
+
 
     function handleBackToQuizACB() {
       props.onBackToQuizButtonClicked();

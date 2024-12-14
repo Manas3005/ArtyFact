@@ -25,6 +25,7 @@ export function FindMyTaste(props){
     const [artistsOptions, setArtistsOptions] = useState([]);
 
     useEffect(() => {
+    
         fetchAllArtworks().then(function (data) {
             const artists = data.data.map((artwork) => artwork.artist_title);
             const filteredArtists = []
@@ -32,13 +33,14 @@ export function FindMyTaste(props){
                 if (artist && !filteredArtists.includes(artist)) {
                   filteredArtists.push(artist);
                 }
-              });
+            });
             setArtistsOptions(filteredArtists); 
+            
         })
         .catch((error) =>
             console.error("Error fetching artworks and hence artist options:", error)
         );
-    }, []);
+    } , []);
 
 
 
@@ -53,7 +55,7 @@ export function FindMyTaste(props){
 
 
     function incrementQuizProgressACB(){
-        dispatch(incrementProgress(20)) 
+        dispatch(incrementProgress(20)); 
     }
 
 
@@ -86,16 +88,17 @@ export function FindMyTaste(props){
             const tempAllArtworkData = [];             
             selectedArtists.forEach(function (currentArtist) {
                 const searchParams = { artist_title: currentArtist };
-        
+                
                 getArtWorksSearch(searchParams).then(function (allArtworks) { //searching all artworks including ones by currentArtist in selectedArtists
-                    let remainingArtworks = allArtworks.data.length; // this is to track the number of artworks left to process, i.e. getArtWorkByID
-        
+                    console.log("SINGULAR ARTWORK: ", allArtworks)
+                    let remainingArtworks = allArtworks.data.length;    // this is to track the number of artworks left to process, i.e. getArtWorkByID
                     allArtworks.data.forEach(function (currentArtwork) {
                         getArtWorkByID(currentArtwork.id).then(function (artworkDetails) { //PROCESSING STAGE: this fetches each artwork by its id so the artist_title property is accessible
                             tempAllArtworkData.push(artworkDetails.data); 
                             remainingArtworks--;
 
                             if (remainingArtworks === 0 && tempAllArtworkData.length === allArtworks.data.length * selectedArtists.length) { //since this can run before the async callbacks, it is important to check that all data has been fetched
+                                console.log("HERE IS THE ORIGINAL VERSION", tempAllArtworkData)
                                 filterAndSetResultsACB(tempAllArtworkData);
                             }
                         });
@@ -108,14 +111,12 @@ export function FindMyTaste(props){
 
 
 
-
-        
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
-            debugger;
+            
             const filteredArtworks = allArtworkData.filter(function (artwork) {
                 return selectedArtists.includes(artwork.artist_title);
             });
-        
+            console.log("HERE ARE THE ARTISTS", artistsOptions)
             console.log("FILTERED ARTWORKS: ", filteredArtworks); //for debugging
             
             //these are temporary arrays that can be filtered on and then the actual array (component state) is set to these temp arrays 
