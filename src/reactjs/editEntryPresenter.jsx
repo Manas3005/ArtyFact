@@ -11,25 +11,25 @@ function EntryEdit (props){
 
 
     const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
     const [mood, setMood] = useState('');
     const [actualText, setActualText] = useState('');
      
     let dispatch = useDispatch()
 
+    const today = new Date();
+    const dateString = today.toDateString();
+
     function saveChangesACB (){
 
-           
         const newEntry = {
             title: title || 'Untitled',
-            date: date || 'today', // Default to today string for now
+            date: dateString, // Default to today string for now
             mood: mood || 'Neutral',
             actualText: actualText || 'No text provided',
             entryID: entryID
             
           };
 
-         
           console.log(newEntry)
         dispatch(addEntry(newEntry))
         dispatch(increaseLatestEntryID())
@@ -40,7 +40,7 @@ function EntryEdit (props){
         <EntryEditTopBarView onSaveChanges={saveChangesACB}></EntryEditTopBarView>
         
         <EntryEditContentView onEntryTitleChange={setTitle} 
-                            onEntryDateChange={setDate} 
+                            todayDate={dateString} 
                             onEntryMoodChange={setMood} 
                             onEntryTextChange={setActualText}></EntryEditContentView>
 

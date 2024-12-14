@@ -1,15 +1,10 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
-import { monthArray, dateArray } from "../../utilities"
 
 export function EntryEditContentView(props){
 
     function onEntryTitleChangeACB (event){
         props.onEntryTitleChange(event.target.value)
-    }
-
-    function onEntryDateChangeACB (event){
-        props.onEntryDateChange(event.target.value)
     }
 
     function onEntryMoodChangeACB (event){
@@ -21,7 +16,7 @@ export function EntryEditContentView(props){
     }
     
     return (
-        <div className="horizontalFlexParent">
+        <div className="journalsHorizontalFlexParent">
 
             <div className="leftContent">
 
@@ -29,22 +24,11 @@ export function EntryEditContentView(props){
                    
                     <input className="entryTitleTextBox" placeholder="Journal Entry Title " onBlur={onEntryTitleChangeACB}></input>
 
-                    <div className="dateDropdownsDiv"> {/* Select a month and date */}
+                    <div className="dateText"> 
                         
-                        <label>Date:</label>
+                        <label>Date:  </label>{props.todayDate}
                         
-                        <select className="dropdown" size="1"> {/* dynamically generated from provided arrays */}
-                            {monthArray.map((month, index) => (
-                                 <option key={index}>{month}</option>
-                            ))}
-                        </select>
-
-                        <select className="dropdown" size="1"> 
-                            {dateArray.map((date, index) => (
-                                 <option key={index}>{date}</option>
-                            ))}
-                        </select>
-
+                        
                     </div>
 
                 </div> 

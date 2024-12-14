@@ -5,7 +5,7 @@ export function EntryContentView(props){
 
     
     return (
-        <div className="horizontalFlexParent">
+        <div className="journalsHorizontalFlexParent">
 
             <div className="leftContent">
                 

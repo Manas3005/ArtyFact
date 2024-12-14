@@ -224,7 +224,7 @@
     transition: all 0.3s ease; 
 }
 
-.horizontalFlexParent{
+.journalsHorizontalFlexParent{
     display:flex;  
     flex-direction:row;
     height: 750px;
@@ -388,36 +388,14 @@
     
 }
 
-.dateDropdownsDiv{
+.dateText{
     width: 450px;
     height: 40px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 20px;
+    font-size: 25px;
     gap: 10px;
+    margin-top: 1%;
 }
-
-.dropdown{
-    height: 40px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 20px;
-    color: #444;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: border-color 0.3s, background-color 0.3s;
-  }
-  
-  .dropdown:hover {
-    border-color: #aaa;
-    background-color: #f9f9f9;
-  }
-  
-  .dropdown:focus {
-    border-color: #007bff;
-    background-color: #e7f1ff;
-    outline: none;
-  }
 
 .titleAndDateDiv{
     flex: 0.1;
