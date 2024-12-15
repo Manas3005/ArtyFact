@@ -14,6 +14,23 @@ export function EntryEditContentView(props){
     function onEntryTextChangeACB (event){
         props.onEntryTextChange(event.target.value)
     }
+
+    function renderDeleteTextACB (){
+        if (!props.entryID){ //when adding new entry
+            return "Cancel"
+        } else {
+            return "Discard Changes"
+        }
+    }
+
+    function renderDeleteIconACB (){
+        if (!props.entryID){ //when adding new entry
+            return "/image/minusIcon.png"
+        } else {
+            return "/image/deleteIcon.png"
+        }
+    }
+    
     
     return (
         <div className="journalsHorizontalFlexParent">
@@ -70,8 +87,8 @@ export function EntryEditContentView(props){
                             <button className="addArtwork commonText commonButtonBase">Add Artwork</button>
 
                             <button className="deleteEntry commonText commonCenterFlex commonButtonBase">
-                                <img className="Icon" src = "/image/deleteIcon.png" />
-                                <text >Delete Journal Entry</text>
+                                <img className="Icon" src = {renderDeleteIconACB()} />
+                                <text >{renderDeleteTextACB()}</text>
                             </button>
                     
                         </div>    

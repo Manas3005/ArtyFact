@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 function EntryEdit (props){
 
     let entryID = useSelector(state => state.myJournals.latestEntryID)
-
+    let currentEntryID = useSelector(state => state.myJournals.selectedEntryID)
 
     const [title, setTitle] = useState('');
     const [mood, setMood] = useState('');
@@ -37,12 +37,18 @@ function EntryEdit (props){
 
     return (<div>
 
-        <EntryEditTopBarView onSaveChanges={saveChangesACB}></EntryEditTopBarView>
+        <EntryEditTopBarView onSaveChanges={saveChangesACB}
+                             entryID={currentEntryID}>
+
+                             </EntryEditTopBarView>
         
         <EntryEditContentView onEntryTitleChange={setTitle} 
                             todayDate={dateString} 
                             onEntryMoodChange={setMood} 
-                            onEntryTextChange={setActualText}></EntryEditContentView>
+                            onEntryTextChange={setActualText}
+                            entryID={currentEntryID}>
+                                
+                            </EntryEditContentView>
 
     </div>)
 

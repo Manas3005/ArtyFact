@@ -8,6 +8,7 @@ export function JournalTopBarView(props){
     }
 
     function handleAddNewEntryClickedACB (){
+        props.onAddNewEntryClick()
         return window.location.hash = '#/editentry'
     }
 
@@ -66,6 +67,3 @@ export function JournalTopBarView(props){
     ) 
 
 }
-    
-
-
