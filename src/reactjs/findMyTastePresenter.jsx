@@ -2,10 +2,11 @@ import { FindMyTasteTopBarView } from "../views/findMyTastePageViews/findMyTaste
 import { DreamArtDescView } from "../views/findMyTastePageViews/dreamArtDescView"
 import { ArtQuizView } from "../views/findMyTastePageViews/artQuizView"
 import { useState } from "react";
-import { getArtWorksSearch, getArtWorkByID, getArtWorkImageModified, fetchAllArtworks} from '/src/apiCall.js';
+import { getArtWorksSearch, getArtWorkByID, getArtWorkImageModified, fetchAllArtworks, fetchFourtyArtworks} from '/src/apiCall.js';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
 import { useEffect } from "react";
+import { getArtWorks } from "../apiCall";
 
 
 export function FindMyTaste(props){
@@ -22,7 +23,14 @@ export function FindMyTaste(props){
     const [resultsReady, setResultsReady] = useState(false);
     const [artTitles, setArtTitles] = useState([]);
     const [artistTitles, setArtistTitles] = useState([]);
+    const [quizCompleted, setQuizCompleted] = useState(false);
     const [artistsOptions, setArtistsOptions] = useState([]);
+
+
+    /*useEffect(() => {
+
+        fetchFourtyArtworks()
+    } , []);*/
 
     useEffect(() => {
     
@@ -65,6 +73,7 @@ export function FindMyTaste(props){
 
     function setResultsBackToPendingACB(){
         setResultsReady(false);
+        setQuizCompleted(false);
     }
 
 
@@ -85,20 +94,21 @@ export function FindMyTaste(props){
 
     function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
             //so that filterAndSetResultsACB is called only when all promises/fetches are resolved
+            setQuizCompleted(true);
             const tempAllArtworkData = [];             
             selectedArtists.forEach(function (currentArtist) {
-                const searchParams = { artist_title: currentArtist };
-                
+                const searchParams = { artist_title: currentArtist};
                 getArtWorksSearch(searchParams).then(function (allArtworks) { //searching all artworks including ones by currentArtist in selectedArtists
                     console.log("SINGULAR ARTWORK: ", allArtworks)
                     let remainingArtworks = allArtworks.data.length;    // this is to track the number of artworks left to process, i.e. getArtWorkByID
                     allArtworks.data.forEach(function (currentArtwork) {
-                        getArtWorkByID(currentArtwork.id).then(function (artworkDetails) { //PROCESSING STAGE: this fetches each artwork by its id so the artist_title property is accessible
+                        getArtWorkByID(currentArtwork.id).then(function (artworkDetails) { //PROCESSING STAGE: this fetches each artwork by its id so the artist_title, image_url, etc. properties are accessible
                             tempAllArtworkData.push(artworkDetails.data); 
                             remainingArtworks--;
 
                             if (remainingArtworks === 0 && tempAllArtworkData.length === allArtworks.data.length * selectedArtists.length) { //since this can run before the async callbacks, it is important to check that all data has been fetched
                                 console.log("HERE IS THE ORIGINAL VERSION", tempAllArtworkData)
+                                //filterAndSetResultsACB(tempAllArtworkData);
                                 filterAndSetResultsACB(tempAllArtworkData);
                             }
                         });
@@ -107,16 +117,11 @@ export function FindMyTaste(props){
             });
     }
 
-
-
-
-
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
             
             const filteredArtworks = allArtworkData.filter(function (artwork) {
                 return selectedArtists.includes(artwork.artist_title); 
             });
-            console.log("HERE ARE THE ARTISTS", artistsOptions)
             console.log("FILTERED ARTWORKS: ", filteredArtworks); //for debugging
             
             //these are temporary arrays that can be filtered on and then the actual array (component state) is set to these temp arrays 
@@ -125,7 +130,6 @@ export function FindMyTaste(props){
             const newArtistTitles = []
             
             //the filteredArtworks are taken and mapped to their image URLs through a function in apiCall.js
-
             filteredArtworks.forEach(function (artwork) {
                 const imageURL = getArtWorkImageModified(artwork.image_id); //using the function from apiCall.js to get the imageURL
                 const imageTitle = artwork.title         //same process as above but for the image titles
@@ -168,8 +172,8 @@ export function FindMyTaste(props){
                                                                         resultsReady = {resultsReady}
                                                                         artTitles = {artTitles}
                                                                         artistTitles = {artistTitles}
+                                                                        quizCompleted = {quizCompleted}
                                                                         artistsOptions = {artistsOptions}
-                                                                        
                                                                         />)}
             </div>)
 }

@@ -7,14 +7,15 @@ import { useState } from "react";
 export function ArtQuizView (props){
 
     const updatedProgress = props.updatedProgress;
-    //const artistsOptions = props.artistsOptions // List of artist options to be rendered
     const selectedArtists = props.selectedArtists;
     const resultsReady = props.resultsReady;
     const imageURLs = props.imageURLs;
     const artTitles = props.artTitles;
     const artistTitles = props.artistTitles;
-    const artistsOptions = ["Tanaka Atsuko", "Diego Rivera", "Alma Thomas", "Kerry James Marshall", "Joan Mitchell", "Aztec (Mexica)", "Gustave Caillebotte", "Georges Seurat", "Vincent van Gogh"]
-    const [quizCompleted, setQuizCompleted] = useState(false);
+    //const artistsOptions = ["Tanaka Atsuko", "Diego Rivera", "Alma Thomas", "Kerry James Marshall", "Joan Mitchell", "Aztec (Mexica)", "Gustave Caillebotte", "Georges Seurat", "Vincent van Gogh", "Richard Earlom"]
+    const quizCompleted = props.quizCompleted;
+    const artistsOptions = props.artistsOptions
+
 
     function handleNextClickACB(){
         props.onNextButtonClicked(); //Firing custom event to dispatch mutation of progress variable in findMyTaste presenter
@@ -34,13 +35,11 @@ export function ArtQuizView (props){
 
     function handleSubmitClickACB(){ //firing custom event to fetch art by selectedArtists 
         props.onSubmitButtonClicked(selectedArtists);
-        setQuizCompleted(true);
     }
 
 
     function handleBackToQuizACB() {
       props.onBackToQuizButtonClicked();
-      setQuizCompleted(false);
     }
 
 
@@ -67,8 +66,12 @@ export function ArtQuizView (props){
       });
     }
 
+
+
     function renderQuizACB() {
+
       if (updatedProgress === 0) {
+
         return (
           <div>
             <div>Select your favorite artists</div>
@@ -91,28 +94,102 @@ export function ArtQuizView (props){
               </button>
             </div>
           </div>
+
         );
       } else if (updatedProgress < 100) {
-        return (
-          <div>
-            <div>Question {updatedProgress / 20}</div>
+
+          if(updatedProgress === 20){
+
+              return (
+                <div>
+                  <div> What color would you like your art to be dominated with? </div>
+                  <div>
+                    <button
+                      onClick={handlePreviousClickACB}
+                      className="quizPreviousQuestion"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={handleNextClickACB}
+                      className="quizNextQuestion"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              );
+
+           } else if(updatedProgress===40) {
+
+              return (
+                <div>
+                  <div> What color would you like your art to be dominated with? </div>
+                  <div>
+                    <button
+                      onClick={handlePreviousClickACB}
+                      className="quizPreviousQuestion"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={handleNextClickACB}
+                      className="quizNextQuestion"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              );
+
+           } else if(updatedProgress===60) {
+
+            return (
+              <div>
+                <div> What color would you like your art to be dominated with? </div>
+                <div>
+                  <button
+                    onClick={handlePreviousClickACB}
+                    className="quizPreviousQuestion"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    onClick={handleNextClickACB}
+                    className="quizNextQuestion"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            );
+
+         } else if(updatedProgress===80) {
+
+          return (
             <div>
-              <button
-                onClick={handlePreviousClickACB}
-                className="quizPreviousQuestion"
-              >
-                Previous
-              </button>
-              <button
-                onClick={handleNextClickACB}
-                className="quizNextQuestion"
-              >
-                Next
-              </button>
+              <div> What color would you like your art to be dominated with? </div>
+              <div>
+                <button
+                  onClick={handlePreviousClickACB}
+                  className="quizPreviousQuestion"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={handleNextClickACB}
+                  className="quizNextQuestion"
+                >
+                  Next
+                </button>
+              </div>
             </div>
-          </div>
-        );
+          );
+
+       }
+
       } else if (updatedProgress === 100) {
+
         if (!resultsReady && !quizCompleted) {
           return (
             <div>
@@ -133,21 +210,36 @@ export function ArtQuizView (props){
               </div>
             </div>
           );
+
         } else if(!resultsReady && quizCompleted){
 
             return (
-              <img src = "https://i.gifer.com/ZKZg.gif"></img>
+              <div style={{ textAlign: 'center' }}>
+
+                  <img 
+                  src="https://i.gifer.com/ZKZg.gif" 
+                  className="quizCompleted" 
+                  alt="Loading Quiz Results" 
+                  />
+
+                  <p>Fetching the best artworks for you!</p>
+
+              </div>
             )
+
         } else if(resultsReady && quizCompleted){
+
           return (
             <div>
+              <div>We think you will like these artworks...</div>
+              
               <div className="resultsContainer">
                 {imageURLs.map((url, index) => (
                   <div key={index} className="resultItem">
                     <img
                       src={url}
                       className="resultImage"
-                      alt={`Artwork ${index + 1}`}
+                      alt={` Couldn't fetch Artwork ${index + 1}`}
                     />
                     <div className="artDetails">
                       <div className="artTitle">{artTitles[index]}</div>
@@ -165,9 +257,9 @@ export function ArtQuizView (props){
             </div>
           );
         }
-      } else {
-        return <div>Done</div>;
+
       }
+
     }
     
     return (

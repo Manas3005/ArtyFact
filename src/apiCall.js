@@ -23,6 +23,7 @@ function gotResponseACB(result) {
 }
 
 function printResponseACB(result) {
+    console.log("si THIS IS THE RESULT, ", result)
     return result;
 }
 
@@ -63,6 +64,16 @@ export function getArtWorkImageModified(result){ //This function directly return
 }
 
 export function fetchAllArtworks() { //allows to fetch all artworks (limit 100) can be used for anything i.e. option instances for the quiz 
+    return fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=80")
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: `, response.status);
+            }
+            return response.json();
+        })
+}
+
+export function fetchFourtyArtworks() { //allows to fetch all artworks (limit 100) can be used for anything i.e. option instances for the quiz 
     return fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=40")
         .then(function(response) {
             if (!response.ok) {
@@ -70,12 +81,12 @@ export function fetchAllArtworks() { //allows to fetch all artworks (limit 100) 
             }
             return response.json();
         })
-        //.then(function(data){
-        //    console.log("Fetched all artworks:", data.data);
-        //})
-        //.catch(function(error){
-        //    console.error("Error fetching all artworks:", error);
-        //});
+        .then(function(data){
+            console.log("Fetched all artworks:", data.data);
+        })
+        .catch(function(error){
+            console.error("Error fetching all artworks:", error);
+        });
 }
 
 
@@ -105,19 +116,22 @@ function createURLParamsForArtWork(searchParams) {
     console.log("This is the query", searchParams);
     console.log("THIS IS THE URL: ", MAIN_URL + "artworks/" + "?" + new URLSearchParams(searchParams))
     return MAIN_URL + "artworks/" + "?" + new URLSearchParams(searchParams);
+    
+    
 } 
 
 function createURLParamsForArtWorkSearch(searchParams) {
     console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams));
-    return MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams);
+    const URL = MAIN_URL + "artworks/" + "search/" + "?q=" + new URLSearchParams(searchParams);
+    console.log("URL RIGHT HERE: ", URL)
+    return URL;
 }
 function createURLParamsForArtWorksByID(searchParams) {
     console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
     return MAIN_URL + "artworks/" + searchParams;
+    
 }
-const searchParams1 = {
-    title: "example",
-}
+
 function createURLParamsForSpecificArtWork(id, searchParams1) {
     return MAIN_URL + "/artworks/" + id + "?" + new URLSearchParams(searchParams1);
 }
