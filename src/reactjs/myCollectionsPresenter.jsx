@@ -3,7 +3,7 @@ import { TopbarCollectionsView } from "../views/myCollectionViews/topbarMyCollec
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { setCollectionsArray } from "../store/collectionsSlice";
+import { setCollectionsArray, setCollection } from "../store/collectionsSlice";
 
 export function MyCollectionsPresenter(props) {
     const dispatch = useDispatch();
@@ -80,6 +80,9 @@ export function MyCollectionsPresenter(props) {
     ]
     
     /**
+     * Denna ska tas bort senare. Vi kommer fetcha denna data från firebase när en user loggar in.
+     * 
+     * 
      * Denna useEffect är endast för att se att vår collections array fylls i store korrekt, men det den egentligen gör nu
      * är att den sätter hela arrayen direkt in i store.
      * Det vi vill göra senare är att låta reducern setCollectionsArray spreada gamla datan och fylla med senaste artwork.
@@ -135,8 +138,7 @@ export function MyCollectionsPresenter(props) {
          * Så det är en conditional rendering på X-knappen.
          */
 
-        function 
-        handleSearchACB(value) {
+        function handleSearchACB(value) {
             //Här inne skall vi ha logik som filtrerar
             //Men det är viktigt att vi har senaste datan från application state, och jag tror vi har det.
             console.log("This", selectedCollectionsArray)
@@ -173,9 +175,19 @@ export function MyCollectionsPresenter(props) {
          * 
          * @param {*} evt 
          */
-        function setCollectionACB(evt) {yy
-            console.log("This is the event in setCollectionACB", evt);
+        function setCollectionsListACB(evt) {
+            console.log("This is the event in setCollectionsListACB", evt);
             dispatch(setCollectionsArray(evt.target.value));
+        }
+
+        /**
+         * Denna funktion är till för att vi ska veta vilken collection det är som collection-sidan ska rendera.
+         * Vi fyller 
+         * @param {*} evt 
+         */
+        function setCollectionArrayACB(evt) {
+            console.log("this is the event in secollectionACB", evt);
+            dispatch(setCollection(evt));
         }
 
         /**
@@ -220,7 +232,8 @@ export function MyCollectionsPresenter(props) {
             <ListOfCollectionsView 
             activeIndex={activeIndex}
             collections={filteredCollections || collections}
-            setCollection={setCollectionACB}
+            setCollections={setCollectionsListACB}
+            setCollection={setCollectionArrayACB}
             />
 
         </div>
