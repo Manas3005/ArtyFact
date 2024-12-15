@@ -2,41 +2,6 @@ import "/src/css/collectionStyle.css"
 
 
 export function CollectionListview(props) {
-    
-    console.log("This is the props in collection page", props);
-
-    //Det jag får in är en collection från presenter då antar jag.
-    /**
-     * Det vi vill göra är att, baserat på vilken collection vi trycker på i myCollections, 
-     * så ska den skickas till collection.
-     * Det vi kan göra är att, vi har en application state som håller reda på vilken collection vi har tryckt på i myCollections.
-     * Det vi gör då är att när vi renderar denna app, så kan vi läsa från application state vilken collection det var som fylldes
-     * i den delen av application state.
-     * Alltså det som kommer hända är att varje tryckning i myCollections (på en collection) kommer fylla en array i application state
-     * som är det senaste collection man tryckt på.
-     * I presenter för vår collectionViews så använder vi en selector för att läsa det senaste värdet från denna array och skickar
-     * den ned som prop till view.
-     * Detta bör funka.
-     */
-
-    /**
-     * Vi har ett problem. Just nu har varje collection item.
-     * Vi vill array-rendera title, year, artistName.
-     * 
-     * @returns Vi ska rendera varje del av en collection
-     */
-    function renderImagesACB() {
-        return (
-            [...props.collection].map((collection) => {
-                console.log(collections)
-
-
-
-
-            })
-        )
-    }
-
 
 
     return(
