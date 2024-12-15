@@ -18,7 +18,7 @@ function eventHandlerForHomeClickACB(evt) {
 return (
   <div>
     <button onClick={eventHandlerForHomeClickACB}>  Home  </button>
-     {/*[...props.allData].map(renderSearchResultsCB)*/} 
+     {[...allData].map(renderSearchResultsCB)} 
 
   </div>  
 )
@@ -27,10 +27,10 @@ return (
 function renderSearchResultsCB(result) {  
         
     return (
-    <span key={result.id} >     
+    <div key={result.id} >     
       <img src={URLParamsForImage(result.image_id)} height="100"></img>
     
-    </span>
+    </div>
 );
 
 }
