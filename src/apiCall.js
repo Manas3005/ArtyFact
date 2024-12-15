@@ -84,20 +84,21 @@ export function URLParamsForImage(searchParams) {
 function createURLParamsForArtWork(searchParams) {
     return MAIN_URL + "artworks/" +  "?" + new URLSearchParams(searchParams);
 }
+
+
+/*
 function createURLParamsForArtWorkSearch(searchParams) {
     //console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams))
     return MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams);
 }
+*/
 
 
+function createURLParamsForArtWorkSearch(searchParams) {
+    console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams));
+    return MAIN_URL + "artworks/" + "search/" + "?q=" + new URLSearchParams(searchParams);
 
-
-
-function createURLParamsForCollection(searchParams) {
-    return MAIN_URL + "exhibitions/search?fields=title%2Cimage_url%2Cweb_url&query%5Bbool%5D%5Bmust%5D%5B%5D%5Brange%5D%5Baic_start_at%5D%5Blte%5D=now&query%5Bbool%5D%5Bmust%5D%5B%5D%5Bterm%5D%5Bis_published%5D=true&query%5Bbool%5D%5Bmust%5D%5B%5D%5Bterm%5D%5Bposition%5D=0&size=1"  // + "?"+ new URLSearchP  arams(searchParams);
 }
-
-
 
 
 

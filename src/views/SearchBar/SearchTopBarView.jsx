@@ -30,12 +30,12 @@ function renderSearchResultsCB(result) {
 
     function onClickImageEventACB(){
         console.log("image has been clicked for : " )
-        return 
+        window.location.hash="#/searchChoosen";    
     }
 
     return (
     <div key={result.id} >     
-      <img src={URLParamsForImage(result.image_id)} height="100" onClick={onClickImageEventACB}></img>
+      <img src={URLParamsForImage(result.id)} height="200" onClick={onClickImageEventACB}></img>
 
       <span>
             {result.title}

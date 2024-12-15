@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import {getArtWorks} from "/src/apiCall.js"
+import {getArtWorksSearch} from "/src/apiCall.js"
 import {SearchTopBar} from "/src/views/SearchBar/SearchTopBarView.jsx"
 import { useEffect, useState } from "react";
 
@@ -8,8 +8,16 @@ function SearchResult(props) {
     const [artData, setArtData] = useState(null);  
     const [error, setError] = useState(null);       
 
+    const searchparams = {
+        title: "Two Sisters",  
+        image_id : "",
+    };
+
+
+    
+
     function fetchSearchACB(){
-    getArtWorks().then((data) => {setArtData(data);}).catch((err) => setError(err.message));
+        getArtWorksSearch(searchparams).then((data) => {setArtData(data);}).catch((err) => setError(err.message));
    
     }
 

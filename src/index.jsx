@@ -19,6 +19,8 @@ export const store = configureStore({
 
         searchResults: searchResults.reducer,
 
+       // searchChoosenPresent: searchResults.reducer, dont know if i need to do this 
+
         //to be added as separate slices
         //artWorks: artWorks.reducer,
         //journalEntryName: journalEntryName.reducer,
