@@ -10,6 +10,8 @@ function EntryEdit (props){
     let entryID = useSelector(state => state.myJournals.latestEntryID)
     let currentEntryID = useSelector(state => state.myJournals.selectedEntryID)
 
+    console.log(currentEntryID)
+
     const [title, setTitle] = useState('');
     const [mood, setMood] = useState('');
     const [actualText, setActualText] = useState('');
@@ -47,7 +49,7 @@ function EntryEdit (props){
                             onEntryMoodChange={setMood} 
                             onEntryTextChange={setActualText}
                             entryID={currentEntryID}>
-                                
+
                             </EntryEditContentView>
 
     </div>)

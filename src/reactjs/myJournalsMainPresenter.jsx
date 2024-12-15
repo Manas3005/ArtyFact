@@ -12,7 +12,7 @@ function MyJournalsMain (props){
 
     //invoked when a new entry is being added and the user is directed to the edit journal entry page
     function onAddNewEntryClickACB (){ 
-        dispatch(setSelectedEntryID(false))
+        dispatch(setSelectedEntryID(null))
     }
 
         return (<div>

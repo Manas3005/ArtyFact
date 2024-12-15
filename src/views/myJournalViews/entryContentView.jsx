@@ -7,6 +7,10 @@ export function EntryContentView(props){
         props.onDeleteEntryClick()
         return window.location.hash = "#/myjournals"
     }
+
+    function handleEditEntryClickedACB (){
+        return window.location.hash = "#/editentry"
+    }
     
     return (
         <div className="journalsHorizontalFlexParent">
@@ -16,6 +20,7 @@ export function EntryContentView(props){
                 <div>
                     <div className="journalEntryContent">Last Updated: {props.lastUpdated}</div>
                     <div className="journalEntryContent">Mood: {props.mood}</div>
+                    <button onClick={handleEditEntryClickedACB}>Edit</button>
                 </div>
 
                 <div className="scrollableTextArea">

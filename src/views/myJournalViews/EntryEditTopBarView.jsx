@@ -1,19 +1,33 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
+import { useSelector } from "react-redux"
 
 export function EntryEditTopBarView(props){
 
-    function handleBackToMyJournalsClickedACB (){
-        return window.location.hash = '#/myjournals'
+    function handleNavigationBackACB (){
+        if (props.entryID === null){
+            return window.location.hash = '#/myjournals'
+        }
+
+        const idString = props.entryID.toString()
+        const path = "#/journalEntryContent/" + idString
+        return window.location.hash = path
     }
 
     function handleSaveChangesClickedACB (){
         props.onSaveChanges();
-        return window.location.hash = '#/myjournals'
+        handleNavigationBackACB();
     }
 
+    function renderBackButtonTitleACB (){
+        if (props.entryID === null){ //when adding new entry
+            return "Back To My Journals"
+        } else {
+            return "Back To Journal Entry"
+        }
+    }
     function renderPageTitleACB (){
-        if (!props.entryID){ //when adding new entry
+        if (props.entryID === null){ //when adding new entry
             return "Add New Journal Entry"
         } else {
             return "Edit Journal Entry"
@@ -21,7 +35,7 @@ export function EntryEditTopBarView(props){
     }
 
     function renderSaveChangesIconACB (){
-        if (!props.entryID){ //when adding new entry
+        if (props.entryID === null){ //when adding new entry
             return "/image/plusIcon.png"
         } else {
             return "/image/saveIcon.png"
@@ -29,7 +43,7 @@ export function EntryEditTopBarView(props){
     }
 
     function renderPageTitleACB (){
-        if (!props.entryID){ //when adding new entry
+        if (props.entryID === null){ //when adding new entry
             return "Add New Journal Entry"
         } else {
             return "Edit Journal Entry"
@@ -37,7 +51,7 @@ export function EntryEditTopBarView(props){
     }
 
     function renderSaveTextACB (){
-        if (!props.entryID){ //when adding new entry
+        if (props.entryID === null){ //when adding new entry
             return "Save Entry"
         } else {
             return "Save Changes"
@@ -48,7 +62,7 @@ export function EntryEditTopBarView(props){
         <div>
             <div className="topBar">
                 
-                <button className="backToMyJournals commonText commonButtonBase" onClick={handleBackToMyJournalsClickedACB}> Back To My Journals</button> 
+                <button className="backToMyJournals commonText commonButtonBase" onClick={handleNavigationBackACB}> {renderBackButtonTitleACB()}</button> 
                
                 
                 <div className="editJournalEntryLogo commonText commonCenterFlex">{renderPageTitleACB()}</div>

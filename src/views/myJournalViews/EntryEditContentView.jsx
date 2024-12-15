@@ -16,15 +16,15 @@ export function EntryEditContentView(props){
     }
 
     function renderDeleteTextACB (){
-        if (!props.entryID){ //when adding new entry
-            return "Cancel"
-        } else {
+        if (props.entryID === null){ //when adding new entry
+            return "Cancel" 
+        } else{ 
             return "Discard Changes"
         }
     }
 
     function renderDeleteIconACB (){
-        if (!props.entryID){ //when adding new entry
+        if (props.entryID === null){ //when adding new entry
             return "/image/minusIcon.png"
         } else {
             return "/image/deleteIcon.png"
