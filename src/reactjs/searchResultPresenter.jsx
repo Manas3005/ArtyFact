@@ -7,10 +7,9 @@ function SearchResult(props) {
     const search = useSelector((state) => state.searchResults.results);
     const [artData, setArtData] = useState(null);  
     const [error, setError] = useState(null);       
-    const [rendeReady, setRender] = useState(true); 
 
     function fetchSearchACB(){
-    getArtWorks().then((data) => {setArtData(data); setRender(false);}).catch((err) => setError(err.message));
+    getArtWorks().then((data) => {setArtData(data);}).catch((err) => setError(err.message));
    
     }
 
@@ -18,7 +17,7 @@ function SearchResult(props) {
 
    
     if (error) return <div>Error: {error}</div>;
-    if (rendeReady || !artData) return <div>Loading...</div>;
+    if (!artData) return <div>Loading...</div>;
 
     console.log("THIS IS THE DATA THAT IS FETCHED ----",artData)
     return (
