@@ -26,3 +26,4 @@ export const myJournalEntries = createSlice({
 )
 
 export const { addEntry, removeEntry } = myJournalEntries.actions;
+

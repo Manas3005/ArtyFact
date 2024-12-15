@@ -26,10 +26,20 @@ export function TopBarView(props){
     function eventHandlerForEnterACB(evt) {
         if(evt.which == "13") {
         console.log("button has been pressed")
-        window.location.hash="#/searchResult";
+           window.location.hash="#/searchResult";
 
         }
     }
+    
+    function searchWasFound(){
+
+    
+
+
+    }
+
+
+
 
 
     return (

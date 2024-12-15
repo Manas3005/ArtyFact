@@ -1,4 +1,3 @@
-//import {testAPI} from "/src/apiCall.js"
 
 export function SearchTopBar(props){
 
@@ -14,7 +13,6 @@ return (
 
     <button>  Home  </button>
     
-    testAPI
 
 
   </div>  
