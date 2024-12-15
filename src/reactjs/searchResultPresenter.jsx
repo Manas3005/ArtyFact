@@ -5,21 +5,22 @@ import { useEffect, useState } from "react";
 
 function SearchResult(props) {
     const search = useSelector((state) => state.searchResults.results);
-    const [artData, setArtData] = useState(null); // State to hold fetched data
-    const [error, setError] = useState(null); // State to hold errors
-    const [hello, setHello] = useState(true); // State to trigger re-render
+    const [artData, setArtData] = useState(null);  
+    const [error, setError] = useState(null);       
+    const [rendeReady, setRender] = useState(true); 
 
     function fetchSearchACB(){
-    getArtWorks().then((data) => {setArtData(data); setHello(false);}).catch((err) => setError(err.message));
+    getArtWorks().then((data) => {setArtData(data); setRender(false);}).catch((err) => setError(err.message));
+   
     }
 
     useEffect(fetchSearchACB, [] ); 
 
-    // Handle loading and error states
+   
     if (error) return <div>Error: {error}</div>;
-    if (hello || !artData) return <div>Loading...</div>;
+    if (rendeReady || !artData) return <div>Loading...</div>;
 
-    // Render SearchTopBar when hello is false
+    console.log("THIS IS THE DATA THAT IS FETCHED ----",artData)
     return (
         <div>
             <SearchTopBar results={search} artworks={artData} />
