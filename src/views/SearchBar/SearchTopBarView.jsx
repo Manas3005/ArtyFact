@@ -10,9 +10,10 @@ let allData = props.artworks.data
 let image = URLParamsForImage(hello)
 
 
-function eventHandlerForHomeClickACB(evt) {
+function eventHandlerForHomeClickACB() {
     window.location.hash="#/homepage";        
 }
+
 
 
 return (
@@ -26,11 +27,23 @@ return (
 
 function renderSearchResultsCB(result) {  
         
+
+    function onClickImageEventACB(){
+        console.log("image has been clicked for : " )
+        return 
+    }
+
     return (
     <div key={result.id} >     
-      <img src={URLParamsForImage(result.image_id)} height="100"></img>
-    
+      <img src={URLParamsForImage(result.image_id)} height="100" onClick={onClickImageEventACB}></img>
+
+      <span>
+            {result.title}
+      </span>
     </div>
+    
+
+
 );
 
 }
