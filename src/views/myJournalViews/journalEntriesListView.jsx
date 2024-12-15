@@ -23,7 +23,7 @@ export function JournalEntriesListView(props){
         
         console.log("journal entries array is empty");
         return (
-        <div className="entriesList">
+        <div className="entriesList commonCenterFlex">
             <img src="/image/thinkingMan.png"></img>
             <p className="alertText">No Journal Entries Added Yet. </p>
             <p className="alertText">Add Journal Entries using the button above. </p>                       
@@ -34,11 +34,11 @@ export function JournalEntriesListView(props){
         console.log(props.entries);
 
         return (
-            <div className="entriesList">
+            <div className="entriesList commonCenterFlex">
 
                 <div className="entriesLabelList">
 
-                <text className="previousEntriesText">Previous Journal Entries</text>
+                <text className="previousEntriesText commonText">Previous Journal Entries</text>
 
                 </div>
 
@@ -49,7 +49,7 @@ export function JournalEntriesListView(props){
                         <div key={index} className="journalEntryListDiv" onClick={() => handleJournalEntryClickedACB(entry)}>
                             
                             <img src="/image/starry-night.png" className="journalEntryListImage" />
-                            <span className="journalEntryListText">{transformJournalTitleCB(entry)}</span>
+                            <span className="journalEntryListText commonText">{transformJournalTitleCB(entry)}</span>
                             
                         </div>
 

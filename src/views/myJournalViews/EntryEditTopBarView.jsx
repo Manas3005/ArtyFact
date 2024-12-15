@@ -16,11 +16,11 @@ export function EntryEditTopBarView(props){
         <div>
             <div className="topBar">
                 
-                <button className="backToMyJournals" onClick={handleBackToMyJournalsClickedACB}> Back To My Journals</button> 
+                <button className="backToMyJournals commonText commonButtonBase" onClick={handleBackToMyJournalsClickedACB}> Back To My Journals</button> 
                
                 
-                <div className="editJournalEntryLogo">Edit Journal Entry</div>
-                <button className="saveChanges" onClick={handleSaveChangesClickedACB}>
+                <div className="editJournalEntryLogo commonText commonCenterFlex">Edit Journal Entry</div>
+                <button className="saveChanges commonText commonButtonBase" onClick={handleSaveChangesClickedACB}>
                     <img className="Icon" src = "/image/saveIcon.png" />
                     <text >Save Changes</text>
                 </button>

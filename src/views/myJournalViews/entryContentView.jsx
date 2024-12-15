@@ -11,7 +11,7 @@ export function EntryContentView(props){
     return (
         <div className="journalsHorizontalFlexParent">
 
-            <div className="leftContent">
+            <div className="leftContent commonText">
                 
                 <div>
                     <div className="journalEntryContent">Last Updated: {props.lastUpdated}</div>
@@ -28,14 +28,14 @@ export function EntryContentView(props){
 
                 <div className="sidebarVerticalFlexParent">
 
-                    <div className="topFlex">
-                        <div className="artWorkBox">
+                    <div className="topFlex commonCenterFlex">
+                        <div className="artWorkBox commonCenterFlex">
                             <img className="starryNightIcon" src="/image/starry-night.png"></img>
                         </div>
                     </div>
 
-                    <div className="bottomFlex">
-                        <button id="delete" className="deleteEntry" onClick={handleDeleteEntryClickedACB}>
+                    <div className="commonCenterFlex">
+                        <button id="delete" className="deleteEntry commonText commonCenterFlex commonButtonBase" onClick={handleDeleteEntryClickedACB}>
                                 <img className="Icon" src = "/image/deleteIcon.png" />
                                 <text >Delete Journal Entry</text>        
                         </button>

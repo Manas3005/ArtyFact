@@ -18,13 +18,13 @@ export function EntryEditContentView(props){
     return (
         <div className="journalsHorizontalFlexParent">
 
-            <div className="leftContent">
+            <div className="leftContent commonText">
 
                 <div className="titleAndDateDiv">
                    
-                    <input className="entryTitleTextBox" placeholder="Journal Entry Title " onBlur={onEntryTitleChangeACB}></input>
+                    <input className="entryTitleTextBox commonText" placeholder="Journal Entry Title " onBlur={onEntryTitleChangeACB}></input>
 
-                    <div className="dateText"> 
+                    <div className="dateText commonText"> 
                         
                         <label>Date:  </label>{props.todayDate}
                         
@@ -37,14 +37,14 @@ export function EntryEditContentView(props){
 
                     <div>
 
-                        <input className="entryTextBox" placeholder="Current Mood (Optional)" onBlur={onEntryMoodChangeACB}></input>
+                        <input className="entryTextBox commonText" placeholder="Current Mood (Optional)" onBlur={onEntryMoodChangeACB}></input>
 
                     </div>
                 </div>
 
                 <div className="journalEntryDiv">
 
-                    <textarea className="journalEntryContentTextBox" placeholder="What are you thinking about? Start Typing here ..." onBlur={onEntryTextChangeACB}></textarea>
+                    <textarea className="journalEntryContentTextBox commonText" placeholder="What are you thinking about? Start Typing here ..." onBlur={onEntryTextChangeACB}></textarea>
 
                 </div>
 
@@ -56,9 +56,9 @@ export function EntryEditContentView(props){
 
                     <div className="sidebarVerticalFlexParent">
                     
-                        <div className="up">
+                        <div className="up commonCenterFlex">
 
-                            <div className="artWorkBox">
+                            <div className="artWorkBox commonCenterFlex">
                                     <img className="starryNightIcon" src="/image/starry-night.png"></img>
                             </div>
 
@@ -67,9 +67,9 @@ export function EntryEditContentView(props){
 
                         <div className="down">
                         
-                            <button className="addArtwork">Add Artwork</button>
+                            <button className="addArtwork commonText commonButtonBase">Add Artwork</button>
 
-                            <button className="deleteEntry">
+                            <button className="deleteEntry commonText commonCenterFlex commonButtonBase">
                                 <img className="Icon" src = "/image/deleteIcon.png" />
                                 <text >Delete Journal Entry</text>
                             </button>

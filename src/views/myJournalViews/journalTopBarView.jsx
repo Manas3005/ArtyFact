@@ -30,7 +30,7 @@ export function JournalTopBarView(props){
             <div>
             <img  className = "logo" src = "/image/myJournalsLogo.png" />
                 
-            <button className="addNewEntry" onClick={handleAddNewEntryClickedACB}>
+            <button className="addNewEntry commonText" onClick={handleAddNewEntryClickedACB}>
                     <img className="Icon" src = "/image/plusIcon.png" />
                     <text >Add New Journal Entry</text>
                 </button>
@@ -40,7 +40,7 @@ export function JournalTopBarView(props){
 
             
         } else {
-            return (<div className="editJournalEntryLogo">{props.pageHeading}</div>)
+            return (<div className="editJournalEntryLogo commonText commonCenterFlex">{props.pageHeading}</div>)
         }    
     }
 
@@ -49,14 +49,14 @@ export function JournalTopBarView(props){
             
             <div className="topBar">
                 
-                <button className="myJournalsMyCollections" onClick={handletopRightButtonClickedACB}>{props.topRightButtonText}</button>
-                <button className="backToHome" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
+                <button className="myJournalsMyCollections commonText commonButtonBase" onClick={handletopRightButtonClickedACB}>{props.topRightButtonText}</button>
+                <button className="backToHome commonText commonButtonBase" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
                 <div>{handleRenderPageTitleACB()}</div>
 
-                <button className="buttonWithIcon">
+                <button className="buttonWithIcon commonButtonBase">
                     <img className="Icon" src = "/image/signinIcon.png" />
-                    <text className="loggedInText">Logged In</text>
+                    <text className="loggedInText commonText">Logged In</text>
                 </button>
                             
             </div>
