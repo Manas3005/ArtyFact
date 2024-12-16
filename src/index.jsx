@@ -8,6 +8,7 @@ import { myJournalEntries } from "./store/journalsSlice";
 
 
 import { findMyTaste } from "./store/findMyTasteSlice";
+import { connectToFirebase } from "./firebaseModel.js";
 
 //Store
 export const store = configureStore({
@@ -38,3 +39,6 @@ createRoot(document.getElementById('root'))
     .render(
         <App/>
     );
+
+//on login
+connectToFirebase(store);
