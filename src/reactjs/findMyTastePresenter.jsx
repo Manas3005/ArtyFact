@@ -28,37 +28,57 @@ export function FindMyTaste(props){
     const [artistsOptions, setArtistsOptions] = useState([]);
     const [colorOptions, setColorOptions] = useState([]);
 
-
+    //The values below define the hue ranges for each color option in the art quiz for question 2
+    const LOWER_RED_VALUE_ONE = 0;
+    const UPPER_RED_VALUE_ONE = 15;
+    const LOWER_RED_VALUE_TWO = 345;
+    const UPPER_RED_VALUE_TWO = 360;
+    
+    const LOWER_ORANGE_VALUE = 16;
+    const UPPER_ORANGE_VALUE = 45;
+    
+    const LOWER_YELLOW_VALUE = 46;
+    const UPPER_YELLOW_VALUE = 75;
+    
+    const LOWER_GREEN_VALUE = 76;
+    const UPPER_GREEN_VALUE = 150;
+    
+    const LOWER_CYAN_VALUE = 151;
+    const UPPER_CYAN_VALUE = 180;
+    
+    const LOWER_PURPLE_VALUE = 256;
+    const UPPER_PURPLE_VALUE = 320;
+    
+    const LOWER_MAGENTA_VALUE = 321;
+    const UPPER_MAGENTA_VALUE = 344;
 
 
     function getUserFriendlyColors(colorHLSValues) {
-
         let userFriendlyColors = [];
-        colorHLSValues.forEach(
-            function(colorObject){
-                if(colorObject===null){ //this is done because some artworks in the API do not have colors defined
-                    return;
-                } else if(colorObject.h>=0 && colorObject.h<=15 || colorObject.h>=345 && colorObject.h<=360){
-                    userFriendlyColors = [...userFriendlyColors, "Red"];
-                } else if(colorObject.h>=16 && colorObject.h<=45){
-                    userFriendlyColors = [...userFriendlyColors, "Orange"];
-                } else if(colorObject.h>=46 && colorObject.h<=75){
-                    userFriendlyColors = [...userFriendlyColors, "Yellow"];
-                } else if(colorObject.h>=76 && colorObject.h<=150){
-                    userFriendlyColors = [...userFriendlyColors, "Green"];
-                } else if(colorObject.h>=151 && colorObject.h<=180){
-                    userFriendlyColors = [...userFriendlyColors, "Cyan"];
-                } else if(colorObject.h>=256 && colorObject.h<=320){
-                    userFriendlyColors = [...userFriendlyColors, "Purple/Violet"];
-                } else if(colorObject.h>=321 && colorObject.h<=344){
-                    userFriendlyColors = [...userFriendlyColors, "Magenta/Pink"];
-                } else {
-                    return;
-                }
+        colorHLSValues.forEach(function (colorObject) {
+            if (colorObject === null) {//this check is done because some artworks in the API do not have colors defined
+                return;
+            } else if (
+                (colorObject.h >= LOWER_RED_VALUE_ONE && colorObject.h <= UPPER_RED_VALUE_ONE) ||
+                (colorObject.h >= LOWER_RED_VALUE_TWO && colorObject.h <= UPPER_RED_VALUE_TWO)) {
+                userFriendlyColors = [...userFriendlyColors, "Red"];
+            } else if (colorObject.h >= LOWER_ORANGE_VALUE && colorObject.h <= UPPER_ORANGE_VALUE) {
+                userFriendlyColors = [...userFriendlyColors, "Orange"];
+            } else if (colorObject.h >= LOWER_YELLOW_VALUE && colorObject.h <= UPPER_YELLOW_VALUE) {
+                userFriendlyColors = [...userFriendlyColors, "Yellow"];
+            } else if (colorObject.h >= LOWER_GREEN_VALUE && colorObject.h <= UPPER_GREEN_VALUE) {
+                userFriendlyColors = [...userFriendlyColors, "Green"];
+            } else if (colorObject.h >= LOWER_CYAN_VALUE && colorObject.h <= UPPER_CYAN_VALUE) {
+                userFriendlyColors = [...userFriendlyColors, "Cyan"];
+            } else if (colorObject.h >= LOWER_PURPLE_VALUE && colorObject.h <= UPPER_PURPLE_VALUE) {
+                userFriendlyColors = [...userFriendlyColors, "Purple/Violet"];
+            } else if (colorObject.h >= LOWER_MAGENTA_VALUE && colorObject.h <= UPPER_MAGENTA_VALUE) {
+                userFriendlyColors = [...userFriendlyColors, "Magenta/Pink"];
+            } else {
+                return;
             }
-        )
+        });
         return userFriendlyColors;
-        
     }
 
     function getBackHLSValues(colorsSelectedByUsers){
@@ -103,7 +123,7 @@ export function FindMyTaste(props){
             const updatedSelections = selectedItems.filter(currentItem => currentItem !== item);
             setSelectedItems(updatedSelections);
         } else {
-            setSelectedItems([...selectedItems, item]); //using array spread to select the new artist along with the already selected artists 
+            setSelectedItems([...selectedItems, item]); //using array spread to select the new item along with the already selected items 
             console.log("Selected items: ", [...selectedItems, item]);
         }
     }
@@ -117,8 +137,6 @@ export function FindMyTaste(props){
     }
 
     
-
-
 
     function setArtDescViewACB(){ //handling custom event 
         setCurrentView('describe') 
@@ -177,7 +195,7 @@ export function FindMyTaste(props){
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
             
             const filteredArtworks = allArtworkData.filter(function (artwork) {
-                return selectedArtists.includes(artwork.artist_title); 
+                return selectedArtists.includes(artwork.artist_title) && selectedColors.includes(artwork.color)
             });
             console.log("FILTERED ARTWORKS: ", filteredArtworks); //for debugging
             
@@ -206,6 +224,10 @@ export function FindMyTaste(props){
             setArtTitles(newImageTitles); //this will also be passed down to artQuizView to render art titles respective to the images
             setArtistTitles(newArtistTitles); //this will also be passed down to artQuizView to render artist titles respective to the artTitles
             setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
+    }
+
+    function getArtWorksFromResponses (){
+
     }
 
 
