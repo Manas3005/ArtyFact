@@ -45,6 +45,9 @@ export function FindMyTaste(props){
     
     const LOWER_CYAN_VALUE = 151;
     const UPPER_CYAN_VALUE = 180;
+
+    const LOWER_BLUE_VALUE = 181;
+    const UPPER_BLUE_VALUE = 255;
     
     const LOWER_PURPLE_VALUE = 256;
     const UPPER_PURPLE_VALUE = 320;
@@ -74,6 +77,8 @@ export function FindMyTaste(props){
                 userFriendlyColors = [...userFriendlyColors, "Purple/Violet"];
             } else if (colorObject.h >= LOWER_MAGENTA_VALUE && colorObject.h <= UPPER_MAGENTA_VALUE) {
                 userFriendlyColors = [...userFriendlyColors, "Magenta/Pink"];
+            } else if(colorObject.h >= LOWER_BLUE_VALUE && colorObject.h <= UPPER_BLUE_VALUE){
+                userFriendlyColors = [...userFriendlyColors, "Blue"];
             } else {
                 return;
             }
@@ -81,9 +86,72 @@ export function FindMyTaste(props){
         return userFriendlyColors;
     }
 
-    function getBackHLSValues(colorsSelectedByUsers){
-        
+
+    function getBackHLSValues(colorSelectedByUser){ //this is to allow the API to understand userInput
+
+        let hValues = []
+
+        if(colorSelectedByUser === "Red"){
+
+            for (let h = LOWER_RED_VALUE_ONE; h <= UPPER_RED_VALUE_ONE; h++) { //this needs to be done so all artworks that have hValues in this range can be fetched
+                hValues = [...hValues, h]
+            }
+            for (let h = LOWER_RED_VALUE_TWO; h <= UPPER_RED_VALUE_TWO; h++) {
+                hValues = [...hValues, h]
+            }
+
+        } else if(colorSelectedByUser === "Orange"){
+
+            for (let h = LOWER_ORANGE_VALUE; h <= UPPER_ORANGE_VALUE; h++) {
+                hValues = [...hValues, h]
+            }
+
+        } else if(colorSelectedByUser === "Yellow"){
+
+            for (let h = LOWER_YELLOW_VALUE; h <= UPPER_YELLOW_VALUE; h++) {
+                hValues = [...hValues, h]
+            }
+
+        } else if(colorSelectedByUser === "Green"){
+
+            for (let h = LOWER_GREEN_VALUE; h <= UPPER_GREEN_VALUE; h++) {
+                hValues = [...hValues, h]
+            }
+            
+        } else if(colorSelectedByUser === "Cyan"){
+
+            for (let h = LOWER_CYAN_VALUE; h <= UPPER_CYAN_VALUE; h++) {
+                hValues = [...hValues, h]
+            }
+            
+        } else if(colorSelectedByUser === "Purple/Violet"){
+
+            for (let h = LOWER_PURPLE_VALUE; h <= UPPER_PURPLE_VALUE; h++) {
+                hValues = [...hValues, h]
+            }
+            
+        } else if(colorSelectedByUser === "Magenta/Pink"){
+
+            for (let h = LOWER_MAGENTA_VALUE; h <= UPPER_MAGENTA_VALUE; h++) {
+                hValues = [...hValues, h]
+            }
+            
+        } else if(colorSelectedByUser === "Blue"){
+
+            for (let h = LOWER_BLUE_VALUE; h <= UPPER_BLUE_VALUE; h++) {
+                hValues = [...hValues, h]
+            }
+
+        } else {
+            return;
+        }
+
+        return {
+                h: hValues
+               }
+
     }
+    
 
 
     useEffect(() => {
@@ -170,7 +238,8 @@ export function FindMyTaste(props){
             setQuizCompleted(true);
             const tempAllArtworkData = [];             
             selectedArtists.forEach(function (currentArtist) {
-                const searchParams = { artist_title: currentArtist};
+                //selectedColors.forEach(function(currentColor) { 
+                const searchParams = { artist_title: currentArtist}//, color: getBackHLSValues(currentColor)};
                 getArtWorksSearch(searchParams).then(function (allArtworks) { //searching all artworks including ones by currentArtist in selectedArtists
                     console.log("SINGULAR ARTWORK: ", allArtworks)
                     let remainingArtworks = allArtworks.data.length;    // this is to track the number of artworks left to process, i.e. getArtWorkByID
@@ -181,12 +250,12 @@ export function FindMyTaste(props){
 
                             if (remainingArtworks === 0 && tempAllArtworkData.length === allArtworks.data.length * selectedArtists.length) { //since this can run before the async callbacks, it is important to check that all data has been fetched
                                 console.log("HERE IS THE ORIGINAL VERSION", tempAllArtworkData)
-                                //filterAndSetResultsACB(tempAllArtworkData);
                                 filterAndSetResultsACB(tempAllArtworkData);
                             }
                         });
                     });
                 });
+                //});
             });
     }
 
@@ -195,7 +264,7 @@ export function FindMyTaste(props){
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
             
             const filteredArtworks = allArtworkData.filter(function (artwork) {
-                return selectedArtists.includes(artwork.artist_title) && selectedColors.includes(artwork.color)
+                return selectedArtists.includes(artwork.artist_title) //&& selectedColors.includes(artwork.color)
             });
             console.log("FILTERED ARTWORKS: ", filteredArtworks); //for debugging
             
@@ -218,7 +287,6 @@ export function FindMyTaste(props){
                 
             });
             console.log("IMAGE URLS: ", newImageURLs) //for debugging
-
         
             setImageURLs(newImageURLs); // this will be passed down to artQuizView to render the images
             setArtTitles(newImageTitles); //this will also be passed down to artQuizView to render art titles respective to the images
