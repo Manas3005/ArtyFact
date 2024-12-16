@@ -29,29 +29,16 @@ export function FindMyTaste(props){
     const [colorOptions, setColorOptions] = useState([]);
 
 
-    /*useEffect(() => {
-
-        fetchFourtyArtworks()
-    } , []);*/
-
-
-    const colorNameToHSLMapping = {
-        red: { h: [0, 20], s: [50, 100], l: [30, 70] },
-        blue: { h: [200, 240], s: [50, 100], l: [20, 60] },
-        orange: { h: [20, 40], s: [50, 100], l: [40, 80] },
-    };
-
-
 
 
     function getUserFriendlyColors(colorHLSValues) {
-        let userFriendlyColors = []
+
+        let userFriendlyColors = [];
         colorHLSValues.forEach(
             function(colorObject){
-                if(colorObject===null){
+                if(colorObject===null){ //this is done because some artworks in the API do not have colors defined
                     return;
-                }
-                if(colorObject.h>=0 && colorObject.h<=15 || colorObject.h>=345 && colorObject.h<=360){
+                } else if(colorObject.h>=0 && colorObject.h<=15 || colorObject.h>=345 && colorObject.h<=360){
                     userFriendlyColors = [...userFriendlyColors, "Red"];
                 } else if(colorObject.h>=16 && colorObject.h<=45){
                     userFriendlyColors = [...userFriendlyColors, "Orange"];
@@ -74,6 +61,10 @@ export function FindMyTaste(props){
         
     }
 
+    function getBackHLSValues(colorsSelectedByUsers){
+        
+    }
+
 
     useEffect(() => {
     
@@ -90,7 +81,7 @@ export function FindMyTaste(props){
                 }
                 
             });
-            userFriendlyColors.forEach((color) => { //this is done so if similar artworks have the same artists, they are not repeated as the options
+            userFriendlyColors.forEach((color) => { //this is done so if similar artworks have the same colors, they are not repeated as the options
                 if (color && !filteredColors.includes(color)) {
                   filteredColors.push(color);
                 }
@@ -107,33 +98,26 @@ export function FindMyTaste(props){
     } , []);
 
 
-    function selectArtistACB(artist){ //Filters such that if the same artist option is clicked on then updatedSelections will exclude it (to deselect)
-        if((selectedArtists.includes(artist))){
-            const updatedSelections = selectedArtists.filter(function (currentArtist){ 
-                return currentArtist !== artist 
-            })
-            setSelectedArtists(updatedSelections) 
+    function toggleSelection(item, selectedItems, setSelectedItems) { //Filters such that if the same option is clicked on then updatedSelections will exclude it (to deselect)
+        if (selectedItems.includes(item)) {
+            const updatedSelections = selectedItems.filter(currentItem => currentItem !== item);
+            setSelectedItems(updatedSelections);
         } else {
-            setSelectedArtists([...selectedArtists, artist]) //using array spread to select the new artist along with the already selected artists 
+            setSelectedItems([...selectedItems, item]); //using array spread to select the new artist along with the already selected artists 
+            console.log("Selected items: ", [...selectedItems, item]);
         }
     }
-
-
-    function selectColorACB(color){ 
-        if((selectedColors.includes(color))){
-            const updatedSelections = selectedColors.filter(function (currentColor){ 
-                return currentColor !== color 
-            })
-            setSelectedColors(updatedSelections) 
-            
-        } else {
-            const matchingColors = getColorsMatchingThreshold(color, colorOptions); 
-            setSelectedColors((prevSelectedColors) => [...prevSelectedColors, ...matchingColors]); 
-
-        }
+        
+    function selectArtistACB(artist) {
+        toggleSelection(artist, selectedArtists, setSelectedArtists);
+    }
+    
+    function selectColorACB(color) {
+        toggleSelection(color, selectedColors, setSelectedColors);
     }
 
     
+
 
 
     function setArtDescViewACB(){ //handling custom event 
@@ -163,8 +147,6 @@ export function FindMyTaste(props){
 
 
 
-
-
     function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
             //so that filterAndSetResultsACB is called only when all promises/fetches are resolved
             setQuizCompleted(true);
@@ -189,6 +171,7 @@ export function FindMyTaste(props){
                 });
             });
     }
+
 
 
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
