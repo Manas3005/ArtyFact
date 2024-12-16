@@ -1,10 +1,14 @@
 import {firebaseConfig} from "/src/firebaseConfig.js";
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, set } from "firebase/database";
+import { setEntries } from "./store/journalsSlice";
+import { setSearchQuery, setCollectionsArray } from "./store/collectionsSlice";
 
 import "./apiCall";
 import "./utilities"
-import { useSelector } from "react-redux";
+import { useSelector} from "react-redux";
+
+
 import { useEffect } from "react";
 import { getArtWorkByID } from "./apiCall";
 import { extractDateInterval } from "./utilities";
@@ -108,7 +112,7 @@ function modelToPersistence(state) {
     return send;
  }
 
- function persistenceToModelForMyCollection(collections) {
+ function persistenceToModelForMyCollection(collections , dispatchHook) {
     //dispatches here , set action in collection slice
     //In this function we have to set the state via reducers, in my case, collectionsArray.
     console.log("These are the collections in persistenceToModelForMyCollection", collections);
@@ -132,16 +136,18 @@ function modelToPersistence(state) {
  }
  
 
- function persistenceToModelForMyJournals(journalEntries){
-
+ function persistenceToModelForMyJournals(journalEntries, dispatchHook){
+    
+    dispatchHook(setEntries(journalEntries.entries));
     //dispatches here, set action in journal slice
     console.log("These are the journal entries in persistenceToModelForMyJournals", journalEntries);
 
  }
 
 
- function persistenceToModel(firebaseData, state) { // we get the snapshot and call the relevant
-    persistenceToModelForMyCollection(firebaseData.collections);
+ function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
+    persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook)
+    persistenceToModelForMyCollection(firebaseData.collections, dispatchHook);
     /**
      * Would call upon different functions with persistenceToModelforMyCollection(firebaseData.myCollection)
      *                                          persistenceToModelforMyJournal(firebaseData.myJournal)
@@ -193,7 +199,7 @@ if(state.ready){ // check if the state is ready, however this will be checked wh
 //note that we might need a reducer for the state.ready, meaning that we dispatch an action that sets the store to ready.
 //We might not need the state ready, we're not sure yet on how this works.
     
- function readFromFirebase(state) {
+ function readFromFirebase(state, dispatchHook) { 
     console.log("We are inside read from firebase", state);
     state.ready = false;
 
@@ -202,7 +208,8 @@ if(state.ready){ // check if the state is ready, however this will be checked wh
     function getSnapValACB(snapshot) { // persisted data we get back from the database
         console.log("This is the snapshot", snapshot)
         console.log("This is the snapshot value", snapshot.val())
-        return persistenceToModel(snapshot.val(), state);
+        //return persistenceToModel(snapshot.val(), state);
+        return persistenceToModel(snapshot.val(), dispatchHook);
     }
 
    ).then(
@@ -215,10 +222,16 @@ if(state.ready){ // check if the state is ready, however this will be checked wh
    );     
 } 
 
- function connectToFirebase(state) {
+/* two params of connectToFireBase: current snapshot of db(state), dispatch function from ReactRoot.jsx(dispatchHook) . 
+    The dispatchHook is required for readFromFirebase, which is inturn required for dispatching actions 
+    in persistenceToModelForMyCollection and persistenceToModelForMyJournal 
+
+*/
+
+ function connectToFirebase(state , dispatchHook) { 
     console.log("inuti connecct", state.ready);
     
-    readFromFirebase(state).then(() => {
+    readFromFirebase(state, dispatchHook).then(() => {
         //watchFunction(isChangedACB, sideEffectACB);
         //useEffect(whatHappensAfterChangeACB, [state.numberOfGuests, state.currentDishId, [...state.dishes]])
     });
