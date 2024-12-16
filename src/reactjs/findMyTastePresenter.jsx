@@ -19,12 +19,14 @@ export function FindMyTaste(props){
 
     const [selectedArtists, setSelectedArtists ] = useState([]) /*component state used here to keep track of the selected choices for artists
     (only needed until the quiz session lasts hence not application state)*/
+    const [selectedColors, setSelectedColors ] = useState([])
     const [imageURLs, setImageURLs] = useState([]);
     const [resultsReady, setResultsReady] = useState(false);
     const [artTitles, setArtTitles] = useState([]);
     const [artistTitles, setArtistTitles] = useState([]);
     const [quizCompleted, setQuizCompleted] = useState(false);
     const [artistsOptions, setArtistsOptions] = useState([]);
+    const [colorOptions, setColorOptions] = useState([]);
 
 
     /*useEffect(() => {
@@ -32,24 +34,106 @@ export function FindMyTaste(props){
         fetchFourtyArtworks()
     } , []);*/
 
+
+    const colorNameToHSLMapping = {
+        red: { h: [0, 20], s: [50, 100], l: [30, 70] },
+        blue: { h: [200, 240], s: [50, 100], l: [20, 60] },
+        orange: { h: [20, 40], s: [50, 100], l: [40, 80] },
+    };
+
+
+
+
+    function getUserFriendlyColors(colorHLSValues) {
+        let userFriendlyColors = []
+        colorHLSValues.forEach(
+            function(colorObject){
+                if(colorObject===null){
+                    return;
+                }
+                if(colorObject.h>=0 && colorObject.h<=15 || colorObject.h>=345 && colorObject.h<=360){
+                    userFriendlyColors = [...userFriendlyColors, "Red"];
+                } else if(colorObject.h>=16 && colorObject.h<=45){
+                    userFriendlyColors = [...userFriendlyColors, "Orange"];
+                } else if(colorObject.h>=46 && colorObject.h<=75){
+                    userFriendlyColors = [...userFriendlyColors, "Yellow"];
+                } else if(colorObject.h>=76 && colorObject.h<=150){
+                    userFriendlyColors = [...userFriendlyColors, "Green"];
+                } else if(colorObject.h>=151 && colorObject.h<=180){
+                    userFriendlyColors = [...userFriendlyColors, "Cyan"];
+                } else if(colorObject.h>=256 && colorObject.h<=320){
+                    userFriendlyColors = [...userFriendlyColors, "Purple/Violet"];
+                } else if(colorObject.h>=321 && colorObject.h<=344){
+                    userFriendlyColors = [...userFriendlyColors, "Magenta/Pink"];
+                } else {
+                    return;
+                }
+            }
+        )
+        return userFriendlyColors;
+        
+    }
+
+
     useEffect(() => {
     
         fetchAllArtworks().then(function (data) {
             const artists = data.data.map((artwork) => artwork.artist_title);
-            const filteredArtists = []
-            artists.forEach((artist) => { //this is done so if multiple artworks of the 100 have the same artists, they are not repeated as the options
+            const colorHLSValues = data.data.map((artwork) => artwork.color);
+            const userFriendlyColors = getUserFriendlyColors(colorHLSValues); //this is so the options are render in a human-readable way
+            const filteredColors = []
+            const filteredArtists = [];
+            
+            artists.forEach((artist) => { //this is done so if similar artworks have the same artists, they are not repeated as the options
                 if (artist && !filteredArtists.includes(artist)) {
                   filteredArtists.push(artist);
                 }
+                
             });
+            userFriendlyColors.forEach((color) => { //this is done so if similar artworks have the same artists, they are not repeated as the options
+                if (color && !filteredColors.includes(color)) {
+                  filteredColors.push(color);
+                }
+                
+            });
+
+
             setArtistsOptions(filteredArtists); 
-            
+            setColorOptions(filteredColors);
         })
         .catch((error) =>
-            console.error("Error fetching artworks and hence artist options:", error)
+            console.error("Error fetching options", error)
         );
     } , []);
 
+
+    function selectArtistACB(artist){ //Filters such that if the same artist option is clicked on then updatedSelections will exclude it (to deselect)
+        if((selectedArtists.includes(artist))){
+            const updatedSelections = selectedArtists.filter(function (currentArtist){ 
+                return currentArtist !== artist 
+            })
+            setSelectedArtists(updatedSelections) 
+        } else {
+            setSelectedArtists([...selectedArtists, artist]) //using array spread to select the new artist along with the already selected artists 
+        }
+    }
+
+
+    function selectColorACB(color){ 
+        if((selectedColors.includes(color))){
+            const updatedSelections = selectedColors.filter(function (currentColor){ 
+                return currentColor !== color 
+            })
+            setSelectedColors(updatedSelections) 
+            
+        } else {
+            const matchingColors = getColorsMatchingThreshold(color, colorOptions); 
+            setSelectedColors((prevSelectedColors) => [...prevSelectedColors, ...matchingColors]); 
+
+        }
+    }
+
+    
 
 
     function setArtDescViewACB(){ //handling custom event 
@@ -78,18 +162,7 @@ export function FindMyTaste(props){
 
 
 
-    function selectArtistACB(artist){ //Filters such that if the same artist option is clicked on then updatedSelections will exclude it (to deselect)
-        if((selectedArtists.includes(artist))){
-            const updatedSelections = selectedArtists.filter(function removeArtistChoiceCB (currentArtist){ 
-                return currentArtist !== artist 
-            })
-            setSelectedArtists(updatedSelections) 
-        } else {
-            setSelectedArtists([...selectedArtists, artist]) //using array spread to select the new artist along with the already selected artists 
-        }
-    }
 
-    
 
 
     function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
@@ -116,6 +189,7 @@ export function FindMyTaste(props){
                 });
             });
     }
+
 
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
             
@@ -164,8 +238,10 @@ export function FindMyTaste(props){
                                                                         onNextButtonClicked = {incrementQuizProgressACB}
                                                                         onPreviousButtonClicked = {decrementQuizProgressACB}
                                                                         onArtistSelected = {selectArtistACB}
+                                                                        onColorSelected = {selectColorACB}
                                                                         updatedProgress = {updatedProgress} //Passing down the updated progress to the ArtQuiz view
                                                                         selectedArtists = {selectedArtists} 
+                                                                        selectedColors = {selectedColors}
                                                                         onSubmitButtonClicked = {getArtworksByArtistsACB}
                                                                         onBackToQuizButtonClicked = {setResultsBackToPendingACB}
                                                                         imageURLs = {imageURLs}
@@ -174,6 +250,7 @@ export function FindMyTaste(props){
                                                                         artistTitles = {artistTitles}
                                                                         quizCompleted = {quizCompleted}
                                                                         artistsOptions = {artistsOptions}
+                                                                        colorOptions = {colorOptions}
                                                                         />)}
             </div>)
 }
