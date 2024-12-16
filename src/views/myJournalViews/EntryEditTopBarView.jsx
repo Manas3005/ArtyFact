@@ -1,6 +1,5 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
-import { useSelector } from "react-redux"
 
 export function EntryEditTopBarView(props){
 

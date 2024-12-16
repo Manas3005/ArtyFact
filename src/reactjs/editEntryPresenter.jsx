@@ -7,10 +7,9 @@ import { useSelector } from "react-redux"
 
 function EntryEdit (props){
 
+    let journalEntries = useSelector(state => state.myJournals.entries)
     let entryID = useSelector(state => state.myJournals.latestEntryID)
     let currentEntryID = useSelector(state => state.myJournals.selectedEntryID)
-
-    console.log(currentEntryID)
 
     const [title, setTitle] = useState('');
     const [mood, setMood] = useState('');
@@ -18,9 +17,13 @@ function EntryEdit (props){
      
     let dispatch = useDispatch()
 
+    // logic for adding todays date
+    
     const today = new Date();
     const dateString = today.toDateString();
+    
 
+    // ACB for saving changes or adding new entry from edit / add entry page
     function saveChangesACB (){
 
         const newEntry = {
@@ -37,6 +40,19 @@ function EntryEdit (props){
         dispatch(increaseLatestEntryID())
     }
 
+    function selectedEntryFinderCB(entry) {
+        if(currentEntryID !== null){
+            return entry.entryID === currentEntryID;
+        }
+        console.log("adding working")
+        return false
+    }
+
+    const selectedEntry = journalEntries.find(selectedEntryFinderCB);   
+    const inputTitle = selectedEntry ? selectedEntry.title : ""
+    const inputMood = selectedEntry ? selectedEntry.mood : ""
+    const inputActualText = selectedEntry ? selectedEntry.actualText : ""
+
     return (<div>
 
         <EntryEditTopBarView onSaveChanges={saveChangesACB}
@@ -48,13 +64,15 @@ function EntryEdit (props){
                             todayDate={dateString} 
                             onEntryMoodChange={setMood} 
                             onEntryTextChange={setActualText}
-                            entryID={currentEntryID}>
+                            
+                            entryID={currentEntryID}
+                            inputTitle={inputTitle}
+                            inputMood={inputMood}
+                            inputActualText={inputActualText}>
 
                             </EntryEditContentView>
 
-    </div>)
-
-    
+    </div>)   
 }
 
 export {EntryEdit}
