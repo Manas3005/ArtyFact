@@ -112,6 +112,39 @@ function modelToPersistence(state) {
     return send;
  }
 
+ async function generateObjectsForCollections(collections) {
+    const populatedCollections = await Promise.all(
+        collections.collectionsArray.map(async (collection) => {
+            const resolvedArtWorks = await Promise.all(
+                collection.artWorks.map(async (id) => {
+                    try {
+                        const result = await getArtWorkByID(id);
+                        const dateInterval = extractDateInterval(result.data.artist_display) || "";
+                        return {
+                            artWork_id: id,
+                            artistName: result.data.artist_title,
+                            artWorkTitle: result.data.title,
+                            image_URL: URLParamsForImage(result.data.image_id),
+                            artistDate: dateInterval,
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching artwork ID ${id}, perhaps it doesn't exist:`, error);
+                        return null; 
+                    }
+                })
+            );
+
+            return {
+                collectionTitle: collection.collectionTitle,
+                artWorks: resolvedArtWorks.filter((artwork) => artwork !== null),
+            };
+        })
+    );
+
+    return populatedCollections;
+}
+
+
  /**
   * Denna funktion ska omvandla data från firebase till objekt som vi ska spara i store.
   * Hur ska dessa objekt se ut?
@@ -127,30 +160,10 @@ function modelToPersistence(state) {
   * Vi har en utility funktion som hämtar image url. Vi kan testa att använda den i vår async await funktion och se ifall det går att lägga in URL:en i objektet.
   * The above is done. Vi lägger nu istället in image URL som value i objektet. Då kan presentern arbeta direkt med den URL:en och rendera bilden.
   */
- async function persistenceToModelForMyCollection(collections, dispatchHook) {
-    const artWorkPromises = collections.collectionsArray.flatMap((collection) =>
-        collection.artWorks.map(async (id) => {
-            try {
-                const result = await getArtWorkByID(id);
-                const dateInterval = extractDateInterval(result.data.artist_display) || "";
-                return {
-                    artWork_id: id,
-                    artistName: result.data.artist_title,
-                    artWorkTitle: result.data.title,
-                    image_URL: URLParamsForImage(result.data.image_id),
-                    artistDate: dateInterval,
-                };
-            } catch (error) {
-                console.error(`There was an error fetching artwork ID ${id}, perhaps it doesn't exist:`, error);
-                return null;
-            }
-        })
-    );
-    const settledPromises = await Promise.allSettled(artWorkPromises);
-    console.log("These are the settled promises", settledPromises);
-    //result.status === "fulfilled" is not really needed it seems as even the empty ones are fulfilled, but you never know.
-    const artWorks = settledPromises.filter((result) => result.status === "fulfilled" && result.value !== null).map((result) => result.value);
-    console.log("Fully resolved artWorks array", artWorks);
+    async function persistenceToModelForMyCollection(collections, dispatchHook) {
+    console.log("These are collections", collections);
+    const artWorkPromises = await generateObjectsForCollections(collections);
+    console.log("These are the art workS", artWorkPromises);
     /**
      * Perhaps we don't really want to return the artWorks, but instead we would like to persist this data in the store?
      * In that case, how should we do so?
@@ -158,8 +171,8 @@ function modelToPersistence(state) {
      * with the artWorks array.
      * Let's try it out.
      */
-    dispatchHook(setCollectionsArray(artWorks)); //Det funkar!
-    return artWorks;
+    dispatchHook(setCollectionsArray(artWorkPromises)); //Det funkar!
+    return artWorkPromises;
 }
 
 
