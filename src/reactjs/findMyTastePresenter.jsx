@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
 import { useEffect } from "react";
 import { getArtWorks } from "../apiCall";
-import { fetchAndProcessArtworks } from "../utilities";
+import { fetchAndProcessArtworks} from "../utilities";
 
 
 export function FindMyTaste(props){
@@ -18,151 +18,30 @@ export function FindMyTaste(props){
     const [currentView, setCurrentView] = useState('describe'); /*here component state is used because it aids the change of views depnding
     on the tab button clicked only on findMyTaste so it has no connection with the application state*/
 
-    const [selectedArtists, setSelectedArtists ] = useState([]) /*component state used here to keep track of the selected choices for artists
+    const [selectedArtists, setSelectedArtists ] = useState([]); /*component state used here to keep track of the selected choices for artists
     (only needed until the quiz session lasts hence not application state)*/
-    const [selectedColors, setSelectedColors ] = useState([])
-    const [imageURLs, setImageURLs] = useState([]);
+    const [selectedStyles, setSelectedStyles] = useState([]);
     const [resultsReady, setResultsReady] = useState(false);
-    const [artTitles, setArtTitles] = useState([]);
-    const [artistTitles, setArtistTitles] = useState([]);
+    
+    const [imageByArtistsURLs, setImageByArtistsURLs] = useState([]);
+    const [artTitlesByArtists, setArtTitlesByArtists] = useState([]);
+    const [artistTitlesByArtists, setArtistTitlesByArtists] = useState([]);
+
+    const [imageByStylesURLs, setImageByStylesURLs] = useState([]);
+    const [artTitlesByStyles, setArtTitlesByStyles] = useState([]);
+    const [artistTitlesByStyles, setArtistTitlesByStyles] = useState([]);
+    const [styleTitles, setStyleTitles] = useState([]);
+    
     const [quizCompleted, setQuizCompleted] = useState(false);
     const [artistsOptions, setArtistsOptions] = useState([]);
-    const [colorOptions, setColorOptions] = useState([]);
-
-    //The values below define the hue ranges for each color option in the art quiz for question 2
-    const LOWER_RED_VALUE_ONE = 0;
-    const UPPER_RED_VALUE_ONE = 15;
-    const LOWER_RED_VALUE_TWO = 345;
-    const UPPER_RED_VALUE_TWO = 360;
-    
-    const LOWER_ORANGE_VALUE = 16;
-    const UPPER_ORANGE_VALUE = 45;
-    
-    const LOWER_YELLOW_VALUE = 46;
-    const UPPER_YELLOW_VALUE = 75;
-    
-    const LOWER_GREEN_VALUE = 76;
-    const UPPER_GREEN_VALUE = 150;
-    
-    const LOWER_CYAN_VALUE = 151;
-    const UPPER_CYAN_VALUE = 180;
-
-    const LOWER_BLUE_VALUE = 181;
-    const UPPER_BLUE_VALUE = 255;
-    
-    const LOWER_PURPLE_VALUE = 256;
-    const UPPER_PURPLE_VALUE = 320;
-    
-    const LOWER_MAGENTA_VALUE = 321;
-    const UPPER_MAGENTA_VALUE = 344;
-
-
-    function getUserFriendlyColors(colorHLSValues) {
-        let userFriendlyColors = [];
-        colorHLSValues.forEach(function (colorObject) {
-            if (colorObject === null) {//this check is done because some artworks in the API do not have colors defined
-                return;
-            } else if (
-                (colorObject.h >= LOWER_RED_VALUE_ONE && colorObject.h <= UPPER_RED_VALUE_ONE) ||
-                (colorObject.h >= LOWER_RED_VALUE_TWO && colorObject.h <= UPPER_RED_VALUE_TWO)) {
-                userFriendlyColors = [...userFriendlyColors, "Red"];
-            } else if (colorObject.h >= LOWER_ORANGE_VALUE && colorObject.h <= UPPER_ORANGE_VALUE) {
-                userFriendlyColors = [...userFriendlyColors, "Orange"];
-            } else if (colorObject.h >= LOWER_YELLOW_VALUE && colorObject.h <= UPPER_YELLOW_VALUE) {
-                userFriendlyColors = [...userFriendlyColors, "Yellow"];
-            } else if (colorObject.h >= LOWER_GREEN_VALUE && colorObject.h <= UPPER_GREEN_VALUE) {
-                userFriendlyColors = [...userFriendlyColors, "Green"];
-            } else if (colorObject.h >= LOWER_CYAN_VALUE && colorObject.h <= UPPER_CYAN_VALUE) {
-                userFriendlyColors = [...userFriendlyColors, "Cyan"];
-            } else if (colorObject.h >= LOWER_PURPLE_VALUE && colorObject.h <= UPPER_PURPLE_VALUE) {
-                userFriendlyColors = [...userFriendlyColors, "Purple/Violet"];
-            } else if (colorObject.h >= LOWER_MAGENTA_VALUE && colorObject.h <= UPPER_MAGENTA_VALUE) {
-                userFriendlyColors = [...userFriendlyColors, "Magenta/Pink"];
-            } else if(colorObject.h >= LOWER_BLUE_VALUE && colorObject.h <= UPPER_BLUE_VALUE){
-                userFriendlyColors = [...userFriendlyColors, "Blue"];
-            } else {
-                return;
-            }
-        });
-        return userFriendlyColors;
-    }
-
-
-    function getBackHLSValues(colorSelectedByUser){ //this is to allow the API to understand userInput
-
-        let hValues = []
-
-        if(colorSelectedByUser === "Red"){
-
-            for (let h = LOWER_RED_VALUE_ONE; h <= UPPER_RED_VALUE_ONE; h++) { //this needs to be done so all artworks that have hValues in this range can be fetched
-                hValues = [...hValues, h]
-            }
-            for (let h = LOWER_RED_VALUE_TWO; h <= UPPER_RED_VALUE_TWO; h++) {
-                hValues = [...hValues, h]
-            }
-
-        } else if(colorSelectedByUser === "Orange"){
-
-            for (let h = LOWER_ORANGE_VALUE; h <= UPPER_ORANGE_VALUE; h++) {
-                hValues = [...hValues, h]
-            }
-
-        } else if(colorSelectedByUser === "Yellow"){
-
-            for (let h = LOWER_YELLOW_VALUE; h <= UPPER_YELLOW_VALUE; h++) {
-                hValues = [...hValues, h]
-            }
-
-        } else if(colorSelectedByUser === "Green"){
-
-            for (let h = LOWER_GREEN_VALUE; h <= UPPER_GREEN_VALUE; h++) {
-                hValues = [...hValues, h]
-            }
-            
-        } else if(colorSelectedByUser === "Cyan"){
-
-            for (let h = LOWER_CYAN_VALUE; h <= UPPER_CYAN_VALUE; h++) {
-                hValues = [...hValues, h]
-            }
-            
-        } else if(colorSelectedByUser === "Purple/Violet"){
-
-            for (let h = LOWER_PURPLE_VALUE; h <= UPPER_PURPLE_VALUE; h++) {
-                hValues = [...hValues, h]
-            }
-            
-        } else if(colorSelectedByUser === "Magenta/Pink"){
-
-            for (let h = LOWER_MAGENTA_VALUE; h <= UPPER_MAGENTA_VALUE; h++) {
-                hValues = [...hValues, h]
-            }
-            
-        } else if(colorSelectedByUser === "Blue"){
-
-            for (let h = LOWER_BLUE_VALUE; h <= UPPER_BLUE_VALUE; h++) {
-                hValues = [...hValues, h]
-            }
-
-        } else {
-            return;
-        }
-        console.log("H VALUES: ", hValues)
-
-        return {
-                "h": hValues,
-               }
-
-    }
-    
-
+    const [styleOptions, setStyleOptions] = useState([]);
 
     useEffect(() => {
     
         fetchAllArtworks().then(function (data) {
             const artists = data.data.map((artwork) => artwork.artist_title);
-            const colorHLSValues = data.data.map((artwork) => artwork.color);
-            const userFriendlyColors = getUserFriendlyColors(colorHLSValues); //this is so the options are render in a human-readable way
-            const filteredColors = []
+            const styles = data.data.map((artwork) => artwork.style_title);
+            const filteredStyles = []
             const filteredArtists = [];
             
             artists.forEach((artist) => { //this is done so if similar artworks have the same artists, they are not repeated as the options
@@ -171,21 +50,22 @@ export function FindMyTaste(props){
                 }
                 
             });
-            userFriendlyColors.forEach((color) => { //this is done so if similar artworks have the same colors, they are not repeated as the options
-                if (color && !filteredColors.includes(color)) {
-                  filteredColors.push(color);
+
+            styles.forEach((style) => { //this is done so if similar artworks have the same artists, they are not repeated as the options
+                if (style && !filteredStyles.includes(style)) {
+                  filteredStyles.push(style);
                 }
                 
             });
-
-
             setArtistsOptions(filteredArtists); 
-            setColorOptions(filteredColors);
+            setStyleOptions(filteredStyles);
         })
         .catch((error) =>
             console.error("Error fetching options", error)
         );
     } , []);
+
+
 
 
     function toggleSelection(item, selectedItems, setSelectedItems) { //Filters such that if the same option is clicked on then updatedSelections will exclude it (to deselect)
@@ -202,12 +82,11 @@ export function FindMyTaste(props){
         toggleSelection(artist, selectedArtists, setSelectedArtists);
     }
     
-    function selectColorACB(color) {
-        toggleSelection(color, selectedColors, setSelectedColors);
+    function selectStyleACB(style) {
+        toggleSelection(style, selectedStyles, setSelectedStyles);
     }
 
     
-
     function setArtDescViewACB(){ //handling custom event 
         setCurrentView('describe') 
     }
@@ -233,53 +112,115 @@ export function FindMyTaste(props){
     }
 
 
-     
 
     function getArtworksByArtistsACB() {
+        setQuizCompleted(true);
         fetchAndProcessArtworks(
             selectedArtists, 
             (currentArtist) => ({ artist_title: currentArtist }), //construct search params for artists
-            filterAndSetResultsACB //callback to process the filtered data
+            filterAndSetResultsACB, //callback to process the filtered data
+            "artists" //this is so the filterAndSetResultsACB method knows which filters to run
+        );
+    };
+
+
+    function getArtworksByStylesACB() {
+        setQuizCompleted(true);
+        fetchAndProcessArtworks(
+            selectedStyles, 
+            (currentStyle) => ({ style_title: currentStyle }), //construct search params for artists
+            filterAndSetResultsACB, //callback to process the filtered data
+            "styles"
         );
     }
 
+
+
+    function getArtworksByResponsesACB(){
+        getArtworksByArtistsACB();
+        getArtworksByStylesACB();
+    }
+
                 
 
-    function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
+    function filterAndSetResultsACB(allArtworkData, filterType) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
             
-            const filteredArtworks = allArtworkData.filter(function (artwork) {
+        const newArtistImageURLs = [];
+        const newArtistImageTitles = [];
+
+        const newStyleImageURLs = [];
+        const newStyleImageTitles = [];
+
+        const newArtistTitlesByArtists = [];
+        const newArtistTitlesByStyles = [];
+        const newStyleTitles = []
+
+        
+        if (filterType === "artists"){ //this check is done so the filtering by filteredStyleArtworks is not populated for artworks that are meant to be filtered by artists
+            
+            const filteredArtistArtworks = allArtworkData.filter(function (artwork) { //CHECK IF THIS CAN BE REMOVED
                 return selectedArtists.includes(artwork.artist_title);
             });
-            console.log("FILTERED ARTWORKS: ", filteredArtworks); //for debugging
-            
-            //these are temporary arrays that can be filtered on and then the actual array (component state) is set to these temp arrays 
-            const newImageURLs = [];
-            const newImageTitles = [];
-            const newArtistTitles = []
-            
-            //the filteredArtworks are taken and mapped to their image URLs through a function in apiCall.js
-            filteredArtworks.forEach(function (artwork) {
-                const imageURL = getArtWorkImageModified(artwork.image_id); //using the function from apiCall.js to get the imageURL
-                const imageTitle = artwork.title         //same process as above but for the image titles
-                const artistTitle = artwork.artist_title
 
-                if (!newImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again as duplicate artworks from the same artist from the API can lead to this
-                    newImageURLs.push(imageURL);
-                    newImageTitles.push(imageTitle);
-                    newArtistTitles.push(artistTitle);
+            console.log("FILTERED ARTWORKS BY ARTISTS: ", filteredArtistArtworks); //for debugging
+            
+            filteredArtistArtworks.forEach(function (artwork) {
+                const imageURL = getArtWorkImageModified(artwork.image_id); //using the function from apiCall.js to get the imageURL
+                const imageTitle = artwork.title;         //same process as above but for the image titles
+                const artistTitle = artwork.artist_title;
+
+                if (!newArtistImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again as duplicate artworks from the same artist from the API can lead to this
+                    newArtistImageURLs.push(imageURL);
+                    newArtistImageTitles.push(imageTitle);
+                    newArtistTitlesByArtists.push(artistTitle);
                 }
                 
             });
-            console.log("IMAGE URLS: ", newImageURLs) //for debugging
+            console.log("IMAGE URLS FOR ART BY ARTISTS: ", newArtistImageURLs) //for debugging
+            setImageByArtistsURLs(newArtistImageURLs); // this will be passed down to artQuizView to render the images
+            setArtTitlesByArtists(newArtistImageTitles); //this will also be passed down to artQuizView to render art titles respective to the images
+            setArtistTitlesByArtists(newArtistTitlesByArtists);
 
-        
-            setImageURLs(newImageURLs); // this will be passed down to artQuizView to render the images
-            setArtTitles(newImageTitles); //this will also be passed down to artQuizView to render art titles respective to the images
-            setArtistTitles(newArtistTitles); //this will also be passed down to artQuizView to render artist titles respective to the artTitles
+
+        } else if(filterType === "styles"){ //for artworks filtered by styles
+
+          const filteredStyleArtworks = allArtworkData.filter(function (artwork) {
+              return selectedStyles.includes(artwork.style_title);
+          });
+
+          console.log("FILTERED ARTWORKS BY STYLES: ", filteredStyleArtworks); 
+
+
+          filteredStyleArtworks.forEach(function (artwork) {
+              const imageURL = getArtWorkImageModified(artwork.image_id); //using the function from apiCall.js to get the imageURL
+              const imageTitle = artwork.title;         //same process as above but for the image titles
+              const artistTitle = artwork.artist_title;
+              const styleTitle = artwork.style_title;
+  
+              if (!newArtistImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again as duplicate artworks from the same artist from the API can lead to this
+                  newStyleImageURLs.push(imageURL);
+                  newStyleImageTitles.push(imageTitle);
+                  newArtistTitlesByStyles.push(artistTitle);
+                  newStyleTitles.push(styleTitle);
+  
+              }
+            
+            });
+            console.log("IMAGE URLS FOR ART BY STYLES: ", newStyleImageURLs) //for debugging
+
+
+            setImageByStylesURLs(newStyleImageURLs);
+            setArtTitlesByStyles(newStyleImageTitles);
+            setArtistTitlesByStyles(newArtistTitlesByStyles);
+            setStyleTitles(newStyleTitles);
+            
             setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
-    }
 
-    function getArtWorksFromResponses (){
+        }
+        
+        //these are temporary arrays that can be filtered on and then the actual array (component state) is set to these temp arrays 
+        
+        //the filteredArtworks are taken and mapped to their image URLs through a function in apiCall.js
 
     }
 
@@ -296,19 +237,27 @@ export function FindMyTaste(props){
                                                                         onNextButtonClicked = {incrementQuizProgressACB}
                                                                         onPreviousButtonClicked = {decrementQuizProgressACB}
                                                                         onArtistSelected = {selectArtistACB}
-                                                                        onColorSelected = {selectColorACB}
-                                                                        updatedProgress = {updatedProgress} //Passing down the updated progress to the ArtQuiz view
-                                                                        selectedArtists = {selectedArtists} 
-                                                                        selectedColors = {selectedColors}
-                                                                        onSubmitButtonClicked = {getArtworksByArtistsACB}
+                                                                        onStyleSelected = {selectStyleACB}
+                                                                        onSubmitButtonClicked = {getArtworksByResponsesACB}
                                                                         onBackToQuizButtonClicked = {setResultsBackToPendingACB}
-                                                                        imageURLs = {imageURLs}
+                                                                        
+                                                                        updatedProgress = {updatedProgress} //passing down the updated progress to the ArtQuiz view
+                                                                        selectedArtists = {selectedArtists} 
+                                                                        selectedStyles = {selectedStyles}
+
+                                                                        artTitlesByArtists = {artTitlesByArtists}
+                                                                        artistTitlesByArtists = {artistTitlesByArtists}
+                                                                        imageByArtistsURLs = {imageByArtistsURLs}
+
+                                                                        artTitlesByStyles = {artTitlesByStyles}
+                                                                        artistTitlesByStyles = {artistTitlesByStyles}
+                                                                        imageByStylesURLs = {imageByStylesURLs}
+                                                                        styleTitles = {styleTitles}
+                                                                        
                                                                         resultsReady = {resultsReady}
-                                                                        artTitles = {artTitles}
-                                                                        artistTitles = {artistTitles}
                                                                         quizCompleted = {quizCompleted}
                                                                         artistsOptions = {artistsOptions}
-                                                                        colorOptions = {colorOptions}
+                                                                        styleOptions = {styleOptions}
                                                                         />)}
             </div>)
 }

@@ -1,4 +1,5 @@
 import sanitizeHtml from 'sanitize-html'; 
+import { getArtWorkByID, getArtWorksSearch} from './apiCall';
 
 
 export const cleanHtmlContent = (html) => {
@@ -13,9 +14,9 @@ export function transformJournalTitleCB(entry) {
     return entry.title;
 }
 
-export function fetchAndProcessArtworks(selectedItems, constructSearchParams, onDataProcessed) { //This approach keeps track of the number of artworks that have gone through the processing stage
+
+export function fetchAndProcessArtworks(selectedItems, constructSearchParams, onDataProcessed, filterType) { //This approach keeps track of the number of artworks that have gone through the processing stage
     //so that filterAndSetResultsACB is called only when all promises/fetches are resolved
-    setQuizCompleted(true);
     const tempAllArtworkData = []; 
     
     selectedItems.forEach(function (selectedItem) {
@@ -31,7 +32,7 @@ export function fetchAndProcessArtworks(selectedItems, constructSearchParams, on
 
                     if (remainingArtworks === 0 && tempAllArtworkData.length === allArtworks.data.length * selectedItems.length) { //since this can run before the async callbacks, it is important to check that all data has been fetched
                         console.log("HERE IS THE ORIGINAL VERSION", tempAllArtworkData);
-                        onDataProcessed(tempAllArtworkData); // Call the callback to process the filtered data
+                        onDataProcessed(tempAllArtworkData, filterType); // Call the callback to process the filtered data
                     }
                 });
             });
@@ -39,3 +40,5 @@ export function fetchAndProcessArtworks(selectedItems, constructSearchParams, on
     });
 }              
 
+
+    

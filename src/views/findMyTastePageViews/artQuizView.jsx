@@ -6,17 +6,25 @@ import { useState } from "react";
 
 export function ArtQuizView (props){
 
-    const updatedProgress = props.updatedProgress;
+    const artTitlesByArtists = props.artTitlesByArtists;
+    const artistTitlesByArtists = props.artistTitlesByArtists;
+    const imageByArtistsURLs = props.imageByArtistsURLs;
+
+    const artTitlesByStyles = props.artTitlesByStyles;
+    const artistTitlesByStyles = props.artistTitlesByStyles;
+    const imageByStylesURLs = props.imageByStylesURLs;
+    const styleTitles = props.styleTitles;
+    
+    const selectedStyles = props.selectedStyles;
     const selectedArtists = props.selectedArtists;
-    const selectedColors = props.selectedColors;
+
+    const updatedProgress = props.updatedProgress;
     const resultsReady = props.resultsReady;
-    const imageURLs = props.imageURLs;
-    const artTitles = props.artTitles;
-    const artistTitles = props.artistTitles;
+    
     //const artistsOptions = ["Tanaka Atsuko", "Diego Rivera", "Alma Thomas", "Kerry James Marshall", "Joan Mitchell", "Aztec (Mexica)", "Gustave Caillebotte", "Georges Seurat", "Vincent van Gogh", "Richard Earlom"]
     const quizCompleted = props.quizCompleted;
     const artistsOptions = props.artistsOptions;
-    const colorOptions = props.colorOptions;
+    const styleOptions = props.styleOptions;
 
 
     function handleNextClickACB(){
@@ -34,9 +42,9 @@ export function ArtQuizView (props){
         once quiz is submitted*/
     }
 
-    function handleColorChoiceSelectionACB(color){
-      props.onColorSelected(color);
-      console.log("SELECTED COLOR", color)
+    function handleStyleChoiceSelectionACB(style){
+      props.onStyleSelected(style);
+      console.log("SELECTED STYLE", style)
     }
 
 
@@ -72,16 +80,16 @@ export function ArtQuizView (props){
       });
     }
 
-    function renderColorOptions() {
+    function renderStyleOptions() {
 
-      return colorOptions.map(function organizeAsOptionCB(color) {
-      const isSelected = selectedColors.includes(color)
+      return styleOptions.map(function organizeAsOptionCB(color) {
+      const isSelected = selectedStyles.includes(color)
         
       return (
         <button
             key={color}
             className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
-            onClick={function() { handleColorChoiceSelectionACB(color); }}
+            onClick={function() { handleStyleChoiceSelectionACB(color); }}
         >
             <input
                 type="checkbox"
@@ -130,9 +138,9 @@ export function ArtQuizView (props){
 
               return (
                 <div>
-                  <div> What color would you like your art to be dominated with? </div>
+                  <div> Select your favorite art styles </div>
                   <div className="favoriteArtistsContainer">
-                  {renderColorOptions()}
+                  {renderStyleOptions()}
                   </div>
                   <div>
                     <button
@@ -265,7 +273,7 @@ export function ArtQuizView (props){
               <div>We think you will like these artworks...</div>
               
               <div className="resultsContainer">
-                {imageURLs.map((url, index) => (
+                {imageByArtistsURLs.map((url, index) => (
                   <div key={index} className="resultItem">
                     <img
                       src={url}
@@ -273,8 +281,8 @@ export function ArtQuizView (props){
                       alt={` Couldn't fetch Artwork ${index + 1}`}
                     />
                     <div className="artDetails">
-                      <div className="artTitle">{artTitles[index]}</div>
-                      <div className="artistTitle">by {artistTitles[index]}</div>
+                      <div className="artTitle">{artTitlesByArtists[index]}</div>
+                      <div className="artistTitle">by {artistTitlesByArtists[index]}</div>
                     </div>
                   </div>
                 ))}

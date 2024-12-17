@@ -48,6 +48,9 @@ export function getArtWorksSearch(searchParams) {
     return fetch(createURLParamsForArtWorkSearch(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
 
+
+
+
 export function getArtWorkImage(result){
     console.log("This is the IMAGE ID", result);
     const imageID = result;
@@ -64,7 +67,7 @@ export function getArtWorkImageModified(result){ //This function directly return
 }
 
 export function fetchAllArtworks() { //allows to fetch all artworks (limit 100) can be used for anything i.e. option instances for the quiz 
-    return fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=80")
+    return fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=40")
         .then(function(response) {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: `, response.status);
@@ -120,12 +123,16 @@ function createURLParamsForArtWork(searchParams) {
     
 } 
 
+
+
 function createURLParamsForArtWorkSearch(searchParams) {
     console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams));
-    const URL = MAIN_URL + "artworks/" + "search/" + "?q=" + new URLSearchParams(searchParams);
+    URL = MAIN_URL + "artworks/" + "search/" + "?q=" + new URLSearchParams(searchParams);
     console.log("URL RIGHT HERE: ", URL)
     return URL;
 }
+
+
 function createURLParamsForArtWorksByID(searchParams) {
     console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
     return MAIN_URL + "artworks/" + searchParams;
