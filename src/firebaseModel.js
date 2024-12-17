@@ -10,7 +10,7 @@ import { useSelector} from "react-redux";
 
 
 import { useEffect } from "react";
-import { getArtWorkByID } from "./apiCall";
+import { getArtWorkByID, URLParamsForImage } from "./apiCall";
 import { extractDateInterval } from "./utilities";
 
 /**
@@ -120,7 +120,12 @@ function modelToPersistence(state) {
   * collectionsArray: [
   *                                     
   * ]
-  * 
+  * Det vi har lyckat göra nu är att vi kan läsa från firebase, och hämta det relevanta datan och skriva den till application state.
+  * Det vi dock måste ha i åtanke är dock att vi tar med image_id, men vi hämtar inte själva bilden, det kanske vi borde göra också nu?
+  * Eller ska vi göra det i presenter? Det kanske är bättre om vi gör det nu faktiskt så att alltid går snabbare när vi är i applikationen.
+  * Det enda vi behöver göra nu är att vi måste se till att vi, baserat på image_id, kan fetcha själva URL:en, och låta det vara det som läggs in i application state?
+  * Vi har en utility funktion som hämtar image url. Vi kan testa att använda den i vår async await funktion och se ifall det går att lägga in URL:en i objektet.
+  * The above is done. Vi lägger nu istället in image URL som value i objektet. Då kan presentern arbeta direkt med den URL:en och rendera bilden.
   */
  async function persistenceToModelForMyCollection(collections, dispatchHook) {
     const artWorkPromises = collections.collectionsArray.flatMap((collection) =>
@@ -132,7 +137,7 @@ function modelToPersistence(state) {
                     artWork_id: id,
                     artistName: result.data.artist_title,
                     artWorkTitle: result.data.title,
-                    image_id: result.data.image_id,
+                    image_URL: URLParamsForImage(result.data.image_id),
                     artistDate: dateInterval,
                 };
             } catch (error) {
@@ -153,12 +158,10 @@ function modelToPersistence(state) {
      * with the artWorks array.
      * Let's try it out.
      */
-    dispatchHook(setCollectionsArray(artWorks));
+    dispatchHook(setCollectionsArray(artWorks)); //Det funkar!
     return artWorks;
 }
 
-
- 
 
  function persistenceToModelForMyJournals(journalEntries, dispatchHook){
     
@@ -167,6 +170,7 @@ function modelToPersistence(state) {
     console.log("These are the journal entries in persistenceToModelForMyJournals", journalEntries);
 
  }
+
 
 
  function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
