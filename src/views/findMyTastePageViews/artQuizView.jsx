@@ -248,7 +248,7 @@ export function ArtQuizView (props){
               <div style={{ textAlign: 'center' }}>
 
                   <img 
-                  src="https://i.gifer.com/ZKZg.gif" 
+                  src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXE2bW5xbjBzcnk3eHdtMmIzdXBjczRobnBqbXR6b3RtemJtdjNjeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3nWhI38IWDofyDrW/giphy.gif" 
                   className="quizCompleted" 
                   alt="Loading Quiz Results" 
                   />

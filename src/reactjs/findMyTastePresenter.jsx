@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
 import { useEffect } from "react";
 import { getArtWorks } from "../apiCall";
+import { fetchAndProcessArtworks } from "../utilities";
 
 
 export function FindMyTaste(props){
@@ -145,9 +146,10 @@ export function FindMyTaste(props){
         } else {
             return;
         }
+        console.log("H VALUES: ", hValues)
 
         return {
-                h: hValues
+                "h": hValues,
                }
 
     }
@@ -231,40 +233,22 @@ export function FindMyTaste(props){
     }
 
 
+     
 
-
-    function getArtworksByArtistsACB() { //This approach keeps track of the number of artworks that have gone through the processing stage
-            //so that filterAndSetResultsACB is called only when all promises/fetches are resolved
-            setQuizCompleted(true);
-            const tempAllArtworkData = [];             
-            selectedArtists.forEach(function (currentArtist) {
-                //selectedColors.forEach(function(currentColor) { 
-                const searchParams = { artist_title: currentArtist}//, color: getBackHLSValues(currentColor)};
-                getArtWorksSearch(searchParams).then(function (allArtworks) { //searching all artworks including ones by currentArtist in selectedArtists
-                    console.log("SINGULAR ARTWORK: ", allArtworks)
-                    let remainingArtworks = allArtworks.data.length;    // this is to track the number of artworks left to process, i.e. getArtWorkByID
-                    allArtworks.data.forEach(function (currentArtwork) {
-                        getArtWorkByID(currentArtwork.id).then(function (artworkDetails) { //PROCESSING STAGE: this fetches each artwork by its id so the artist_title, image_url, etc. properties are accessible
-                            tempAllArtworkData.push(artworkDetails.data); 
-                            remainingArtworks--;
-
-                            if (remainingArtworks === 0 && tempAllArtworkData.length === allArtworks.data.length * selectedArtists.length) { //since this can run before the async callbacks, it is important to check that all data has been fetched
-                                console.log("HERE IS THE ORIGINAL VERSION", tempAllArtworkData)
-                                filterAndSetResultsACB(tempAllArtworkData);
-                            }
-                        });
-                    });
-                });
-                //});
-            });
+    function getArtworksByArtistsACB() {
+        fetchAndProcessArtworks(
+            selectedArtists, 
+            (currentArtist) => ({ artist_title: currentArtist }), //construct search params for artists
+            filterAndSetResultsACB //callback to process the filtered data
+        );
     }
 
-
+                
 
     function filterAndSetResultsACB(allArtworkData) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
             
             const filteredArtworks = allArtworkData.filter(function (artwork) {
-                return selectedArtists.includes(artwork.artist_title) //&& selectedColors.includes(artwork.color)
+                return selectedArtists.includes(artwork.artist_title);
             });
             console.log("FILTERED ARTWORKS: ", filteredArtworks); //for debugging
             
@@ -287,6 +271,7 @@ export function FindMyTaste(props){
                 
             });
             console.log("IMAGE URLS: ", newImageURLs) //for debugging
+
         
             setImageURLs(newImageURLs); // this will be passed down to artQuizView to render the images
             setArtTitles(newImageTitles); //this will also be passed down to artQuizView to render art titles respective to the images
