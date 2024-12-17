@@ -248,6 +248,12 @@
     padding: 10px;
     position: relative;
   }
+
+
+  .gap {
+    height: 4rem; 
+    width: 100%; 
+  }
   
   .resultImage {
     width: 100%;

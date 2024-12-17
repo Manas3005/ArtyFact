@@ -14,7 +14,7 @@ export function ArtQuizView (props){
     const artistTitlesByStyles = props.artistTitlesByStyles;
     const imageByStylesURLs = props.imageByStylesURLs;
     const styleTitles = props.styleTitles;
-    
+
     const selectedStyles = props.selectedStyles;
     const selectedArtists = props.selectedArtists;
 
@@ -270,9 +270,14 @@ export function ArtQuizView (props){
 
           return (
             <div>
+
               <div>We think you will like these artworks...</div>
-              
+              <div className = "gap"></div>
+
+              <div>Based on your favorite artists</div>
               <div className="resultsContainer">
+
+                
                 {imageByArtistsURLs.map((url, index) => (
                   <div key={index} className="resultItem">
                     <img
@@ -286,7 +291,36 @@ export function ArtQuizView (props){
                     </div>
                   </div>
                 ))}
+
+
+              </div>  
+
+              <div className = "gap"></div>
+              <div>Based on your preferred styles</div>
+              <div className="resultsContainer">
+
+
+                {imageByStylesURLs.map((url, index) => (
+                  <div key={index} className="resultItem">
+                    <img
+                      src={url}
+                      className="resultImage"
+                      alt={` Couldn't fetch Artwork ${index + 1}`}
+                    />
+                    <div className="artDetails">
+                      <div className="artTitle">{artTitlesByStyles[index]}</div>
+                      <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
+                      <div className="artistTitle">Style: {styleTitles[index]}</div>
+                    </div>
+                  </div>
+                ))}
+
+
               </div>
+
+
+              
+
               <button
                 onClick={handleBackToQuizACB}
                 className="quizBackButton"
