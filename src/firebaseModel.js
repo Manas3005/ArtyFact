@@ -47,11 +47,11 @@ set(myCollectionsRef, {
     collectionsArray: [
         {
             collectionTitle: "Japanese Art",
-            artWorks: [34,123,5312]
+            artWorks: [34,12981,129884]
         },
         {
             collectionTitle: "Impressionism.. oh",
-            artWorks: [3123,235,12]
+            artWorks: [3123,129885,129887]
         },
     ]
 })
@@ -81,14 +81,14 @@ function readyACB(snap) {
 }
 
 function modelToPersistenceForMyCollections() {
-    const selectedCollections = useSelector(state => state.myCollections.collectionsArray);
-    console.log("THIS IS SELECTER", selectedCollections);
-    set(myCollectionsRef, selectedCollectionsArray1);
+    //const selectedCollections = useSelector(state => state.myCollections.collectionsArray);
+    //console.log("THIS IS SELECTER", selectedCollections);
+    //set(myCollectionsRef, selectedCollectionsArray1);
 }
 
 function modelToPersistenceForMyJournals() {
-    const selectedJournalEntries = useSelector(state => state.journalsSlice.entries);
-    set(myJournalsRef, selectedJournalEntries);
+    //const selectedJournalEntries = useSelector(state => state.journalsSlice.entries);
+    //set(myJournalsRef, selectedJournalEntries);
 }
 
     /**
