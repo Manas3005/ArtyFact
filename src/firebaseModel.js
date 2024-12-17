@@ -112,28 +112,52 @@ function modelToPersistence(state) {
     return send;
  }
 
- function persistenceToModelForMyCollection(collections , dispatchHook) {
-    //dispatches here , set action in collection slice
-    //In this function we have to set the state via reducers, in my case, collectionsArray.
-    console.log("These are the collections in persistenceToModelForMyCollection", collections);
-    const newArray = [...collections.collectionsArray].map((collection) => {
-        collection.artWorks.forEach(id => {
-            console.log(id);
-            getArtWorkByID(id).then((result) =>  {
-                console.log("This is the result from the call", result);
-                //Vi vill kanske store:a hela objektet i application state?
-                //Eller vill vi endast store:a en del av objekten?
-                const artistName = result.artist_title;
-                const artworkTitle = result.title;
-                const image_id = result.image_id;
-                const dateInterval = extractDateInterval(result.artist_display) ? extractDateInterval(result.artist_display): "";
-                console.log("The date interval", dateInterval, "for ", result.artist_display);
+ /**
+  * Denna funktion ska omvandla data från firebase till objekt som vi ska spara i store.
+  * Hur ska dessa objekt se ut?
+  * Vi vill spara det som är relevant för collections.
+  * För varje collection-item (alltså en artWork) vill vi returnera/skapa ett obejtk för den artWorken.
+  * collectionsArray: [
+  *                                     
+  * ]
+  * 
+  */
+ async function persistenceToModelForMyCollection(collections, dispatchHook) {
+    const artWorkPromises = collections.collectionsArray.flatMap((collection) =>
+        collection.artWorks.map(async (id) => {
+            try {
+                const result = await getArtWorkByID(id);
+                const dateInterval = extractDateInterval(result.data.artist_display) || "";
+                return {
+                    artWork_id: id,
+                    artistName: result.data.artist_title,
+                    artWorkTitle: result.data.title,
+                    image_id: result.data.image_id,
+                    artistDate: dateInterval,
+                };
+            } catch (error) {
+                console.error(`There was an error fetching artwork ID ${id}, perhaps it doesn't exist:`, error);
+                return null;
             }
-        );
-        });
-        console.log("This is a collection that i have read from firebase", collection);
-    });
- }
+        })
+    );
+    const settledPromises = await Promise.allSettled(artWorkPromises);
+    console.log("These are the settled promises", settledPromises);
+    //result.status === "fulfilled" is not really needed it seems as even the empty ones are fulfilled, but you never know.
+    const artWorks = settledPromises.filter((result) => result.status === "fulfilled" && result.value !== null).map((result) => result.value);
+    console.log("Fully resolved artWorks array", artWorks);
+    /**
+     * Perhaps we don't really want to return the artWorks, but instead we would like to persist this data in the store?
+     * In that case, how should we do so?
+     * Well we can say for sure that we need to persist it to the store, so we need to dispatch the collectionsArray action
+     * with the artWorks array.
+     * Let's try it out.
+     */
+    dispatchHook(setCollectionsArray(artWorks));
+    return artWorks;
+}
+
+
  
 
  function persistenceToModelForMyJournals(journalEntries, dispatchHook){
@@ -147,7 +171,7 @@ function modelToPersistence(state) {
 
  function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
     persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook)
-    persistenceToModelForMyCollection(firebaseData.collections, dispatchHook);
+    persistenceToModelForMyCollection(firebaseData.collections, dispatchHook).then((result) =>  result);
     /**
      * Would call upon different functions with persistenceToModelforMyCollection(firebaseData.myCollection)
      *                                          persistenceToModelforMyJournal(firebaseData.myJournal)
