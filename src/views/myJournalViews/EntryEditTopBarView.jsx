@@ -1,5 +1,6 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
+import { conditionalRenderHelperCB } from "../../utilities"
 
 export function EntryEditTopBarView(props){
 
@@ -19,42 +20,25 @@ export function EntryEditTopBarView(props){
     }
 
     function renderBackButtonTitleACB (){
-        if (props.entryID === null){ //when adding new entry
-            return "Back To My Journals"
-        } else {
-            return "Back To Journal Entry"
-        }
+        return conditionalRenderHelperCB(props.entryID, "Back To My Journals", "Back To Journal Entry")
+
     }
     function renderPageTitleACB (){
-        if (props.entryID === null){ //when adding new entry
-            return "Add New Journal Entry"
-        } else {
-            return "Edit Journal Entry"
-        }
+        return conditionalRenderHelperCB(props.entryID, "Add New Journal Entry", "Edit Journal Entry")
     }
 
     function renderSaveChangesIconACB (){
-        if (props.entryID === null){ //when adding new entry
-            return "/image/plusIcon.png"
-        } else {
-            return "/image/saveIcon.png"
-        }
+        return conditionalRenderHelperCB(props.entryID, "/image/plusIcon.png", "/image/saveIcon.png")
     }
 
     function renderPageTitleACB (){
-        if (props.entryID === null){ //when adding new entry
-            return "Add New Journal Entry"
-        } else {
-            return "Edit Journal Entry"
-        }
+        return conditionalRenderHelperCB(props.entryID, "Add New Journal Entry", "Edit Journal Entry")
+
     }
 
     function renderSaveTextACB (){
-        if (props.entryID === null){ //when adding new entry
-            return "Save Entry"
-        } else {
-            return "Save Changes"
-        }
+        return conditionalRenderHelperCB(props.entryID, "Save Entry", "Save Changes")
+
     }
     
     return (

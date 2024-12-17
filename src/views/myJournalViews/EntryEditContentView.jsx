@@ -1,5 +1,6 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
+import { conditionalRenderHelperCB } from "../../utilities"
 
 export function EntryEditContentView(props){
 
@@ -16,19 +17,11 @@ export function EntryEditContentView(props){
     }
 
     function renderDeleteTextACB (){
-        if (props.entryID === null){ //when adding new entry
-            return "Cancel" 
-        } else{ 
-            return "Discard Changes"
-        }
+        return conditionalRenderHelperCB(props.entryID, "Cancel", "Discard Changes")
     }
 
     function renderDeleteIconACB (){
-        if (props.entryID === null){ //when adding new entry
-            return "/image/minusIcon.png"
-        } else {
-            return "/image/deleteIcon.png"
-        }
+        return conditionalRenderHelperCB(props.entryID, "/image/minusIcon.png", "/image/deleteIcon.png")
     }
     
     
