@@ -29,9 +29,21 @@ export const myJournalEntries = createSlice({
         },
         setSelectedEntryID: (state, action) => { //sets the selected entry ID, when a journal entry is clicked in the entry list
             state.selectedEntryID = action.payload
-        }
+        },
+        editEntry: (state,action) => {
+            return {...state, 
+                // creates a shallow copy of the entire state, and only edits the parts of the which are 
+                // changed, leaving the other parts of the state as it is 
+        
+            // sets edited entry to the entry that is currently selected, i.e. has the same id, then updates the entries array
+            //action.payload is the updated entry object 
+            entries: (state.entries.map((entry) => 
+            entry.entryID === action.payload.entryID ? action.payload : entry
+            ))}
+
+        }   
         }
     }
 )
 
-export const { addEntry, removeEntry, increaseLatestEntryID, setSelectedEntryID} = myJournalEntries.actions;
+export const { addEntry, removeEntry, increaseLatestEntryID, setSelectedEntryID, editEntry} = myJournalEntries.actions;

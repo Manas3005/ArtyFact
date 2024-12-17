@@ -39,7 +39,7 @@ export function EntryEditContentView(props){
 
                 <div className="titleAndDateDiv">
                    
-                    <input className="entryTitleTextBox commonText" placeholder="Journal Entry Title " onBlur={onEntryTitleChangeACB}></input>
+                    <input className="entryTitleTextBox commonText" value={props.inputTitle} placeholder="Journal Entry Title " onChange={onEntryTitleChangeACB}></input>
 
                     <div className="dateText commonText"> 
                         
@@ -54,14 +54,14 @@ export function EntryEditContentView(props){
 
                     <div>
 
-                        <input className="entryTextBox commonText" placeholder="Current Mood (Optional)" onBlur={onEntryMoodChangeACB}></input>
+                        <input className="entryTextBox commonText" value={props.inputMood} placeholder="Current Mood (Optional)" onChange={onEntryMoodChangeACB}></input>
 
                     </div>
                 </div>
 
                 <div className="journalEntryDiv">
 
-                    <textarea className="journalEntryContentTextBox commonText" placeholder="What are you thinking about? Start Typing here ..." onBlur={onEntryTextChangeACB}></textarea>
+                    <textarea className="journalEntryContentTextBox commonText" value={props.inputActualText} placeholder="What are you thinking about? Start Typing here ..." onChange={onEntryTextChangeACB}></textarea>
 
                 </div>
 

@@ -18,7 +18,7 @@
 }
 
 .saveChanges:hover, .backToHome:hover, .myJournalsMyCollections:hover, .addNewEntry:hover, 
-.backToMyJournals:hover, .addArtwork:hover, .deleteEntry:hover, .journalEntryListDiv:hover{
+.backToMyJournals:hover, .addArtwork:hover, .deleteEntry:hover, .journalEntryListDiv:hover, .editButton:hover{
     transform: translateY(-3px); 
     transition: all 0.3s ease;
     outline: none;  
@@ -400,4 +400,40 @@
 
 .topFlex.commonCenterFlex{
     flex:0.77;
+}
+
+.editButton.commonButtonBase {
+    right: 15px;                  
+
+    display: flex;                
+    align-items: center;          
+    gap: 10px;                    
+    padding: 10px;                               
+    background-color: white;
+    font-family: 'Jacques Francois';
+    color: black; 
+                
+}
+
+.editText.commonText{
+    font-size: 25px;
+    flex: 0.7;
+    font-size: 25px;                               
+}
+
+.contentFlexParent{
+    display:flex;  
+    flex-direction:row;
+  }
+    
+  .lastUpdatedLeft{
+    flex:0.9;
+  }
+  .lastUpdatedRight{
+    flex:0.1;
+  }
+
+  .editButton.commonButtonBase:hover {
+    background-color: rgb(16, 231, 224);  
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
 }

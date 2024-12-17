@@ -18,9 +18,24 @@ export function EntryContentView(props){
             <div className="leftContent commonText">
                 
                 <div>
-                    <div className="journalEntryContent">Last Updated: {props.lastUpdated}</div>
+                    <div className="contentFlexParent">
+
+                    <span className="lastUpdatedLeft">   
+                        <div className="journalEntryContent">Last Updated: {props.lastUpdated}</div>
+                    </span> 
+
+                    <div className="lastUpdatedRight">
+
+                        <button className="editButton commonButtonBase" onClick={handleEditEntryClickedACB}>
+                            <img className="Icon" src = "/image/editIcon.png" />
+                            <text className="editText commonText">Edit</text>
+                        </button>
+
+                    </div>
+
+                    </div>
                     <div className="journalEntryContent">Mood: {props.mood}</div>
-                    <button onClick={handleEditEntryClickedACB}>Edit</button>
+
                 </div>
 
                 <div className="scrollableTextArea">
