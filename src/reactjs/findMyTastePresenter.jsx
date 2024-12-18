@@ -1,5 +1,4 @@
 import { FindMyTasteTopBarView } from "../views/findMyTastePageViews/findMyTasteTopBarView"
-import { DreamArtDescView } from "../views/findMyTastePageViews/dreamArtDescView"
 import { ArtQuizView } from "../views/findMyTastePageViews/artQuizView"
 import { useState } from "react";
 import { getArtWorksSearch, getArtWorkByID, getArtWorkImageModified, fetchAllArtworks, fetchFourtyArtworks} from '/src/apiCall.js';
@@ -310,7 +309,7 @@ export function FindMyTaste(props){
                                        onArtQuizButtonClicked = {setArtQuizViewACB}              
                 ></FindMyTasteTopBarView> 
         
-                {currentView === 'describe' ? (<DreamArtDescView/>) : (<ArtQuizView 
+                <ArtQuizView 
                                                                         onNextButtonClicked = {incrementQuizProgressACB}
                                                                         onPreviousButtonClicked = {decrementQuizProgressACB}
                                                                         onArtistSelected = {selectArtistACB}
@@ -345,6 +344,6 @@ export function FindMyTaste(props){
                                                                         artistsOptions = {artistsOptions}
                                                                         styleOptions = {styleOptions}
                                                                         mediumOptions = {mediumOptions}
-                                                                        />)}
+                                                                        />
             </div>)
 }
