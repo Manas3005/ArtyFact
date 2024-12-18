@@ -27,7 +27,7 @@ function SearchResult(props) {
   useEffect(() => {
     async function fetchArtworks() {
       try {
-        const data = await getArtWorksSearch(searchparams);
+        const data = await getArtWorksSearch(searchParam1);
         setArtData(data);
       } catch (err) {
         setError(err.message);
