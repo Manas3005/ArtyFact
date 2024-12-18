@@ -18,6 +18,7 @@ export const myCollections = createSlice({
         },
         setCollectionsArray: (state, action) => {
             console.log("This is the payload", action.payload);
+            console.log("This is the type", action.type);
             state.collectionsArray = action.payload;
             console.log("This is the collections array after storing", state.collectionsArray);
         },

@@ -3,6 +3,8 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, set } from "firebase/database";
 import { setEntries } from "./store/journalsSlice";
 import { setSearchQuery, setCollectionsArray } from "./store/collectionsSlice";
+import { listenerMiddleware } from "./middleware.js";
+
 
 import "./apiCall";
 import "./utilities"
@@ -264,6 +266,23 @@ if(state.ready){ // check if the state is ready, however this will be checked wh
         //watchFunction(isChangedACB, sideEffectACB);
         //useEffect(whatHappensAfterChangeACB, [state.numberOfGuests, state.currentDishId, [...state.dishes]])
         console.log("We are her1e", state.getState());
+        console.log("the ttttt", setCollectionsArray.type);
+
+        listenerMiddleware.startListening({
+            type: setCollectionsArray.type, 
+            effect(action, store){  
+              console.log("There has been a change in the store:", action.payload, state.getState());
+              console.log("The change was: ", action.payload);
+              console.log("This is the new state", store.getState());
+            }
+          })
+
+          /**
+           * If we want to scale this and listen to other data in the store, we simply add another kind of "setCollectionsArray.type" in an array of type
+           * Similarly, if we want to perform some actions based on what actually took place then we can use switch cases to match the action type.
+           */
+          dispatchHook(setCollectionsArray({ payload: "Some test data" }));
+          console.log("test");
     });
 
     function isChangedACB(){  
@@ -274,7 +293,7 @@ if(state.ready){ // check if the state is ready, however this will be checked wh
     }
      
     
-     function whatHappensAfterChangeACB() {
+     function whatHappensAfterChangeACB () {
         // we want to save changes to firebase if we have changes
           
         return saveToFirebase(state);

@@ -5,6 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { myCollections} from "./store/collectionsSlice";
 import "./firebaseModel.js";
 import { myJournalEntries } from "./store/journalsSlice";
+import { listenerMiddleware } from "./middleware.js";
 
 
 import { findMyTaste } from "./store/findMyTasteSlice";
@@ -21,8 +22,10 @@ export const store = configureStore({
         //artWorks: artWorks.reducer,
         //journalEntryName: journalEntryName.reducer,
         //journalEntryImage: journalEntryName.reducer
-    }
-        
+    },
+    middleware(getDefaultMiddleware){ //Credit: Cristian Bogdan stackblitzz
+        return getDefaultMiddleware().prepend(listenerMiddleware.middleware)
+      },        
     },
 )
 
