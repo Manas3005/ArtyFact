@@ -21,8 +21,10 @@ export function FindMyTaste(props){
     const [selectedArtists, setSelectedArtists ] = useState([]); /*component state used here to keep track of the selected choices for artists
     (only needed until the quiz session lasts hence not application state)*/
     const [selectedStyles, setSelectedStyles] = useState([]);
-    const [resultsReady, setResultsReady] = useState(false);
-    
+    const [selectedMediums, setSelectedMediums] = useState([]);
+
+    //YET TO ADD CODE COMMENTS FOR VARIABLES BELOW
+
     const [imageByArtistsURLs, setImageByArtistsURLs] = useState([]);
     const [artTitlesByArtists, setArtTitlesByArtists] = useState([]);
     const [artistTitlesByArtists, setArtistTitlesByArtists] = useState([]);
@@ -31,19 +33,31 @@ export function FindMyTaste(props){
     const [artTitlesByStyles, setArtTitlesByStyles] = useState([]);
     const [artistTitlesByStyles, setArtistTitlesByStyles] = useState([]);
     const [styleTitles, setStyleTitles] = useState([]);
+
+    const [imageByMediumsURLs, setImageByMediumsURLs] = useState([]);
+    const [artTitlesByMediums, setArtTitlesByMediums] = useState([]);
+    const [artistTitlesByMediums, setArtistTitlesByMediums] = useState([]);
+    const [mediumTitles, setMediumTitles] = useState([]);
     
+    const [resultsReady, setResultsReady] = useState(false);
     const [quizCompleted, setQuizCompleted] = useState(false);
+    
     const [artistsOptions, setArtistsOptions] = useState([]);
     const [styleOptions, setStyleOptions] = useState([]);
+    const [mediumOptions, setMediumOptions] = useState([]);
 
     useEffect(() => {
     
         fetchAllArtworks().then(function (data) {
             const artists = data.data.map((artwork) => artwork.artist_title);
             const styles = data.data.map((artwork) => artwork.style_title);
-            const filteredStyles = []
-            const filteredArtists = [];
+            const mediums = data.data.map((artwork) => artwork.classification_title);
             
+            const filteredStyles = [];
+            const filteredArtists = [];
+            const filteredMediums = [];
+            
+            //The checks below are really important otherwise duplicate options appear (tested)
             artists.forEach((artist) => { //this is done so if similar artworks have the same artists, they are not repeated as the options
                 if (artist && !filteredArtists.includes(artist)) {
                   filteredArtists.push(artist);
@@ -51,14 +65,23 @@ export function FindMyTaste(props){
                 
             });
 
-            styles.forEach((style) => { //this is done so if similar artworks have the same artists, they are not repeated as the options
+            styles.forEach((style) => { 
                 if (style && !filteredStyles.includes(style)) {
                   filteredStyles.push(style);
                 }
                 
             });
+
+            mediums.forEach((medium) => {  
+                if (medium && !filteredMediums.includes(medium)) {
+                  filteredMediums.push(medium);
+                }
+                
+            });
+
             setArtistsOptions(filteredArtists); 
             setStyleOptions(filteredStyles);
+            setMediumOptions(filteredMediums);
         })
         .catch((error) =>
             console.error("Error fetching options", error)
@@ -84,6 +107,10 @@ export function FindMyTaste(props){
     
     function selectStyleACB(style) {
         toggleSelection(style, selectedStyles, setSelectedStyles);
+    }
+
+    function selectMediumACB(medium){
+        toggleSelection(medium, selectedMediums, setSelectedMediums);
     }
 
     
@@ -128,32 +155,52 @@ export function FindMyTaste(props){
         setQuizCompleted(true);
         fetchAndProcessArtworks(
             selectedStyles, 
-            (currentStyle) => ({ style_title: currentStyle }), //construct search params for artists
-            filterAndSetResultsACB, //callback to process the filtered data
+            (currentStyle) => ({ style_title: currentStyle }), 
+            filterAndSetResultsACB, 
             "styles"
         );
     }
 
+    function getArtworksByMediumsACB() {
+        setQuizCompleted(true);
+        fetchAndProcessArtworks(
+            selectedMediums, 
+            (currentMedium) => ({ classification_title: currentMedium }), 
+            filterAndSetResultsACB, 
+            "mediums"
+        );
+    }
 
 
     function getArtworksByResponsesACB(){
         getArtworksByArtistsACB();
         getArtworksByStylesACB();
+        getArtworksByMediumsACB();
     }
 
                 
 
-    function filterAndSetResultsACB(allArtworkData, filterType) { //this filters the artworks to keep only the artworks by the currentArtist in selectedArtists and retrieve its image URL
+    function filterAndSetResultsACB(allArtworkData, filterType) { //this filters the artworks to keep only the artworks by the currentItem in selectedItms and retrieve its image URL
             
+        //Temporary arrays that can be filtered on and then the actual array (component state) is set to these temp arrays 
+        
+        //The filteredArtworks are taken and mapped to their image URLs through a function in apiCall.js
+
         const newArtistImageURLs = [];
         const newArtistImageTitles = [];
+        const newArtistTitlesByArtists = [];
 
         const newStyleImageURLs = [];
         const newStyleImageTitles = [];
-
-        const newArtistTitlesByArtists = [];
         const newArtistTitlesByStyles = [];
         const newStyleTitles = []
+
+        const newMediumImageURLs = [];
+        const newMediumImageTitles = [];
+        const newArtistTitlesByMediums = [];
+        const newMediumTitles = []
+
+
 
         
         if (filterType === "artists"){ //this check is done so the filtering by filteredStyleArtworks is not populated for artworks that are meant to be filtered by artists
@@ -197,7 +244,7 @@ export function FindMyTaste(props){
               const artistTitle = artwork.artist_title;
               const styleTitle = artwork.style_title;
   
-              if (!newArtistImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again as duplicate artworks from the same artist from the API can lead to this
+              if (!newStyleImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again as duplicate artworks from the same artist from the API can lead to this
                   newStyleImageURLs.push(imageURL);
                   newStyleImageTitles.push(imageTitle);
                   newArtistTitlesByStyles.push(artistTitle);
@@ -214,14 +261,43 @@ export function FindMyTaste(props){
             setArtistTitlesByStyles(newArtistTitlesByStyles);
             setStyleTitles(newStyleTitles);
             
-            setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
+            
 
+        } else if (filterType === "mediums"){
+
+          const filteredMediumArtworks = allArtworkData.filter(function (artwork) {
+              return selectedMediums.includes(artwork.classification_title);
+          });
+  
+          console.log("FILTERED ARTWORKS BY MEDIUMS: ", filteredMediumArtworks); 
+  
+  
+          filteredMediumArtworks.forEach(function (artwork) {
+              const imageURL = getArtWorkImageModified(artwork.image_id); //using the function from apiCall.js to get the imageURL
+              const imageTitle = artwork.title;         //same process as above but for the image titles
+              const artistTitle = artwork.artist_title;
+              const mediumTitle = artwork.classification_title;
+  
+              if (!newMediumImageURLs.includes(imageURL)) { //this is to ensure that the same URL is not appended again as duplicate artworks from the same artist from the API can lead to this
+                  newMediumImageURLs.push(imageURL);
+                  newMediumImageTitles.push(imageTitle);
+                  newArtistTitlesByMediums.push(artistTitle);
+                  newMediumTitles.push(mediumTitle);
+  
+              }
+            
+            });
+          console.log("IMAGE URLS FOR ART BY STYLES: ", newMediumImageURLs) //for debugging
+  
+  
+          setImageByMediumsURLs(newMediumImageURLs);
+          setArtTitlesByMediums(newMediumImageTitles);
+          setArtistTitlesByMediums(newArtistTitlesByMediums);
+          setMediumTitles(newMediumTitles);
+          setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
         }
         
-        //these are temporary arrays that can be filtered on and then the actual array (component state) is set to these temp arrays 
-        
-        //the filteredArtworks are taken and mapped to their image URLs through a function in apiCall.js
-
+    
     }
 
 
@@ -238,12 +314,14 @@ export function FindMyTaste(props){
                                                                         onPreviousButtonClicked = {decrementQuizProgressACB}
                                                                         onArtistSelected = {selectArtistACB}
                                                                         onStyleSelected = {selectStyleACB}
+                                                                        onMediumSelected = {selectMediumACB}
                                                                         onSubmitButtonClicked = {getArtworksByResponsesACB}
                                                                         onBackToQuizButtonClicked = {setResultsBackToPendingACB}
                                                                         
                                                                         updatedProgress = {updatedProgress} //passing down the updated progress to the ArtQuiz view
                                                                         selectedArtists = {selectedArtists} 
                                                                         selectedStyles = {selectedStyles}
+                                                                        selectedMediums = {selectedMediums}
 
                                                                         artTitlesByArtists = {artTitlesByArtists}
                                                                         artistTitlesByArtists = {artistTitlesByArtists}
@@ -253,11 +331,18 @@ export function FindMyTaste(props){
                                                                         artistTitlesByStyles = {artistTitlesByStyles}
                                                                         imageByStylesURLs = {imageByStylesURLs}
                                                                         styleTitles = {styleTitles}
+
+                                                                        artTitlesByMediums = {artTitlesByMediums}
+                                                                        artistTitlesByMediums = {artistTitlesByMediums}
+                                                                        imageByMediumsURLs = {imageByMediumsURLs}
+                                                                        mediumTitles = {mediumTitles}
                                                                         
                                                                         resultsReady = {resultsReady}
                                                                         quizCompleted = {quizCompleted}
+                                                                        
                                                                         artistsOptions = {artistsOptions}
                                                                         styleOptions = {styleOptions}
+                                                                        mediumOptions = {mediumOptions}
                                                                         />)}
             </div>)
 }

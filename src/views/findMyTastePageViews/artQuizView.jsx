@@ -1,7 +1,6 @@
 import "/src/css/findMyTasteStyle.css";
 
 import LinearWithValueLabel from "../ThirdPartyWrittenComponents/LinearProgressWithLabel"
-import { useState } from "react";
 
 
 export function ArtQuizView (props){
@@ -15,8 +14,14 @@ export function ArtQuizView (props){
     const imageByStylesURLs = props.imageByStylesURLs;
     const styleTitles = props.styleTitles;
 
+    const artTitlesByMediums = props.artTitlesByMediums;
+    const artistTitlesByMediums = props.artistTitlesByMediums;
+    const imageByMediumsURLs = props.imageByMediumsURLs;
+    const mediumTitles = props.mediumTitles;
+
     const selectedStyles = props.selectedStyles;
     const selectedArtists = props.selectedArtists;
+    const selectedMediums = props.selectedMediums;
 
     const updatedProgress = props.updatedProgress;
     const resultsReady = props.resultsReady;
@@ -25,6 +30,8 @@ export function ArtQuizView (props){
     const quizCompleted = props.quizCompleted;
     const artistsOptions = props.artistsOptions;
     const styleOptions = props.styleOptions;
+    const mediumOptions = props.mediumOptions;
+    
 
 
     function handleNextClickACB(){
@@ -47,6 +54,12 @@ export function ArtQuizView (props){
       console.log("SELECTED STYLE", style)
     }
 
+    function handleMediumChoiceSelectionACB(medium){
+      props.onMediumSelected(medium);
+      console.log("SELECTED STYLE", medium)
+    }
+
+
 
     function handleSubmitClickACB(){ //firing custom event to fetch art by selectedArtists 
         props.onSubmitButtonClicked(selectedArtists);
@@ -58,6 +71,8 @@ export function ArtQuizView (props){
     }
 
 
+
+    //THE RENDER OPTIONS METHODS BELOW CAN POSSIBLY BE SIMPLIFIED TO A REUSABLE FUNCTION
     function renderArtistOptions() {
 
       return artistsOptions.map(function organizeAsOptionCB(artist) {
@@ -82,21 +97,43 @@ export function ArtQuizView (props){
 
     function renderStyleOptions() {
 
-      return styleOptions.map(function organizeAsOptionCB(color) {
-      const isSelected = selectedStyles.includes(color)
+      return styleOptions.map(function organizeAsOptionCB(style) {
+      const isSelected = selectedStyles.includes(style)
         
       return (
         <button
-            key={color}
+            key={style}
             className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
-            onClick={function() { handleStyleChoiceSelectionACB(color); }}
+            onClick={function() { handleStyleChoiceSelectionACB(style); }}
         >
             <input
                 type="checkbox"
                 readOnly
                 checked={isSelected}
             />
-            {color}
+            {style}
+        </button>
+      );
+      });
+    }
+
+    function renderMediumOptions() {
+
+      return mediumOptions.map(function organizeAsOptionCB(medium) {
+      const isSelected = selectedMediums.includes(medium)
+        
+      return (
+        <button
+            key={medium}
+            className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
+            onClick={function() { handleMediumChoiceSelectionACB(medium); }}
+        >
+            <input
+                type="checkbox"
+                readOnly
+                checked={isSelected}
+            />
+            {medium}
         </button>
       );
       });
@@ -163,7 +200,10 @@ export function ArtQuizView (props){
 
               return (
                 <div>
-                  <div> What color would you like your art to be dominated with? </div>
+                  <div> The medium of an artwork is important because it reveals how the piece was created, highlights its artistic or technical qualities, and determines its preservation needs. What mediums interest you?</div>
+                  <div className="favoriteArtistsContainer">
+                  {renderMediumOptions()}
+                  </div>
                   <div>
                     <button
                       onClick={handlePreviousClickACB}
@@ -272,6 +312,7 @@ export function ArtQuizView (props){
             <div>
 
               <div>We think you will like these artworks...</div>
+
               <div className = "gap"></div>
 
               <div>Based on your favorite artists</div>
@@ -315,11 +356,30 @@ export function ArtQuizView (props){
                   </div>
                 ))}
 
-
               </div>
 
 
-              
+              <div className = "gap"></div>
+              <div>Based on the mediums you liked</div>
+
+              <div className="resultsContainer">
+
+                {imageByMediumsURLs.map((url, index) => (
+                  <div key={index} className="resultItem">
+                    <img
+                      src={url}
+                      className="resultImage"
+                      alt={` Couldn't fetch Artwork ${index + 1}`}
+                    />
+                    <div className="artDetails">
+                      <div className="artTitle">{artTitlesByMediums[index]}</div>
+                      <div className="artistTitle">by {artistTitlesByMediums[index]}</div>
+                      <div className="artistTitle">Medium: {mediumTitles[index]}</div>
+                    </div>
+                  </div>
+                ))}
+
+              </div>
 
               <button
                 onClick={handleBackToQuizACB}
