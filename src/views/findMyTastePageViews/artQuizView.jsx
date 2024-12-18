@@ -140,6 +140,105 @@ export function ArtQuizView (props){
     }
 
 
+    function renderArtByArtistsACB(){
+      if(selectedArtists.length!==0){
+        return (
+        <div>
+
+          <div className = "gap"></div>
+
+            <div>Based on your favorite artists</div>
+            <div className="resultsContainer">
+
+
+              {imageByArtistsURLs.map((url, index) => (
+                <div key={index} className="resultItem">
+                  <img
+                    src={url}
+                    className="resultImage"
+                    alt={` Couldn't fetch Artwork ${index + 1}`}
+                  />
+                  <div className="artDetails">
+                    <div className="artTitle">{artTitlesByArtists[index]}</div>
+                    <div className="artistTitle">by {artistTitlesByArtists[index]}</div>
+                  </div>
+                </div>
+              ))}
+
+
+            </div>  
+
+          </div>
+          )
+      }
+    }
+
+
+    function renderArtByStylesACB(){
+      if(selectedStyles.length!==0){
+        return (
+        <div>
+              <div className = "gap"></div>
+              <div>Based on your preferred styles</div>
+              <div className="resultsContainer">
+
+
+                {imageByStylesURLs.map((url, index) => (
+                  <div key={index} className="resultItem">
+                    <img
+                      src={url}
+                      className="resultImage"
+                      alt={` Couldn't fetch Artwork ${index + 1}`}
+                    />
+                    <div className="artDetails">
+                      <div className="artTitle">{artTitlesByStyles[index]}</div>
+                      <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
+                      <div className="artistTitle">Style: {styleTitles[index]}</div>
+                    </div>
+                  </div>
+                ))}
+
+              </div>
+
+          </div>
+          )
+      }
+    }
+
+
+    function renderArtByMediumACB(){
+
+      if(selectedMediums.length!==0){
+        return (
+        <div>
+              <div className = "gap"></div>
+              <div>Based on the mediums you liked</div>
+
+              <div className="resultsContainer">
+
+                {imageByMediumsURLs.map((url, index) => (
+                  <div key={index} className="resultItem">
+                    <img
+                      src={url}
+                      className="resultImage"
+                      alt={` Couldn't fetch Artwork ${index + 1}`}
+                    />
+                    <div className="artDetails">
+                      <div className="artTitle">{artTitlesByMediums[index]}</div>
+                      <div className="artistTitle">by {artistTitlesByMediums[index]}</div>
+                      <div className="artistTitle">Medium: {mediumTitles[index]}</div>
+                    </div>
+                  </div>
+                ))}
+
+              </div>
+
+          </div>
+          )
+      }
+    }
+
+
 
     function renderQuizACB() {
 
@@ -315,74 +414,10 @@ export function ArtQuizView (props){
 
               <div>We think you will like these artworks...</div>
 
-              <div className = "gap"></div>
-
-              <div>Based on your favorite artists</div>
-              <div className="resultsContainer">
-
-                
-                {imageByArtistsURLs.map((url, index) => (
-                  <div key={index} className="resultItem">
-                    <img
-                      src={url}
-                      className="resultImage"
-                      alt={` Couldn't fetch Artwork ${index + 1}`}
-                    />
-                    <div className="artDetails">
-                      <div className="artTitle">{artTitlesByArtists[index]}</div>
-                      <div className="artistTitle">by {artistTitlesByArtists[index]}</div>
-                    </div>
-                  </div>
-                ))}
-
-
-              </div>  
-
-              <div className = "gap"></div>
-              <div>Based on your preferred styles</div>
-              <div className="resultsContainer">
-
-
-                {imageByStylesURLs.map((url, index) => (
-                  <div key={index} className="resultItem">
-                    <img
-                      src={url}
-                      className="resultImage"
-                      alt={` Couldn't fetch Artwork ${index + 1}`}
-                    />
-                    <div className="artDetails">
-                      <div className="artTitle">{artTitlesByStyles[index]}</div>
-                      <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
-                      <div className="artistTitle">Style: {styleTitles[index]}</div>
-                    </div>
-                  </div>
-                ))}
-
-              </div>
-
-
-              <div className = "gap"></div>
-              <div>Based on the mediums you liked</div>
-
-              <div className="resultsContainer">
-
-                {imageByMediumsURLs.map((url, index) => (
-                  <div key={index} className="resultItem">
-                    <img
-                      src={url}
-                      className="resultImage"
-                      alt={` Couldn't fetch Artwork ${index + 1}`}
-                    />
-                    <div className="artDetails">
-                      <div className="artTitle">{artTitlesByMediums[index]}</div>
-                      <div className="artistTitle">by {artistTitlesByMediums[index]}</div>
-                      <div className="artistTitle">Medium: {mediumTitles[index]}</div>
-                    </div>
-                  </div>
-                ))}
-
-              </div>
-
+              {renderArtByArtistsACB()}
+              {renderArtByStylesACB()}
+              {renderArtByMediumACB()}
+              
               <button
                 onClick={handleBackToQuizACB}
                 className="quizBackButton"
