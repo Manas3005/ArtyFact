@@ -28,7 +28,7 @@ export function TopBarView(props){
     function handleEnterKey(evt) {
         if(evt.which == "13") { 
             
-        props.onSearchInitated
+        props.onSearched(evt.target.value)    
         console.log("--------------------- This is the evt",evt.target.value)
         console.log(" PROPS IN TOPBAR",props)
         console.log("button has been pressed")

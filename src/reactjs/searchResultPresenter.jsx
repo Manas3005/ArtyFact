@@ -16,7 +16,6 @@ function SearchResult(props) {
   };
   const searchParam1 = useSelector((state) => state.searchResults.searchParam);
   console.log("SEARCHPARAM",searchParam1)
-  console.log("presenter props",props)
 
   const dispatch = useDispatch();
 

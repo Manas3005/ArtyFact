@@ -6,9 +6,27 @@ import {cleanHtmlContent } from '/src/utilities.js'
 import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
 
+import { useDispatch } from "react-redux"; // this is for the searched 
 
+import {setNewSearchParam} from "/src/store/searchResultSlice.js";
 
 function HomePage(props){
+
+
+    // here will be the logic for updating the searchReusltSlice 
+
+    
+    const dispatch = useDispatch()
+
+    function updateCurrentSearch(setParam){
+
+        dispatch(setNewSearchParam(setParam)) 
+
+    }
+
+
+
+
 
     //Redux specific hooks
     //const selector = useSelector(); //Allows you to observe the latest data in the store (model)
@@ -51,12 +69,16 @@ function HomePage(props){
     console.log("The image URL:", image);
    
     return <div>
-        <TopBarView> </TopBarView>
+        <TopBarView
+        onSearched={updateCurrentSearch}
+        />
+
         <ExploreBodyView> </ExploreBodyView>
         <ArtDescBodyView 
                 artData={randomArt} 
                 image={image}
                 description={cleanedDescription}
+                
                 />
         </div>
 }
