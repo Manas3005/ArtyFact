@@ -25,9 +25,9 @@ export function ArtQuizView (props){
 
     const updatedProgress = props.updatedProgress;
     const resultsReady = props.resultsReady;
-    
-    //const artistsOptions = ["Tanaka Atsuko", "Diego Rivera", "Alma Thomas", "Kerry James Marshall", "Joan Mitchell", "Aztec (Mexica)", "Gustave Caillebotte", "Georges Seurat", "Vincent van Gogh", "Richard Earlom"]
     const quizCompleted = props.quizCompleted;
+    const quizReady = props.quizReady;
+
     const artistsOptions = props.artistsOptions;
     const styleOptions = props.styleOptions;
     const mediumOptions = props.mediumOptions;
@@ -142,6 +142,8 @@ export function ArtQuizView (props){
 
 
     function renderQuizACB() {
+
+      if(quizReady){
 
       if (updatedProgress === 0) {
 
@@ -392,7 +394,21 @@ export function ArtQuizView (props){
         }
 
       }
+    } else {
+      return (
+        <div style={{ textAlign: 'center' }}>
 
+            <img 
+            src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXE2bW5xbjBzcnk3eHdtMmIzdXBjczRobnBqbXR6b3RtemJtdjNjeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3nWhI38IWDofyDrW/giphy.gif" 
+            className="quizCompleted" 
+            alt="Loading Art Quiz" 
+            />
+
+            <p>Loading Quiz</p>
+
+        </div>
+      )
+    }
     }
     
     return (

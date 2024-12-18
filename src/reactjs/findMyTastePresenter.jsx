@@ -39,6 +39,7 @@ export function FindMyTaste(props){
     const [artistTitlesByMediums, setArtistTitlesByMediums] = useState([]);
     const [mediumTitles, setMediumTitles] = useState([]);
     
+    const [quizReady, setQuizReady] = useState(false);
     const [resultsReady, setResultsReady] = useState(false);
     const [quizCompleted, setQuizCompleted] = useState(false);
     
@@ -47,7 +48,7 @@ export function FindMyTaste(props){
     const [mediumOptions, setMediumOptions] = useState([]);
 
     useEffect(() => {
-    
+        setQuizReady(false);
         fetchAllArtworks().then(function (data) {
             const artists = data.data.map((artwork) => artwork.artist_title);
             const styles = data.data.map((artwork) => artwork.style_title);
@@ -82,9 +83,9 @@ export function FindMyTaste(props){
             setArtistsOptions(filteredArtists); 
             setStyleOptions(filteredStyles);
             setMediumOptions(filteredMediums);
-        })
+        }).then(setQuizReady(true))
         .catch((error) =>
-            console.error("Error fetching options", error)
+            console.error("Error fetching quiz", error)
         );
     } , []);
 
@@ -337,6 +338,7 @@ export function FindMyTaste(props){
                                                                         imageByMediumsURLs = {imageByMediumsURLs}
                                                                         mediumTitles = {mediumTitles}
                                                                         
+                                                                        quizReady = {quizReady}
                                                                         resultsReady = {resultsReady}
                                                                         quizCompleted = {quizCompleted}
                                                                         
