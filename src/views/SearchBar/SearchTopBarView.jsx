@@ -3,7 +3,7 @@ import { URLParamsForImage } from "/src/apiCall.js";
 export function SearchTopBar(props) {
 
   console.log("THIS IS THE PROPS THAT IS SENT TO VIEW",props)
-  const { artworks, artImages, onSearchInitiated } = props;
+  const { artworks, artInfo, onSearchInitiated } = props;
   const allData = artworks.data;
 
   function eventHandlerForHomeClickACB() {
@@ -11,8 +11,8 @@ export function SearchTopBar(props) {
   }
 
   function renderSearchResultsCB(result) {
-    const image_id = artImages[result.id]; // Get image_id from props
-
+    const foundInformation = artInfo[result.id]; // Get image_id from props
+    
     function onClickImageEventACB() {
       console.log("Image has been clicked for:", result.id);
       window.location.hash = "#/searchChoosen";
@@ -20,9 +20,9 @@ export function SearchTopBar(props) {
 
     return (
       <div key={result.id}>
-        {image_id ? (
+        {foundInformation ? (
           <img
-            src={URLParamsForImage(image_id)}
+            src={URLParamsForImage(foundInformation.image_id)}
             height="200"
             onClick={onClickImageEventACB}
             alt={result.title}

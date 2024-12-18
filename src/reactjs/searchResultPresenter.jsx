@@ -7,13 +7,14 @@ import { useDispatch } from "react-redux";
 function SearchResult(props) {
   const search = useSelector((state) => state.searchResults.results);
   const [artData, setArtData] = useState(null); // For main artworks data
-  const [artImages, setArtImages] = useState({}); // For image_id mapping
+  const [artInfo, setArtInformation] = useState({}); // For art Information mapping
   const [error, setError] = useState(null);
 
-  const searchparams = {
+  const searchparams = { // this is for testing 
     title: "Two Sisters",
     limit: 40,
   };
+
   const searchParam1 = useSelector((state) => state.searchResults.searchParam);
   console.log("SEARCHPARAM",searchParam1)
 
@@ -29,6 +30,7 @@ function SearchResult(props) {
       try {
         const data = await getArtWorksSearch(searchParam1);
         setArtData(data);
+        console.log("CHECK IT OUT",data)
       } catch (err) {
         setError(err.message);
       }
@@ -39,38 +41,65 @@ function SearchResult(props) {
   // Fetch image_id for each artwork
   useEffect(() => {
     async function fetchImageIDs() {
+
       if (!artData || !artData.data) return;
 
       try {
         const results = await Promise.all(
           artData.data.map(async (artwork) => {
             const data = await getArtWorkByID(artwork.id);
-            return { id: artwork.id, image_id: data.data.image_id };
+            console.log("What did we fetch", data);
+
+            return { id: artwork.id, 
+                image_id: data.data.image_id ,
+                medium_display: data.data.medium_display,
+                artist_title: data.data.artist_title ,
+                place_of_origin : data.data.place_of_origin,
+                dimensions:data.data.dimensions ,
+                description: data.data.description,
+                style_title: data.data.style_title,
+            };
+
           })
         );
-        const images = results.reduce((acc, curr) => {
-          acc[curr.id] = curr.image_id;
+
+        const information = results.reduce((acc, curr) => {
+          acc[curr.id] = {
+            image_id: curr.image_id,
+            medium_display: curr.medium_display,
+            artist:curr.artist_title,
+            place_of_origin:curr.place_of_origin,
+            dimensions: curr.dimensions,
+            description:curr.description,
+            style_title:curr.style_title,
+
+
+        };
+
           return acc;
         }, {});
-        setArtImages(images);
+
+        setArtInformation(information);
+
       } catch (err) {
         setError(err.message);
       }
+
     }
     fetchImageIDs();
   }, [artData]);
 
   if (error) return <div>Error: {error}</div>;
-  if (!artData || !artImages) return <div>Loading...</div>;
+  if (!artData || !artInfo) return <div>Loading...</div>;
 
-  console.log("Fetched Art Images:", artImages);
+  console.log("Fetched Art Images:", artInfo);
 
   return (
     <div>
       <SearchTopBar
         results={search}
         artworks={artData}
-        artImages={artImages} // Pass image_id mapping as a prop
+        artInfo={artInfo} 
         onSearchInitiated={onEnterKeyPressed}
       />
     </div>

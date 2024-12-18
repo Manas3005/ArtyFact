@@ -61,6 +61,7 @@ function HomePage(props){
     const randomArt = artData ? artData[Math.floor(Math.random() * artData.length)] : null;
     const image = randomArt ? URLParamsForImage(randomArt.image_id) : null;
     const cleanedDescription = randomArt ? cleanHtmlContent(randomArt.description) : '';
+    console.log("THIS IS THE RANDOM ART",randomArt)
     console.log("cleaned", cleanedDescription);
 
 
