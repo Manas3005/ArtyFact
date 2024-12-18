@@ -9,7 +9,8 @@ export const searchResults = createSlice({
         currentArtPeice : null,
         
         searchParam:{
-             title:"",
+             title : "",
+             limiet :40
         }
 
     },
@@ -22,7 +23,7 @@ export const searchResults = createSlice({
 
         },
 
-        setNewSearchParam:() =>{
+        setNewSearchParam:(state,action) =>{
 
             state.searchParam.title = action.payload;
 

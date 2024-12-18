@@ -44,6 +44,19 @@ export function getArtWorksWithLog(searchParams) {
     return fetch(createURLParamsForArtWork(searchParams), options).then(gotResponseACB).then((result) => console.log("this is where we are now ",result));
 }
 
+export function getArtWorkByID(searchParams) {
+    console.log("This is params", searchParams);
+    return fetch(createURLParamsForArtWorksByID(searchParams), options).then(gotResponseACB).then(printResponseACB);
+}
+
+function createURLParamsForArtWorksByID(searchParams) {
+    console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
+    return MAIN_URL + "artworks/" + searchParams;
+
+}
+
+
+
 export function getCollection(searchParams) {
     return fetch(createURLParamsForCollection(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
@@ -52,7 +65,15 @@ export function getCollection(searchParams) {
 
 export function getArtWorksSearch(searchParams) {
     return fetch(createURLParamsForArtWorkSearch(searchParams), options).then(gotResponseACB).then(printResponseACB);
-}   
+}  
+
+
+export function getArtWorkImageModified(result){ //This function directly return the URL that leads to the image, added this because the function above seems to throw an error while fetching
+    console.log("This is the IMAGE ID DIRECT", result);
+    const imageID = result;
+    const imagePath = imageID + IMAGE_DIM;
+    return URLParamsForImage(imagePath);
+}
 
 
 export function getArtWorkImage(result){
@@ -103,7 +124,7 @@ function createURLParamsForArtWorkSearch(searchParams) {
 
 
 const searchParams1 = {
-    title: "example",
+    title: "example",   
 }
 function createURLParamsForSpecificArtWork(id, searchParams1) {
     return MAIN_URL + "/artworks/" + id + "?" + new URLSearchParams(searchParams1);

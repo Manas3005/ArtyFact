@@ -2,9 +2,11 @@ import "/src/css/style.css"
 //import Drawer from '@mui/material/Drawer';
 import React, { useState } from 'react';
 import ExploreDrawer from "/src/views/ThirdPartyWrittenComponents/sideBarNav.jsx";
+import { setNewSearchParam } from "/src/store/searchResultSlice.js";
+
 
 export function TopBarView(props){
-
+ 
     
     function handleMyJournalsClickedACB (){
         return window.location.hash = '#/myjournals'
@@ -17,28 +19,25 @@ export function TopBarView(props){
       setOpen(newOpen);
     };
   
-    console.log("we are here and this is props"+ props)
+    console.log("we are here and this is props", props)
 
     function handleClickForMyCollectionACB() {
         window.location.hash="#/collections";
     }
 
-    function eventHandlerForEnterACB(evt) {
-        if(evt.which == "13") {
+    function handleEnterKey(evt) {
+        if(evt.which == "13") { 
+            
+        props.onSearchInitated
+        console.log("--------------------- This is the evt",evt.target.value)
+        console.log(" PROPS IN TOPBAR",props)
         console.log("button has been pressed")
            window.location.hash="#/searchResult";
 
         }
     }
     
-    function searchWasFound(){
-
     
-
-
-    }
-
-
 
 
 
@@ -60,7 +59,7 @@ export function TopBarView(props){
 
 
                 
-               <input className="searchBar" placeholder = "Search..." onKeyDown={eventHandlerForEnterACB}/> 
+               <input className="searchBar" placeholder = "Search..." onKeyDown={handleEnterKey}/> 
 
 
                 <img  className = "logo" src = "https://i.imgur.com/viSeXcY.png" />

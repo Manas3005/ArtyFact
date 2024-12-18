@@ -1,51 +1,44 @@
+import { URLParamsForImage } from "/src/apiCall.js";
 
+export function SearchTopBar(props) {
 
+  console.log("THIS IS THE PROPS THAT IS SENT TO VIEW",props)
+  const { artworks, artImages, onSearchInitiated } = props;
+  const allData = artworks.data;
 
-import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
+  function eventHandlerForHomeClickACB() {
+    window.location.hash = "#/homepage";
+  }
 
-export function SearchTopBar(props){
-console.log("THIS IS THE PROPS THAT IS PASSED TO SEARCHVIEW",props)   
-let hello = props.artworks.data[0].image_id
-let allData = props.artworks.data
-let image = URLParamsForImage(hello)
+  function renderSearchResultsCB(result) {
+    const image_id = artImages[result.id]; // Get image_id from props
 
-
-function eventHandlerForHomeClickACB() {
-    window.location.hash="#/homepage";        
-}
-
-
-
-return (
-  <div>
-    <button onClick={eventHandlerForHomeClickACB}>  Home  </button>
-     {[...allData].map(renderSearchResultsCB)} 
-
-  </div>  
-)
-
-
-function renderSearchResultsCB(result) {  
-        
-
-    function onClickImageEventACB(){
-        console.log("image has been clicked for : " )
-        window.location.hash="#/searchChoosen";    
+    function onClickImageEventACB() {
+      console.log("Image has been clicked for:", result.id);
+      window.location.hash = "#/searchChoosen";
     }
 
     return (
-    <div key={result.id} >     
-      <img src={URLParamsForImage(result.id)} height="200" onClick={onClickImageEventACB}></img>
+      <div key={result.id}>
+        {image_id ? (
+          <img
+            src={URLParamsForImage(image_id)}
+            height="200"
+            onClick={onClickImageEventACB}
+            alt={result.title}
+          />
+        ) : (
+          <span>Loading image...</span>
+        )}
+        <span>{result.title}</span>
+      </div>
+    );
+  }
 
-      <span>
-            {result.title}
-      </span>
+  return (
+    <div>
+      <button onClick={eventHandlerForHomeClickACB}>Home</button>
+      {allData.map(renderSearchResultsCB)}
     </div>
-    
-
-
-);
-
-}
-
+  );
 }
