@@ -32,7 +32,7 @@ export function makeRouter(store){
         {   
             path: "/findMyTaste",
             element: <FindMyTaste store = {store}></FindMyTaste>
-        }
+        },
         
     ])
 }

@@ -40,5 +40,15 @@ export function fetchAndProcessArtworks(selectedItems, constructSearchParams, on
     });
 }              
 
+export function toggleSelection(item, selectedItems, setSelectedItems) { //Filters such that if the same option is clicked on then updatedSelections will exclude it (to deselect)
+    if (selectedItems.includes(item)) {
+        const updatedSelections = selectedItems.filter(currentItem => currentItem !== item);
+        setSelectedItems(updatedSelections);
+    } else {
+        setSelectedItems([...selectedItems, item]); //using array spread to select the new item along with the already selected items 
+        console.log("Selected items: ", [...selectedItems, item]);
+    }
+}
+
 
     

@@ -1,12 +1,10 @@
 import { FindMyTasteTopBarView } from "../views/findMyTastePageViews/findMyTasteTopBarView"
 import { ArtQuizView } from "../views/findMyTastePageViews/artQuizView"
 import { useState } from "react";
-import { getArtWorksSearch, getArtWorkByID, getArtWorkImageModified, fetchAllArtworks, fetchFourtyArtworks} from '/src/apiCall.js';
+import { getArtWorkImageModified, fetchAllArtworks} from '/src/apiCall.js';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
-import { useEffect } from "react";
-import { getArtWorks } from "../apiCall";
-import { fetchAndProcessArtworks} from "../utilities";
+import { fetchAndProcessArtworks, toggleSelection} from "../utilities";
 
 
 export function FindMyTaste(props){
@@ -14,8 +12,6 @@ export function FindMyTaste(props){
     
     const dispatch = useDispatch()
 
-    const [currentView, setCurrentView] = useState('describe'); /*here component state is used because it aids the change of views depnding
-    on the tab button clicked only on findMyTaste so it has no connection with the application state*/
 
     const [selectedArtists, setSelectedArtists ] = useState([]); /*component state used here to keep track of the selected choices for artists
     (only needed until the quiz session lasts hence not application state)*/
@@ -46,7 +42,7 @@ export function FindMyTaste(props){
     const [styleOptions, setStyleOptions] = useState([]);
     const [mediumOptions, setMediumOptions] = useState([]);
 
-    useEffect(() => {
+    function loadQuizACB(){
         setQuizReady(false);
         fetchAllArtworks().then(function (data) {
             const artists = data.data.map((artwork) => artwork.artist_title);
@@ -86,21 +82,13 @@ export function FindMyTaste(props){
         .catch((error) =>
             console.error("Error fetching quiz", error)
         );
-    } , []);
-
-
-
-
-    function toggleSelection(item, selectedItems, setSelectedItems) { //Filters such that if the same option is clicked on then updatedSelections will exclude it (to deselect)
-        if (selectedItems.includes(item)) {
-            const updatedSelections = selectedItems.filter(currentItem => currentItem !== item);
-            setSelectedItems(updatedSelections);
-        } else {
-            setSelectedItems([...selectedItems, item]); //using array spread to select the new item along with the already selected items 
-            console.log("Selected items: ", [...selectedItems, item]);
-        }
     }
+
+
+
+    
         
+
     function selectArtistACB(artist) {
         toggleSelection(artist, selectedArtists, setSelectedArtists);
     }
@@ -125,12 +113,20 @@ export function FindMyTaste(props){
 
 
     function incrementQuizProgressACB(){
-        dispatch(incrementProgress(20)); 
+        if(updatedProgress===66){
+            dispatch(incrementProgress(34)); 
+        } else {
+            dispatch(incrementProgress(33)); 
+        }
     }
 
 
     function decrementQuizProgressACB(){
-        dispatch(decrementProgress(20))
+        if(updatedProgress===100){
+            dispatch(decrementProgress(34));
+        } else {
+            dispatch(decrementProgress(33));
+        }
     }
 
     function setResultsBackToPendingACB(){
@@ -315,6 +311,7 @@ export function FindMyTaste(props){
                                                                         onArtistSelected = {selectArtistACB}
                                                                         onStyleSelected = {selectStyleACB}
                                                                         onMediumSelected = {selectMediumACB}
+                                                                        onBeginLoadingQuiz = {loadQuizACB}
                                                                         onSubmitButtonClicked = {getArtworksByResponsesACB}
                                                                         onBackToQuizButtonClicked = {setResultsBackToPendingACB}
                                                                         

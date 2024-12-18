@@ -117,7 +117,6 @@ export function ArtQuizView (props){
       });
     }
 
-    
     function renderMediumOptions() {
 
       return mediumOptions.map(function organizeAsOptionCB(medium) {
@@ -140,13 +139,17 @@ export function ArtQuizView (props){
       });
     }
 
+    function handleQuizLoadingACB(){
+      props.onBeginLoadingQuiz();
+    }
+
 
     function renderArtByArtistsACB(){
       if(selectedArtists.length!==0){
         return (
         <div>
 
-          <div className = "gap"></div> hmg 
+          <div className = "gap"></div>
 
             <div>Based on your favorite artists</div>
             <div className="resultsContainer">
@@ -243,18 +246,23 @@ export function ArtQuizView (props){
 
     function renderQuizACB() {
 
+      handleQuizLoadingACB()
+      
       if(quizReady){
 
       if (updatedProgress === 0) {
 
         return (
+
           <div>
+
             <div className="quizWelcomeContainer">
-              <h1 className="quizWelcomeTitle">Welcome to the Art Quiz!</h1>
-              <p className="quizDescription">
+                <h1 className="quizWelcomeTitle">Welcome to the Art Quiz!</h1>
+                <p className="quizDescription">
                 Discover artworks that match your unique taste! Select your favorite artists, styles, and mediums to create a personalized gallery just for you.
-              </p>
+                </p>
             </div>
+           
             <div>
               <button
                 onClick={handlePreviousClickACB}
@@ -271,125 +279,78 @@ export function ArtQuizView (props){
               </button>
             </div>
           </div>
-        );
-        
 
+        );
 
       } else if (updatedProgress < 100) {
 
-          if(updatedProgress === 20){
+          if(updatedProgress === 33){
 
-            return (
-              <div>
-                <div>Select your favorite artists</div>
-                <div className="favoriteArtistsContainer">
-                  {renderArtistOptions()}
-                </div>
+              return (
                 <div>
-                  <button
-                    onClick={handlePreviousClickACB}
-                    className="quizPreviousQuestion"
-                    
-                  >
-                    Previous
-                  </button>
-                  <button
-                    onClick={handleNextClickACB}
-                    className="quizNextQuestion"
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-    
-            );
-              
-           } else if(updatedProgress===40) {
 
-            return (
-              <div>
-                <div> Select your preferred art styles </div>
-                <div className="favoriteArtistsContainer">
-                {renderStyleOptions()}
+                  <div>Select your favorite artists</div>
+                  <div className="favoriteArtistsContainer">
+                    {renderArtistOptions()}
+                  </div>
+                  <div>
+                    <button
+                      onClick={handlePreviousClickACB}
+                      className="quizPreviousQuestion"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={handleNextClickACB}
+                      className="quizNextQuestion"
+                    >
+                      Next
+                    </button>
+                  </div>
+
                 </div>
+              );
+
+           } else if(updatedProgress===66) {
+
+              return (
                 <div>
-                  <button
-                    onClick={handlePreviousClickACB}
-                    className="quizPreviousQuestion"
-                  >
-                    Previous
-                  </button>
-                  <button
-                    onClick={handleNextClickACB}
-                    className="quizNextQuestion"
-                  >
-                    Next
-                  </button>
+                
+                  <div> Select your favorite art styles </div>
+                  <div className="favoriteArtistsContainer">
+                  {renderStyleOptions()}
+                  
                 </div>
-              </div>
-            );
+                  
+                  <div>
+                    <button
+                      onClick={handlePreviousClickACB}
+                      className="quizPreviousQuestion"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={handleNextClickACB}
+                      className="quizNextQuestion"
+                    >
+                      Next
+                    </button>
+                  </div>
 
-              
-
-           } else if(updatedProgress===60) {
-
-
-            return (
-              <div>
-                <div> The medium of an artwork is important because it reveals how the piece was created, highlights its artistic or technical qualities, and determines its preservation needs. What mediums interest you?</div>
-                <div className="favoriteArtistsContainer">
-                {renderMediumOptions()}
                 </div>
-                <div>
-                  <button
-                    onClick={handlePreviousClickACB}
-                    className="quizPreviousQuestion"
-                  >
-                    Previous
-                  </button>
-                  <button
-                    onClick={handleNextClickACB}
-                    className="quizNextQuestion"
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            );
-            
+              );
 
-         } else if(updatedProgress===80) {
-
-
-          return (
-            <div>
-              <div> What color would you like your art to be dominated with? </div>
-              <div>
-                <button
-                  onClick={handlePreviousClickACB}
-                  className="quizPreviousQuestion"
-                >
-                  Previous
-                </button>
-                <button
-                  onClick={handleNextClickACB}
-                  className="quizNextQuestion"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          );
-          
-       }
-
+           } 
       } else if (updatedProgress === 100) {
 
         if (!resultsReady && !quizCompleted) {
+          
           return (
             <div>
-              <div> What color would you like your art to be dominated with? </div>
-              <div>
+            <div> The medium of an artwork is important because it reveals how the piece was created, highlights its artistic or technical qualities, and determines its preservation needs. Which of these mediums interest you?</div>
+              <div className="favoriteArtistsContainer">
+              {renderMediumOptions()}
+              </div>             
                 <button
                   onClick={handlePreviousClickACB}
                   className="quizPreviousQuestion"
@@ -397,15 +358,14 @@ export function ArtQuizView (props){
                   Previous
                 </button>
                 <button
-                  onClick={handleNextClickACB}
-                  className="quizNextQuestion"
+                  onClick={handleSubmitClickACB}
+                  className="submitQuizButton"
                 >
-                  Next
+                  Submit
                 </button>
               </div>
-            </div>
-          );
 
+          );
 
         } else if(!resultsReady && quizCompleted){
 
@@ -434,6 +394,8 @@ export function ArtQuizView (props){
               {renderArtByStylesACB()}
               {renderArtByMediumACB()}
               
+
+
               <button
                 onClick={handleBackToQuizACB}
                 className="quizBackButton"
