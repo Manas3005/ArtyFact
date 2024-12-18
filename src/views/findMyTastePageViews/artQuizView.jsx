@@ -31,6 +31,9 @@ export function ArtQuizView (props){
     const artistsOptions = props.artistsOptions;
     const styleOptions = props.styleOptions;
     const mediumOptions = props.mediumOptions;
+    const errorMessage = props.errorMessage;
+    const showMessage = props.showMessage;
+    
     
 
 
@@ -363,6 +366,11 @@ export function ArtQuizView (props){
                 >
                   Submit
                 </button>
+                {errorMessage && (
+                <div className={`error-message ${showMessage ? "fade-in" : "fade-out"}`}>
+                    {errorMessage}
+                </div>
+                )}
               </div>
 
           );
@@ -373,7 +381,7 @@ export function ArtQuizView (props){
               <div style={{ textAlign: 'center' }}>
 
                   <img 
-                  src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXE2bW5xbjBzcnk3eHdtMmIzdXBjczRobnBqbXR6b3RtemJtdjNjeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3nWhI38IWDofyDrW/giphy.gif" 
+                  src="https://s5.ezgif.com/tmp/ezgif-5-1748778ccd.gif" 
                   className="quizCompleted" 
                   alt="Loading Quiz Results" 
                   />
@@ -410,7 +418,7 @@ export function ArtQuizView (props){
         <div style={{ textAlign: 'center' }}>
 
             <img 
-            src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXE2bW5xbjBzcnk3eHdtMmIzdXBjczRobnBqbXR6b3RtemJtdjNjeiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3nWhI38IWDofyDrW/giphy.gif" 
+            src="https://s5.ezgif.com/tmp/ezgif-5-1748778ccd.gif" 
             className="quizCompleted" 
             alt="Loading Art Quiz" 
             />

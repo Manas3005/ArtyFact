@@ -41,6 +41,8 @@ export function FindMyTaste(props){
     const [artistsOptions, setArtistsOptions] = useState([]);
     const [styleOptions, setStyleOptions] = useState([]);
     const [mediumOptions, setMediumOptions] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [showMessage, setShowMessage] = useState(false);
 
     function loadQuizACB(){
         fetchAllArtworks()
@@ -172,9 +174,19 @@ export function FindMyTaste(props){
 
 
     function getArtworksByResponsesACB(){
-        getArtworksByArtistsACB();
-        getArtworksByStylesACB();
-        getArtworksByMediumsACB();
+        if (selectedArtists.length === 0 && selectedStyles.length === 0 && selectedMediums.length === 0) {
+            setErrorMessage("You must answer at least one question to see results.");
+            setShowMessage(true);
+
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 3000);
+        } else {
+            setErrorMessage(""); 
+            getArtworksByArtistsACB();
+            getArtworksByStylesACB();
+            getArtworksByMediumsACB();
+        }
     }
 
                 
@@ -344,6 +356,8 @@ export function FindMyTaste(props){
                                                                         artistsOptions = {artistsOptions}
                                                                         styleOptions = {styleOptions}
                                                                         mediumOptions = {mediumOptions}
+                                                                        errorMessage = {errorMessage}
+                                                                        showMessage = {showMessage}
                                                                         />
             </div>)
 }
