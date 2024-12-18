@@ -181,14 +181,14 @@ function modelToPersistence(state) {
     dispatchHook(setEntries(journalEntries.entries));
     //dispatches here, set action in journal slice
     console.log("These are the journal entries in persistenceToModelForMyJournals", journalEntries);
-
  }
 
 
 
- function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
+ async function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
     persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook)
-    persistenceToModelForMyCollection(firebaseData.collections, dispatchHook).then((result) =>  result);
+    const result = await persistenceToModelForMyCollection(firebaseData.collections, dispatchHook);
+    return result;
     /**
      * Would call upon different functions with persistenceToModelforMyCollection(firebaseData.myCollection)
      *                                          persistenceToModelforMyJournal(firebaseData.myJournal)
@@ -240,27 +240,15 @@ if(state.ready){ // check if the state is ready, however this will be checked wh
 //note that we might need a reducer for the state.ready, meaning that we dispatch an action that sets the store to ready.
 //We might not need the state ready, we're not sure yet on how this works.
     
- function readFromFirebase(state, dispatchHook) { 
+ async function readFromFirebase(state, dispatchHook) { 
     console.log("We are inside read from firebase", state);
     state.ready = false;
 
-    return get(myBigRef).then(
-    
-    function getSnapValACB(snapshot) { // persisted data we get back from the database
-        console.log("This is the snapshot", snapshot)
-        console.log("This is the snapshot value", snapshot.val())
-        //return persistenceToModel(snapshot.val(), state);
-        return persistenceToModel(snapshot.val(), dispatchHook);
-    }
-
-   ).then(
-
-    function setReadyACB() {
-        console.log("model.ready is TRUE now");
-        //model.ready = true;
-    }
-    
-   );     
+    const snapshot = await get(myBigRef);
+     console.log("This is the snapshot", snapshot);
+     console.log("This is the snapshot value", snapshot.val());
+     return await persistenceToModel(snapshot.val(), dispatchHook);
+     console.log("model.ready is TRUE now");     
 } 
 
 /* two params of connectToFireBase: current snapshot of db(state), dispatch function from ReactRoot.jsx(dispatchHook) . 
@@ -275,6 +263,7 @@ if(state.ready){ // check if the state is ready, however this will be checked wh
     readFromFirebase(state, dispatchHook).then(() => {
         //watchFunction(isChangedACB, sideEffectACB);
         //useEffect(whatHappensAfterChangeACB, [state.numberOfGuests, state.currentDishId, [...state.dishes]])
+        console.log("We are her1e", state.getState());
     });
 
     function isChangedACB(){  
