@@ -125,7 +125,7 @@ export function ArtQuizView (props){
       return (
         <button
             key={medium}
-            className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
+            className={"favoriteArtist" + (isSelected ? "Selected" : "")} 
             onClick={function() { handleMediumChoiceSelectionACB(medium); }}
         >
             <input
@@ -247,7 +247,7 @@ export function ArtQuizView (props){
     function renderQuizACB() {
 
       handleQuizLoadingACB()
-      
+
       if(quizReady){
 
       if (updatedProgress === 0) {
@@ -347,8 +347,8 @@ export function ArtQuizView (props){
           
           return (
             <div>
-            <div> The medium of an artwork is important because it reveals how the piece was created, highlights its artistic or technical qualities, and determines its preservation needs. Which of these mediums interest you?</div>
-              <div className="favoriteArtistsContainer">
+            <div> The medium of an artwork is important because it reveals how the piece was created, highlights its artistic and technical qualities, and determines its preservation needs. Which of these mediums interest you?</div>
+              <div className="favoriteMediumsContainer">
               {renderMediumOptions()}
               </div>             
                 <button
@@ -393,8 +393,6 @@ export function ArtQuizView (props){
               {renderArtByArtistsACB()}
               {renderArtByStylesACB()}
               {renderArtByMediumACB()}
-              
-
 
               <button
                 onClick={handleBackToQuizACB}
@@ -425,10 +423,10 @@ export function ArtQuizView (props){
     }
     
     return (
-      <div> 
-        <LinearWithValueLabel updatedProgress={updatedProgress} />
-        <div className="quizQuestions">{renderQuizACB()}</div>
-      </div>
+      <div className="bodyBackground"> {/* Applying the background class */}
+      <LinearWithValueLabel updatedProgress={updatedProgress} />
+      <div className="quizQuestions">{renderQuizACB()}</div>
+    </div>
     );
     
 

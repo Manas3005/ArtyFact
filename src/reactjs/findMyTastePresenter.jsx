@@ -43,8 +43,9 @@ export function FindMyTaste(props){
     const [mediumOptions, setMediumOptions] = useState([]);
 
     function loadQuizACB(){
-        setQuizReady(false);
-        fetchAllArtworks().then(function (data) {
+        fetchAllArtworks()
+        .then(function (data) {
+            setQuizReady(false);
             const artists = data.data.map((artwork) => artwork.artist_title);
             const styles = data.data.map((artwork) => artwork.style_title);
             const mediums = data.data.map((artwork) => artwork.classification_title);
@@ -78,7 +79,9 @@ export function FindMyTaste(props){
             setArtistsOptions(filteredArtists); 
             setStyleOptions(filteredStyles);
             setMediumOptions(filteredMediums);
-        }).then(setQuizReady(true))
+            
+            setQuizReady(true);
+        })
         .catch((error) =>
             console.error("Error fetching quiz", error)
         );
