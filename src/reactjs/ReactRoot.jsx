@@ -49,14 +49,6 @@ function ReactRoot(props){
       ReactRoot as it is wrapped in <Provider> component in index.jsx .
 
     */
-    let dispatch = useDispatch();
-
-    //on login
-
-    useEffect(() => {
-        connectToFirebase(store, dispatch); // Pass state and the dispatch objects, the dispatch cannot be called inside FirebaseModel
-    }, [dispatch]);
-
 
     return (
 
