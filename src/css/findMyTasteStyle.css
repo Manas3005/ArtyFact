@@ -234,10 +234,10 @@
   
 .quizProgress {
     position: relative; 
-    bottom: 42px;
-    left: 95px;
+    bottom: 13%;
+    left: 6.5%;
     font-family: 'Jacques Francois';
-    font-size: 50px; 
+    font-size: 20px; 
     color: #333333; 
     padding: 10px; 
     border-radius: 8px; 
