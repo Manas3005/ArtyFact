@@ -13,8 +13,25 @@ export function SearchTopBar(props) {
   function renderSearchResultsCB(result) {
     const foundInformation = artInfo[result.id]; // Get image_id from props
     
+
+
     function onClickImageEventACB() {
-      console.log("Image has been clicked for:", result.id);
+      console.log("Image has been clicked for:", foundInformation.artist);
+      
+      const allArtInformationToUpdate={
+                art_name:result.title, 
+                image_id: foundInformation.image_id ,
+                medium_display: foundInformation.medium_display,
+                artist: foundInformation.artist ,
+                place_of_origin : foundInformation.place_of_origin,
+                dimensions:foundInformation.dimensions ,
+                description: foundInformation.description,
+                style_title: foundInformation.style_title,
+      };
+
+      props.setIndividualArt(allArtInformationToUpdate)
+
+
       window.location.hash = "#/searchChoosen";
     }
 

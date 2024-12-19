@@ -6,7 +6,7 @@ export const searchResults = createSlice({
     name : "searchResults",
     initialState: {
         results: [], // Array to store all the found art pieces
-        currentArtPeice : null,
+        currentArt : null,
         
         searchParam:{
              title : "",
@@ -27,11 +27,15 @@ export const searchResults = createSlice({
 
             state.searchParam.title = action.payload;
 
-        }
+        },
+
+        setCurrentArt: (state, action) => {
+            state.currentArt = action.payload; // Fix property name
+        },
 
 
         }
 
     }
 )
-export const {copyFoundArtList,setNewSearchParam } = searchResults.actions;
+export const {copyFoundArtList,setNewSearchParam,setCurrentArt } = searchResults.actions;

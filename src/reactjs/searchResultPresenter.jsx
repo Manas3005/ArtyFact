@@ -3,32 +3,35 @@ import { getArtWorksSearch, getArtWorkByID } from "/src/apiCall.js";
 import { SearchTopBar } from "/src/views/SearchBar/SearchTopBarView.jsx";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import {setCurrentArt} from "/src/store/searchResultSlice.js";
+
 
 function SearchResult(props) {
-  const search = useSelector((state) => state.searchResults.results);
   const [artData, setArtData] = useState(null); // For main artworks data
   const [artInfo, setArtInformation] = useState({}); // For art Information mapping
   const [error, setError] = useState(null);
 
-  const searchparams = { // this is for testing 
+  const searchparamsTester = { // this is for testing 
     title: "Two Sisters",
     limit: 40,
   };
 
-  const searchParam1 = useSelector((state) => state.searchResults.searchParam);
-  console.log("SEARCHPARAM",searchParam1)
+  const searchParam = useSelector((state) => state.searchResults.searchParam);
+  console.log("SEARCHPARAM",searchParam)
 
   const dispatch = useDispatch();
 
-  function onEnterKeyPressed(evt) {
-    dispatch(setNewSearchParam(evt.target.value));
+  function setCurrentArtACB(artInformation) {
+    console.log("ARTINFO RENDERED",artInformation)
+    dispatch(setCurrentArt(artInformation));
+        //dispatch(setNewSearchParam(evt.target.value));
   }
 
   // Fetch the list of artworks
   useEffect(() => {
     async function fetchArtworks() {
       try {
-        const data = await getArtWorksSearch(searchParam1);
+        const data = await getArtWorksSearch(searchParam);
         setArtData(data);
         console.log("CHECK IT OUT",data)
       } catch (err) {
@@ -65,13 +68,13 @@ function SearchResult(props) {
 
         const information = results.reduce((acc, curr) => {
           acc[curr.id] = {
-            image_id: curr.image_id,
-            medium_display: curr.medium_display,
-            artist:curr.artist_title,
-            place_of_origin:curr.place_of_origin,
-            dimensions: curr.dimensions,
-            description:curr.description,
-            style_title:curr.style_title,
+            image_id:        curr.image_id,
+            medium_display:  curr.medium_display,
+            artist:          curr.artist_title,
+            place_of_origin: curr.place_of_origin,
+            dimensions:      curr.dimensions,
+            description:     curr.description,
+            style_title:     curr.style_title,
 
 
         };
@@ -97,10 +100,9 @@ function SearchResult(props) {
   return (
     <div>
       <SearchTopBar
-        results={search}
         artworks={artData}
         artInfo={artInfo} 
-        onSearchInitiated={onEnterKeyPressed}
+        setIndividualArt={setCurrentArtACB}
       />
     </div>
   );
