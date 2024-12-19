@@ -1,7 +1,7 @@
 .topBarFMT{
     height: 30vh;
     width: 100%;
-    background-color: #dacdbf;
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20241106/pngtree-abstract-art-of-subtle-brushstrokes-in-light-gray-and-beige-color-image_16526904.jpg'); 
     border-radius: 20px;
     
 }
@@ -244,27 +244,37 @@
     width: fit-content; 
 }
 
+.artQuizLogo{
+
+    position: absolute; /* Keep it positioned relative to the top bar */
+    top: 10%; /* Vertically center it */
+    left: 50%; /* Horizontally center it */
+    transform: translate(-50%, -50%); /* Adjust its position back to true center */
+    width: 442px;
+    height: 83px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    z-index: 10; /* Ensure it stays above other elements */
+}
+
 .resultsContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-    gap: 25px; 
-    justify-content: flex-start; 
-    align-items: flex-start; 
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px; 
+    justify-content: stretch; 
+    align-items: center; 
     padding: 10px;
     position: relative;
-  }
-
-
-  .gap {
-    height: 4rem; 
+    box-sizing: border-box;
     width: 100%; 
   }
+
   
   .resultImage {
     width: 100%;
     max-height: 100%;
     border: 2px solid #ccc;
-    border-radius: 8px;
+    border-radius: 10px;
+    object-fit: cover;
   }
 
   .quizWelcomeContainer {
@@ -290,9 +300,9 @@
 
   
   .bodyBackground {
-    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20241106/pngtree-abstract-art-of-subtle-brushstrokes-in-light-gray-and-beige-color-image_16526904.jpg'); /* Ensure correct path */
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20241106/pngtree-abstract-art-of-subtle-brushstrokes-in-light-gray-and-beige-color-image_16526904.jpg'); 
     background-size: cover; 
-    background-position: center; 
+    background-position: center;
     background-repeat: no-repeat; 
     min-height: 100%; 
     width: 100%; 
@@ -315,6 +325,41 @@
 .fade-in {
     opacity: 1; 
 }
+
+
+  .resultsPageTitle {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px; 
+    text-align: center;
+    color: #333;
+  }
+  
+  .resultsPageSubtitle {
+    font-size: 25px;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+    margin-top: 40px; 
+    margin-bottom: 20px; 
+  }
+  
+
+  .separator {
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+    margin: 20px auto; 
+  }
+
+
+  .noResults{
+    font-size: 1.2rem; 
+    color: #843030; 
+    text-align: center; 
+    margin-top: 10px; 
+  }
+  
 
   
 

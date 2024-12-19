@@ -148,13 +148,15 @@ export function ArtQuizView (props){
 
 
     function renderArtByArtistsACB(){
+
       if(selectedArtists.length!==0 && imageByArtistsURLs.length!==0 ){
+
         return (
         <div>
 
-          <div className = "gap"></div>
+          <div className="resultsPageSubtitle">Based on your favorite artists</div>
+          <div className="separator"></div>
 
-            <div>Based on your favorite artists</div>
             <div className="resultsContainer">
 
 
@@ -181,18 +183,22 @@ export function ArtQuizView (props){
         return;
       } else if(selectedArtists.length!==0 && imageByArtistsURLs.length===0){
         return (
-          <div>No results found for the selected artists</div>
+      <p className = "noResults">Oops! No results found for the selected artists. Try selecting different artists to discover artworks you'll love</p>
         )
       }
     }
 
 
     function renderArtByStylesACB(){
+
       if(selectedStyles.length!==0 && imageByStylesURLs.length!==0){
+
         return (
         <div>
-              <div className = "gap"></div>
-              <div>Based on your preferred styles</div>
+
+              <div className="resultsPageSubtitle">Based on your preferred styles</div>
+              <div className="separator"></div>
+
               <div className="resultsContainer">
 
 
@@ -219,7 +225,8 @@ export function ArtQuizView (props){
         return;
       } else if(selectedStyles.length!==0 && imageByStylesURLs.length===0){
         return (
-          <div>No results found for the selected styles</div>
+          <p className = "noResults">Oops! No results found for the selected styles. Try selecting different styles to discover artworks you'll love</p>
+
         )
       }
     }
@@ -231,8 +238,10 @@ export function ArtQuizView (props){
         
         return (
         <div>
-              <div className = "gap"></div>
-              <div>Based on the mediums you liked</div>
+
+              <div className="resultsPageSubtitle">Based on the mediums you liked</div>
+              <div className="separator"></div>
+
 
               <div className="resultsContainer">
 
@@ -257,9 +266,11 @@ export function ArtQuizView (props){
           )
       }else if(selectedMediums.length===0 && imageByMediumsURLs.length===0){
         return;
+
       } else if(selectedMediums.length!==0 && imageByMediumsURLs.length===0){
+        
         return (
-          <div>No results found for the selected mediums</div>
+          <p className = "noResults">Oops! No results found for the selected mediums. Try selecting different mediums to discover artworks you'll love</p>
         )
       }
     }
@@ -415,7 +426,7 @@ export function ArtQuizView (props){
 
           return (
             <div>
-              <div>We think you will like these artworks...</div>
+              <div className="resultsPageTitle">Here Are Artworks Curated Just For You</div>
 
               {renderArtByArtistsACB()}
               {renderArtByStylesACB()}

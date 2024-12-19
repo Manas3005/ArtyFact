@@ -106,15 +106,6 @@ export function FindMyTaste(props){
         toggleSelection(medium, selectedMediums, setSelectedMediums);
     }
 
-    
-    function setArtDescViewACB(){ //handling custom event 
-        setCurrentView('describe') 
-    }
-
-
-    function setArtQuizViewACB(){ //handling custom event
-        setCurrentView('quiz') 
-    }
 
 
     function incrementQuizProgressACB(){
@@ -316,9 +307,7 @@ export function FindMyTaste(props){
 
 
     return (<div>
-                <FindMyTasteTopBarView onDescribeButtonClicked = {setArtDescViewACB} 
-                                       onArtQuizButtonClicked = {setArtQuizViewACB}              
-                ></FindMyTasteTopBarView> 
+                <FindMyTasteTopBarView/> 
         
                 <ArtQuizView 
                                                                         onNextButtonClicked = {incrementQuizProgressACB}
