@@ -148,7 +148,7 @@ export function ArtQuizView (props){
 
 
     function renderArtByArtistsACB(){
-      if(selectedArtists.length!==0){
+      if(selectedArtists.length!==0 && imageByArtistsURLs.length!==0 ){
         return (
         <div>
 
@@ -177,12 +177,18 @@ export function ArtQuizView (props){
 
           </div>
           )
+      }else if(selectedArtists.length===0 && imageByArtistsURLs.length===0){
+        return;
+      } else if(selectedArtists.length!==0 && imageByArtistsURLs.length===0){
+        return (
+          <div>No results found for the selected artists</div>
+        )
       }
     }
 
 
     function renderArtByStylesACB(){
-      if(selectedStyles.length!==0){
+      if(selectedStyles.length!==0 && imageByStylesURLs.length!==0){
         return (
         <div>
               <div className = "gap"></div>
@@ -209,13 +215,20 @@ export function ArtQuizView (props){
 
           </div>
           )
+      } else if(selectedStyles.length===0 && imageByStylesURLs.length===0){
+        return;
+      } else if(selectedStyles.length!==0 && imageByStylesURLs.length===0){
+        return (
+          <div>No results found for the selected styles</div>
+        )
       }
     }
 
 
     function renderArtByMediumACB(){
 
-      if(selectedMediums.length!==0){
+      if(selectedMediums.length!==0 && imageByMediumsURLs.length!==0){
+        
         return (
         <div>
               <div className = "gap"></div>
@@ -242,6 +255,12 @@ export function ArtQuizView (props){
 
           </div>
           )
+      }else if(selectedMediums.length===0 && imageByMediumsURLs.length===0){
+        return;
+      } else if(selectedMediums.length!==0 && imageByMediumsURLs.length===0){
+        return (
+          <div>No results found for the selected mediums</div>
+        )
       }
     }
 
@@ -252,7 +271,6 @@ export function ArtQuizView (props){
       handleQuizLoadingACB()
 
       if(quizReady){
-
       if (updatedProgress === 0) {
 
         return (
@@ -381,7 +399,7 @@ export function ArtQuizView (props){
               <div style={{ textAlign: 'center' }}>
 
                   <img 
-                  src="https://s5.ezgif.com/tmp/ezgif-5-1748778ccd.gif" 
+                  src="image/artQuizBackground.gif" 
                   className="quizCompleted" 
                   alt="Loading Quiz Results" 
                   />
@@ -393,9 +411,10 @@ export function ArtQuizView (props){
 
         } else if(resultsReady && quizCompleted){
 
+      
+
           return (
             <div>
-
               <div>We think you will like these artworks...</div>
 
               {renderArtByArtistsACB()}
@@ -410,6 +429,8 @@ export function ArtQuizView (props){
               </button>
             </div>
           );
+
+        //}
         }
 
       }
@@ -418,7 +439,7 @@ export function ArtQuizView (props){
         <div style={{ textAlign: 'center' }}>
 
             <img 
-            src="https://s5.ezgif.com/tmp/ezgif-5-1748778ccd.gif" 
+            src="image/artQuizBackground.gif" 
             className="quizCompleted" 
             alt="Loading Art Quiz" 
             />

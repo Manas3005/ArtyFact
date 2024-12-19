@@ -305,10 +305,10 @@ export function FindMyTaste(props){
           setArtTitlesByMediums(newMediumImageTitles);
           setArtistTitlesByMediums(newArtistTitlesByMediums);
           setMediumTitles(newMediumTitles);
-          setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
         }
         
-    
+        setResultsReady(true); //this will be passed down to artQuizView to let it know that the results are ready
+
     }
 
 
