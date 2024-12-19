@@ -23,6 +23,10 @@ export function TopBarView(props){
         window.location.hash="#/collections";
     }
 
+    function handleSignInClick (){
+        props.onSignUpClick()
+    }
+
     return (
         <div>
             
@@ -50,7 +54,7 @@ export function TopBarView(props){
                     <img  src = "/image/signinIcon.png" />
                 </button>
 
-                <button  className="signInlogo">    
+                <button  className="signInlogo" onClick={handleSignInClick}>    
                     Sign in
                    {/*<img  src="/image/signinLogo.png"/>*/}
                 </button>

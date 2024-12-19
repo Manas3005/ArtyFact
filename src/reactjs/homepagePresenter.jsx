@@ -7,6 +7,10 @@ import {cleanHtmlContent } from '/src/utilities.js'
 import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
 
+import { auth } from "../firebaseModel";
+import {signInWithPopup, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, signOut} from "firebase/auth";
+
+
 function HomePage(props){
 
     //Redux specific hooks
@@ -49,10 +53,16 @@ function HomePage(props){
     console.log("this is artData", artData);
     console.log("Selected random art:", randomArt);
     console.log("The image URL:", image);
+
+    const provider = new GoogleAuthProvider();
+
+    function onSignInClickedACB (){
+        signInWithPopup(auth, provider);
+    } 
    
     return <div>
        
-        <TopBarView> </TopBarView>
+        <TopBarView onSignUpClick={onSignInClickedACB}> </TopBarView>
         <ExploreBodyView> </ExploreBodyView>
         <ArtDescBodyView 
                 artData={randomArt} 
