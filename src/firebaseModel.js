@@ -4,14 +4,12 @@ import { getDatabase, ref, get, set } from "firebase/database";
 import { setEntries } from "./store/journalsSlice";
 import { setSearchQuery, setCollectionsArray } from "./store/collectionsSlice";
 import { listenerMiddleware } from "./middleware.js";
+import { getAuth } from "firebase/auth"
 
 
 import "./apiCall";
 import "./utilities"
-import { useSelector} from "react-redux";
 
-
-import { useEffect } from "react";
 import { getArtWorkByID, URLParamsForImage } from "./apiCall";
 import { extractDateInterval } from "./utilities";
 
@@ -26,6 +24,8 @@ import { extractDateInterval } from "./utilities";
 
 const app= initializeApp(firebaseConfig);
 const db= getDatabase(app);
+
+export const auth = getAuth(app); //auth object linking UI with firebase
 
 /*  PATH is the “root” Firebase path.  */
 const PATH = "ArtyFact";
