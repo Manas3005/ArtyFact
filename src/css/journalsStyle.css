@@ -1,6 +1,6 @@
 /* CSS Classes that are common to many other CSS classes */
 .commonText {
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family:'Jacques Francois';
     font-style: normal;
     font-weight: 400;
 }
@@ -123,7 +123,7 @@
 }
 
 .alertText{
-    font-family: 'Jomolhari';
+    font-family: 'Jacques Francois';
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
