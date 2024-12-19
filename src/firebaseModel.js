@@ -26,8 +26,6 @@ import { extractDateInterval } from "./utilities";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const app= initializeApp(firebaseConfig);
-const db= getDatabase(app);
 
 export const auth = getAuth(app); //auth object linking UI with firebase
 
