@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { entries } from "mobx";
 
 export const myJournalEntries = createSlice({
     name : "myJournalEntries",

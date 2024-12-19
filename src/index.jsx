@@ -10,14 +10,16 @@ import { listenerMiddleware } from "./middleware.js";
 
 import { findMyTaste } from "./store/findMyTasteSlice";
 import { connectToFirebase } from "./firebaseModel.js";
+import { user } from "./store/userSlice.js";
 
 //Store
 export const store = configureStore({
     reducer: {
         myCollections: myCollections.reducer,
         myJournals: myJournalEntries.reducer,
-
+        
         findMyTaste: findMyTaste.reducer,
+        user: user.reducer,
         //to be added as separate slices
         //artWorks: artWorks.reducer,
         //journalEntryName: journalEntryName.reducer,
