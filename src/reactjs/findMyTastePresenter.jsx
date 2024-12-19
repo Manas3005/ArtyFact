@@ -18,7 +18,7 @@ export function FindMyTaste(props){
     const [selectedStyles, setSelectedStyles] = useState([]);
     const [selectedMediums, setSelectedMediums] = useState([]);
 
-    //YET TO ADD CODE COMMENTS FOR VARIABLES BELOW
+    
 
     const [imageByArtistsURLs, setImageByArtistsURLs] = useState([]);
     const [artTitlesByArtists, setArtTitlesByArtists] = useState([]);
