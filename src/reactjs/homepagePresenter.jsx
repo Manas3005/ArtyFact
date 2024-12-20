@@ -8,7 +8,7 @@ import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
 
 import { auth } from "../firebaseModel";
-import {signInWithPopup, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, signOut} from "firebase/auth";
+import {signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut} from "firebase/auth";
 
 
 function HomePage(props){

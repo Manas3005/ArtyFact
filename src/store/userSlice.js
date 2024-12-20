@@ -4,15 +4,11 @@ export const user = createSlice({
     name : "user",
     initialState: {
         user: undefined, // initially, user is undefined
-        ready: false,  // Initially, the app is not ready
         uid: undefined,  // Initially, we don't know the auth state
     },
     reducers:{
-        setReady: (state, action) => { 
-            state.ready = action.payload
-          },
-
         setUID: (state, action) => { 
+            console.log("This is the UID in slice:", action.payload)
             state.uid = action.payload;
         },
         setUser: (state, action) => { 
@@ -22,4 +18,4 @@ export const user = createSlice({
     }
 )
 
-export const { setReady, setUID, setUser } = user.actions;
+export const {setUID, setUser} = user.actions;

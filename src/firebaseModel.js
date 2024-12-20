@@ -4,12 +4,13 @@ import { getDatabase, ref, get, set } from "firebase/database";
 import { setEntries } from "./store/journalsSlice";
 import { setSearchQuery, setCollectionsArray } from "./store/collectionsSlice";
 import { listenerMiddleware } from "./middleware.js";
-import { getAuth } from "firebase/auth"
+import { getAuth, onAuthStateChanged} from "firebase/auth"
+import { setUID } from "./store/userSlice.js";
 
 
 import "./apiCall";
 import "./utilities"
-import { useSelector } from "react-redux";
+import { store } from "./index.jsx";
 
 
 import { getArtWorkByID, URLParamsForImage } from "./apiCall";
@@ -31,7 +32,6 @@ export const auth = getAuth(app); //auth object linking UI with firebase
 
 /*  PATH is the “root” Firebase path.  */
 const PATH = "ArtyFact";
-const rf = ref(db, PATH);
 
 // Initialise firebase app, database, ref
 const myBigRef = ref(db, PATH);
@@ -247,10 +247,9 @@ async function persistenceToModelForMyCollection(collections, dispatchHook) {
 
 
 function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
+    console.log("These are the journal entries in persistenceToModelForMyJournals", journalEntries);
 
     dispatchHook(setEntries(journalEntries.entries));
-    //dispatches here, set action in journal slice
-    console.log("These are the journal entries in persistenceToModelForMyJournals", journalEntries);
 }
 
 
@@ -325,15 +324,31 @@ function saveToFirebase(customRef, payload) {
 //note that we might need a reducer for the state.ready, meaning that we dispatch an action that sets the store to ready.
 //We might not need the state ready, we're not sure yet on how this works.
 
-async function readFromFirebase(state, dispatchHook) {
-    console.log("We are inside read from firebase", state);
-    state.ready = false;
+async function readFromFirebase(dispatchHook) {
+    
+    listenerMiddleware.startListening({ //credit: Cristian Bogdan Stackblitz
+        type: setUID.type,
+        effect(action) {
 
+            const state = store.getState();
+            const userUID = state.user.uid;
+
+            console.log("State is:", state)
+
+            const userRef = ref(db, `${PATH}/${userUID}`)
+            
+            get(userRef).then((snapshot) => 
+                {   console.log("this snapshot val before passing to PTM:", snapshot.val())
+                    persistenceToModel(snapshot.val(), dispatchHook)});    
+        }
+    })
+
+    /*
     const snapshot = await get(myBigRef);
     console.log("This is the snapshot", snapshot);
     console.log("This is the snapshot value", snapshot.val());
     return await persistenceToModel(snapshot.val(), dispatchHook);
-    console.log("model.ready is TRUE now");
+    */
 }
 
 /* two params of connectToFireBase: current snapshot of db(state), dispatch function from ReactRoot.jsx(dispatchHook) . 
@@ -342,10 +357,38 @@ async function readFromFirebase(state, dispatchHook) {
 
 */
 
-function connectToFirebase(state, dispatchHook) {
-    console.log("inuti connecct", state.ready);
 
-    readFromFirebase(state, dispatchHook).then(() => {
+
+
+
+function connectToFirebase(state, dispatchHook) {
+
+    function loginOrOutACB(user){
+
+        if (user) {
+            // The user is now authenticated, create a ref in firebase with users uid in its path
+            const userRef = ref(db, `${PATH}/${user.uid}`);
+            
+            // default data for the new user, so ref is not empty
+            set(userRef, {
+                displayName: user.displayName,
+
+            }).then(() => {
+                console.log("User reference created successfully!");
+            })
+        }
+
+        // demo render:
+        dispatchHook(setUID(user.uid))
+        const userIDString = "user "+(user?" ID "+user.uid:user);
+        console.log(userIDString)
+      }
+    
+        console.log(auth)
+        onAuthStateChanged(auth, loginOrOutACB);
+
+
+    readFromFirebase(dispatchHook).then(() => {
         //watchFunction(isChangedACB, sideEffectACB);
         //useEffect(whatHappensAfterChangeACB, [state.numberOfGuests, state.currentDishId, [...state.dishes]])
         console.log("We are her1e", state.getState());
