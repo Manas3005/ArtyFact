@@ -379,6 +379,7 @@ export function MyCollectionsPresenter(props) {
             /**
              * Vi ser här att vi gör en dispatch till store, där vi sätter den collection vi vill visa i vår nya sida,
              * men vi vet att det inte går så bra när vi refreshar sidan.
+             * Finns det något annat alternativ för att ge 
              * 
              */
             dispatch(setCollection(collection));
