@@ -35,17 +35,9 @@ const PATH = "ArtyFact";
 
 // Initialise firebase app, database, ref
 const myBigRef = ref(db, PATH);
-const myRef = ref(db, PATH + "/test")
 const myCollectionsRef = ref(db, PATH + "/collections")
 const myJournalsRef = ref(db, PATH + "/myJournals")
 
-// here is a test to try
-set(myRef, {
-    numberOfGuests: 5,
-    currentDishId: 13,
-    dishes: [{ id: 13, title: "dummy1" },
-    { id: 42, title: "dummy2" }]
-})
 
 /**
  * Necessary for reading from firebase and being able to derive data.
@@ -325,7 +317,7 @@ function saveToFirebase(customRef, payload) {
 //We might not need the state ready, we're not sure yet on how this works.
 
 async function readFromFirebase(dispatchHook) {
-    
+
     listenerMiddleware.startListening({ //credit: Cristian Bogdan Stackblitz
         type: setUID.type,
         effect(action) {
@@ -361,10 +353,10 @@ async function readFromFirebase(dispatchHook) {
 
 
 
-function connectToFirebase(state, dispatchHook) {
+function connectToFirebase(dispatchHook) {
 
     function loginOrOutACB(user){
-
+    
         if (user) {
             // The user is now authenticated, create a ref in firebase with users uid in its path
             const userRef = ref(db, `${PATH}/${user.uid}`);
@@ -381,19 +373,29 @@ function connectToFirebase(state, dispatchHook) {
         // demo render:
         dispatchHook(setUID(user.uid))
         dispatchHook(setProfilePicURL(user.photoURL))
+
         const userIDString = "user "+(user?" ID "+user.uid:user);
         console.log(userIDString)
+        
       }
-    
+        
         console.log(auth)
-        onAuthStateChanged(auth, loginOrOutACB);
+        const authPromise = new Promise((resolve) => { 
+            onAuthStateChanged(auth, (user) => {
+                loginOrOutACB(user);
+                resolve(); // Resolve the promise after loginOrOutACB has been executed fully
+            });
+        });
 
+        //ensure that the all the code in the loginOrOutACB has finished executing before readFromFirebase is executed
+        authPromise.then( 
+            () => readFromFirebase(dispatchHook).then(
+                () => {
+        
+        console.log("We are her1e", store.getState());
 
-    readFromFirebase(dispatchHook).then(() => {
-        //watchFunction(isChangedACB, sideEffectACB);
-        //useEffect(whatHappensAfterChangeACB, [state.numberOfGuests, state.currentDishId, [...state.dishes]])
-        console.log("We are her1e", state.getState());
-        console.log("the ttttt", setCollectionsArray.type);
+        const userPath = `${PATH}/${store.getState().user.uid}`  
+        console.log(userPath);
 
         listenerMiddleware.startListening({ //credit: Cristian Bogdan Stackblitz
             type: setCollectionsArray.type,
@@ -401,11 +403,15 @@ function connectToFirebase(state, dispatchHook) {
                 console.log("There has been a change in the store:", action.payload);
                 console.log("The change was: ", action.payload, "we now need to persist this change in db");
                 console.log("This is the new state", store.getState());
+
                 switch (action.type) {
+
                     case setCollectionsArray.type:
                         console.log("The action type was for the collectionsArray");
-                        saveToFirebase(myCollectionsRef, action.payload);
+                        const userCollectionsRef = ref(db, `${userPath}/collections`)
+                        saveToFirebase(userCollectionsRef, action.payload);
                         break;
+
                     case setSearchQuery.type:
                         console.log("The action type was for the search query");
                         saveToFirebase(myBigRef, action.payload);
@@ -420,7 +426,7 @@ function connectToFirebase(state, dispatchHook) {
          * Similarly, if we want to perform some actions based on what actually took place then we can use switch cases to match the action type.
          */
         dispatchHook(setCollectionsArray(testCollectionsArray));
-    });
+    }));
 }
 
 

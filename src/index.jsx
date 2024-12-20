@@ -46,4 +46,4 @@ createRoot(document.getElementById('root'))
         <App/>
     );
 
-connectToFirebase(store, store.dispatch);
+connectToFirebase(store.dispatch);
