@@ -54,11 +54,11 @@ set(myCollectionsRef, {
     collectionsArray: [
         {
             collectionTitle: "Japanese Art",
-            artWorks: [34, 12981, 129884]
+            artWorkIDs: [34, 12981, 129884]
         },
         {
             collectionTitle: "Impressionism.. oh",
-            artWorks: [3123, 129885, 129887]
+            artWorkIDs: [3123, 129885, 129887]
         },
     ]
 })
@@ -90,7 +90,7 @@ const testCollectionsArray =
     collections: [
 
         {
-            collectionTitle: "Japanese Art",
+            collection_title: "Japanese Art",
             artWorks: [
                 {
                     artWorkTitle: "Joseph Sold by his Brothers",
@@ -117,7 +117,7 @@ const testCollectionsArray =
             ]
         },
         {
-            collectionTitle: "Impressionism.. oh",
+            collection_title: "Impressionism.. oh",
             artWorks: [
                 {
                     artWorkTitle: "The Bath",
@@ -150,10 +150,18 @@ function readyACB(snap) {
     return snap.val();
 }
 
-function modelToPersistenceForMyCollections() {
+function modelToPersistenceForMyCollections(payload) {
     //const selectedCollections = useSelector(state => state.myCollections.collectionsArray);
     //console.log("THIS IS SELECTER", selectedCollections);
     //set(myCollectionsRef, selectedCollectionsArray1);
+    console.log("This is the payload, or change that we need to persist in the db (inside modelToPersistenceForMyCollections)", payload);
+    const newArray = payload.collections.map(collection => ({
+        collectionTitle: collection.collection_title,
+        artWorkIDs: [...collection.artWorks].map(artWork => artWork.artWork_id),
+    }));
+    console.log(newArray);
+    set(myCollectionsRef, { collectionsArray: newArray });
+
 }
 
 function modelToPersistenceForMyJournals() {
@@ -168,27 +176,30 @@ function modelToPersistenceForMyJournals() {
  * @param } model 
  * @returns 
  */
-function modelToPersistence(state) {
+function modelToPersistence(payload, type) {
+    console.log("inside model to persistence");
+    console.log("This is the payload", payload, " and this is the type", type);
 
-    modelToPersistenceForMyCollections(state)
+    if(type === setCollectionsArray.type) {
+        console.log("vi är inuti if-check");
+        console.log("This is the type", type);
+        console.log("And this is the collectionsArray type", setCollectionsArray.type);
+        //Vi är redo att persist
+        modelToPersistenceForMyCollections(payload);
+
+    }
+    //Need an if-check here as well to check the type.
     modelToPersistenceForMyJournals(state)
-
-    const send = {
-        guests: model.numberOfGuests,//--------------change 
-        dishIDs: [...model.dishes].map(dish => dish.id).sort((a, b) => a - b),
-        dishId: model.currentDishId,
-    };
-
-    return send;
 }
 
 async function generateObjectsForCollections(collections) {
     const populatedCollections = await Promise.all(
         collections.collectionsArray.map(async (collection) => {
             const resolvedArtWorks = await Promise.all(
-                collection.artWorks.map(async (id) => {
+                collection.artWorkIDs.map(async (id) => {
                     try {
                         const result = await getArtWorkByID(id);
+                        console.log("this is result", result);
                         const dateInterval = extractDateInterval(result.data.artist_display) || "";
                         return {
                             artWork_id: id,
@@ -205,7 +216,7 @@ async function generateObjectsForCollections(collections) {
             );
 
             return {
-                collectionTitle: collection.collectionTitle,
+                collection_title: collection.collectionTitle,
                 artWorks: resolvedArtWorks.filter((artwork) => artwork !== null),
             };
         })
@@ -301,7 +312,8 @@ async function persistenceToModel(firebaseData, dispatchHook) { // we get the sn
 }
 
 
-function saveToFirebase(customRef, payload) {
+function saveToFirebase(customRef, payload, type) {
+    console.log("Vad har vi här", type);
     //if(state.ready){ // check if the state is ready, however this will be checked when 
     //set(myBigRef, modelToPersistence(state));
     //console.log("we are about to set some tests: here is the current state", state.getState());
@@ -320,6 +332,19 @@ function saveToFirebase(customRef, payload) {
     set(customRef, payload);  //instead of this
     //set(customRef, modelToPersistence(payload)) //We do this
     //}
+
+
+    /**
+     * Vi vill skapa en funktion som parse:ar ut de delar vi vill ha och endast persista dem.
+     * Den är ju modelToPersistence, men saken är ju att vi vill parse:a olika saker beroende på vad det är för payload.
+     * Så om det är collections som vi vill persista så måste vi parse:a den annorlunda såklart.
+     * Så hur ska vi göra då? Ska vi anropa på modelToPersistence(payload)
+     *
+     * 
+     */
+    modelToPersistence(payload, type);
+
+
 }
 
 //note that we might need a reducer for the state.ready, meaning that we dispatch an action that sets the store to ready.
@@ -360,12 +385,14 @@ function connectToFirebase(state, dispatchHook) {
                 switch (action.type) {
                     case setCollectionsArray.type:
                         console.log("The action type was for the collectionsArray");
-                        saveToFirebase(myCollectionsRef, action.payload);
+                        console.log("This is the ACTION", action.type);
+                        saveToFirebase(myCollectionsRef, action.payload, action.type);
                         break;
                     case setSearchQuery.type:
                         console.log("The action type was for the search query");
                         saveToFirebase(myBigRef, action.payload);
                         break;
+                    //Add more cases here to cover.    
                 }
                 //return saveToFirebase(/* Här kan vi även ge vilken path (alltså någon av myBigRef, alltså mycollectionsRef) den ska vara baserat på vilken case det är**/action.payload);
 
@@ -375,6 +402,8 @@ function connectToFirebase(state, dispatchHook) {
          * If we want to scale this and listen to other data in the store, we simply add another kind of "setCollectionsArray.type" in an array of type
          * Similarly, if we want to perform some actions based on what actually took place then we can use switch cases to match the action type.
          */
+
+        //A tester to trigger the listener to react and save to firebase.
         dispatchHook(setCollectionsArray(testCollectionsArray));
     });
 }
