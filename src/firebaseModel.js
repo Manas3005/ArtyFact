@@ -54,10 +54,12 @@ set(myCollectionsRef, {
     collectionsArray: [
         {
             collectionTitle: "Japanese Art",
+            collectionDescription: "art that accompanied Yukio Mishima's travesty..",
             artWorkIDs: [34, 12981, 129884]
         },
         {
             collectionTitle: "Impressionism.. oh",
+            collectionDescription: "Long before death there was there was the Nile, and out of the Nile death sprung out.. blossomed and ready to kill... songs had not yet been invented, nor was love anywhere to be found.. only sickness.. Mefistofeles was simply not ready to accept Nazim Hikmet at this point in time, nor was Prague yet to be on a world map. The world was simply not ready..asdklj asd lkasjdkla  sdlkajskdj askldjalksd.. jaoksdjaisd osad... sdjaoidoiwoiausdoiu oiasjdkl kslkqw jelqwe... asdsadiooiqweu  yhej va dgl ryd le..laksdlsa dwq we asdlasd",
             artWorkIDs: [3123, 129885, 129887]
         },
     ]
@@ -85,12 +87,13 @@ set(myJournalsRef, {
 })
 
 //I will now define a test object that we set in the db.
+//Det är samma version som det som läses från artWorkPromises, men denna är utan nulls osv.
 const testCollectionsArray =
-{
-    collections: [
 
+    [
         {
             collection_title: "Japanese Art",
+            collection_description: "art that accompanied Yukio Mishima's travesty..",
             artWorks: [
                 {
                     artWorkTitle: "Joseph Sold by his Brothers",
@@ -118,6 +121,7 @@ const testCollectionsArray =
         },
         {
             collection_title: "Impressionism.. oh",
+            collection_description: "Long before death there was there was the Nile, and out of the Nile death sprung out.. blossomed and ready to kill... songs had not yet been invented, nor was love anywhere to be found.. only sickness.. Mefistofeles was simply not ready to accept Nazim Hikmet at this point in time, nor was Prague yet to be on a world map. The world was simply not ready..asdklj asd lkasjdkla  sdlkajskdj askldjalksd.. jaoksdjaisd osad... sdjaoidoiwoiausdoiu oiasjdkl kslkqw jelqwe... asdsadiooiqweu  yhej va dgl ryd le..laksdlsa dwq we asdlasd",
             artWorks: [
                 {
                     artWorkTitle: "The Bath",
@@ -144,7 +148,6 @@ const testCollectionsArray =
             ]
         },
     ]
-};
 
 function readyACB(snap) {
     return snap.val();
@@ -155,7 +158,7 @@ function modelToPersistenceForMyCollections(payload) {
     //console.log("THIS IS SELECTER", selectedCollections);
     //set(myCollectionsRef, selectedCollectionsArray1);
     console.log("This is the payload, or change that we need to persist in the db (inside modelToPersistenceForMyCollections)", payload);
-    const newArray = payload.collections.map(collection => ({
+    const newArray = payload.map(collection => ({
         collectionTitle: collection.collection_title,
         artWorkIDs: [...collection.artWorks].map(artWork => artWork.artWork_id),
     }));
@@ -189,12 +192,13 @@ function modelToPersistence(payload, type) {
 
     }
     //Need an if-check here as well to check the type.
-    modelToPersistenceForMyJournals(state)
+    //modelToPersistenceForMyJournals(state)
 }
 
 async function generateObjectsForCollections(collections) {
     const populatedCollections = await Promise.all(
         collections.collectionsArray.map(async (collection) => {
+            console.log("This is a single collection123", collection);
             const resolvedArtWorks = await Promise.all(
                 collection.artWorkIDs.map(async (id) => {
                     try {
@@ -217,11 +221,11 @@ async function generateObjectsForCollections(collections) {
 
             return {
                 collection_title: collection.collectionTitle,
+                collection_description: collection.collectionDescription,
                 artWorks: resolvedArtWorks.filter((artwork) => artwork !== null),
             };
         })
     );
-
     return populatedCollections;
 }
 
@@ -242,9 +246,9 @@ async function generateObjectsForCollections(collections) {
  * The above is done. Vi lägger nu istället in image URL som value i objektet. Då kan presentern arbeta direkt med den URL:en och rendera bilden.
  */
 async function persistenceToModelForMyCollection(collections, dispatchHook) {
-    console.log("These are collections", collections);
+    console.log("These are collections (from firebase) with the IDs we are going to search upon now", collections);
     const artWorkPromises = await generateObjectsForCollections(collections);
-    console.log("These are the art workS", artWorkPromises);
+    console.log("These are the art works from the API call based on the artWorkIDs from firebase", artWorkPromises);
     /**
      * Perhaps we don't really want to return the artWorks, but instead we would like to persist this data in the store?
      * In that case, how should we do so?
@@ -252,6 +256,7 @@ async function persistenceToModelForMyCollection(collections, dispatchHook) {
      * with the artWorks array.
      * Let's try it out.
      */
+    console.log("Now i am about to dispatch the artWorkPromises to the store", artWorkPromises);
     dispatchHook(setCollectionsArray(artWorkPromises)); //Det funkar!
     return artWorkPromises;
 }
@@ -267,7 +272,7 @@ function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
 
 
 async function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
-    persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook)
+    persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook);
     const result = await persistenceToModelForMyCollection(firebaseData.collections, dispatchHook);
     return result;
     /**
@@ -329,7 +334,7 @@ function saveToFirebase(customRef, payload, type) {
      */
     console.log("We are in saveToFibrease. Here is the new change:", payload);
     console.log("This is the ref", customRef);
-    set(customRef, payload);  //instead of this
+    //set(customRef, payload);  //instead of this
     //set(customRef, modelToPersistence(payload)) //We do this
     //}
 
@@ -404,6 +409,7 @@ function connectToFirebase(state, dispatchHook) {
          */
 
         //A tester to trigger the listener to react and save to firebase.
+        console.log("About to dispatch static array to store to trigger listener: This is the array im dispatching", testCollectionsArray);
         dispatchHook(setCollectionsArray(testCollectionsArray));
     });
 }

@@ -276,14 +276,14 @@ export function MyCollectionsPresenter(props) {
      * Det vi vill göra senare är att låta reducern setCollectionsArray spreada gamla datan och fylla med senaste artwork.
      * Den ska inte alltså vara en "setCollectionsArray" utan mer lik en "addArtworkToCollection"
      */
-    useEffect(() => {
+    /*useEffect(() => {
         console.log("This is the useEffect", collections);
         dispatch(setCollectionsArray(collections));
         console.log("The array in store after dispatch", selectedCollectionsArray);
-    }, []);
+    }, []);*/
 
     const selectedCollectionsArray = useSelector((state) => state.myCollections.collectionsArray);
-    console.log("The selected collecitons array", selectedCollectionsArray);
+    console.log("The selected collecitons array (read in myCollectionsPresenter)", selectedCollectionsArray);
 
 
 
@@ -293,7 +293,7 @@ export function MyCollectionsPresenter(props) {
         }, 6000); 
 
         return () => clearInterval(interval); 
-    }, [selectedCollectionsArray]);
+    }, []);
 
     /**
      * Det vi har gjort hitills:
@@ -373,9 +373,15 @@ export function MyCollectionsPresenter(props) {
          * Vi fyller 
          * @param {*} evt 
          */
-        function setCollectionArrayACB(evt) {
-            console.log("this is the event in secollectionACB", evt);
-            dispatch(setCollection(evt));
+        function setCollectionArrayACB(collection) {
+            console.log("this is the collection given to the setter", collection);
+            console.log("We will now try to see if we still have access to the collections", selectedCollectionsArray);
+            /**
+             * Vi ser här att vi gör en dispatch till store, där vi sätter den collection vi vill visa i vår nya sida,
+             * men vi vet att det inte går så bra när vi refreshar sidan.
+             * 
+             */
+            dispatch(setCollection(collection));
         }
 
         /**
@@ -419,7 +425,7 @@ export function MyCollectionsPresenter(props) {
             />
             <ListOfCollectionsView 
             activeIndex={activeIndex}
-            collections={filteredCollections || collectionsForTest}
+            collections={filteredCollections || selectedCollectionsArray}
             setCollections={setCollectionsListACB}
             setCollection={setCollectionArrayACB}
             />

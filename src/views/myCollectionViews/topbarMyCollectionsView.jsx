@@ -4,7 +4,7 @@ import {BackToHomeButton} from "/src/views/customViewComponents/BackToHomeButton
 
 function TopbarCollectionsView(props) {
 
-    console.log("These are the props in collections view", props);
+   // console.log("These are the props in collections view", props);
 
 
     function backToHomeACB() {

@@ -42,11 +42,11 @@ export function CollectionListview(props) {
      */
     function renderImagesACB() {
         return props.collection.artWorks.map((artWork) => (
-            <div className="theCollectionSingleFrame" key={artWork.title}>
-                <img className="theCollection-image" src={artWork.image} alt={artWork.title}></img>
-                <div className="theCollection-title">{artWork.title}</div>
+            <div className="theCollectionSingleFrame" key={artWork.artWork_id}>
+                <img className="theCollection-image" src={artWork.image_URL} alt={artWork.artWorkTitle}></img>
+                <div className="theCollection-title">{artWork.artWorkTitle}</div>
                 <div className="theCollection-year">{artWork.year}</div>
-                <div className="artistName">{artWork.artistName}</div>
+                <div className="artistName">{artWork.artistName + " " + artWork.artistDate}</div>
             </div>
         ));
     }

@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 
 export function ListOfCollectionsView(props) {
 
-    console.log("This is the props", props);
+    console.log("This is the props in listOfCollectionsView", props);
 
+    //Nu är frågan om vi vill använda component state eller inte, eller ifall vi vill hämta själva collection:en från firebase?
     function handleNavigateACB(evt, collection) {
         console.log("This is the evt", evt);
         console.log("This is the collection in event", collection);
-        props.setCollection(collection);
+        //Här sätter vi en viss collection in i en ny array i store. Men det kanske vi inte vill göra.
+        //Utan vid rendering av den view:n vill vi hämta från firebase det aktuella datan.
+        //Men då är frågan, hur ska vi göra det? Ska vi göra det genom att 
+        props.setCollection(collection);    
         //Det vi behöver är att veta just vilken det är, och för att veta det behöver vi veta vilken collection vi har tryckt på.
         /**
          * Hur kan vi veta vilken collection vi har tryckt på?
@@ -37,24 +41,24 @@ export function ListOfCollectionsView(props) {
 
 
     function renderSlideShowCB(artWorks, collection) {
-        console.log("This is the collectio in renderSlideShowCB", collection);
-        console.log("This are the artWorks in renderSlideShowCB", artWorks);
+        console.log("We have been given the artworks now. This is the collection in renderSlideShowCB", collection, "and these are the artworks", artWorks);
+        //console.log("This are the artWorks in renderSlideShowCB", artWorks);
         return [...artWorks].map((artWork, i) => (
             <img
                 key={i}
-                src={artWork.image}
+                src={artWork.image_URL}
                 alt={`Slide ${i}`}
                 className={`collection-image ${i === props.activeIndex ? "active" : "hidden"}`}
                 onClick={(evt) => handleNavigateACB(evt, collection)}
-                
             />
         ));
     }
 
     function renderCollectionCB(collection) {
+        console.log("this is a collection in rednerCollectionCB", collection, "we are about to render its title and then call the renderSlideShowCB to render artworks");
         return (
-            <div className="collection-item" key={collection.title}>
-                <div className="image-title">{collection.title}</div>
+            <div className="collection-item" key={collection.collection_title}>
+                <div className="image-title">{collection.collection_title}</div>
                 <div className="slideshow-container">{renderSlideShowCB(collection.artWorks, collection)}</div>
             </div>
         );
