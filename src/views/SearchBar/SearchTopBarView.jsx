@@ -27,6 +27,7 @@ export function SearchTopBar(props) {
                 dimensions:foundInformation.dimensions ,
                 description: foundInformation.description,
                 style_title: foundInformation.style_title,
+                date_display : foundInformation.date_display
       };
 
       props.setIndividualArt(allArtInformationToUpdate)

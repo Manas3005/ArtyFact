@@ -61,6 +61,7 @@ function SearchResult(props) {
                 dimensions:data.data.dimensions ,
                 description: data.data.description,
                 style_title: data.data.style_title,
+                date_display: data.data.date_display
             };
 
           })
@@ -75,7 +76,7 @@ function SearchResult(props) {
             dimensions:      curr.dimensions,
             description:     curr.description,
             style_title:     curr.style_title,
-
+            date_display:    curr.date_display
 
         };
 
