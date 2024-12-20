@@ -79,6 +79,194 @@ export function MyCollectionsPresenter(props) {
         }
     ]
     
+    const collectionsForTest = [
+        {
+            title: "Japanese Art",
+            artWorks: [
+                {
+                    title: "Lilly flowers",
+                    year: "1341-2341",
+                    artistName: "Vincent Van Gogh",
+                    image: 'https://i.imgur.com/4MWnofa.jpeg',
+                },
+                {
+                    title: "Saturday",
+                    year: "1341",
+                    artistName: "Vincent",
+                    image: 'https://i.imgur.com/pzHx8kg.jpeg',
+                },
+                {
+                    title: "Monday",
+                    year: "1321",
+                    artistName: "Heyy",
+                    image: 'https://i.imgur.com/6APpUgV.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Impressionism... oh",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/nsBGeNZ.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/qrycgCT.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/HsSDEwa.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Gustave Caillebotte..",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/3ShRSaq.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/YLqzq73.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/TsygFcL.jpeg',
+                },
+            ],
+        },
+        {
+            title: "are you coming home soon dear?",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/dAy5xeF.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/U9sQ5eE.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/T58LnpG.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Collection 5",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/AyszSmi.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/JpfMWE3.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/6xIuGyG.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Collection 6",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/WdLAx8y.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/sURNEFc.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/HsSDEwa.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Collection 7",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/IMoyBfZ.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/NWXkwWK.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/CNFcZQu.jpeg',
+                },
+            ],
+        },
+        {
+            title: "what are these streets?",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/lqYOlkP.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/5PAjcHE.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/pJOfSc3.jpeg',
+                },
+            ],
+        },
+    ];
+
+
     /**
      * Denna ska tas bort senare. Vi kommer fetcha denna data från firebase när en user loggar in.
      * 
@@ -101,7 +289,7 @@ export function MyCollectionsPresenter(props) {
 
     useEffect(() => {   
         const interval = setInterval(() => {
-            setActiveIndex((prevIndex) => (prevIndex + 1) % 2);
+            setActiveIndex((prevIndex) => (prevIndex + 1) % 3);
         }, 6000); 
 
         return () => clearInterval(interval); 
@@ -231,7 +419,7 @@ export function MyCollectionsPresenter(props) {
             />
             <ListOfCollectionsView 
             activeIndex={activeIndex}
-            collections={filteredCollections || collections}
+            collections={filteredCollections || collectionsForTest}
             setCollections={setCollectionsListACB}
             setCollection={setCollectionArrayACB}
             />

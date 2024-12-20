@@ -36,11 +36,13 @@ export function ListOfCollectionsView(props) {
 
 
 
-    function renderSlideShowCB(images, collection) {
-        return [...images].map((image, i) => (
+    function renderSlideShowCB(artWorks, collection) {
+        console.log("This is the collectio in renderSlideShowCB", collection);
+        console.log("This are the artWorks in renderSlideShowCB", artWorks);
+        return [...artWorks].map((artWork, i) => (
             <img
                 key={i}
-                src={image}
+                src={artWork.image}
                 alt={`Slide ${i}`}
                 className={`collection-image ${i === props.activeIndex ? "active" : "hidden"}`}
                 onClick={(evt) => handleNavigateACB(evt, collection)}
@@ -53,7 +55,7 @@ export function ListOfCollectionsView(props) {
         return (
             <div className="collection-item" key={collection.title}>
                 <div className="image-title">{collection.title}</div>
-                <div className="slideshow-container">{renderSlideShowCB(collection.images, collection)}</div>
+                <div className="slideshow-container">{renderSlideShowCB(collection.artWorks, collection)}</div>
             </div>
         );
     }

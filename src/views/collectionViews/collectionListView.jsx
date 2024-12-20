@@ -24,24 +24,46 @@ export function CollectionListview(props) {
      * Vi vill array-rendera title, year, artistName.
      * 
      * @returns Vi ska rendera varje del av en collection
+     * 
+     * collection: {
+     *      title: "Collection 1"
+     *      artWorks: [
+     *              {
+     *                 title: "Sunday",
+     *                 image: ".....adoijqoie"
+     *                 year: "1953",
+     *                 artistName: "Vincent Van Gogh"  
+     *              },
+     *              
+     *              ]
+     * 
+     * }
+     * 
      */
     function renderImagesACB() {
-        return (
-            [...props.collection].map((collection) => {
-                console.log(collections)
-
-
-
-
-            })
-        )
+        return props.collection.artWorks.map((artWork) => (
+            <div className="theCollectionSingleFrame" key={artWork.title}>
+                <img className="theCollection-image" src={artWork.image} alt={artWork.title}></img>
+                <div className="theCollection-title">{artWork.title}</div>
+                <div className="theCollection-year">{artWork.year}</div>
+                <div className="artistName">{artWork.artistName}</div>
+            </div>
+        ));
     }
+    
 
 
 
     return(
 
         <div>
+            <div className="theCollectionFull">
+               {renderImagesACB()}
+            </div>
+        </div>
+
+
+       /* <div>
             <div className="theCollectionFull">
                 <div className="theCollectionSingleFrame">
                     <img className="theCollection-image" src="image/impressionism/SundayImpressionism.jpg"></img>
@@ -62,7 +84,7 @@ export function CollectionListview(props) {
 
             </div>
 
-        </div>
+        </div>*/
 
     )
 

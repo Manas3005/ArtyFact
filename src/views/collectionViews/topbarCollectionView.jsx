@@ -5,14 +5,25 @@ import "/src/css/collectionStyle.css"
 
 export function TopbarCollectionView(props) {
 
+    console.log("This is the props in topbarcollectionview", props);
+    
+    function handleClickForBackToHomeACB(evt) {
+        window.location.hash = "#/";
+    }
+
+    function handleclickForMyJournalACB() {
+        window.location.hash ="#/myJournal";
+    }
+
+
 
     return (
 
         <div>
             <div className="topbarCollection">
-                <BackToHomeButton className={"backToHomeCollection"}></BackToHomeButton>
-                <MyJournalsButton className={"MyJournalCollection"}></MyJournalsButton>
-                <h1 className="collectionTitle">Impressionism.. oh</h1>
+                <button className={"backToHomeCollection"} onClick={handleClickForBackToHomeACB}>Back To Home</button>
+                <button className={"MyJournalCollection"} onClick={handleclickForMyJournalACB}>Back slfkjdsf</button>
+                <h1 className="collectionTitle">{props.collection.title}</h1>
                 <div className="collectionName">
                 Long before death there was there was the Nile, and out of the Nile death sprung out.. blossomed and ready to kill...
                 songs had not yet been invented, nor was love anywhere to be found.. only sickness.. Mefistofeles was simply not ready to accept Nazim Hikmet at this point in time, nor was Prague yet to be on a world map.

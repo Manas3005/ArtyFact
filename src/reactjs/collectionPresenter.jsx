@@ -19,8 +19,9 @@ export function CollectionPresenter() {
     return (
 
         <div>
-            <TopbarCollectionView>
-            </TopbarCollectionView>
+            <TopbarCollectionView
+            collection={selectedCollection}
+            ></TopbarCollectionView>
             <CollectionListview
             collection={selectedCollection}
             ></CollectionListview>
