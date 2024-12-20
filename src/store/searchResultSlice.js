@@ -10,8 +10,13 @@ export const searchResults = createSlice({
         
         searchParam:{
              title : "",
-             limiet :40
-        }
+             limit :40
+        },
+
+        idParam:{
+            id:"",
+            limit:1
+        },
 
     },
 
