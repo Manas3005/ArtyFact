@@ -1,3 +1,4 @@
+import { intercept } from 'mobx';
 import sanitizeHtml from 'sanitize-html'; 
 
 
@@ -12,4 +13,20 @@ export const cleanHtmlContent = (html) => {
 export function transformJournalTitleCB(entry) {
     return entry.title;
 }
+
+export function extractDateInterval(input) {
+    console.log("This is input", input);
+    if(input) {
+    const regex = /\d+/g;
+    const matches = input.match(regex);
+    return matches && matches.length >= 2 ? `${matches[0]}-${matches[1]}` : "";
+    }
+    else {
+        return "";
+    }
+}
+const input = "Charles Georges Dufresne\nFrench, 1876-1938";
+const dateInterval = extractDateInterval(input);
+console.log(dateInterval);
+
 

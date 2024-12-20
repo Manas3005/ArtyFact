@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { entries } from "mobx";
 
 export const myJournalEntries = createSlice({
     name : "myJournalEntries",
@@ -20,9 +19,15 @@ export const myJournalEntries = createSlice({
                 }
                 state.entries= state.entries.filter(entryFilterCB); // Remove the current entry you are viewing from entries array
             
-        }
+        },
+        setEntries: (state, action) => { 
+            state.entries = action.payload;
+        },
+        /*setLatestEntryID: (state, action) => { 
+            state.latestEntryID = action.payload;
+        },*/
         }
     }
 )
 
-export const { addEntry, removeEntry } = myJournalEntries.actions;
+export const { addEntry, removeEntry, setEntries } = myJournalEntries.actions;
