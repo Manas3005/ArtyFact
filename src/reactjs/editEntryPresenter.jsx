@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useState,useEffect } from "react";
 import { addEntry, increaseLatestEntryID, editEntry } from "../store/journalsSlice";
 import { useSelector } from "react-redux"
+import {setNewSearchParam} from "/src/store/searchResultSlice.js";
 
 function EntryEdit (props){
 
@@ -14,7 +15,7 @@ function EntryEdit (props){
     const [title, setTitle] = useState('');
     const [mood, setMood] = useState('');
     const [actualText, setActualText] = useState('');
-     
+    const [searchParam, setSearchParam] = useState('');
     let dispatch = useDispatch()
 
     function selectedEntryFinderCB(entry) {
@@ -69,6 +70,15 @@ function EntryEdit (props){
 
         }
     }
+
+    function sendSearchParamACB (){
+        const param = {
+            title: searchParam,
+            limit: 40
+        }
+
+        dispatch(setNewSearchParam(param))
+    }
     
     useEffect(() => {
         if (selectedEntry) {
@@ -89,7 +99,9 @@ function EntryEdit (props){
                             todayDate={dateString} 
                             onEntryMoodChange={setMood} 
                             onEntryTextChange={setActualText}
-                            
+                            onSearchParamChange={setSearchParam}
+                            onSearchParamsSend={sendSearchParamACB}
+
                             entryID={currentEntryID}
                             inputTitle={title}
                             inputMood={mood}

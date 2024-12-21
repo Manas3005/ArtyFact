@@ -20,7 +20,12 @@ function HomePage(props){
 
     function updateCurrentSearch(setParam){
         console.log("about to set params:", setParam);
-        dispatch(setNewSearchParam(setParam)); 
+
+        const searchParam = {
+            title: setParam,
+            limit: 40
+        }
+        dispatch(setNewSearchParam(searchParam)); 
 
     }
 

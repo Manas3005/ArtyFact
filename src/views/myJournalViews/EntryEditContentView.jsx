@@ -4,8 +4,6 @@ import { conditionalRenderHelperCB } from "../../utilities"
 
 export function EntryEditContentView(props){
 
-    const searchArtworkModal = document.getElementById("searchArtworkModal")
-
     function onEntryTitleChangeACB (event){
         props.onEntryTitleChange(event.target.value)
     }
@@ -27,11 +25,22 @@ export function EntryEditContentView(props){
     }
 
     function handleAddOrChangeArtworkClick (){
+        const searchArtworkModal = document.getElementById("searchArtworkModal")
         searchArtworkModal.style.display = "flex";
     }
 
     function closeModalACB(){
+        const searchArtworkModal = document.getElementById("searchArtworkModal")
         searchArtworkModal.style.display = "none";
+    }
+
+    function handleSearchParamChangeACB(event){
+        props.onSearchParamChange(event.target.value)
+    }
+
+    function handleSearchParamsSendACB (){
+        props.onSearchParamsSend()
+        window.location.hash="#/searchResult";
     }
     
     return (
@@ -103,12 +112,12 @@ export function EntryEditContentView(props){
 
             </div>
 
-            <div id="searchArtworkModal" class="modal" onClick={closeModalACB}>
+            <div id="searchArtworkModal" class="modal" >
                 <div class="modal-content">
                     <h2 className="commonText">Search for the artwork you wish to add to your current Journal Entry</h2>
-                    <input className="editEntrysearchBar" placeholder = "Type here..."/>
+                    <input className="editEntrysearchBar" placeholder = "Type here..." onBlur={handleSearchParamChangeACB}/>
                     <div className="modalButtonDiv">
-                        <button className="goButton commonText commonButtonBase">Go</button>
+                        <button className="goButton commonText commonButtonBase" onClick={handleSearchParamsSendACB}>Go</button>
                         <button id="closeModel" className="cancel commonText commonButtonBase" onClick={closeModalACB}>Cancel</button>
                     </div>
                 </div>
