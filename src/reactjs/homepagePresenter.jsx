@@ -23,7 +23,7 @@ function HomePage(props){
 
        const serachparam = {
             title : setParam,
-            limit :2
+            limit :40
        }
 
 
