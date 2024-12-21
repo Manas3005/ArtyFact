@@ -2,9 +2,11 @@ import "/src/css/style.css"
 //import Drawer from '@mui/material/Drawer';
 import React, { useState } from 'react';
 import ExploreDrawer from "/src/views/ThirdPartyWrittenComponents/sideBarNav.jsx";
+import { setNewSearchParam } from "/src/store/searchResultSlice.js";
+
 
 export function TopBarView(props){
-
+ 
     
     function handleMyJournalsClickedACB (){
         return window.location.hash = '#/myjournals'
@@ -17,11 +19,27 @@ export function TopBarView(props){
       setOpen(newOpen);
     };
   
-    console.log("we are here and this is props"+ props)
+    console.log("we are here and this is props", props)
 
     function handleClickForMyCollectionACB() {
         window.location.hash="#/collections";
     }
+
+    function handleEnterKey(evt) {
+        if(evt.which == "13") { 
+            
+        props.onSearched(evt.target.value)    
+        console.log("--------------------- This is the evt",evt.target.value)
+        console.log(" PROPS IN TOPBAR",props)
+        console.log("button has been pressed")
+           window.location.hash="#/searchResult";
+
+        }
+    }
+    
+    
+
+
 
     return (
         <div>
@@ -40,14 +58,14 @@ export function TopBarView(props){
 
 
 
+                
+               <input className="searchBar" placeholder = "Search..." onKeyDown={handleEnterKey}/> 
 
-               <input className="searchBar" placeholder = "Search..."/> 
 
-
-                <img  className = "logo" src = "https://i.imgur.com/viSeXcY.png" />
+                <img  className = "logo" src = "/image/Logo.png" />
                 
                 <button className="signInIcon">
-                    <img  src = "https://i.imgur.com/4OM4nvs.png" />
+                    <img  src = "/image/signinIcon.png" />
                 </button>
 
                 <button  className="signInlogo">    

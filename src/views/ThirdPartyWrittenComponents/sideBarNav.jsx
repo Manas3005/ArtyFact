@@ -7,19 +7,24 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getCollection} from '/src/apiCall.js';
 
 
 export default function ExploreDrawer({ open, toggleDrawer }) {
-
 
 
     const handleButtonClick = (action) => {
         //console.log(`${action} button clicked`);
         // You can add navigation, API calls, or other logic here
         
+
+        const searchParams = {
        
+        };
+
+      
         action === 'CITYSCAPES'
-        ? console.log("Why did you click on CITYSCAPES?")
+        ? console.log("Why did you click on CITYSCAPES?",getCollection(searchParams))
         : action === 'IMPRESSIONISM'
         ? console.log("Why did you click on IMPRESSIONISM?")
         : action === 'ANIMAL'

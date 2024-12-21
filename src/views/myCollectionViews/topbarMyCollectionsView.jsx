@@ -1,8 +1,10 @@
+import { MyJournalsButton } from "../customViewComponents/backToHomeButton";
 import "/src/css/collectionsStyle.css"
+import {BackToHomeButton} from "/src/views/customViewComponents/BackToHomeButton"
 
 function TopbarCollectionsView(props) {
 
-    console.log("These are the props in collections view", props);
+   // console.log("These are the props in collections view", props);
 
 
     function backToHomeACB() {
@@ -46,9 +48,9 @@ function TopbarCollectionsView(props) {
         <div>
 
             <div className="topbarCollection">
-                <button className="MyJournalCollection" onClick={goToJournalACB}>My Journals</button>
-                
-                <button className="backToHomeCollection" onClick={backToHomeACB}>Back To Home</button>
+                <MyJournalsButton className="myJournalCollection"></MyJournalsButton>
+
+                <BackToHomeButton className="backToHomeCollection" ></BackToHomeButton>
                 <input className="collectionsSearchBar" placeholder = "Search Collections..." onChange={handleSearchACB}/>
                 <button className="buttonX"
                     onClick={handleClearButtonACB} 
@@ -56,9 +58,9 @@ function TopbarCollectionsView(props) {
                     x</button> 
                 <button className="signInlogo">Sign in</button>
                 <button className="signInIcon" >
-                <img src = "https://i.imgur.com/uf8TJb6.png"/>
+                <img src = "/image/signinIcon.png"/>
                 </button>
-                <img className = "collectionsLogo" src="https://i.imgur.com/0MOeBLR.png" />
+                <img className = "collectionsLogo" src="/image/collectionsLogo.png" />
 
                 <button className="addNewCollection">Create New Collection</button>
             </div>

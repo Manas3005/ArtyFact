@@ -1,14 +1,11 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
+import { conditionalRenderHelperCB } from "../../utilities"
 
 export function EntryEditContentView(props){
 
     function onEntryTitleChangeACB (event){
         props.onEntryTitleChange(event.target.value)
-    }
-
-    function onEntryDateChangeACB (event){
-        props.onEntryDateChange(event.target.value)
     }
 
     function onEntryMoodChangeACB (event){
@@ -18,17 +15,31 @@ export function EntryEditContentView(props){
     function onEntryTextChangeACB (event){
         props.onEntryTextChange(event.target.value)
     }
+
+    function renderDeleteTextACB (){
+        return conditionalRenderHelperCB(props.entryID, "Cancel", "Discard Changes")
+    }
+
+    function renderDeleteIconACB (){
+        return conditionalRenderHelperCB(props.entryID, "/image/minusIcon.png", "/image/deleteIcon.png")
+    }
+    
     
     return (
-        <div className="editEntryHorizontalFlexParent">
+        <div className="journalsHorizontalFlexParent">
 
-            <div className="editEntryLeftContent">
+            <div className="leftContent commonText">
 
                 <div className="titleAndDateDiv">
                    
-                    <input className="entryTitleTextBox" placeholder="Journal Entry Title " onBlur={onEntryTitleChangeACB}></input>
+                    <input className="entryTitleTextBox commonText" value={props.inputTitle} placeholder="Journal Entry Title " onChange={onEntryTitleChangeACB}></input>
 
-                    <input className="entryTextBox" placeholder="Journal Entry Date " onBlur={onEntryDateChangeACB}></input>
+                    <div className="dateText commonText"> 
+                        
+                        <label>Date:  </label>{props.todayDate}
+                        
+                        
+                    </div>
 
                 </div> 
 
@@ -36,29 +47,29 @@ export function EntryEditContentView(props){
 
                     <div>
 
-                        <input className="entryTextBox" placeholder="Current Mood (Optional)" onBlur={onEntryMoodChangeACB}></input>
+                        <input className="entryTextBox commonText" value={props.inputMood} placeholder="Current Mood (Optional)" onChange={onEntryMoodChangeACB}></input>
 
                     </div>
                 </div>
 
                 <div className="journalEntryDiv">
 
-                    <textarea className="journalEntryContentTextBox" placeholder="What are you thinking about? Start Typing here ..." onBlur={onEntryTextChangeACB}></textarea>
+                    <textarea className="journalEntryContentTextBox commonText" value={props.inputActualText} placeholder="What are you thinking about? Start Typing here ..." onChange={onEntryTextChangeACB}></textarea>
 
                 </div>
 
             </div>
 
-            <div className="editEntryRightSideBar">
+            <div className="rightContent">
 
                 
 
                     <div className="sidebarVerticalFlexParent">
                     
-                        <div className="up">
+                        <div className="up commonCenterFlex">
 
-                            <div className="artWorkBox">
-                                    <img className="starryNightIcon" src="https://i.imgur.com/b3r8xMO.png"></img>
+                            <div className="artWorkBox commonCenterFlex">
+                                    <img className="starryNightIcon" src="/image/starry-night.png"></img>
                             </div>
 
                         </div>
@@ -66,11 +77,11 @@ export function EntryEditContentView(props){
 
                         <div className="down">
                         
-                            <button className="addArtwork">Add Artwork</button>
+                            <button className="addArtwork commonText commonButtonBase">Add Artwork</button>
 
-                            <button className="deleteEntry">
-                                <img className="Icon" src = "https://i.imgur.com/xNXJSLZ.png" />
-                                <text >Delete Journal Entry</text>
+                            <button className="deleteEntry commonText commonCenterFlex commonButtonBase">
+                                <img className="Icon" src = {renderDeleteIconACB()} />
+                                <text >{renderDeleteTextACB()}</text>
                             </button>
                     
                         </div>    

@@ -16,7 +16,7 @@ function ArtDescBodyView (props) {
     }
 
     return (
-
+            
         <div className="horizontalFlexParent"> 
 
             <img className="ArtDescImage" src= {props.image} />
