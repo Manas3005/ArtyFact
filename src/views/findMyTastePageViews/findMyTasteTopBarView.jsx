@@ -6,7 +6,7 @@ function FindMyTasteTopBarView (props){
     return (<div className = "topBarFMT">
                 
                 <a href = "#/homepage">
-                    <img className = "backToHomeButton" src = "https://i.imgur.com/JcHVFK7.png"></img>
+                    <button className = "backToHome">Back To Home</button>
                 </a>
                 
                 <img src = "image/artQuizTitle.png" className = "artQuizLogo"></img>
