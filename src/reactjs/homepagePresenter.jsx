@@ -12,35 +12,7 @@ import {setNewSearchParam} from "/src/store/searchResultSlice.js";
 
 function HomePage(props){
 
-        
-    // --------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-//------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
     // here will be the logic for updating the searchReusltSlice 
 
     
@@ -59,18 +31,7 @@ function HomePage(props){
 
     }
 
-    function updateCurrentExplore(setParam){
-        console.log("about to set params:", setParam);
-
-        const searchParams1 = {
-            style_title: setParam,
-            limit:40 
-        };
-
-        dispatch(setNewSearchParam(searchParams1)); 
-
-    }
-
+    
 
 
     //Redux specific hooks
@@ -117,11 +78,14 @@ function HomePage(props){
     return <div>
         <TopBarView   
         onSearched={updateCurrentSearch}
-        onExplore={updateCurrentExplore}
 
         />  
 
-        <ExploreBodyView> </ExploreBodyView>
+        <ExploreBodyView     
+           
+
+        />
+        
         <ArtDescBodyView 
                 artData={randomArt} 
                 image={image}
