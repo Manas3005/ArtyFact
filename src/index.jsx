@@ -6,7 +6,7 @@ import { myCollections} from "./store/collectionsSlice";
 import "./firebaseModel.js";
 import { myJournalEntries } from "./store/journalsSlice";
 import { listenerMiddleware } from "./middleware.js";
-
+import{searchResults} from "./store/searchResultSlice";
 
 import { findMyTaste } from "./store/findMyTasteSlice";
 import { connectToFirebase } from "./firebaseModel.js";
@@ -19,7 +19,6 @@ export const store = configureStore({
         myJournals: myJournalEntries.reducer,
         
         findMyTaste: findMyTaste.reducer,
-        user: user.reducer,
         //to be added as separate slices
         //artWorks: artWorks.reducer,
         //journalEntryName: journalEntryName.reducer,

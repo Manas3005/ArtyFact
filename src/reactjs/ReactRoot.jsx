@@ -4,13 +4,15 @@ import { MyJournalsMain } from "./myJournalsMainPresenter.jsx";
 import { EntryEdit } from "./editEntryPresenter.jsx";
 import {MyCollectionsPresenter} from "./myCollectionsPresenter.jsx"
 import {  createHashRouter,  RouterProvider} from "react-router-dom";
-import { store} from "../index.jsx";
+import {store} from "../index.jsx";
 import { FindMyTaste } from "./findMyTastePresenter.jsx";
 import { useDispatch } from "react-redux";
 import { useEffect} from "react";
 import { connectToFirebase } from "../firebaseModel.js";
+import {SearchResult} from "./searchResultPresenter.jsx"
+import { SearchChoosenPresent } from "./searchChoosenPresenter.jsx"; 
 
-export function makeRouter(store){
+export function makeRouter(store){  
     return createHashRouter([
         {    
             path:"/",
@@ -35,8 +37,16 @@ export function makeRouter(store){
         {   
             path: "/findMyTaste",
             element: <FindMyTaste store = {store}></FindMyTaste>
+        },
+        {   
+            path: "/searchResult",
+            element: <SearchResult store = {store}></SearchResult>
+        },
+
+        {   
+            path: "/searchChoosen",
+            element: <SearchChoosenPresent store = {store}></SearchChoosenPresent>
         }
-        
     ])
 }
 

@@ -44,6 +44,23 @@ export function getArtWorksWithLog(searchParams) {
     return fetch(createURLParamsForArtWork(searchParams), options).then(gotResponseACB).then((result) => console.log("this is where we are now ",result));
 }
 
+export function getArtWorkByID(searchParams) {
+    console.log("This is params", searchParams);
+    return fetch(createURLParamsForArtWorksByID(searchParams), options).then(gotResponseACB).then(printResponseACB);
+}
+
+function createURLParamsForArtWorksByID(searchParams) {
+    console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
+    return MAIN_URL + "artworks/" + searchParams;
+
+}
+
+
+
+export function getCollection(searchParams) {
+    return fetch(createURLParamsForCollection(searchParams), options).then(gotResponseACB).then(printResponseACB);
+}
+
 
 
 export function getArtWorksSearch(searchParams) {
@@ -55,6 +72,13 @@ export function getArtWorkByID(searchParams) {
     return fetch(createURLParamsForArtWorksByID(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
 
+
+export function getArtWorkImageModified(result){ //This function directly return the URL that leads to the image, added this because the function above seems to throw an error while fetching
+    console.log("This is the IMAGE ID DIRECT", result);
+    const imageID = result;
+    const imagePath = imageID + IMAGE_DIM;
+    return URLParamsForImage(imagePath);
+}
 
 
 export function getArtWorkImage(result){
@@ -86,12 +110,26 @@ export function URLParamsForImage(searchParams) {
 function createURLParamsForArtWork(searchParams) {
     return MAIN_URL + "artworks/" +  "?" + new URLSearchParams(searchParams);
 }
+
+
+/*
 function createURLParamsForArtWorkSearch(searchParams) {
-    console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams))
+    //console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams))
     return MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams);
 }
+*/
+
+
+function createURLParamsForArtWorkSearch(searchParams) {
+    console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams));
+    return MAIN_URL + "artworks/" + "search/" + "?q=" + new URLSearchParams(searchParams);
+
+}
+
+
+
 const searchParams1 = {
-    title: "example",
+    title: "example",   
 }
 function createURLParamsForSpecificArtWork(id, searchParams1) {
     return MAIN_URL + "/artworks/" + id + "?" + new URLSearchParams(searchParams1);
