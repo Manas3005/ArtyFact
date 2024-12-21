@@ -504,7 +504,7 @@ function connectToFirebase(state, dispatchHook) {
               const updatedCollectionsArray = store.getState().myCollections.collectionsArray;
               console.log("we are inside editCollectionDescription listener and we have read the collectionsARRAY", updatedCollectionsArray);
 
-              dispatchHook(setCollectionsArray(updatedCollectionsArray));
+              //dispatchHook(setCollectionsArray(updatedCollectionsArray));
             },
           });
  

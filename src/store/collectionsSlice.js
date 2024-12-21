@@ -38,13 +38,7 @@ export const myCollections = createSlice({
             const collection_id = action.payload.collection_id;
             const newDescription = action.payload.collection_description;
 
-            state.collectionsArray = [...state.collectionsArray].map(collection => {
-                if (collection.collection_id === collection_id) {
-                    console.log("updating the state");
-                    return { ...collection, collection_description: newDescription };
-                }
-                return collection;
-            });
+           
 
            /*
             const collection_id = action.payload.id;

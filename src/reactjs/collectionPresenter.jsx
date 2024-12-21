@@ -2,7 +2,7 @@ import { TopbarCollectionView } from "../views/collectionViews/topbarCollectionV
 import { CollectionListview } from "../views/collectionViews/collectionListView";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { editCollectionDescription } from "../store/collectionsSlice";
+import { editCollectionDescription, setCollectionsArray } from "../store/collectionsSlice";
 
 export function CollectionPresenter() {
     console.log("----------ENTERING COLLECTION PRESENTER------------");
@@ -24,15 +24,19 @@ export function CollectionPresenter() {
 
     function handleEditDescriptionACB(description, id) {
         console.log("This is the new collection description:", description, " and this is the id: ", id);
-        const newArray = [...allCollections].filter((collection) => collection.collection_id === id);
-        console.log("the new Array", newArray);
-        const newObj = selectedCollection.collection_description;
-        const obj = {
+        const updatedSingleCollection = {
             ...selectedCollection,
             collection_description: description
         };
-        console.log("new obj after editing", obj);
-        dispatch(editCollectionDescription(obj));
+        const updatedCollectionsArray = [...allCollections].map(collection => {
+            if (collection.collection_id === id) {
+                console.log("updating the state");
+                return { ...collection, collection_description: description };
+            }
+            return collection;
+        });
+        dispatch(editCollectionDescription(updatedSingleCollection));
+        dispatch(setCollectionsArray(updatedArray));
     }
 
     function handleSaveChangesACB() {
