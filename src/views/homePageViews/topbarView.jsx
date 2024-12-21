@@ -25,11 +25,12 @@ export function TopBarView(props){
     }
 
     function handleSignInClick (){
-        props.onSignUpClick()
-    }
-
-    function handleSignOutClick (){
-        props.onSignOutClick()
+        if (props.userID === null){
+            props.onSignUpClick()
+        } else{
+            props.onSignOutClick()
+        }
+        
     }
 
     function renderProfilIcon (){
@@ -37,11 +38,11 @@ export function TopBarView(props){
     }
 
     function renderSignInButtonText (){
-        return conditionalRenderHelperCB(props.userID, "Sign In", props.userName)
+        return conditionalRenderHelperCB(props.userID, "Sign In", "Sign Out")
     }
 
-    function renderLoggedInText (){
-        return conditionalRenderHelperCB(props.userID, "Logged in as: Guest", "")
+    function renderDisplayNameText (){
+        return conditionalRenderHelperCB(props.userID,"Guest", props.userName)
     }
 
 
@@ -61,27 +62,17 @@ export function TopBarView(props){
 
                 <ExploreDrawer open={open} toggleDrawer={toggleDrawer} />
 
-
-
-
                <input className="searchBar" placeholder = "Search..."/> 
 
 
                 <img  className = "logo" src = "/image/Logo.png" />
                 
-                
-                    
-                <img className="signInIcon" src = {renderProfilIcon()} />
-                
-                <button  className="signInlogo" onClick={handleSignInClick}>    
-                    {renderSignInButtonText()}
-                   {/*<img  src="/image/signinLogo.png"/>*/}
-                </button>
+                <div className="signInDiv">    
+                    <img className="profilePic" src = {renderProfilIcon()} />
+                    <label className="displayName">{renderDisplayNameText()}  </label>
 
-                <label>{renderLoggedInText()}  </label>
-
-                <button onClick={handleSignOutClick}> Sign Out </button>
-                
+                    <button className="signInButton" onClick={handleSignInClick}> {renderSignInButtonText()} </button>
+                </div>
                 
                 <button className="Myjournal" onClick={handleMyJournalsClickedACB} >My Journal</button>
                 <button className="Mycollections" onClick={handleClickForMyCollectionACB}>My Collections</button>

@@ -11,14 +11,11 @@
 }
 
 .logo{
-    position: center;          
-    margin-bottom: 100px;
+    position: absolute;             
     top: 3%;  
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     max-height:83px ;
     max-width: 450px;
-
-
 }
 
 .Explore {
@@ -41,11 +38,8 @@
     line-height: 26px;
     color: #000000;
     background-color: ABB4C1;
-
-
-
-
 }
+
 .searchBar {
     position: absolute;
     border: bold;        
@@ -56,32 +50,20 @@
     cursor: text;
 }
 
-.signInlogo {
+.displayName {
     position: absolute;
-    border: bold;        
-    right: 50px;                   
-    top: 3%;                                  
-    cursor: pointer;
-   
-
-width: 92px;
-height: 38px;
-
-
-font-family: 'Junge';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 15px;
-
-color: #000000;
-          
+    align-items: center;
+    left: 25%;                         
+    top: 12%;                                  
+    cursor: pointer;  
+    
 }
 
-.signInIcon {
+.profilePic {
     position: absolute;
-    border: none;        
-    right: 150;                   
+    height: 40px;
+    width: 40px;
+    right: 150px;                          
     top: 3%;                                  
     cursor: pointer;
 }
@@ -195,6 +177,41 @@ width: 155.79px;
 height: 36.54px;
 }
 
+.signInDiv{
+    position: absolute;
+    font-family: 'Jacques Francois';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
 
+    top: 3%;
+    right: 1%;
+    color: #000000;
+    width: 190px;
+    height: 100px;
+}
 
+.signInButton {
+    position: absolute;
+    font-family: 'Jacques Francois';
+    right: 13.5%;                         
+    top: 50%;                                  
+    cursor: pointer;
+    
+    display: flex;                
+    align-items: center;          
+    gap: 10px;                    
+    padding: 10px;
+    
+    width: 140px;
+    height: 38px;
+}
 
+.signInButton:hover {
+    transform: translateY(-3px); 
+    transition: all 0.3s ease;
+
+    border-color: #f9084c; 
+    background-color: rgb(186, 77, 114); 
+    box-shadow: 0px 4px 10px rgba(203, 21, 164, 0.5); 
+}

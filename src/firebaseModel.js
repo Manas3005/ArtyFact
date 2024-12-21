@@ -397,7 +397,6 @@ function connectToFirebase(dispatchHook) {
             type: setEntries.type,
             effect(action, store) {
                
-                    console.log("The action type was for the collectionsArray");
                     const userJournalsRef = ref(db, `${userPath}/myJournals`)
                     saveToFirebase(userJournalsRef, action.payload);
                             
