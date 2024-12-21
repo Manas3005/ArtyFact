@@ -31,7 +31,7 @@ export function SearchChoose(props) {
       <div className="chooseImage">
         <img src={URLParamsForImage(props.art.image_id)} className="image" />
       </div>
-
+        
       <div className="artDetails">
 
         <div className="artTitle">{props.art.art_name}</div>

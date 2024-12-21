@@ -50,13 +50,14 @@ export function SearchTopBar(props) {
             onClick={onClickImageEventACB}
           />
         ) : (
-          <span>Loading image...</span>
+          <div>
+          </div>
         )}
         <span className="artTitle">{result.title}</span>
           {foundInformation?(
             <span className="artist">{foundInformation.artist}</span>
           ): (
-            <span>Loading image...</span>
+            <span>  </span>
            )
             
           }
