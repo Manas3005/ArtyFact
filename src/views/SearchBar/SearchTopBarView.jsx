@@ -1,4 +1,5 @@
 import { URLParamsForImage } from "/src/apiCall.js";
+import "/src/css/searchResultStyle.css"
 
 export function SearchTopBar(props) {
 
@@ -6,13 +7,14 @@ export function SearchTopBar(props) {
   const { artworks, artInfo, onSearchInitiated } = props;
   const allData = artworks.data;
 
+
   function eventHandlerForHomeClickACB() {
     window.location.hash = "#/homepage";
   }
 
   function renderSearchResultsCB(result) {
     const foundInformation = artInfo[result.id]; // Get image_id from props
-    
+    console.log("This is the found info ",foundInformation)
 
 
     function onClickImageEventACB() {
@@ -30,6 +32,7 @@ export function SearchTopBar(props) {
                 date_display : foundInformation.date_display
       };
 
+
       props.setIndividualArt(allArtInformationToUpdate)
 
 
@@ -40,23 +43,62 @@ export function SearchTopBar(props) {
       <div key={result.id}>
         {foundInformation ? (
           <img
+            className="resultImage"
             src={URLParamsForImage(foundInformation.image_id)}
-            height="200"
+            height="300"
+            width="300"
             onClick={onClickImageEventACB}
-            alt={result.title}
           />
         ) : (
           <span>Loading image...</span>
         )}
-        <span>{result.title}</span>
+        <span className="artTitle">{result.title}</span>
+          {foundInformation?(
+            <span className="artist">{foundInformation.artist}</span>
+          ): (
+            <span>Loading image...</span>
+           )
+            
+          }
+       
+
+
       </div>
     );
   }
 
   return (
-    <div>
-      <button onClick={eventHandlerForHomeClickACB}>Home</button>
-      {allData.map(renderSearchResultsCB)}
-    </div>
+
+  <div>
+      
+       <div >
+           
+             
+          
+                  <img  src="https://i.imgur.com/viSeXcY.png" className="logoArty"/> 
+
+
+          <button onClick={eventHandlerForHomeClickACB} className="homeButton"> 
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
+               <path fill-rule="evenodd" d="M11.354 1.146a.5.5 0 0 1 0 .708L5.207 8l6.147 6.146a.5.5 0 0 1-.708.708l-6.5-6.5a.5.5 0 0 1 0-.708l6.5-6.5a.5.5 0 0 1 .708 0z"/>
+               </svg>
+          </button>
+     
+
+        </div>
+
+        <hr className="divider" />
+
+        <div className="resultsContainer">
+          {allData.map(renderSearchResultsCB)}
+         </div>
+
+  </div>
+
+
+
+
+
+   
   );
 }
