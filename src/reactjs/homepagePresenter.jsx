@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { ArtDescBodyView } from "../views/homePageViews/artDescBodyView";
-import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
+import { fetch20Artworks, getArtWorks, getArtWorkImage, URLParamsForImage, getArtWorksSearch} from '/src/apiCall.js';
 import {cleanHtmlContent } from '/src/utilities.js'
 import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
@@ -12,6 +12,34 @@ import {setNewSearchParam} from "/src/store/searchResultSlice.js";
 
 function HomePage(props){
 
+        
+    // --------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // here will be the logic for updating the searchReusltSlice 
 
@@ -20,11 +48,28 @@ function HomePage(props){
 
     function updateCurrentSearch(setParam){
         console.log("about to set params:", setParam);
-        dispatch(setNewSearchParam(setParam)); 
+
+       const serachparam = {
+            title : setParam,
+            limit :2
+       }
+
+
+        dispatch(setNewSearchParam(serachparam)); 
 
     }
 
+    function updateCurrentExplore(setParam){
+        console.log("about to set params:", setParam);
 
+        const searchParams1 = {
+            style_title: setParam,
+            limit:40 
+        };
+
+        dispatch(setNewSearchParam(searchParams1)); 
+
+    }
 
 
 
@@ -70,9 +115,11 @@ function HomePage(props){
     console.log("The image URL:", image);
    
     return <div>
-        <TopBarView
+        <TopBarView   
         onSearched={updateCurrentSearch}
-        />
+        onExplore={updateCurrentExplore}
+
+        />  
 
         <ExploreBodyView> </ExploreBodyView>
         <ArtDescBodyView 
