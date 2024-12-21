@@ -54,15 +54,23 @@ set(myRef, {
 set(myCollectionsRef, {
     collectionsArray: [
         {
+            collectionId: 1,
             collectionTitle: "Japanese Art",
             collectionDescription: "art that accompanied Yukio Mishima's travesty..",
             artWorkIDs: [34, 12981, 129884]
         },
         {
+            collectionId: 2,
             collectionTitle: "Impressionism.. oh",
             collectionDescription: "Long before death there was there was the Nile, and out of the Nile death sprung out.. blossomed and ready to kill... songs had not yet been invented, nor was love anywhere to be found.. only sickness.. Mefistofeles was simply not ready to accept Nazim Hikmet at this point in time, nor was Prague yet to be on a world map. The world was simply not ready..asdklj asd lkasjdkla  sdlkajskdj askldjalksd.. jaoksdjaisd osad... sdjaoidoiwoiausdoiu oiasjdkl kslkqw jelqwe... asdsadiooiqweu  yhej va dgl ryd le..laksdlsa dwq we asdlasd",
             artWorkIDs: [3123, 129885, 129887]
         },
+        {
+            collectionId: 3,
+            collectionTitle: "On the outskirts of death",
+            collectionDescription: "a collection of my father's art.",
+            artWorkIDs: [129, 140, 145, 146, 153]
+        }
     ]
 })
 
@@ -176,6 +184,7 @@ function modelToPersistenceForSingleCollection(payload) {
     const newObject = {
         collectionTitle: payload.collection_title,
         collectionDescription: payload.collection_description,
+        collectionId: payload.collection_id,
         artWorkIDs: payload.artWorks.map(artWork => artWork.artWork_id)
         };
     console.log("newObject:", newObject);
@@ -239,6 +248,7 @@ async function generateObjectsForCollections(collections) {
             );
 
             return {
+                collection_id: collection.collectionId,
                 collection_title: collection.collectionTitle,
                 collection_description: collection.collectionDescription,
                 artWorks: resolvedArtWorks.filter((artwork) => artwork !== null),
@@ -271,6 +281,7 @@ async function generateObjectForSingleCollection(collection) {
             );
 
             return {
+                collection_id: collection.collectionArray.collectionId,
                 collection_title: collection.collectionArray.collectionTitle,
                 collection_description: collection.collectionArray.collectionDescription,
                 artWorks: resolvedArtWorks.filter((artwork) => artwork !== null),
@@ -312,7 +323,7 @@ async function persistenceToModelForMyCollection(collections, dispatchHook) {
 }
 
 async function persistenceToModelForSingleCollection(collection, dispatchHook) {
-    console.log("These are artworks (from firebase) with the IDs we are going to search upon now", collection);
+    console.log("This is a single collection (from firebase) with the IDs we are going to search upon now", collection);
     const artWorkPromises = await generateObjectForSingleCollection(collection);
     console.log("Just got back the data: ", artWorkPromises);
     console.log("Now i am about to dispatch the single collection to the store", artWorkPromises);
@@ -485,8 +496,8 @@ function connectToFirebase(state, dispatchHook) {
          */
 
         //A tester to trigger the listener to react and save to firebase. 
-        console.log("About to dispatch static array to store to trigger listener: This is the array im dispatching", testCollectionsArray);
-        dispatchHook(setCollectionsArray(testCollectionsArray));
+        //console.log("About to dispatch static array to store to trigger listener: This is the array im dispatching", testCollectionsArray);
+        //dispatchHook(setCollectionsArray(testCollectionsArray));
     });
 }
 
