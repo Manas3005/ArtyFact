@@ -138,10 +138,6 @@ const testCollectionsArray =
     ]
 };
 
-function readyACB(snap) {
-    return snap.val();
-}
-
 function modelToPersistenceForMyCollections() {
     //const selectedCollections = useSelector(state => state.myCollections.collectionsArray);
     //console.log("THIS IS SELECTER", selectedCollections);
@@ -318,10 +314,6 @@ function saveToFirebase(customRef, payload) {
 
 async function readFromFirebase(dispatchHook) {
 
-    listenerMiddleware.startListening({ //credit: Cristian Bogdan Stackblitz
-        type: setUID.type,
-        effect(action) {
-
             const state = store.getState();
             const userUID = state.user.uid;
 
@@ -332,8 +324,8 @@ async function readFromFirebase(dispatchHook) {
             get(userRef).then((snapshot) => 
                 {   console.log("this snapshot val before passing to PTM:", snapshot.val())
                     persistenceToModel(snapshot.val(), dispatchHook)});    
-        }
-    })
+        
+    
 
     /*
     const snapshot = await get(myBigRef);
@@ -357,20 +349,6 @@ function connectToFirebase(dispatchHook) {
 
     function loginOrOutACB(user){
     
-        if (user) {
-            // The user is now authenticated, create a ref in firebase with users uid in its path
-            const userRef = ref(db, `${PATH}/${user.uid}`);
-            
-            // default data for the new user, so ref is not empty
-            set(userRef, {
-                displayName: user.displayName,
-
-            }).then(() => {
-                console.log("User reference created successfully!");
-            })
-        }
-
-        // demo render:
         dispatchHook(setUID(user.uid))
         dispatchHook(setProfilePicURL(user.photoURL))
 
@@ -395,7 +373,9 @@ function connectToFirebase(dispatchHook) {
         console.log("We are her1e", store.getState());
 
         const userPath = `${PATH}/${store.getState().user.uid}`  
-        console.log(userPath);
+        
+        //adding listeners for specific changes in state of the store, 
+        //not using store.subcribe() as it would trigger on each change in the store's state
 
         listenerMiddleware.startListening({ //credit: Cristian Bogdan Stackblitz
             type: setCollectionsArray.type,
@@ -404,28 +384,34 @@ function connectToFirebase(dispatchHook) {
                 console.log("The change was: ", action.payload, "we now need to persist this change in db");
                 console.log("This is the new state", store.getState());
 
-                switch (action.type) {
-
-                    case setCollectionsArray.type:
-                        console.log("The action type was for the collectionsArray");
-                        const userCollectionsRef = ref(db, `${userPath}/collections`)
-                        saveToFirebase(userCollectionsRef, action.payload);
-                        break;
-
-                    case setSearchQuery.type:
-                        console.log("The action type was for the search query");
-                        saveToFirebase(myBigRef, action.payload);
-                        break;
-                }
+                    console.log("The action type was for the collectionsArray");
+                    const userCollectionsRef = ref(db, `${userPath}/collections`)
+                    saveToFirebase(userCollectionsRef, action.payload);
+                            
                 //return saveToFirebase(/* Här kan vi även ge vilken path (alltså någon av myBigRef, alltså mycollectionsRef) den ska vara baserat på vilken case det är**/action.payload);
 
             }
-        })
+        });
+
+        listenerMiddleware.startListening({ //credit: Cristian Bogdan Stackblitz
+            type: setEntries.type,
+            effect(action, store) {
+               
+                    console.log("The action type was for the collectionsArray");
+                    const userJournalsRef = ref(db, `${userPath}/myJournals`)
+                    saveToFirebase(userJournalsRef, action.payload);
+                            
+                //return saveToFirebase(/* Här kan vi även ge vilken path (alltså någon av myBigRef, alltså mycollectionsRef) den ska vara baserat på vilken case det är**/action.payload);
+
+            }
+        });
+
         /**
          * If we want to scale this and listen to other data in the store, we simply add another kind of "setCollectionsArray.type" in an array of type
          * Similarly, if we want to perform some actions based on what actually took place then we can use switch cases to match the action type.
          */
         dispatchHook(setCollectionsArray(testCollectionsArray));
+
     }));
 }
 
