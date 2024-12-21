@@ -1,17 +1,56 @@
 import { TopbarCollectionView } from "../views/collectionViews/topbarCollectionView";
 import { CollectionListview } from "../views/collectionViews/collectionListView";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { editCollectionDescription } from "../store/collectionsSlice";
 
 export function CollectionPresenter() {
     console.log("----------ENTERING COLLECTION PRESENTER------------");
+    //Vi övervakar endast singleCollectionsArray, men det är inte den som ändras i detta fall, utan det är den stora collectionSarray
+    //När vi ändrar i decsription osv.
+    const selectedCollection = useSelector((state) => state.myCollections.singleCollectionArray);
+    const allCollections = useSelector((state) => state.myCollections.collectionsArray);
+
+    console.log("selected Collection", selectedCollection);
+
+    const dispatch = useDispatch();
+
+    const [isEditing, setIsEditing] = useState(false);
+
+    function toggleEditingACB() {
+        console.log("About to toggle edit button");
+        setIsEditing((prev) => !prev);
+    }
+
+    function handleEditDescriptionACB(description, id) {
+        console.log("This is the new collection description:", description, " and this is the id: ", id);
+        const newArray = [...allCollections].filter((collection) => collection.collection_id === id);
+        console.log("the new Array", newArray);
+        const newObj = selectedCollection.collection_description;
+        const obj = {
+            ...selectedCollection,
+            collection_description: description
+        };
+        console.log("new obj after editing", obj);
+        dispatch(editCollectionDescription(obj));
+    }
+
+    function handleSaveChangesACB() {
+        console.log("Saving changes..");
+        setIsEditing(false);
+    }
+
+    function handleDeleteArtWorkACB() {
+        //Some logic to filter the collections array
+        //Then we dispatch the new array (that are all of the collections without the one we want to delete);
+    }
+
 
     /**
      * Denna presenter använder sig av en array i store som fylls när man trycker på en collection i myCollectionsView (den andra view:n, inte för denna view:n).
      * Detta är dock lite problematiskt eftersom vi bara får åtkomst till värdet en gång, så fort det ändras,
      * men inte igen om vi laddar om sidan igen.
      */
-    const selectedCollection = useSelector((state) => state.myCollections.singleCollectionArray);
 
     //Vi behöver något sätt att singulera ut vilken collection det är vi är intresserad av.
     //om jag kombinerar collectionPresenter och myCollectionsPresenter till EN ENDA presenter, då kan jag använda component state bättre?
@@ -27,11 +66,15 @@ export function CollectionPresenter() {
         )
     }
 
+
     return (
 
         <div>
             <TopbarCollectionView
             collection={selectedCollection}
+            onToggleEdit={toggleEditingACB}
+            isEditing={isEditing}
+            onEditDescription={handleEditDescriptionACB}
             ></TopbarCollectionView>
             <CollectionListview
             collection={selectedCollection}

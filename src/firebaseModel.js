@@ -2,7 +2,7 @@ import { firebaseConfig } from "/src/firebaseConfig.js";
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, set } from "firebase/database";
 import { setEntries } from "./store/journalsSlice";
-import { setSearchQuery, setCollectionsArray, setCollection } from "./store/collectionsSlice";
+import { setSearchQuery, setCollectionsArray, setCollection, editCollectionDescription } from "./store/collectionsSlice";
 import { listenerMiddleware } from "./middleware.js";
 import { getAuth } from "firebase/auth"
 
@@ -207,6 +207,7 @@ function modelToPersistenceForMyJournals() {
 function modelToPersistence(payload, type) {
     console.log("inside model to persistence");
     console.log("This is the payload", payload, " and this is the type", type);
+    console.log("This is the type:", type, " and this is the other type:", setCollectionsArray.type)
 
     if(type === setCollectionsArray.type) {
         console.log("vi är inuti if-check");
@@ -216,6 +217,10 @@ function modelToPersistence(payload, type) {
         modelToPersistenceForMyCollections(payload);
     }
     if(type === setCollection.type) {
+        console.log("inside the type:", setCollection.type, " in the modelToPersistence if-check");
+        modelToPersistenceForSingleCollection(payload);
+    }
+    if(type === editCollectionDescription.type) {
         console.log("inside the type:", setCollection.type, " in the modelToPersistence if-check");
         modelToPersistenceForSingleCollection(payload);
     }
@@ -485,6 +490,21 @@ function connectToFirebase(state, dispatchHook) {
               console.log("Action data: ", action.payload);
               console.log("This is the new state", store.getState());
               saveToFirebase(singleCollectionRef, action.payload, action.type);
+            },
+          });
+
+          listenerMiddleware.startListening({
+            type: editCollectionDescription.type,
+            effect(action, store) {
+              console.log("Action triggered!!!: editCollectionDescription", action.payload);
+              console.log("Action data: ", action.payload);
+              console.log("This is the new state", store.getState());
+              saveToFirebase(singleCollectionRef, action.payload, action.type);
+
+              const updatedCollectionsArray = store.getState().myCollections.collectionsArray;
+              console.log("we are inside editCollectionDescription listener and we have read the collectionsARRAY", updatedCollectionsArray);
+
+              dispatchHook(setCollectionsArray(updatedCollectionsArray));
             },
           });
  
