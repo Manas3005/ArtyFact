@@ -3,6 +3,7 @@ import { CollectionListview } from "../views/collectionViews/collectionListView"
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { editCollectionDescription, setCollectionsArray } from "../store/collectionsSlice";
+import { updateCollectionsArrayField, updateSingleCollectionField } from "../utilities";
 
 export function CollectionPresenter() {
     console.log("----------ENTERING COLLECTION PRESENTER------------");
@@ -22,22 +23,31 @@ export function CollectionPresenter() {
         setIsEditing((prev) => !prev);
     }
 
+    
     function handleEditDescriptionACB(description, id) {
         console.log("This is the new collection description:", description, " and this is the id: ", id);
-        const updatedSingleCollection = {
-            ...selectedCollection,
-            collection_description: description
-        };
-        const updatedCollectionsArray = [...allCollections].map(collection => {
-            if (collection.collection_id === id) {
-                console.log("updating the state");
-                return { ...collection, collection_description: description };
-            }
-            return collection;
-        });
+    
+        const updatedSingleCollection = updateSingleCollectionField(selectedCollection, 'collection_description', description);
+    
+        const updatedCollectionsArray = updateCollectionsArrayField(allCollections, id, 'collection_description', description);
+    
         dispatch(editCollectionDescription(updatedSingleCollection));
-        dispatch(setCollectionsArray(updatedArray));
+        dispatch(setCollectionsArray(updatedCollectionsArray));
     }
+
+    
+    function handleEditTitleACB(title, id) {
+        console.log("This is the new collection title:", title, " and this is the id: ", id);
+    
+        const updatedSingleCollection = updateSingleCollectionField(selectedCollection, 'collection_title', title);
+    
+        const updatedCollectionsArray = updateCollectionsArrayField(allCollections, id, 'collection_title', title);
+    
+        dispatch(editCollectionTitle(updatedSingleCollection)); 
+        dispatch(setCollectionsArray(updatedCollectionsArray));
+    }
+    
+    
 
     function handleSaveChangesACB() {
         console.log("Saving changes..");

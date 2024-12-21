@@ -30,3 +30,21 @@ const dateInterval = extractDateInterval(input);
 console.log(dateInterval);
 
 
+export function updateSingleCollectionField(collection, field, value) {
+    return {
+        ...collection,
+        [field]: value
+    };
+}
+
+export function updateCollectionsArrayField(collections, id, field, value) {
+    return collections.map(collection => {
+        if (collection.collection_id === id) {
+            console.log(`Updating ${field} for collection with id: ${id}`);
+            return { ...collection, [field]: value };
+        }
+        return collection;
+    });
+}
+
+
