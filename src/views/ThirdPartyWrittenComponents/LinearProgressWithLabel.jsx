@@ -14,7 +14,7 @@ function LinearProgressWithLabel(props) {
           }}/>
       </Box>
       <Box sx={{ minWidth: 35 }}>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '1.2rem', "padding-top": "8px", "padding-right": "12px"}}>
           {`${Math.round(props.value)}%`}
         </Typography>
       </Box>

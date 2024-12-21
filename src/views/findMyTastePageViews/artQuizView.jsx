@@ -5,46 +5,63 @@ import LinearWithValueLabel from "../ThirdPartyWrittenComponents/LinearProgressW
 
 export function ArtQuizView (props){
 
-    const updatedProgress = props.updatedProgress;
-    const artists = ["Picasso", "Van Gogh", "Da Vinci", "Monet", "Dali", "Rembrandt", "Matisse", "Mary Cassatt", "Edgar Degas", "Georges Seurat"] // List of artist options to be rendered
-    const selectedArtists = props.selectedArtists;
-    let quizDone = false;
+    const artTitlesByArtists = props.artTitlesByArtists;
+    const artistTitlesByArtists = props.artistTitlesByArtists;
+    const imageByArtistsURLs = props.imageByArtistsURLs;
 
-    function renderArtistOptions() {
-        return artists.map(function organizeAsOptionCB(artist) {
-        const isSelected = selectedArtists.includes(artist);
-   
-            return (
-                <button
-                    key={artist}
-                    className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
-                    onClick={function() { handleChoiceSelectionACB(artist); }}
-                >
-                    <input
-                        type="checkbox"
-                        readOnly
-                        checked={isSelected}
-                    />
-                    {artist}
-                    {console.log(selectedArtists)} {/*TESTING - REMOVE*/}
-                </button>
-            );
-        });
-    }
+    const artTitlesByStyles = props.artTitlesByStyles;
+    const artistTitlesByStyles = props.artistTitlesByStyles;
+    const imageByStylesURLs = props.imageByStylesURLs;
+    const styleTitles = props.styleTitles;
+
+    const artTitlesByMediums = props.artTitlesByMediums;
+    const artistTitlesByMediums = props.artistTitlesByMediums;
+    const imageByMediumsURLs = props.imageByMediumsURLs;
+    const mediumTitles = props.mediumTitles;
+
+    const selectedStyles = props.selectedStyles;
+    const selectedArtists = props.selectedArtists;
+    const selectedMediums = props.selectedMediums;
+
+    const updatedProgress = props.updatedProgress;
+    const resultsReady = props.resultsReady;
+    const quizCompleted = props.quizCompleted;
+    const quizReady = props.quizReady;
+
+    const artistsOptions = props.artistsOptions;
+    const styleOptions = props.styleOptions;
+    const mediumOptions = props.mediumOptions;
+    const errorMessage = props.errorMessage;
+    const showMessage = props.showMessage;
     
+    
+
 
     function handleNextClickACB(){
         props.onNextButtonClicked(); //Firing custom event to dispatch mutation of progress variable in findMyTaste presenter
     }
 
+
     function handlePreviousClickACB(){
         props.onPreviousButtonClicked();
     }
 
-    function handleChoiceSelectionACB(artist){
+
+    function handleArtistChoiceSelectionACB(artist){
         props.onArtistSelected(artist); /*firing custom event to select artist and store in selectedArtists to later fetch related art
         once quiz is submitted*/
     }
+
+    function handleStyleChoiceSelectionACB(style){
+      props.onStyleSelected(style);
+      console.log("SELECTED STYLE", style)
+    }
+
+    function handleMediumChoiceSelectionACB(medium){
+      props.onMediumSelected(medium);
+      console.log("SELECTED STYLE", medium)
+    }
+
 
 
     function handleSubmitClickACB(){ //firing custom event to fetch art by selectedArtists 
@@ -52,41 +69,425 @@ export function ArtQuizView (props){
     }
 
 
-    return (
+    function handleBackToQuizACB() {
+      props.onBackToQuizButtonClicked();
+    }
+
+
+
+    //THE RENDER OPTIONS METHODS BELOW CAN POSSIBLY BE SIMPLIFIED TO A REUSABLE FUNCTION
+    function renderArtistOptions() {
+
+      return artistsOptions.map(function organizeAsOptionCB(artist) {
+      const isSelected = selectedArtists.includes(artist)
+ 
+      return (
+        <button
+            key={artist}
+            className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
+            onClick={function() { handleArtistChoiceSelectionACB(artist); }}
+        >
+            <input
+                type="checkbox"
+                readOnly
+                checked={isSelected}
+            />
+            {artist}
+        </button>
+      );
+      });
+    }
+
+    function renderStyleOptions() {
+
+      return styleOptions.map(function organizeAsOptionCB(style) {
+      const isSelected = selectedStyles.includes(style)
+        
+      return (
+        <button
+            key={style}
+            className={"favoriteArtist" + (isSelected ? "Selected" : "")} //This is to use a different class to style the button if an input is selected (background color) for better user feedback
+            onClick={function() { handleStyleChoiceSelectionACB(style); }}
+        >
+            <input
+                type="checkbox"
+                readOnly
+                checked={isSelected}
+            />
+            {style}
+        </button>
+      );
+      });
+    }
+
+
+    function renderMediumOptions() {
+
+      return mediumOptions.map(function organizeAsOptionCB(medium) {
+      const isSelected = selectedMediums.includes(medium)
+        
+      return (
+        <button
+            key={medium}
+            className={"favoriteArtist" + (isSelected ? "Selected" : "")} 
+            onClick={function() { handleMediumChoiceSelectionACB(medium); }}
+        >
+            <input
+                type="checkbox"
+                readOnly
+                checked={isSelected}
+            />
+            {medium}
+        </button>
+      );
+      });
+    }
+
+    function handleQuizLoadingACB(){
+      props.onBeginLoadingQuiz();
+    }
+
+
+
     
-    <div>
+    function renderArtByArtistsACB(){
 
-        <LinearWithValueLabel updatedProgress = {updatedProgress}></LinearWithValueLabel> {/*Passing down the updated progress to the third party component*/}
-        
-        <div className = "quizQuestions">
-            
-            
-            {updatedProgress === 0 ? (<div >Select your favorite artists {/*Parameter used: "artist_title" */}
-                                        <div className="favoriteArtistsContainer">
-                                           {renderArtistOptions()}
-                                           {quizDone = false}
-                                        </div>
-                                     </div>
-                                     ) 
-            :updatedProgress=== 10 ? (<div >Select a color that you would like your art to be dominated with {quizDone = false}</div>)
-            :(<div >Done {quizDone = false} </div>) }
+      if(selectedArtists.length!==0 && imageByArtistsURLs.length!==0 ){
 
-            
-            {updatedProgress === 100 ? (<div>
-                                            <button onClick = {handlePreviousClickACB} className = "quizPreviousQuestion"> Previous</button>
-                                            <button onClick = {handleSubmitClickACB} className = "submitQuizButton"> Submit</button>
-                                            {quizDone = true}
-                                        </div>)                            
-            :(<div>
-                <button onClick = {handlePreviousClickACB} className = "quizPreviousQuestion"> Previous</button>
-                <button onClick = {handleNextClickACB} className = "quizNextQuestion"> Next</button>
-             </div>)}
+        return (
+        <div>
+
+          <div className="resultsPageSubtitle">Based on your favorite artists</div>
+          <div className="separator"></div>
+
+            <div className="resultsContainer">
+
+
+            {imageByArtistsURLs.map((url, index) => (
+              url ? (
+                <div key={index} className="resultItem">
+                  <img
+                    src={url}
+                    className="resultImage"
+                    alt={`Couldn't fetch Artwork ${index + 1}`}
+                    onError={(e) => {
+                      e.target.closest(".resultItem").style.display = "none";  //this is so entire grid item is hidden if there is an error in displaying the image
+                    }}
+                  />
+                  <div className="artDetails">
+                    <div className="artTitle">{artTitlesByArtists[index]}</div>
+                    <div className="artistTitle">by {artistTitlesByArtists[index]}</div>
+                  </div>
+                </div>
+              ) : null
+            ))}
+
+
+
+            </div>  
+
+          </div>
+          )
+      }else if(selectedArtists.length===0 && imageByArtistsURLs.length===0){
+        return;
+      } else if(selectedArtists.length!==0 && imageByArtistsURLs.length===0){
+        return (
+      <p className = "noResults">Oops! No results found for the selected artists. Try selecting different artists to discover artworks you'll love</p>
+        )
+      }
+    }
+
+
+    function renderArtByStylesACB(){
+
+      if(selectedStyles.length!==0 && imageByStylesURLs.length!==0){
+
+        return (
+        <div>
+
+              <div className="resultsPageSubtitle">Based on your preferred styles</div>
+              <div className="separator"></div>
+
+              <div className="resultsContainer">
+
+              {imageByStylesURLs.map((url, index) => (
+               url ? (
+               <div key={index} className="resultItem">
+                 <img
+                   src={url}
+                   className="resultImage"
+                   alt={`Couldn't fetch Artwork ${index + 1}`}
+                   onError={(e) => {
+                     e.target.closest(".resultItem").style.display = "none"; 
+                   }}
+                 />
+                 <div className="artDetails">
+                   <div className="artTitle">{artTitlesByStyles[index]}</div>
+                   <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
+                   <div className="artistTitle">Style: {styleTitles[index]}</div>
+                 </div>
+               </div>
+              ) : null
+              ))}
+
+
+              </div>
+
+          </div>
+          )
+      } else if(selectedStyles.length===0 && imageByStylesURLs.length===0){
+        return;
+      } else if(selectedStyles.length!==0 && imageByStylesURLs.length===0){
+        return (
+          <p className = "noResults">Oops! No results found for the selected styles. Try selecting different styles to discover artworks you'll love</p>
+
+        )
+      }
+    }
+
+
+    function renderArtByMediumACB(){
+
+      if(selectedMediums.length!==0 && imageByMediumsURLs.length!==0){
         
+        return (
+        <div>
+
+              <div className="resultsPageSubtitle">Based on the mediums you liked</div>
+              <div className="separator"></div>
+
+
+              <div className="resultsContainer">
+
+              {imageByMediumsURLs.map((url, index) => (
+                url ? (
+                  <div key={index} className="resultItem">
+                    <img
+                      src={url}
+                      className="resultImage"
+                      alt={`Couldn't fetch Artwork ${index + 1}`}
+                      onError={(e) => {
+                        e.target.closest(".resultItem").style.display = "none"; 
+                      }}
+                    />
+                    <div className="artDetails">
+                      <div className="artTitle">{artTitlesByMediums[index]}</div>
+                      <div className="artistTitle">by {artistTitlesByMediums[index]}</div>
+                      <div className="artistTitle">Medium: {mediumTitles[index]}</div>
+                    </div>
+                  </div>
+                ) : null
+              ))}
+
+
+              </div>
+
+          </div>
+          )
+      }else if(selectedMediums.length===0 && imageByMediumsURLs.length===0){
+        return;
+
+      } else if(selectedMediums.length!==0 && imageByMediumsURLs.length===0){
+        
+        return (
+          <p className = "noResults">Oops! No results found for the selected mediums. Try selecting different mediums to discover artworks you'll love</p>
+        )
+      }
+    }
+
+
+
+    function renderQuizACB() {
+
+      handleQuizLoadingACB()
+
+      if(quizReady){
+      if (updatedProgress === 0) {
+
+        return (
+
+          <div>
+
+            <div className="quizWelcomeContainer">
+                <h1 className="quizWelcomeTitle">Welcome to the Art Quiz!</h1>
+                <p className="quizDescription">
+                Discover artworks that match your unique taste! Select your favorite artists, styles, and mediums to create a personalized gallery just for you.
+                </p>
+            </div>
+           
+            <div>
+              <button
+                onClick={handlePreviousClickACB}
+                className="quizPreviousQuestion"
+                disabled
+              >
+                Previous
+              </button>
+              <button
+                onClick={handleNextClickACB}
+                className="quizNextQuestion"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+
+        );
+
+      } else if (updatedProgress < 100) {
+
+          if(updatedProgress === 33){
+
+              return (
+                <div>
+
+                  <div>Select your favorite artists</div>
+                  <div className="favoriteArtistsContainer">
+                    {renderArtistOptions()}
+                  </div>
+                  <div>
+                    <button
+                      onClick={handlePreviousClickACB}
+                      className="quizPreviousQuestion"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={handleNextClickACB}
+                      className="quizNextQuestion"
+                    >
+                      Next
+                    </button>
+                  </div>
+
+                </div>
+              );
+
+           } else if(updatedProgress===66) {
+
+              return (
+                <div>
+                
+                  <div> Select your favorite art styles </div>
+                  <div className="favoriteArtistsContainer">
+                  {renderStyleOptions()}
+                  
+                </div>
+                  
+                  <div>
+                    <button
+                      onClick={handlePreviousClickACB}
+                      className="quizPreviousQuestion"
+                    >
+                      Previous
+                    </button>
+                    <button
+                      onClick={handleNextClickACB}
+                      className="quizNextQuestion"
+                    >
+                      Next
+                    </button>
+                  </div>
+
+                </div>
+              );
+
+           } 
+      } else if (updatedProgress === 100) {
+
+        if (!resultsReady && !quizCompleted) {
+          
+          return (
+            <div>
+            <div> The medium of an artwork is important because it reveals how the piece was created, highlights its artistic and technical qualities, and determines its preservation needs. Which of these mediums interest you?</div>
+              <div className="favoriteMediumsContainer">
+              {renderMediumOptions()}
+              </div>             
+                <button
+                  onClick={handlePreviousClickACB}
+                  className="quizPreviousQuestion"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={handleSubmitClickACB}
+                  className="submitQuizButton"
+                >
+                  Submit
+                </button>
+                {errorMessage && (
+                <div className={`error-message ${showMessage ? "fade-in" : "fade-out"}`}>
+                    {errorMessage}
+                </div>
+                )}
+              </div>
+
+          );
+
+        } else if(!resultsReady && quizCompleted){
+
+            return (
+              <div style={{ textAlign: 'center' }}>
+
+                  <img 
+                  src="image/artQuizBackground.gif" 
+                  className="quizCompleted" 
+                  alt="Loading Quiz Results" 
+                  />
+
+                  <p>Fetching the best artworks for you!</p>
+
+              </div>
+            )
+
+        } else if(resultsReady && quizCompleted){
+
+      
+
+          return (
+            <div>
+              <div className="resultsPageTitle">Here Are Artworks Curated Just For You</div>
+
+              {renderArtByArtistsACB()}
+              {renderArtByStylesACB()}
+              {renderArtByMediumACB()}
+
+              <button
+                onClick={handleBackToQuizACB}
+                className="quizBackButton"
+              >
+                Back to Quiz
+              </button>
+            </div>
+          );
+
+        //}
+        }
+
+      }
+    } else {
+      return (
+        <div style={{ textAlign: 'center' }}>
+
+            <img 
+            src="image/artQuizBackground.gif" 
+            className="quizCompleted" 
+            alt="Loading Art Quiz" 
+            />
+
+            <p>Loading Quiz</p>
+
         </div>
-
-
+      )
+    }
+    }
+    
+    return (
+      <div className="bodyBackground"> {/* Applying the background class */}
+      <LinearWithValueLabel updatedProgress={updatedProgress} />
+      <div className="quizQuestions">{renderQuizACB()}</div>
     </div>
+    );
+    
 
-
-    )
 }

@@ -40,6 +40,7 @@ export function makeRouter(store){
             path: "/findMyTaste",
             element: <FindMyTaste store = {store}></FindMyTaste>
         },
+
         {
             path:"/journalEntryContent/:ID",
             element: <JournalEntryContent store={store}></JournalEntryContent>
@@ -57,6 +58,7 @@ export function makeRouter(store){
             path: "/searchChoosen",
             element: <SearchChoosenPresent store = {store}></SearchChoosenPresent>
         }
+
     ])
 }
 

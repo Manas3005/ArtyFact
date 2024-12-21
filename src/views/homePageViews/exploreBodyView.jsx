@@ -10,8 +10,8 @@ function ExploreBodyView () {
     }
 
     function renderQuizProgressACB(){
-        if(quizProgress>0){
-            return (<div className = "quizProgress"> (Finish Art Quiz: {quizProgress} %)</div>
+        if(quizProgress>0 && quizProgress<100){
+            return (<div className = "quizProgress"> (Finish Art Quiz: {quizProgress}% )</div>
         )}
     }
 
