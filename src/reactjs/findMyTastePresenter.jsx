@@ -64,6 +64,7 @@ export function FindMyTaste(props){
                 
             });
 
+
             styles.forEach((style) => { 
                 if (style && !filteredStyles.includes(style)) {
                   filteredStyles.push(style);
@@ -78,9 +79,9 @@ export function FindMyTaste(props){
                 
             });
 
-            setArtistsOptions(filteredArtists); 
-            setStyleOptions(filteredStyles);
-            setMediumOptions(filteredMediums);
+            setArtistsOptions(filteredArtists.sort()); 
+            setStyleOptions(filteredStyles.sort());
+            setMediumOptions(filteredMediums.sort());
             
             setQuizReady(true);
         })
