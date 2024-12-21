@@ -1,4 +1,5 @@
 import "/src/css/style.css"
+import "/src/css/journalsStyle.css"
 //import Drawer from '@mui/material/Drawer';
 import React, { useState } from 'react';
 import ExploreDrawer from "/src/views/ThirdPartyWrittenComponents/sideBarNav.jsx";
@@ -25,10 +26,16 @@ export function TopBarView(props){
     }
 
     function handleSignInClick (){
+        
+        const signInOutButton = document.getElementById("signInOutButton");
+
         if (props.userID === null){
             props.onSignUpClick()
+            signInOutButton.classList.add("signOutButton")
+
         } else{
             props.onSignOutClick()
+            signInOutButton.classList.remove("signOutButton");
         }
         
     }
@@ -71,7 +78,9 @@ export function TopBarView(props){
                     <img className="profilePic" src = {renderProfilIcon()} />
                     <label className="displayName">{renderDisplayNameText()}  </label>
 
-                    <button className="signInButton" onClick={handleSignInClick}> {renderSignInButtonText()} </button>
+                    <button id="signInOutButton" className="signInButton" onClick={handleSignInClick}> 
+                        <img className="Icon" src = "/image/google.png" />
+                        {renderSignInButtonText()} </button>
                 </div>
                 
                 <button className="Myjournal" onClick={handleMyJournalsClickedACB} >My Journal</button>
