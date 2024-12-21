@@ -14,7 +14,10 @@ export function TopbarCollectionView(props) {
     function handleclickForMyJournalACB() {
         window.location.hash ="#/myJournal";
     }
-
+    
+    if (!props.collection) {
+        return <div>Loading collection data...</div>;
+    }
 
 
     return (
@@ -23,8 +26,8 @@ export function TopbarCollectionView(props) {
             <div className="topbarCollection">
                 <button className={"backToHomeCollection"} onClick={handleClickForBackToHomeACB}>Back To Home</button>
                 <button className={"MyJournalCollection"} onClick={handleclickForMyJournalACB}>Back slfkjdsf</button>
-                <h1 className="collectionTitle">{props.collection.collection_title}</h1>
-                <div className="collectionName">{props.collection.collection_description}</div>
+                <h1 className="collectionTitle">{props.collection.collection_title || ""}</h1>
+                <div className="collectionName">{props.collection.collection_description || ""}</div>
                 <SignInButton className={"signInLogo"}></SignInButton>
                 <button className="signInIcon">
                 <img src = "/image/signinIcon.png"/>

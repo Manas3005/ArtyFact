@@ -337,11 +337,12 @@ function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
 async function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
     console.log("This is firebaseData:", firebaseData);
     persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook);
-    const result = await persistenceToModelForMyCollection(firebaseData.collections, dispatchHook);
-    const resul2 = await persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
+    const [result, result2] = await Promise.all([
+        persistenceToModelForMyCollection(firebaseData.collections, dispatchHook),
+        persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook)
+    ]);
     //Insert a new persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
-    return result;  //Ändra denna till en return endast då Promise All
-    /**
+    return { result, result2 };     /**
      * Would call upon different functions with persistenceToModelforMyCollection(firebaseData.myCollection)
      *                                          persistenceToModelforMyJournal(firebaseData.myJournal)
      
@@ -447,6 +448,7 @@ function connectToFirebase(state, dispatchHook) {
         console.log("We are her1e", state.getState());
         console.log("the ttttt", setCollectionsArray.type);
 
+        
         listenerMiddleware.startListening({
             type: setCollectionsArray.type,
             effect(action, store) {
@@ -468,12 +470,13 @@ function connectToFirebase(state, dispatchHook) {
           listenerMiddleware.startListening({
             type: setCollection.type,
             effect(action, store) {
-              console.log("Action triggered: setCollection", action.payload);
+              console.log("Action triggered!: setCollection", action.payload);
               console.log("Action data: ", action.payload);
               console.log("This is the new state", store.getState());
               saveToFirebase(singleCollectionRef, action.payload, action.type);
             },
           });
+ 
           
         
         /**

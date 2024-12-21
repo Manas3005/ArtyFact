@@ -11,16 +11,12 @@ export function CollectionPresenter() {
      * Detta är dock lite problematiskt eftersom vi bara får åtkomst till värdet en gång, så fort det ändras,
      * men inte igen om vi laddar om sidan igen.
      */
-    const [currentCollection, setCurrentCollection] = useState(null);
     const selectedCollection = useSelector((state) => state.myCollections.singleCollectionArray);
-    if(selectedCollection !== currentCollection) {
-        setCurrentCollection(selectedCollection);
-    }
-    console.log("The collection has been set to", currentCollection);
+
     //Vi behöver något sätt att singulera ut vilken collection det är vi är intresserad av.
     //om jag kombinerar collectionPresenter och myCollectionsPresenter till EN ENDA presenter, då kan jag använda component state bättre?
     //Problemet nu är att 
-    console.log("This is the selected collection", selectedCollection);
+    console.log("This is the selected collection in collectionPresenter", selectedCollection);
 
     if(!selectedCollection ||selectedCollection.length === 0) {
         return (
@@ -35,10 +31,10 @@ export function CollectionPresenter() {
 
         <div>
             <TopbarCollectionView
-            collection={currentCollection}
+            collection={selectedCollection}
             ></TopbarCollectionView>
             <CollectionListview
-            collection={currentCollection}
+            collection={selectedCollection}
             ></CollectionListview>
         </div>
 
