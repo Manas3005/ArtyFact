@@ -1,9 +1,9 @@
 import { testingAnAPICallForMostSimilar } from "../apiCall";
-import { TopbarCollectionsView } from "../views/myCollectionViews/topbarCollectionsView"
+import { TopbarCollectionsView } from "../views/myCollectionViews/topbarMyCollectionsView"
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { setCollectionsArray } from "../store/collectionsSlice";
+import { setCollectionsArray, setCollection } from "../store/collectionsSlice";
 
 export function MyCollectionsPresenter(props) {
     const dispatch = useDispatch();
@@ -79,24 +79,221 @@ export function MyCollectionsPresenter(props) {
         }
     ]
     
-    useEffect(() => {
+    const collectionsForTest = [
+        {
+            title: "Japanese Art",
+            artWorks: [
+                {
+                    title: "Lilly flowers",
+                    year: "1341-2341",
+                    artistName: "Vincent Van Gogh",
+                    image: 'https://i.imgur.com/4MWnofa.jpeg',
+                },
+                {
+                    title: "Saturday",
+                    year: "1341",
+                    artistName: "Vincent",
+                    image: 'https://i.imgur.com/pzHx8kg.jpeg',
+                },
+                {
+                    title: "Monday",
+                    year: "1321",
+                    artistName: "Heyy",
+                    image: 'https://i.imgur.com/6APpUgV.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Impressionism... oh",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/nsBGeNZ.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/qrycgCT.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/HsSDEwa.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Gustave Caillebotte..",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/3ShRSaq.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/YLqzq73.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/TsygFcL.jpeg',
+                },
+            ],
+        },
+        {
+            title: "are you coming home soon dear?",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/dAy5xeF.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/U9sQ5eE.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/T58LnpG.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Collection 5",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/AyszSmi.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/JpfMWE3.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/6xIuGyG.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Collection 6",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/WdLAx8y.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/sURNEFc.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/HsSDEwa.jpeg',
+                },
+            ],
+        },
+        {
+            title: "Collection 7",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/IMoyBfZ.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/NWXkwWK.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/CNFcZQu.jpeg',
+                },
+            ],
+        },
+        {
+            title: "what are these streets?",
+            artWorks: [
+                {
+                    title: "Artwork 1",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/lqYOlkP.jpeg',
+                },
+                {
+                    title: "Artwork 2",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/5PAjcHE.jpeg',
+                },
+                {
+                    title: "Artwork 3",
+                    year: "Unknown",
+                    artistName: "Unknown",
+                    image: 'https://i.imgur.com/pJOfSc3.jpeg',
+                },
+            ],
+        },
+    ];
+
+
+    /**
+     * Denna ska tas bort senare. Vi kommer fetcha denna data från firebase när en user loggar in.
+     * 
+     * 
+     * Denna useEffect är endast för att se att vår collections array fylls i store korrekt, men det den egentligen gör nu
+     * är att den sätter hela arrayen direkt in i store.
+     * Det vi vill göra senare är att låta reducern setCollectionsArray spreada gamla datan och fylla med senaste artwork.
+     * Den ska inte alltså vara en "setCollectionsArray" utan mer lik en "addArtworkToCollection"
+     */
+    /*useEffect(() => {
         console.log("This is the useEffect", collections);
         dispatch(setCollectionsArray(collections));
         console.log("The array in store after dispatch", selectedCollectionsArray);
-    }, []);
+    }, []);*/
 
     const selectedCollectionsArray = useSelector((state) => state.myCollections.collectionsArray);
-    console.log("The selected collecitons array", selectedCollectionsArray);
+    console.log("The selected collecitons array (read in myCollectionsPresenter)", selectedCollectionsArray);
 
 
 
     useEffect(() => {   
         const interval = setInterval(() => {
-            setActiveIndex((prevIndex) => (prevIndex + 1) % 2);
+            setActiveIndex((prevIndex) => (prevIndex + 1) % 3);
         }, 6000); 
 
         return () => clearInterval(interval); 
-    }, [selectedCollectionsArray]);
+    }, []);
 
     /**
      * Det vi har gjort hitills:
@@ -129,8 +326,7 @@ export function MyCollectionsPresenter(props) {
          * Så det är en conditional rendering på X-knappen.
          */
 
-        function 
-        handleSearchACB(value) {
+        function handleSearchACB(value) {
             //Här inne skall vi ha logik som filtrerar
             //Men det är viktigt att vi har senaste datan från application state, och jag tror vi har det.
             console.log("This", selectedCollectionsArray)
@@ -167,9 +363,26 @@ export function MyCollectionsPresenter(props) {
          * 
          * @param {*} evt 
          */
-        function setCollectionACB(evt) {yy
-            console.log("This is the event in setCollectionACB", evt);
+        function setCollectionsListACB(evt) {
+            console.log("This is the event in setCollectionsListACB", evt);
             dispatch(setCollectionsArray(evt.target.value));
+        }
+
+        /**
+         * Denna funktion är till för att vi ska veta vilken collection det är som collection-sidan ska rendera.
+         * Vi fyller 
+         * @param {*} evt 
+         */
+        function setCollectionArrayACB(collection) {
+            console.log("this is the collection given to the setter", collection);
+            console.log("We will now try to see if we still have access to the collections", selectedCollectionsArray);
+            /**
+             * Vi ser här att vi gör en dispatch till store, där vi sätter den collection vi vill visa i vår nya sida,
+             * men vi vet att det inte går så bra när vi refreshar sidan.
+             * Finns det något annat alternativ för att ge 
+             * 
+             */
+            dispatch(setCollection(collection));
         }
 
         /**
@@ -199,24 +412,6 @@ export function MyCollectionsPresenter(props) {
 
     //useEffect((testingAnAPICallForMostSimilar), []);
 
-    /*const images= [ {
-            image: '/image/miyazaki.png',
-            title: "Miyazaki In Japan",
-        },
-        {
-            image: '/image/artdeschomepage.png',
-            title: 'Unknown',
-        },
-        {
-            image: '/image/luigiloir.png',
-            title: 'Boulevard Saint'
-        },
-        {
-            image: '/image/paris.jpg',
-            title: 'Paris Street'
-        }
-    ]*/
-
         function setClearButtonACB(value) {
             console.log("Just pressed X button");
             setClearButton(value);
@@ -231,8 +426,9 @@ export function MyCollectionsPresenter(props) {
             />
             <ListOfCollectionsView 
             activeIndex={activeIndex}
-            collections={filteredCollections || collections}
-            setCollection={setCollectionACB}
+            collections={filteredCollections || selectedCollectionsArray}
+            setCollections={setCollectionsListACB}
+            setCollection={setCollectionArrayACB}
             />
 
         </div>
