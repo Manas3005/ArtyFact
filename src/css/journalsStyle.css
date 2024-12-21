@@ -18,7 +18,8 @@
 }
 
 .saveChanges:hover, .backToHome:hover, .myJournalsMyCollections:hover, .addNewEntry:hover, 
-.backToMyJournals:hover, .addArtwork:hover, .deleteEntry:hover, .journalEntryListDiv:hover, .editButton:hover{
+.backToMyJournals:hover, .addArtwork:hover, .deleteEntry:hover, .journalEntryListDiv:hover, .editButton:hover, 
+.goButton:hover,.cancel:hover{
     transform: translateY(-3px); 
     transition: all 0.3s ease;
     outline: none;  
@@ -436,4 +437,67 @@
   .editButton.commonButtonBase:hover {
     background-color: rgb(16, 231, 224);  
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+  }
+  
+  /* Modal content box */
+  .modal-content {
+    background-color: white;
+    
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 255, 238, 0.2);
+    height: 200px;
+    width: 500px;
+    text-align: center;
+  }
+
+  .editEntrysearchBar {         
+    width: 300px;
+    height: 33px;                               
+    cursor: text;
+}
+
+.modalButtonDiv{
+    display: flex; 
+    gap: 60px; 
+    justify-content: center; 
+    margin-top: 20px; 
+    cursor: pointer;
+}
+
+.goButton.commonText.commonButtonBase{
+    width: 100px;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 12px;
+    background-color: rgb(163, 237, 106);  
+}
+
+.cancel.commonText.commonButtonBase{
+    width: 100px;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 12px;
+    background-color: rgb(220, 101, 94); 
+}
+
+.goButton.commonButtonBase:hover { 
+    box-shadow: 5px 5px 15px rgba(91, 229, 5, 0.5);
+}
+
+.cancel.commonButtonBase:hover {  
+    box-shadow: 5px 5px 15px rgba(237, 16, 16, 0.5); 
 }

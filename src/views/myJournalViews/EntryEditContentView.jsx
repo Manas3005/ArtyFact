@@ -4,6 +4,8 @@ import { conditionalRenderHelperCB } from "../../utilities"
 
 export function EntryEditContentView(props){
 
+    const searchArtworkModal = document.getElementById("searchArtworkModal")
+
     function onEntryTitleChangeACB (event){
         props.onEntryTitleChange(event.target.value)
     }
@@ -23,7 +25,14 @@ export function EntryEditContentView(props){
     function renderDeleteIconACB (){
         return conditionalRenderHelperCB(props.entryID, "/image/minusIcon.png", "/image/deleteIcon.png")
     }
-    
+
+    function handleAddOrChangeArtworkClick (){
+        searchArtworkModal.style.display = "flex";
+    }
+
+    function closeModalACB(){
+        searchArtworkModal.style.display = "none";
+    }
     
     return (
         <div className="journalsHorizontalFlexParent">
@@ -60,6 +69,7 @@ export function EntryEditContentView(props){
 
             </div>
 
+
             <div className="rightContent">
 
                 
@@ -77,7 +87,8 @@ export function EntryEditContentView(props){
 
                         <div className="down">
                         
-                            <button className="addArtwork commonText commonButtonBase">Add Artwork</button>
+                            <button id="addOrChangeArtwork" className="addArtwork commonText commonButtonBase"
+                            onClick={handleAddOrChangeArtworkClick}>Add Artwork</button>
 
                             <button className="deleteEntry commonText commonCenterFlex commonButtonBase">
                                 <img className="Icon" src = {renderDeleteIconACB()} />
@@ -90,6 +101,17 @@ export function EntryEditContentView(props){
 
                     
 
+            </div>
+
+            <div id="searchArtworkModal" class="modal" onClick={closeModalACB}>
+                <div class="modal-content">
+                    <h2 className="commonText">Search for the artwork you wish to add to your current Journal Entry</h2>
+                    <input className="editEntrysearchBar" placeholder = "Type here..."/>
+                    <div className="modalButtonDiv">
+                        <button className="goButton commonText commonButtonBase">Go</button>
+                        <button id="closeModel" className="cancel commonText commonButtonBase" onClick={closeModalACB}>Cancel</button>
+                    </div>
+                </div>
             </div>
                                
         </div>
