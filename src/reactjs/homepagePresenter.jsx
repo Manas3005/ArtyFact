@@ -7,12 +7,17 @@ import {cleanHtmlContent } from '/src/utilities.js'
 import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
 
+import { useSelector } from "react-redux"
+
 import { auth } from "../firebaseModel";
 import {signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut} from "firebase/auth";
 
 
 function HomePage(props){
 
+    let userUID = useSelector(state => state.user.uid)
+    let userDisplayName = useSelector(state => state.user.displayName)
+    let userProfilePicURL = useSelector(state => state.user.profilePicURL)
     //Redux specific hooks
     //const selector = useSelector(); //Allows you to observe the latest data in the store (model)
     //const dispatch = useDispatch(); //Allows you to call upon setters in redux. So when u call setters, u just dispatch actions
@@ -54,15 +59,30 @@ function HomePage(props){
     console.log("Selected random art:", randomArt);
     console.log("The image URL:", image);
 
+    //authentication related ----------
+    
+    
     const provider = new GoogleAuthProvider();
 
     function onSignInClickedACB (){
         signInWithPopup(auth, provider);
     } 
+
+    function onSignOutClickedACB (){
+        signOut(auth);
+    }
+
+    //----------------------------------
    
     return <div>
        
-        <TopBarView onSignUpClick={onSignInClickedACB}> </TopBarView>
+        <TopBarView onSignUpClick={onSignInClickedACB}
+                    onSignOutClick={onSignOutClickedACB} 
+                    userID={userUID} 
+                    userName={userDisplayName} 
+                    userProfilePicURL={userProfilePicURL}> 
+                    
+                    </TopBarView>
         <ExploreBodyView> </ExploreBodyView>
         <ArtDescBodyView 
                 artData={randomArt} 

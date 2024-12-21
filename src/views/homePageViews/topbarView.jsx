@@ -2,6 +2,7 @@ import "/src/css/style.css"
 //import Drawer from '@mui/material/Drawer';
 import React, { useState } from 'react';
 import ExploreDrawer from "/src/views/ThirdPartyWrittenComponents/sideBarNav.jsx";
+import { conditionalRenderHelperCB } from "../../utilities";
 
 export function TopBarView(props){
 
@@ -27,6 +28,24 @@ export function TopBarView(props){
         props.onSignUpClick()
     }
 
+    function handleSignOutClick (){
+        props.onSignOutClick()
+    }
+
+    function renderProfilIcon (){
+        return conditionalRenderHelperCB(props.userID, "/image/signinIcon.png", props.userProfilePicURL)
+    }
+
+    function renderSignInButtonText (){
+        return conditionalRenderHelperCB(props.userID, "Sign In", props.userName)
+    }
+
+    function renderLoggedInText (){
+        return conditionalRenderHelperCB(props.userID, "Logged in as: Guest", "")
+    }
+
+
+
     return (
         <div>
             
@@ -50,14 +69,18 @@ export function TopBarView(props){
 
                 <img  className = "logo" src = "/image/Logo.png" />
                 
-                <button className="signInIcon">
-                    <img  src = "/image/signinIcon.png" />
-                </button>
-
+                
+                    
+                <img className="signInIcon" src = {renderProfilIcon()} />
+                
                 <button  className="signInlogo" onClick={handleSignInClick}>    
-                    Sign in
+                    {renderSignInButtonText()}
                    {/*<img  src="/image/signinLogo.png"/>*/}
                 </button>
+
+                <label>{renderLoggedInText()}  </label>
+
+                <button onClick={handleSignOutClick}> Sign Out </button>
                 
                 
                 <button className="Myjournal" onClick={handleMyJournalsClickedACB} >My Journal</button>

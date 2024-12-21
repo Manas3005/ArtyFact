@@ -5,7 +5,7 @@ import { setEntries } from "./store/journalsSlice";
 import { setSearchQuery, setCollectionsArray } from "./store/collectionsSlice";
 import { listenerMiddleware } from "./middleware.js";
 import { getAuth, onAuthStateChanged} from "firebase/auth"
-import { setUID, setProfilePicURL } from "./store/userSlice.js";
+import { setUID, setProfilePicURL, setDisplayName } from "./store/userSlice.js";
 
 
 import "./apiCall";
@@ -351,7 +351,7 @@ function connectToFirebase(dispatchHook) {
     
         dispatchHook(setUID(user.uid))
         dispatchHook(setProfilePicURL(user.photoURL))
-
+        dispatchHook(setDisplayName(user.displayName))
         const userIDString = "user "+(user?" ID "+user.uid:user);
         console.log(userIDString)
         

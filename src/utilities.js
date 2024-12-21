@@ -29,4 +29,12 @@ const input = "Charles Georges Dufresne\nFrench, 1876-1938";
 const dateInterval = extractDateInterval(input);
 console.log(dateInterval);
 
+export function conditionalRenderHelperCB (entry, arg1, arg2) { 
+    if (entry === null){ 
+        return arg1
+    } else {
+        return arg2
+    }
+}
+
 
