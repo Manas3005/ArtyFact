@@ -233,7 +233,6 @@ export function FindMyTaste(props){
 
 
         } else if(filterType === "styles"){ //for artworks filtered by styles
-
           const filteredStyleArtworks = allArtworkData.filter(function (artwork) {
               return selectedStyles.includes(artwork.style_title);
           });
@@ -290,7 +289,7 @@ export function FindMyTaste(props){
               }
             
             });
-          console.log("IMAGE URLS FOR ART BY STYLES: ", newMediumImageURLs) //for debugging
+          console.log("IMAGE URLS FOR ART BY MEDIUMS: ", newMediumImageURLs) //for debugging
   
   
           setImageByMediumsURLs(newMediumImageURLs);

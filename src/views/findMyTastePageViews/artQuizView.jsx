@@ -120,6 +120,7 @@ export function ArtQuizView (props){
       });
     }
 
+
     function renderMediumOptions() {
 
       return mediumOptions.map(function organizeAsOptionCB(medium) {
@@ -147,6 +148,8 @@ export function ArtQuizView (props){
     }
 
 
+
+    
     function renderArtByArtistsACB(){
 
       if(selectedArtists.length!==0 && imageByArtistsURLs.length!==0 ){
@@ -160,19 +163,25 @@ export function ArtQuizView (props){
             <div className="resultsContainer">
 
 
-              {imageByArtistsURLs.map((url, index) => (
+            {imageByArtistsURLs.map((url, index) => (
+              url ? (
                 <div key={index} className="resultItem">
                   <img
                     src={url}
                     className="resultImage"
-                    alt={` Couldn't fetch Artwork ${index + 1}`}
+                    alt={`Couldn't fetch Artwork ${index + 1}`}
+                    onError={(e) => {
+                      e.target.closest(".resultItem").style.display = "none";  //this is so entire grid item is hidden if there is an error in displaying the image
+                    }}
                   />
                   <div className="artDetails">
                     <div className="artTitle">{artTitlesByArtists[index]}</div>
                     <div className="artistTitle">by {artistTitlesByArtists[index]}</div>
                   </div>
                 </div>
-              ))}
+              ) : null
+            ))}
+
 
 
             </div>  
@@ -201,21 +210,26 @@ export function ArtQuizView (props){
 
               <div className="resultsContainer">
 
+              {imageByStylesURLs.map((url, index) => (
+               url ? (
+               <div key={index} className="resultItem">
+                 <img
+                   src={url}
+                   className="resultImage"
+                   alt={`Couldn't fetch Artwork ${index + 1}`}
+                   onError={(e) => {
+                     e.target.closest(".resultItem").style.display = "none"; 
+                   }}
+                 />
+                 <div className="artDetails">
+                   <div className="artTitle">{artTitlesByStyles[index]}</div>
+                   <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
+                   <div className="artistTitle">Style: {styleTitles[index]}</div>
+                 </div>
+               </div>
+              ) : null
+              ))}
 
-                {imageByStylesURLs.map((url, index) => (
-                  <div key={index} className="resultItem">
-                    <img
-                      src={url}
-                      className="resultImage"
-                      alt={` Couldn't fetch Artwork ${index + 1}`}
-                    />
-                    <div className="artDetails">
-                      <div className="artTitle">{artTitlesByStyles[index]}</div>
-                      <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
-                      <div className="artistTitle">Style: {styleTitles[index]}</div>
-                    </div>
-                  </div>
-                ))}
 
               </div>
 
@@ -245,12 +259,16 @@ export function ArtQuizView (props){
 
               <div className="resultsContainer">
 
-                {imageByMediumsURLs.map((url, index) => (
+              {imageByMediumsURLs.map((url, index) => (
+                url ? (
                   <div key={index} className="resultItem">
                     <img
                       src={url}
                       className="resultImage"
-                      alt={` Couldn't fetch Artwork ${index + 1}`}
+                      alt={`Couldn't fetch Artwork ${index + 1}`}
+                      onError={(e) => {
+                        e.target.closest(".resultItem").style.display = "none"; 
+                      }}
                     />
                     <div className="artDetails">
                       <div className="artTitle">{artTitlesByMediums[index]}</div>
@@ -258,7 +276,9 @@ export function ArtQuizView (props){
                       <div className="artistTitle">Medium: {mediumTitles[index]}</div>
                     </div>
                   </div>
-                ))}
+                ) : null
+              ))}
+
 
               </div>
 
