@@ -17,7 +17,7 @@ export const store = configureStore({
     reducer: {
         myCollections: myCollections.reducer,
         myJournals: myJournalEntries.reducer,
-        
+        searchResults: searchResults.reducer,
         findMyTaste: findMyTaste.reducer,
         //to be added as separate slices
         //artWorks: artWorks.reducer,

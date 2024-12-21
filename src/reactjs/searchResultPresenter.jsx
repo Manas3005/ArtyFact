@@ -16,7 +16,7 @@ function SearchResult(props) {
     limit: 40,
   };
 
-  const searchParamSend = useSelector((state) => state.searchResults);
+  const searchParamSend = useSelector((state) => state.searchResults.searchParam);
   console.log("SEARCHPARAM", searchParamSend);
 
   const dispatch = useDispatch();

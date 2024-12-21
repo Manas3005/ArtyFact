@@ -16,11 +16,11 @@ function HomePage(props){
     // here will be the logic for updating the searchReusltSlice 
 
     
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     function updateCurrentSearch(setParam){
-
-        dispatch(setNewSearchParam(setParam)) 
+        console.log("about to set params:", setParam);
+        dispatch(setNewSearchParam(setParam)); 
 
     }
 
