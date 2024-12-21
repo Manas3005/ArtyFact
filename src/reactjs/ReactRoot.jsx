@@ -12,6 +12,7 @@ import { useEffect} from "react";
 import { connectToFirebase } from "../firebaseModel.js";
 import {SearchResult} from "./searchResultPresenter.jsx"
 import { SearchChoosenPresent } from "./searchChoosenPresenter.jsx"; 
+import { JournalEntryContent } from "./journalEntryContentPresenter.jsx";
 
 export function makeRouter(store){  
     return createHashRouter([
@@ -38,6 +39,10 @@ export function makeRouter(store){
         {   
             path: "/findMyTaste",
             element: <FindMyTaste store = {store}></FindMyTaste>
+        },
+        {
+            path:"/journalEntryContent/:ID",
+            element: <JournalEntryContent store={store}></JournalEntryContent>
         },
         {
             path: "/thecollection",
