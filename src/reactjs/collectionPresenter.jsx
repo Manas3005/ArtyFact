@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 export function CollectionPresenter() {
+    console.log("----------ENTERING COLLECTION PRESENTER------------");
 
     /**
      * Denna presenter använder sig av en array i store som fylls när man trycker på en collection i myCollectionsView (den andra view:n, inte för denna view:n).

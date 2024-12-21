@@ -7,6 +7,7 @@ export function ListOfCollectionsView(props) {
 
     //Nu är frågan om vi vill använda component state eller inte, eller ifall vi vill hämta själva collection:en från firebase?
     function handleNavigateACB(evt, collection) {
+        console.log("-------------EVERYTHING RELATED TO PRESSING ON A COLLECTION STARTS NOW--------------");
         console.log("This is the evt", evt);
         console.log("This is the collection in event", collection);
         //Här sätter vi en viss collection in i en ny array i store. Men det kanske vi inte vill göra.
@@ -28,7 +29,7 @@ export function ListOfCollectionsView(props) {
             return collection.title == evt.target.value;
         });*/
 
-        [...props.collections].map((collection) => console.log(collection));
+        //[...props.collections].map((collection) => console.log(collection));
         //props.setCollection(newArray);
         /**
          * Här behöver vi lägga till logik för att skicka data till application state.

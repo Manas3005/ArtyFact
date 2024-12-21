@@ -2,7 +2,7 @@ import { firebaseConfig } from "/src/firebaseConfig.js";
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, set } from "firebase/database";
 import { setEntries } from "./store/journalsSlice";
-import { setSearchQuery, setCollectionsArray } from "./store/collectionsSlice";
+import { setSearchQuery, setCollectionsArray, setCollection } from "./store/collectionsSlice";
 import { listenerMiddleware } from "./middleware.js";
 import { getAuth } from "firebase/auth"
 
@@ -38,6 +38,7 @@ const myBigRef = ref(db, PATH);
 const myRef = ref(db, PATH + "/test")
 const myCollectionsRef = ref(db, PATH + "/collections")
 const myJournalsRef = ref(db, PATH + "/myJournals")
+const singleCollectionRef = ref(db, PATH + "/singleCollection")
 
 // here is a test to try
 set(myRef, {
@@ -160,12 +161,27 @@ function modelToPersistenceForMyCollections(payload) {
     console.log("This is the payload, or change that we need to persist in the db (inside modelToPersistenceForMyCollections)", payload);
     const newArray = payload.map(collection => ({
         collectionTitle: collection.collection_title,
+        collectionDescription: collection.collection_description,
         artWorkIDs: [...collection.artWorks].map(artWork => artWork.artWork_id),
     }));
-    console.log(newArray);
+    console.log("newArray:", newArray);
     set(myCollectionsRef, { collectionsArray: newArray });
-
 }
+
+//Denna är endast till för reloading, eftersom denna fylls ju när vi trycker på den i hemsidan.
+//Vi sparar den för att kunna hämta om den när vi laddar om sidan.
+//Nu behöver vi implementera en persistenceToModel för denna.
+function modelToPersistenceForSingleCollection(payload) {
+    console.log("This is the payload, or change that we need to persist in the db (inside modelToPersistenceForSingleCollection)", payload);
+    const newObject = {
+        collectionTitle: payload.collection_title,
+        collectionDescription: payload.collection_description,
+        artWorkIDs: payload.artWorks.map(artWork => artWork.artWork_id)
+        };
+    console.log("newObject:", newObject);
+    set(singleCollectionRef, { collectionArray: newObject });
+}
+
 
 function modelToPersistenceForMyJournals() {
     //const selectedJournalEntries = useSelector(state => state.journalsSlice.entries);
@@ -189,7 +205,10 @@ function modelToPersistence(payload, type) {
         console.log("And this is the collectionsArray type", setCollectionsArray.type);
         //Vi är redo att persist
         modelToPersistenceForMyCollections(payload);
-
+    }
+    if(type === setCollection.type) {
+        console.log("inside the type:", setCollection.type, " in the modelToPersistence if-check");
+        modelToPersistenceForSingleCollection(payload);
     }
     //Need an if-check here as well to check the type.
     //modelToPersistenceForMyJournals(state)
@@ -229,6 +248,37 @@ async function generateObjectsForCollections(collections) {
     return populatedCollections;
 }
 
+async function generateObjectForSingleCollection(collection) {
+            console.log("This is a single collection in generateObjectForSingleCollection:", collection);
+            const resolvedArtWorks = await Promise.all(
+                collection.collectionArray.artWorkIDs.map(async (id) => {
+                    try {
+                        const result = await getArtWorkByID(id);
+                        console.log("this is result", result);
+                        const dateInterval = extractDateInterval(result.data.artist_display) || "";
+                        return {
+                            artWork_id: id,
+                            artistName: result.data.artist_title,
+                            artWorkTitle: result.data.title,
+                            image_URL: URLParamsForImage(result.data.image_id),
+                            artistDate: dateInterval,
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching artwork ID ${id}, perhaps it doesn't exist:`, error);
+                        return null;
+                    }
+                })
+            );
+
+            return {
+                collection_title: collection.collectionArray.collectionTitle,
+                collection_description: collection.collectionArray.collectionDescription,
+                artWorks: resolvedArtWorks.filter((artwork) => artwork !== null),
+            };
+
+        }
+
+
 
 /**
  * Denna funktion ska omvandla data från firebase till objekt som vi ska spara i store.
@@ -261,6 +311,19 @@ async function persistenceToModelForMyCollection(collections, dispatchHook) {
     return artWorkPromises;
 }
 
+async function persistenceToModelForSingleCollection(collection, dispatchHook) {
+    console.log("These are artworks (from firebase) with the IDs we are going to search upon now", collection);
+    const artWorkPromises = await generateObjectForSingleCollection(collection);
+    console.log("Just got back the data: ", artWorkPromises);
+    console.log("Now i am about to dispatch the single collection to the store", artWorkPromises);
+    dispatchHook(setCollection(artWorkPromises));
+    return artWorkPromises;
+
+
+    
+
+}
+
 
 function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
 
@@ -272,9 +335,12 @@ function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
 
 
 async function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
+    console.log("This is firebaseData:", firebaseData);
     persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook);
     const result = await persistenceToModelForMyCollection(firebaseData.collections, dispatchHook);
-    return result;
+    const resul2 = await persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
+    //Insert a new persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
+    return result;  //Ändra denna till en return endast då Promise All
     /**
      * Would call upon different functions with persistenceToModelforMyCollection(firebaseData.myCollection)
      *                                          persistenceToModelforMyJournal(firebaseData.myJournal)
@@ -381,34 +447,41 @@ function connectToFirebase(state, dispatchHook) {
         console.log("We are her1e", state.getState());
         console.log("the ttttt", setCollectionsArray.type);
 
-        listenerMiddleware.startListening({ //credit: Cristian Bogdan Stackblitz
+        listenerMiddleware.startListening({
             type: setCollectionsArray.type,
             effect(action, store) {
-                console.log("There has been a change in the store:", action.payload);
-                console.log("The change was: ", action.payload, "we now need to persist this change in db");
-                console.log("This is the new state", store.getState());
-                switch (action.type) {
-                    case setCollectionsArray.type:
-                        console.log("The action type was for the collectionsArray");
-                        console.log("This is the ACTION", action.type);
-                        saveToFirebase(myCollectionsRef, action.payload, action.type);
-                        break;
-                    case setSearchQuery.type:
-                        console.log("The action type was for the search query");
-                        saveToFirebase(myBigRef, action.payload);
-                        break;
-                    //Add more cases here to cover.    
-                }
-                //return saveToFirebase(/* Här kan vi även ge vilken path (alltså någon av myBigRef, alltså mycollectionsRef) den ska vara baserat på vilken case det är**/action.payload);
-
-            }
-        })
+              console.log("Action triggered: setCollectionsArray", action.payload);
+              console.log("This is the new state", store.getState());
+              saveToFirebase(myCollectionsRef, action.payload, action.type);
+            },
+          });
+          
+          listenerMiddleware.startListening({
+            type: setSearchQuery.type,
+            effect(action, store) {
+              console.log("Action triggered: setSearchQuery", action.payload)
+              console.log("This is the new state", store.getState());
+              saveToFirebase(myBigRef, action.payload, action.type);
+            },
+          });
+          
+          listenerMiddleware.startListening({
+            type: setCollection.type,
+            effect(action, store) {
+              console.log("Action triggered: setCollection", action.payload);
+              console.log("Action data: ", action.payload);
+              console.log("This is the new state", store.getState());
+              saveToFirebase(singleCollectionRef, action.payload, action.type);
+            },
+          });
+          
+        
         /**
          * If we want to scale this and listen to other data in the store, we simply add another kind of "setCollectionsArray.type" in an array of type
          * Similarly, if we want to perform some actions based on what actually took place then we can use switch cases to match the action type.
          */
 
-        //A tester to trigger the listener to react and save to firebase.
+        //A tester to trigger the listener to react and save to firebase. 
         console.log("About to dispatch static array to store to trigger listener: This is the array im dispatching", testCollectionsArray);
         dispatchHook(setCollectionsArray(testCollectionsArray));
     });
