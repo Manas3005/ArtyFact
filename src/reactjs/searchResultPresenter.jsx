@@ -16,8 +16,8 @@ function SearchResult(props) {
     limit: 40,
   };
 
-  const searchParam = useSelector((state) => state.searchResults.searchParam);
-  console.log("SEARCHPARAM",searchParam)
+  const searchParamSend = useSelector((state) => state.searchResults);
+  console.log("SEARCHPARAM", searchParamSend);
 
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ function SearchResult(props) {
   useEffect(() => {
     async function fetchArtworks() {
       try {
-        const data = await getArtWorksSearch(searchParam);
+        const data = await getArtWorksSearch(searchParamSend);
         setArtData(data);
         console.log("CHECK IT OUT",data)
       } catch (err) {

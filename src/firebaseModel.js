@@ -189,7 +189,7 @@ function modelToPersistence(payload, type) {
 
     }
     //Need an if-check here as well to check the type.
-    modelToPersistenceForMyJournals(state)
+    //modelToPersistenceForMyJournals(state)
 }
 
 async function generateObjectsForCollections(collections) {

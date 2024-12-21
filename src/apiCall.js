@@ -44,10 +44,7 @@ export function getArtWorksWithLog(searchParams) {
     return fetch(createURLParamsForArtWork(searchParams), options).then(gotResponseACB).then((result) => console.log("this is where we are now ",result));
 }
 
-export function getArtWorkByID(searchParams) {
-    console.log("This is params", searchParams);
-    return fetch(createURLParamsForArtWorksByID(searchParams), options).then(gotResponseACB).then(printResponseACB);
-}
+
 
 function createURLParamsForArtWorksByID(searchParams) {
     console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
@@ -135,11 +132,6 @@ function createURLParamsForSpecificArtWork(id, searchParams1) {
     return MAIN_URL + "/artworks/" + id + "?" + new URLSearchParams(searchParams1);
 }
 
-function createURLParamsForArtWorksByID(searchParams) {
-    console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
-    return MAIN_URL + "artworks/" + searchParams;
-    
-}
 
 
 //Create API calls for gathering images
