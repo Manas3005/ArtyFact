@@ -179,10 +179,12 @@
 .rightContent{
     flex: 0.25;
     justify-content: center;
-    border-left: 1px solid #000;    
+    border-left: 1px solid #000;
+    border-top: 1px solid #000;    
 }
 
 .leftContent.commonText{
+    border-top: 1px solid #000;
     flex: 0.75;
     display:flex;  
     flex-direction:column;
@@ -415,12 +417,11 @@
 
 .editButton.commonButtonBase {
     right: 15px;                  
-
+    background-color: D2E0FB;
     display: flex;                
     align-items: center;          
     gap: 10px;                    
     padding: 10px;                               
-    background-color: white;
     font-family: 'Jacques Francois';
     color: black; 
                 
@@ -442,6 +443,8 @@
   }
   .lastUpdatedRight{
     flex:0.1;
+    margin-top: 3%;
+    margin-right: 3%;
   }
 
   .editButton.commonButtonBase:hover {

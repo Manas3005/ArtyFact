@@ -106,7 +106,7 @@ export function EntryEditContentView(props){
 
             <div id="searchArtworkModal" class="modal" >
                 <div class="modal-content">
-                    <h2 className="commonText">Search for the artwork you wish to add to your current Journal Entry</h2>
+                    <h2 className="commonText">Search for the artwork you wish to add to the current Journal Entry</h2>
                     <input className="editEntrysearchBar" placeholder = "Type here..." onBlur={handleSearchParamChangeACB}/>
                     <div className="modalButtonDiv">
                         <button className="goButton commonText commonButtonBase" onClick={handleSearchParamsSendACB}>Go</button>

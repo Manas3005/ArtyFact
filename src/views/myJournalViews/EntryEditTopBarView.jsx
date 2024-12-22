@@ -46,14 +46,6 @@ export function EntryEditTopBarView(props){
         return conditionalRenderHelperCB(props.entryID, "Save Entry", "Save Changes")
 
     }
-
-    function renderDeleteTextACB (){
-        return conditionalRenderHelperCB(props.entryID, "Cancel", "Discard Changes")
-    }
-
-    function renderDeleteIconACB (){
-        return conditionalRenderHelperCB(props.entryID, "/image/minusIcon.png", "/image/deleteIcon.png")
-    }
     
     return (
         <div>
@@ -71,8 +63,8 @@ export function EntryEditTopBarView(props){
                     </button>
 
                     <button className="deleteEntry commonText commonCenterFlex commonButtonBase" onClick={handleCancelClickedACB}>
-                            <img className="Icon" src = {renderDeleteIconACB()} />
-                            <text >{renderDeleteTextACB()}</text>
+                            <img className="Icon" src = "/image/minusIcon.png" />
+                            <text >Discard Changes</text>
                     </button>
 
                 </div>
