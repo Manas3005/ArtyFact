@@ -69,7 +69,8 @@ function HomePage(props){
     } 
 
     function onSignOutClickedACB (){
-        signOut(auth);
+        signOut(auth).then(() => {
+            window.location.reload()}); //reloads page upon sign out
     }
 
     //----------------------------------

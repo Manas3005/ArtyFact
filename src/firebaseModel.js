@@ -410,6 +410,7 @@ function connectToFirebase(dispatchHook) {
          * Similarly, if we want to perform some actions based on what actually took place then we can use switch cases to match the action type.
          */
         dispatchHook(setCollectionsArray(testCollectionsArray));
+        
 
     }));
 }

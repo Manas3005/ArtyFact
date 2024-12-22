@@ -52,9 +52,9 @@
 
 .displayName {
     position: absolute;
-    align-items: center;
-    left: 25%;                         
-    top: 12%;                                  
+    right: 25%;                         
+    top: 55%;
+                                      
     cursor: pointer;  
     
 }
@@ -194,17 +194,16 @@ height: 36.54px;
 .signInButton {
     position: absolute;
     font-family: 'Jacques Francois';
-    font-size: 17px;
-    right: 18%;                         
-    top: 55%;                                  
+    font-size: 17px;    
+    left: 25%;                         
+    top: 7%;
     cursor: pointer;
     
     display: flex;                
     align-items: center;          
     gap: 10px;                    
     padding: 10px;
-
-    border-radius: 12px;
+    
     width: 140px;
     height: 38px;
 }
@@ -214,7 +213,7 @@ height: 36.54px;
     transition: all 0.3s ease;
 
     border-color: #1a9c66; 
-    background-color: rgb(103, 228, 40); 
+    background-color: rgb(171, 238, 137); 
     box-shadow: 0px 4px 10px rgba(203, 21, 164, 0.5); 
 }
 

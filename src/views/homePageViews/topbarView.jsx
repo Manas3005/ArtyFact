@@ -62,8 +62,6 @@ export function TopBarView(props){
                 <button  onClick={toggleDrawer(true)} className="Explore"> 
                     
                    ☰ Explore
-                {/*<img  src="image/explore.png"/>*/}
-
                
                 </button>
 
