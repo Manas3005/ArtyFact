@@ -4,6 +4,14 @@ import "/src/css/searchResultStyle.css"
 
 export function SearchChoose(props) {
   console.log("WE ARE IN THE CHOOSEN VIEW", props);
+  
+  if(!props.art) {
+    return (
+      <div>
+        <p>No artwork found!</p>
+      </div>
+    )
+  }
 
 
   const htmlString = props.art.description;

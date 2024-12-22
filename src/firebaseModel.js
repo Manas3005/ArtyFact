@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, set } from "firebase/database";
 import { setEntries } from "./store/journalsSlice";
 import { setSearchQuery, setCollectionsArray, setCollection, editCollectionDescription, editCollectionTitle } from "./store/collectionsSlice";
-import { setNewSearchParam } from "./store/searchResultSlice.js";
+import { setNewSearchParam, setCurrentArt } from "./store/searchResultSlice.js";
 import { listenerMiddleware } from "./middleware.js";
 import { getAuth } from "firebase/auth"
 
@@ -41,6 +41,7 @@ const myCollectionsRef = ref(db, PATH + "/collections");
 const myJournalsRef = ref(db, PATH + "/myJournals");
 const singleCollectionRef = ref(db, PATH + "/singleCollection");
 const searchParamRef = ref(db, PATH + "/searchParams");
+const currentArtDetailsRef = ref(db, PATH + "/currentArtDetails");
 
 // here is a test to try
 set(myRef, {
@@ -199,6 +200,11 @@ function modelToPersistenceForSearchParams(payload) {
     set(searchParamRef, payload);
 }
 
+function modelToPersistenceForCurrentArtDetails(payload) {
+    console.log("this is the payload in MTP for current art details", payload);
+    set(currentArtDetailsRef, payload);
+}
+
 
 function modelToPersistenceForMyJournals() {
     //const selectedJournalEntries = useSelector(state => state.journalsSlice.entries);
@@ -239,6 +245,10 @@ function modelToPersistence(payload, type) {
     if(type === setNewSearchParam.type) {
         console.log("inside the type:", setNewSearchParam.type, " in the modelToPersistence if-check");
         modelToPersistenceForSearchParams(payload);
+    }
+    if(type === setCurrentArt.type) {
+        console.log("inside the type:", setCurrentArt.type, " in the modelToPersistence if-check");
+        modelToPersistenceForCurrentArtDetails(payload);
     }
     //Need an if-check here as well to check the type.
     //modelToPersistenceForMyJournals(state)
@@ -377,12 +387,18 @@ function persistenceToModelForSearchParams(searchParams, dispatchHook){
     dispatchHook(setNewSearchParam(searchParams));
 }
 
+function persistenceToModelForCurrentArtDetails(currentArtDetails, dispatchHook) {
+    console.log("These are the current art details when reading from firebase", currentArtDetails);
+    dispatchHook(setCurrentArt(currentArtDetails));
+}
+
 
 
 async function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
     console.log("This is firebaseData:", firebaseData);
     persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook);
     persistenceToModelForSearchParams(firebaseData.searchParams, dispatchHook);
+    persistenceToModelForCurrentArtDetails(firebaseData.currentArtDetails, dispatchHook);
     const [result, result2] = await Promise.all([
         persistenceToModelForMyCollection(firebaseData.collections, dispatchHook),
         persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook)
@@ -559,6 +575,21 @@ function connectToFirebase(state, dispatchHook) {
               console.log("Action data: ", action.payload);
               console.log("This is the new state", store.getState());
               saveToFirebase(searchParamRef, action.payload, action.type);
+
+              const updatedCollectionsArray = store.getState().myCollections.collectionsArray;
+              console.log("we are inside editCollectionDescription listener and we have read the collectionsARRAY", updatedCollectionsArray);
+
+              //dispatchHook(setCollectionsArray(updatedCollectionsArray));
+            },
+          });
+
+          listenerMiddleware.startListening({
+            type: setCurrentArt.type,
+            effect(action, store) {
+              console.log("action for set current art triggered!: setCurrentArt", action.payload);
+              console.log("Action data: ", action.payload);
+              console.log("This is the new state", store.getState());
+             saveToFirebase(currentArtDetailsRef, action.payload, action.type);
 
               const updatedCollectionsArray = store.getState().myCollections.collectionsArray;
               console.log("we are inside editCollectionDescription listener and we have read the collectionsARRAY", updatedCollectionsArray);
