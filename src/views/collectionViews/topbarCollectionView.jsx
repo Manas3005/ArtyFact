@@ -1,4 +1,4 @@
-import {BackToHomeButton, MyJournalsButton, Button, SignInButton } from "../customViewComponents/backToHomeButton";
+import { BackToHomeButton, MyJournalsButton, Button, SignInButton } from "../customViewComponents/backToHomeButton";
 import "/src/css/collectionsStyle.css"
 import "/src/css/collectionStyle.css"
 import { useState, useEffect } from "react";
@@ -14,27 +14,31 @@ export function TopbarCollectionView(props) {
      * 
      */
 
-  
+
+
+
     console.log("This is the props in topbarcollectionview", props);
 
-    const [title, setTitle] = useState(props.collection.collection_title || "");
-    const [description, setDescription] = useState(props.collection.collection_description || "");
+    const [title, setTitle] = useState(props.collection ? props.collection.collection_title : "");
+    const [description, setDescription] = useState(props.collection ? props.collection.collection_description : "");
+
 
     useEffect(() => {
-        setTitle(props.collection.collection_title || "");
-        setDescription(props.collection.collection_description || "");
+        // If the collection props change, update the local state
+        setTitle(props.collection ? props.collection.collection_title : "");
+        setDescription(props.collection ? props.collection.collection_description : "");
     }, [props.collection]);
-    
+
+    if (!props.collection) {
+        return <div>Loading collection data...</div>;
+    }
+
     function handleClickForBackToHomeACB(evt) {
         window.location.hash = "#/";
     }
 
     function handleclickForMyJournalACB() {
-        window.location.hash ="#/myJournal";
-    }
-    
-    if (!props.collection) {
-        return <div>Loading collection data...</div>;
+        window.location.hash = "#/myJournal";
     }
 
     function handleToggleACB() {
@@ -47,7 +51,7 @@ export function TopbarCollectionView(props) {
 
     function handleEditDescriptionACB(collection_description, collection_id) {
         console.log("This is the evt", collection_description);
-        setDescription(collection_description); 
+        setDescription(collection_description);
         props.onEditDescription(collection_description, collection_id);
     }
 
@@ -56,12 +60,12 @@ export function TopbarCollectionView(props) {
         setTitle(collection_title);
         props.onEditTitle(collection_title, collection_id);
     }
-    
+
     function handleSaveChangesACB() {
         console.log("in handle");
         props.onSaveChanges();
     }
-    
+
 
 
     return (
@@ -71,33 +75,33 @@ export function TopbarCollectionView(props) {
                 <button className={"backToHomeCollection"} onClick={handleClickForBackToHomeACB}>Back To Home</button>
                 <button className={"MyJournalCollection"} onClick={handleclickForMyJournalACB}>Back slfkjdsf</button>
 
-            {props.isEditing ? (
-                <>
-                    <input type="text" className="collectionTitle" onChange={(e) => handleEditTitleACB(e.target.value, props.collection.collection_id)}                         value={title}  
-                    ></input>
-                    <textarea
-                        style={{resize: 'none'}}
-                        onChange={(e) => handleEditDescriptionACB(e.target.value, props.collection.collection_id)}
-                        className="collectionName"
-                        value={description}  
+                {props.isEditing ? (
+                    <>
+                        <input type="text" className="collectionTitle" onChange={(e) => handleEditTitleACB(e.target.value, props.collection.collection_id)} value={title}
+                        ></input>
+                        <textarea
+                            style={{ resize: 'none' }}
+                            onChange={(e) => handleEditDescriptionACB(e.target.value, props.collection.collection_id)}
+                            className="collectionName"
+                            value={description}
 
-                    ></textarea>
-                    <button className="saveChanges" onClick={handleSaveChangesACB}>Save Changes</button>
-                </>
-            ) : (
-                <>
-                    <h1 className="collectionTitle">{props.collection.collection_title || ""}</h1>
-                    <div className="collectionName">{props.collection.collection_description || ""}</div>
-                </>
-            )}
+                        ></textarea>
+                        <button className="saveChanges" onClick={handleSaveChangesACB}>Save Changes</button>
+                    </>
+                ) : (
+                    <>
+                        <h1 className="collectionTitle">{props.collection.collection_title || ""}</h1>
+                        <div className="collectionName">{props.collection.collection_description || ""}</div>
+                    </>
+                )}
 
-                <button className="editCollection" onClick={handleToggleACB}>{props.isEditing ? "Cancel": "Edit Collection"}</button>
+                <button className="editCollection" onClick={handleToggleACB}>{props.isEditing ? "Cancel" : "Edit Collection"}</button>
                 <SignInButton className={"signInLogo"}></SignInButton>
                 <button className="signInIcon">
-                <img src = "/image/signinIcon.png"/>
+                    <img src="/image/signinIcon.png" />
                 </button>
             </div>
-        </div> 
+        </div>
 
 
     )
