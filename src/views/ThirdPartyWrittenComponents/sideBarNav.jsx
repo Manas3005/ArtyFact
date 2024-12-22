@@ -44,8 +44,11 @@ export default function ExploreDrawer(props) {
         >
 
 <img 
+className="picture"
   src="dist/image/thinkingMan.png" 
- 
+    height ="100"
+    width= "100"
+
 />
 <Divider className="list-divider" />
 
@@ -69,7 +72,7 @@ export default function ExploreDrawer(props) {
                       {/* icon here */}
                     </ListItemIcon>
 
-                    <ListItemText className="list-item-text" primaryTypographyProps={{ style: { fontSize: "20px" } }} >
+                    <ListItemText className="list-item-text" primaryTypographyProps={{ style: { fontSize: "15px" } }} >
                     {text}
                     </ListItemText>
 
@@ -80,6 +83,8 @@ export default function ExploreDrawer(props) {
               </React.Fragment>
             ))}
           </List>
+          <Divider className="list-divider" />
+
         </Box>
       );
       
