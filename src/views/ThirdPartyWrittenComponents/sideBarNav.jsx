@@ -47,6 +47,7 @@ export default function ExploreDrawer(props) {
   src="dist/image/thinkingMan.png" 
  
 />
+<Divider className="list-divider" />
 
 
 
