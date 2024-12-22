@@ -1,5 +1,4 @@
-import "/src/css/findMyTasteStyle.css";
-
+import "/src/css/findMyTasteStyle.css"
 import LinearWithValueLabel from "../ThirdPartyWrittenComponents/LinearProgressWithLabel"
 
 
@@ -160,22 +159,22 @@ export function ArtQuizView (props){
           <div className="resultsPageSubtitle">Based on your favorite artists</div>
           <div className="separator"></div>
 
-            <div className="resultsContainer">
+            <div className="quizResultsContainer">
 
 
             {imageByArtistsURLs.map((url, index) => (
               url ? (
-                <div key={index} className="resultItem">
+                <div key={index} className="quizResultItem">
                   <img
                     src={url}
-                    className="resultImage"
+                    className="quizResultImage"
                     alt={`Couldn't fetch Artwork ${index + 1}`}
                     onError={(e) => {
-                      e.target.closest(".resultItem").style.display = "none";  //this is so entire grid item is hidden if there is an error in displaying the image
+                      e.target.closest(".quizResultItem").style.display = "none";  //this is so entire grid item is hidden if there is an error in displaying the image
                     }}
                   />
-                  <div className="artDetails">
-                    <div className="artTitle">{artTitlesByArtists[index]}</div>
+                  <div className="quizArtDetails">
+                    <div className="quizArtTitle">{artTitlesByArtists[index]}</div>
                     <div className="artistTitle">by {artistTitlesByArtists[index]}</div>
                   </div>
                 </div>
@@ -208,21 +207,21 @@ export function ArtQuizView (props){
               <div className="resultsPageSubtitle">Based on your preferred styles</div>
               <div className="separator"></div>
 
-              <div className="resultsContainer">
+              <div className="quizResultsContainer">
 
               {imageByStylesURLs.map((url, index) => (
                url ? (
-               <div key={index} className="resultItem">
+               <div key={index} className="quizResultItem">
                  <img
                    src={url}
-                   className="resultImage"
+                   className="quizResultImage"
                    alt={`Couldn't fetch Artwork ${index + 1}`}
                    onError={(e) => {
-                     e.target.closest(".resultItem").style.display = "none"; 
+                     e.target.closest(".quizResultItem").style.display = "none"; 
                    }}
                  />
-                 <div className="artDetails">
-                   <div className="artTitle">{artTitlesByStyles[index]}</div>
+                 <div className="quizArtDetails">
+                   <div className="quizArtTitle">{artTitlesByStyles[index]}</div>
                    <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
                    <div className="artistTitle">Style: {styleTitles[index]}</div>
                  </div>
@@ -257,21 +256,21 @@ export function ArtQuizView (props){
               <div className="separator"></div>
 
 
-              <div className="resultsContainer">
+              <div className="quizResultsContainer">
 
               {imageByMediumsURLs.map((url, index) => (
                 url ? (
-                  <div key={index} className="resultItem">
+                  <div key={index} className="quizResultItem">
                     <img
                       src={url}
-                      className="resultImage"
+                      className="quizResultImage"
                       alt={`Couldn't fetch Artwork ${index + 1}`}
                       onError={(e) => {
-                        e.target.closest(".resultItem").style.display = "none"; 
+                        e.target.closest(".quizResultItem").style.display = "none"; 
                       }}
                     />
-                    <div className="artDetails">
-                      <div className="artTitle">{artTitlesByMediums[index]}</div>
+                    <div className="quizArtDetails">
+                      <div className="quizArtTitle">{artTitlesByMediums[index]}</div>
                       <div className="artistTitle">by {artistTitlesByMediums[index]}</div>
                       <div className="artistTitle">Medium: {mediumTitles[index]}</div>
                     </div>
@@ -442,7 +441,7 @@ export function ArtQuizView (props){
 
         } else if(resultsReady && quizCompleted){
 
-      
+     
 
           return (
             <div>
@@ -483,7 +482,7 @@ export function ArtQuizView (props){
     }
     
     return (
-      <div className="bodyBackground"> {/* Applying the background class */}
+      <div className="bodyBackground"> 
       <LinearWithValueLabel updatedProgress={updatedProgress} />
       <div className="quizQuestions">{renderQuizACB()}</div>
     </div>

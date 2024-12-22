@@ -51,7 +51,6 @@ export function FindMyTaste(props){
             const artists = data.data.map((artwork) => artwork.artist_title);
             const styles = data.data.map((artwork) => artwork.style_title);
             const mediums = data.data.map((artwork) => artwork.classification_title);
-            
             const filteredStyles = [];
             const filteredArtists = [];
             const filteredMediums = [];
@@ -203,8 +202,7 @@ export function FindMyTaste(props){
         const newArtistTitlesByMediums = [];
         const newMediumTitles = []
 
-
-
+        console.log("ALL ARTWORK DATA: ", allArtworkData);
         
         if (filterType === "artists"){ //this check is done so the filtering by filteredStyleArtworks is not populated for artworks that are meant to be filtered by artists
             
@@ -291,7 +289,7 @@ export function FindMyTaste(props){
             });
           console.log("IMAGE URLS FOR ART BY MEDIUMS: ", newMediumImageURLs) //for debugging
   
-  
+            console.log("WOWWOWOWO: ", newArtistImageURLs)
           setImageByMediumsURLs(newMediumImageURLs);
           setArtTitlesByMediums(newMediumImageTitles);
           setArtistTitlesByMediums(newArtistTitlesByMediums);
@@ -306,7 +304,7 @@ export function FindMyTaste(props){
     const updatedProgress = useSelector((state) => state.findMyTaste.progress); //this is to actually update the artQuizview
 
 
-    return (<div>
+    return (<>
                 <FindMyTasteTopBarView/> 
         
                 <ArtQuizView 
@@ -348,5 +346,5 @@ export function FindMyTaste(props){
                                                                         errorMessage = {errorMessage}
                                                                         showMessage = {showMessage}
                                                                         />
-            </div>)
+            </>)
 }

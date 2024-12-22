@@ -57,12 +57,7 @@ export function getCollection(searchParams) {
 
 
 
-export function getArtWorkImageModified(result){ //This function directly return the URL that leads to the image
-    console.log("This is the IMAGE ID DIRECT", result);
-    const imageID = result;
-    const imagePath = imageID + IMAGE_DIM;
-    return URLParamsForImage(imagePath);
-}
+
 
 
 export function getArtWorkImage(result){
@@ -74,7 +69,7 @@ export function getArtWorkImage(result){
 
 
 export function fetchAllArtworks() { //allows to fetch all artworks (limit 100) can be used for anything i.e. option instances for the quiz 
-    return fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=100")
+    return fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=100", options)
         .then(function(response) {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: `, response.status);
@@ -93,10 +88,28 @@ function printGotImageACB(result) {
     console.log("this is image result", result);
 }
 
-export function URLParamsForImage(searchParams) {
-    console.log("the path in image", IMAGE_URL + searchParams)
-    return IMAGE_URL + searchParams; //+ IMAGE_DIM;
+
+
+export function getArtWorkImageModified(result){ //USED BY FINDMYTASTE
+    console.log("This is the IMAGE ID DIRECT", result); 
+    const imageID = result;
+    const imagePath = imageID + IMAGE_DIM;
+    return URLParamsForImageModified(imagePath);
 }
+
+export function URLParamsForImage(searchParams) { //DO NOT CHANGE OR REPLACE DURING MERGE, MOST OF THE APP USING IMAGES RELIES ON THIS
+    console.log("the path in image", IMAGE_URL + searchParams)
+    return IMAGE_URL + searchParams + IMAGE_DIM;
+}
+
+
+
+export function URLParamsForImageModified(searchParams) { //DO NOT CHANGE OR REPLACE DURING MERGE, FINDMYTASTE USES THIS
+    console.log("the path in image", IMAGE_URL + searchParams)
+    return IMAGE_URL + searchParams;
+}
+
+
 /**
  * An example of searchParams would be
  * {
@@ -124,16 +137,9 @@ function createURLParamsForArtWorkSearch(searchParams) {
 
 function createURLParamsForArtWorksByID(searchParams) {
     console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
-    return MAIN_URL + "artworks/" +  "?" + new URLSearchParams(searchParams);
+    return MAIN_URL + "artworks/" + searchParams;
 }
 
-
-
-function createURLParamsForArtWorkSearch(searchParams) {
-    console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams));
-    return MAIN_URL + "artworks/" + "search/" + "?q=" + new URLSearchParams(searchParams);
-
-}
 
 
 
