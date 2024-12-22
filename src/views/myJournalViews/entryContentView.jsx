@@ -6,8 +6,18 @@ import { renderEntryArtWorkPath } from "../../utilities"
 export function EntryContentView(props){
 
     function handleDeleteEntryClickedACB (){
+        const deleteEntryModal = document.getElementById("deleteEntryModal")
+        deleteEntryModal.style.display = "flex";
+    }
+
+    function handleDeleteConfirmationACB(){
         props.onDeleteEntryClick()
         return window.location.hash = "#/myjournals"
+    }
+
+    function closeModalACB(){
+        const deleteEntryModal = document.getElementById("deleteEntryModal")
+        deleteEntryModal.style.display = "none";
     }
 
     function handleEditEntryClickedACB (){
@@ -58,12 +68,26 @@ export function EntryContentView(props){
                     </div>
 
                     <div className="commonCenterFlex">
-                        <button id="delete" className="deleteEntry commonText commonCenterFlex commonButtonBase" onClick={handleDeleteEntryClickedACB}>
+
+                        <button id="delete" className="deleteEntry commonText commonCenterFlex commonButtonBase" 
+                                onClick={handleDeleteEntryClickedACB}>
+
                                 <img className="Icon" src = "/image/deleteIcon.png" />
                                 <text >Delete Journal Entry</text>        
                         </button>
                     </div>
 
+                </div>
+            </div>
+
+            <div id="deleteEntryModal" class="modal" >
+                <div class="modal-content">
+                    <h2 className="commonText">Are you sure you want to delete this journal entry?</h2>
+                    <img className="Icon" src = "/image/deleteIcon.png" />
+                    <div className="modalButtonDiv">
+                        <button className="goButton commonText commonButtonBase" onClick={handleDeleteConfirmationACB}>Yes</button>
+                        <button id="closeModel" className="cancel commonText commonButtonBase" onClick={closeModalACB}>No</button>
+                    </div>
                 </div>
             </div>
 
