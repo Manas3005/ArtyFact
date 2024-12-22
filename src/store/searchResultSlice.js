@@ -33,7 +33,11 @@ export const searchResults = createSlice({
         },
 
         setCurrentArt: (state, action) => {
+            console.log("This is the payload (for setCurrentArt) given to store", action.payload);
+            console.log("This is the setCurrentArt before storing", state.searchParam);
             state.currentArt = action.payload; // Fix property name
+            console.log("This is the currentArt after storing", state.searchParam);
+
         },
 
 

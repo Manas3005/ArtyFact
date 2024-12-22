@@ -1,6 +1,3 @@
-import { TopbarCollectionsView } from "../views/myCollectionViews/topbarCollectionsView"
-import { testingAnAPICallForMostSimilar } from "../apiCall";
-import { TopbarCollectionsView } from "../views/myCollectionViews/topbarMyCollectionsView"
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
