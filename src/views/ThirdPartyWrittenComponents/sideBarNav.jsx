@@ -7,118 +7,98 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { testAPI, getArtWorks, getArtWorkImage, URLParamsForImage, getCollection} from '/src/apiCall.js';
+import { useState } from "react";
+import { useDispatch } from "react-redux"; // this is for the searched 
+import {setNewSearchParam} from "/src/store/searchResultSlice.js";
+import "/src/css/navBarStyle.css";
 
 
-export default function ExploreDrawer({ open, toggleDrawer }) {
+export default function ExploreDrawer(props) {
+    console.log("PROPS IN EXPLORE", props);
 
+    const dispatch = useDispatch();
 
-    const handleButtonClick = (action) => {
-        //console.log(`${action} button clicked`);
-        // You can add navigation, API calls, or other logic here
-        
+    function updateCurrentExplore(setParam) {
+        console.log("about to set params:", setParam);
 
-        const searchParams = {
-       
+        const searchParams1 = {
+            style_title: setParam,
+            limit: 60,
         };
 
-      
-        action === 'CITYSCAPES'
-        ? console.log("Why did you click on CITYSCAPES?",getCollection(searchParams))
-        : action === 'IMPRESSIONISM'
-        ? console.log("Why did you click on IMPRESSIONISM?")
-        : action === 'ANIMAL'
-        ? console.log("Why did you click on ANIMAL?")
-        : action === 'ESSENTIALS'
-        ? console.log("Why did you click on ESSENTIALS?")
-        : action === 'AFRICAN DIASPORA'
-        ? console.log("Why did you click on AFRICAN DIASPORA?")
-        : action === 'FASHION'
-        ? console.log("Why did you click on FASHION?")
-        : action === 'CHICAGO ARTIST'
-        ? console.log("Why did you click on CHICAGO ARTIST?")
-        : action === 'POP ART'
-        ? console.log("Why did you click on POP ART?")
-        : action === 'MYTHOLOGY'
-        ? console.log("Why did you click on MYTHOLOGY?")
-        : action === 'SURREALISM'
-        ? console.log("Why did you click on SURREALISM?")
-        : action === 'ARMS ARMOR'
-        ? console.log("Why did you click on ARMS ARMOR?")
-        : action === 'PORTRAITS'
-        ? console.log("Why did you click on PORTRAITS?")
-        : action === 'MASKS'
-        ? console.log("Why did you click on MASKS?")
-        : action === 'DRINKING AND DINING'
-        ? console.log("Why did you click on DRINKING AND DINING?")
-        : action === '21ST Century'
-        ? console.log("Why did you click on 21ST Century?")
-        : action === 'ARCHITECTURE'
-        ? console.log("Why did you click on ARCHITECTURE?")
-        : action === 'LANDSCAPES'
-        ? console.log("Why did you click on LANDSCAPES?")
-        : action === 'ART DECO'
-        ? console.log("Why did you click on ART DECO?")
-        : action === 'ANCIENT'
-        ? console.log("Why did you click on ANCIENT?")
-        : action === 'MINITURE'
-        ? console.log("Why did you click on MINITURE?")
-        : action === 'WOODBLOCK PRINT'
-        ? console.log("Why did you click on WOODBLOCK PRINT?")
-        : action === 'STILL LIFE'
-        ? console.log("Why did you click on STILL LIFE?")
-        : action === 'MODERNISM'
-        ? console.log("Why did you click on MODERNISM?")
-        : console.log(`No specific action for ${action}`);
+        dispatch(setNewSearchParam(searchParams1));
+    }
 
-
-
+    const handleButtonClick = (action) => {
+        console.log("This is the text", action);
+        updateCurrentExplore(action); // Call the function passed as a prop
+        window.location.hash = "#/searchResult";
     };
 
-
     const DrawerList = (
-        <Box sx={{ width: 260 }} role="presentation" onClick={toggleDrawer(false)}>
-            <List>  
+        <Box
+          className="drawer-box"
+          role="presentation"
+          onClick={props.toggleDrawer(false)}
+          
+        >
 
-                {['CITYSCAPES', 'IMPRESSIONISM', 'ANIMAL', 'ESSENTIALS',
-                'AFRICAN DIASPORA', 'FASHION', 'CHICAGO ARTIST', 'POP ART' , 'MYTHOLOGY',
-                'SURREALISM', 'ARMS ARMOR', 'PORTRAITS', 'MASKS','DRINKING AND DINING',
-                'FURNITURE','21ST Century','ARCHITECTURE','LANDSCAPES','ART DECO','ANCIENT','MINITURE',
-                'WOODBLOCK PRINT', 'STILL LIFE','MODERNISM'
-            
-                ].map((text) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton onClick={() => handleButtonClick(text)}> 
-                            <ListItemIcon>
-                                {/* Add your icons here */}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+<img 
+className="picture"
+  src="dist/image/thinkingMan.png" 
+    height ="100"
+    width= "100"
 
-            </List>
-            <Divider />
-            <List>
+/>
+<Divider className="list-divider" />
 
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {/* Add your icons here */}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
 
-            </List>
+
+          <List>
+            {[
+              'Acrylic paintings (visual works)', 'Altarpiece', 'Drawings (visual works)',
+              'Etching europeanpainting', 'Ewer (vessel)', 'Handscroll', 'Mezzotint',
+              'Oil on board', 'Oil on canvas', 'Oil on panel', 'Painting', 'Saltcellar',
+              'Screensculpture', 'Table', 'Tankas (scrolls or banners)', 'Tempera',
+              'Textile',
+            ].map((text, index) => (
+              <React.Fragment key={text}>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    className="list-item-button"
+                    onClick={() => handleButtonClick(text)}
+                  >
+                    <ListItemIcon className="list-item-icon">
+                      {/* icon here */}
+                    </ListItemIcon>
+
+                    <ListItemText className="list-item-text" disableTypography >
+                    {text}
+                    </ListItemText>
+
+                
+                  </ListItemButton>
+                </ListItem>
+                {index < 16 && <Divider className="list-divider" />} {/* Divider after each item except the last */}
+              </React.Fragment>
+            ))}
+          </List>
+          <Divider className="list-divider" />
+
         </Box>
-    );
-
+      );
+      
     return (
-        <Drawer open={open} onClose={toggleDrawer(false)}>
+        <Drawer
+            open={props.open}
+            onClose={props.toggleDrawer(false)}
+            PaperProps={{
+                className: "drawer-paper",
+            }}
+        >
             {DrawerList}
         </Drawer>
     );
 }
+
+
