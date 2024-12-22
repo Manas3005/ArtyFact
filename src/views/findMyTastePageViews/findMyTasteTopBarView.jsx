@@ -10,7 +10,7 @@ function FindMyTasteTopBarView (props){
 
                 </a>
                 
-                <img src = "image/artQuizTitle.png" className = "artQuizLogo"></img>
+                <img src = "public/image/artQuizTitle.png" className = "artQuizLogo"></img>
                 
                 
            </div>)
