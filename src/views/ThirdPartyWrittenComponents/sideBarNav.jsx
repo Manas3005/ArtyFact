@@ -72,7 +72,7 @@ className="picture"
                       {/* icon here */}
                     </ListItemIcon>
 
-                    <ListItemText className="list-item-text" primaryTypographyProps={{ style: { fontSize: "15px" } }} >
+                    <ListItemText className="list-item-text" disableTypography >
                     {text}
                     </ListItemText>
 
