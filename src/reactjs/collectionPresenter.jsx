@@ -2,8 +2,8 @@ import { TopbarCollectionView } from "../views/collectionViews/topbarCollectionV
 import { CollectionListview } from "../views/collectionViews/collectionListView";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { editCollectionDescription, setCollectionsArray, editCollectionTitle } from "../store/collectionsSlice";
-import { updateCollectionsArrayField, updateSingleCollectionField, updateCollectionFields } from "../utilities";
+import { editCollectionDescription, setCollectionsArray, editCollectionTitle, setCollection } from "../store/collectionsSlice";
+import { updateCollectionsArrayField, updateSingleCollectionField, updateCollectionFields, removeArtworkById } from "../utilities";
 
 export function CollectionPresenter() {
     console.log("----------ENTERING COLLECTION PRESENTER------------");
@@ -46,6 +46,7 @@ export function CollectionPresenter() {
         const updatedCollectionsArray = allCollections.map(collection =>
             collection.collection_id === selectedCollection.collection_id ? updatedCollection : collection);
 
+            console.log("this is the updated", updatedCollectionsArray);
         dispatch(editCollectionTitle(updatedCollection));
         dispatch(editCollectionDescription(updatedCollection));
         dispatch(setCollectionsArray(updatedCollectionsArray));
@@ -53,9 +54,45 @@ export function CollectionPresenter() {
         setIsEditing(false);
     }
 
-    function handleDeleteArtWorkACB() {
+    function handleDeleteArtWorkACB(artWork_id, collection_id) {
         //Some logic to filter the collections array
         //Then we dispatch the new array (that are all of the collections without the one we want to delete);
+        console.log("We are in handle delete and these are the arguments:", "artWork_id:", artWork_id, "collection_id:", collection_id);
+        //Nu ska vi deleta en artwork m.h.a id
+        console.log("These are all the collections", allCollections);
+        const newArray = [...allCollections].map((collection) => {
+            if (collection.collection_id === collection_id) {
+                return {
+                    ...collection,
+                    artWorks: [...collection.artWorks].filter((artWork) => artWork.artWork_id !== artWork_id),
+                };
+            }
+            else {
+            return collection;
+            }
+        });
+
+        console.log("This is the new array from the parseing", newArray);
+
+        const updatedCollection = removeArtworkById(selectedCollection, artWork_id);
+        console.log("This is the updated", updatedCollection);
+        dispatch(setCollectionsArray(newArray));
+        dispatch(editCollectionDescription(updatedCollection));
+
+
+
+
+
+        /*
+        console.log("These are all the collections", allCollections);
+        const newArray = [...allCollections].filter((collection) => collection.collection_id === collection_id);
+        console.log("This is the new array with the correct collection:", newArray);
+        //Nu vill vi filtrera bort artWork_id som har med vår att göra.
+        console.log(newArray);
+        const newArrayWithoutDeletedCollection = [...newArray[0].artWorks].filter((artWork) => artWork.artWork_id !== artWork_id);
+        dispatch(setCollectionsArray(newArrayWithoutDeletedCollection));
+        console.log("This is the new array without the collection we wanted to delete:", newArrayWithoutDeletedCollection);
+        */
     }
 
 
@@ -93,6 +130,8 @@ export function CollectionPresenter() {
             ></TopbarCollectionView>
             <CollectionListview
             collection={selectedCollection}
+            isEditing={isEditing}
+            onDeleteArtWork={handleDeleteArtWorkACB}
             ></CollectionListview>
         </div>
     )

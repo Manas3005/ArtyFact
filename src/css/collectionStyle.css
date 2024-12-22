@@ -178,3 +178,35 @@ color: #000000;
 .editCollection{
 
 }
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.deleteButton {
+    position: absolute;
+    margin-left: 490px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9b0707bb; 
+    font-size: 1.5em;
+    margin-top: 10px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    animation: wiggle 0.5s ease-out; 
+
+  }
+  
+  .deleteButton:hover {
+    color: #e60000; 
+    transform: scale(1.1); 
+  }
+  
+  .deleteButton:active {
+    transform: scale(0.8); 
+  }
+  

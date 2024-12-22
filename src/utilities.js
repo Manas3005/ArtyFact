@@ -55,5 +55,12 @@ export function updateCollectionFields(collection, title, description) {
     };
 }
 
+export function removeArtworkById(collection, artWorkId) {
+    return {
+        ...collection,
+        artWorks: collection.artWorks.filter(artWork => artWork.artWork_id !== artWorkId)
+    };
+}
+
 
 

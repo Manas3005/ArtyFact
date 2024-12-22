@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import "/src/css/collectionStyle.css"
+import { FaTrash } from "react-icons/fa";
+
 
 
 export function CollectionListview(props) {
@@ -41,13 +43,28 @@ export function CollectionListview(props) {
      * }
      * 
      */
+    
+    function handleDeleteArtworkACB(artWork_id, collection_id) {
+        // This function will be called when the trashcan button is clicked
+        console.log("Delete artwork with ID:", artWork_id);
+        // Add the logic to delete the artwork, likely dispatching an action or calling a prop function
+        props.onDeleteArtWork(artWork_id, collection_id); // Assuming a prop function is passed to handle deletion
+    }
+
+
+
+
     function renderImagesACB() {
         return props.collection.artWorks.map((artWork) => (
             <div className="theCollectionSingleFrame" key={artWork.artWork_id}>
+                                {props.isEditing && (
+                    <button className="deleteButton" onClick={() => handleDeleteArtworkACB(artWork.artWork_id, props.collection.collection_id)}><FaTrash/></button>
+                )}
                 <img className="theCollection-image" src={artWork.image_URL} alt={artWork.artWorkTitle}></img>
                 <div className="theCollection-title">{artWork.artWorkTitle}</div>
                 <div className="theCollection-year">{artWork.year}</div>
                 <div className="artistName">{artWork.artistName + " " + artWork.artistDate}</div>
+
             </div>
         ));
     }

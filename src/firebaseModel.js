@@ -285,7 +285,7 @@ async function generateObjectForSingleCollection(collection) {
                         };
                     } catch (error) {
                         console.error(`Error fetching artwork ID ${id}, perhaps it doesn't exist:`, error);
-                        return null;
+                        return [];
                     }
                 })
             );
@@ -334,11 +334,19 @@ async function persistenceToModelForMyCollection(collections, dispatchHook) {
 
 async function persistenceToModelForSingleCollection(collection, dispatchHook) {
     console.log("This is a single collection (from firebase) with the IDs we are going to search upon now", collection);
-    const artWorkPromises = await generateObjectForSingleCollection(collection);
-    console.log("Just got back the data: ", artWorkPromises);
-    console.log("Now i am about to dispatch the single collection to the store", artWorkPromises);
-    dispatchHook(setCollection(artWorkPromises));
-    return artWorkPromises;
+    if (!collection || !collection.collectionArray.artWorkIDs || collection.collectionArray.artWorkIDs.length === 0) {
+        return {
+        };
+    }
+    else {
+        console.log("we are in else");
+        const artWorkPromises = await generateObjectForSingleCollection(collection);
+        console.log("Just got back the data: ", artWorkPromises);
+        console.log("Now i am about to dispatch the single collection to the store", artWorkPromises);
+        dispatchHook(setCollection(artWorkPromises));
+        return artWorkPromises;
+    }
+
 
 
     
