@@ -8,10 +8,7 @@ export const searchResults = createSlice({
         results: [], // Array to store all the found art pieces
         currentArt : null,
         
-        searchParam:{
-             title : "",
-             limit :40
-        },
+        searchParam:{},
 
         idParam:{
             id:"",

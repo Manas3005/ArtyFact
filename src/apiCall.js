@@ -46,6 +46,7 @@ export function getArtWorkByID(searchParams) {
 }
 
 export function getArtWorksSearch(searchParams) {
+    //debugger;
     return fetch(createURLParamsForArtWorkSearch(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
 
@@ -128,16 +129,13 @@ function createURLParamsForArtWork(searchParams) {
 
 
 function createURLParamsForArtWorkSearch(searchParams) {
+    //debugger;
     console.log("hell hea", MAIN_URL + "artworks/" + "search/" + "?" + new URLSearchParams(searchParams));
-    URL = MAIN_URL + "artworks/" + "search/" + "?q=" + new URLSearchParams(searchParams);
-    console.log("URL RIGHT HERE: ", URL)
-    return URL;
-}
+    //debugger;
+    const url = MAIN_URL + "artworks/" + "search/" + "?q=" + new URLSearchParams(searchParams);
+    console.log("URL:", url);
+    return url;
 
-
-function createURLParamsForArtWorksByID(searchParams) {
-    console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
-    return MAIN_URL + "artworks/" + searchParams;
 }
 
 

@@ -11,18 +11,22 @@ import { useDispatch } from "react-redux"; // this is for the searched
 
 import {setNewSearchParam} from "/src/store/searchResultSlice.js";
 
-function HomePage(props){
+function HomePage(props){ 
 
 
     // here will be the logic for updating the searchReusltSlice 
-
+  
     
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
 
     function updateCurrentSearch(setParam){
         console.log("about to set params:", setParam);
-        dispatch(setNewSearchParam(setParam)); 
 
+       const serachparam = {
+            title : setParam,
+       }
+       
+        dispatch(setNewSearchParam(serachparam)); 
     }
 
 

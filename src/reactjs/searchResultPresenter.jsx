@@ -16,8 +16,16 @@ function SearchResult(props) {
     limit: 40,
   };
 
+  function isEmptyObject(firebaseData) {
+    return firebaseData && (typeof firebaseData === "object" && Object.keys(firebaseData).length === 0);
+  }
+  
   const searchParamSend = useSelector((state) => state.searchResults.searchParam);
-  console.log("SEARCHPARAM", searchParamSend);
+  if(isEmptyObject(searchParamSend)) {
+    console.log("truthy");
+  }
+    console.log( "waiting...");
+  console.log("THESE ARE THE SEARCH PARAMS", searchParamSend);
 
   const dispatch = useDispatch();
 
@@ -27,71 +35,66 @@ function SearchResult(props) {
         //dispatch(setNewSearchParam(evt.target.value));
   }
 
-  // Fetch the list of artworks
+
   useEffect(() => {
-    async function fetchArtworks() {
+    (async () => {
+      if (isEmptyObject(searchParamSend)) {
+        console.log("Waiting for valid search parameters...");
+        return;
+      }
+  
       try {
+        //Hämta artworks när vi laddat klart från firebase
+        //debugger;
+        console.log("starting to fetch now with the params", searchParamSend);
         const data = await getArtWorksSearch(searchParamSend);
         setArtData(data);
-        console.log("CHECK IT OUT",data)
-      } catch (err) {
-        setError(err.message);
-      }
-    }
-    fetchArtworks();
-  }, []);
-
-  // Fetch image_id for each artwork
-  useEffect(() => {
-    async function fetchImageIDs() {
-
-      if (!artData || !artData.data) return;
-
-      try {
-        const results = await Promise.all(
-          artData.data.map(async (artwork) => {
-            const data = await getArtWorkByID(artwork.id);
-            console.log("What did we fetch", data);
-
-            return { id: artwork.id, 
-                image_id: data.data.image_id ,
-                medium_display: data.data.medium_display,
-                artist_title: data.data.artist_title ,
-                place_of_origin : data.data.place_of_origin,
-                dimensions:data.data.dimensions ,
-                description: data.data.description,
-                style_title: data.data.style_title,
-                date_display: data.data.date_display
+        console.log("Fetched Artworks Data:", data);
+  
+        //Hämtar image IDs efter artworks data is fetched
+        if (data && data.data) {
+          console.log("Inside if");
+          const results = await Promise.all(
+            data.data.map(async (artwork) => {
+              console.log("about to fetch artworks by id");
+              const details = await getArtWorkByID(artwork.id);
+              console.log("Fetched Details for Artwork:", details);
+  
+              return {
+                id: artwork.id,
+                image_id: details.data.image_id,
+                medium_display: details.data.medium_display,
+                artist_title: details.data.artist_title,
+                place_of_origin: details.data.place_of_origin,
+                dimensions: details.data.dimensions,
+                description: details.data.description,
+                style_title: details.data.style_title,
+                date_display: details.data.date_display,
+              };
+            })
+          );
+  
+          const information = results.reduce((acc, curr) => {
+            acc[curr.id] = {
+              image_id: curr.image_id,
+              medium_display: curr.medium_display,
+              artist: curr.artist_title,
+              place_of_origin: curr.place_of_origin,
+              dimensions: curr.dimensions,
+              description: curr.description,
+              style_title: curr.style_title,
+              date_display: curr.date_display,
             };
-
-          })
-        );
-
-        const information = results.reduce((acc, curr) => {
-          acc[curr.id] = {
-            image_id:        curr.image_id,
-            medium_display:  curr.medium_display,
-            artist:          curr.artist_title,
-            place_of_origin: curr.place_of_origin,
-            dimensions:      curr.dimensions,
-            description:     curr.description,
-            style_title:     curr.style_title,
-            date_display:    curr.date_display
-
-        };
-
-          return acc;
-        }, {});
-
-        setArtInformation(information);
-
+            return acc;
+          }, {});
+  
+          setArtInformation(information);
+        }
       } catch (err) {
         setError(err.message);
       }
-
-    }
-    fetchImageIDs();
-  }, [artData]);
+    })(); 
+  }, [searchParamSend]);
 
   if (error) return <div>Error: {error}</div>;
   if (!artData || !artInfo) return <div>Loading...</div>;
@@ -104,6 +107,7 @@ function SearchResult(props) {
         artworks={artData}
         artInfo={artInfo} 
         setIndividualArt={setCurrentArtACB}
+        searchParams={searchParamSend}
       />
     </div>
   );
