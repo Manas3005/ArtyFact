@@ -1,7 +1,7 @@
 import { firebaseConfig } from "/src/firebaseConfig.js";
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, set } from "firebase/database";
-import { setEntries } from "./store/journalsSlice";
+import { setEntries, addEntry } from "./store/journalsSlice";
 import { setSearchQuery, setCollectionsArray } from "./store/collectionsSlice";
 import { listenerMiddleware } from "./middleware.js";
 import { getAuth, onAuthStateChanged} from "firebase/auth"
@@ -394,11 +394,11 @@ function connectToFirebase(dispatchHook) {
         });
 
         listenerMiddleware.startListening({ //credit: Cristian Bogdan Stackblitz
-            type: setEntries.type,
-            effect(action, store) {
+            type: addEntry.type,
+            effect(action) {
                
-                    const userJournalsRef = ref(db, `${userPath}/myJournals`)
-                    saveToFirebase(userJournalsRef, action.payload);
+                    const userJournalsRef = ref(db, `${userPath}/myJournals/entries`)
+                    saveToFirebase(userJournalsRef, store.getState().myJournals.entries);
                             
                 //return saveToFirebase(/* Här kan vi även ge vilken path (alltså någon av myBigRef, alltså mycollectionsRef) den ska vara baserat på vilken case det är**/action.payload);
 
@@ -410,7 +410,7 @@ function connectToFirebase(dispatchHook) {
          * Similarly, if we want to perform some actions based on what actually took place then we can use switch cases to match the action type.
          */
         dispatchHook(setCollectionsArray(testCollectionsArray));
-        
+
 
     }));
 }
