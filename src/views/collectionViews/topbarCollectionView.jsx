@@ -66,8 +66,11 @@ export function TopbarCollectionView(props) {
             alert("Title is required for a collection!");
             return;
         }
+        else {
         console.log("in handle");
+        alert("Changes Changed Successfully!");
         props.onSaveChanges();
+        }
     }
 
 
