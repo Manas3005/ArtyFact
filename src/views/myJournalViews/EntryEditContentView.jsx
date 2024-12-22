@@ -1,6 +1,6 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
-import { renderEntryArtWorkPath } from "../../utilities"
+import { renderEntryArtWorkPath, conditionalRenderHelperCB } from "../../utilities"
 
 export function EntryEditContentView(props){
 
@@ -34,6 +34,10 @@ export function EntryEditContentView(props){
         props.onEntryContentChange()
         props.onSearchParamsSend()
         window.location.hash="#/searchResult";
+    }
+
+    function renderChangeArtWorkButtonText (){
+        return conditionalRenderHelperCB(props.imageID, "Add Artwork", "Change Artwork")
     }
     
     return (
@@ -90,7 +94,7 @@ export function EntryEditContentView(props){
                         <div className="down">
                         
                             <button id="addOrChangeArtwork" className="addArtwork commonText commonButtonBase"
-                            onClick={handleAddOrChangeArtworkClick}>Add Artwork</button>
+                            onClick={handleAddOrChangeArtworkClick}>{renderChangeArtWorkButtonText()}</button>
                     
                         </div>    
                     
