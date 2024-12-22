@@ -37,42 +37,51 @@ export default function ExploreDrawer(props) {
 
     const DrawerList = (
         <Box
-            className="drawer-box"
-            role="presentation"
-            onClick={props.toggleDrawer(false)}
+          className="drawer-box"
+          role="presentation"
+          onClick={props.toggleDrawer(false)}
+          
         >
-            <List>
-                {[
-                    'Acrylic paintings (visual works)', 'Altarpiece', 'Drawings (visual works)',
-                    'Etching europeanpainting', 'Ewer (vessel)', 'Handscroll', 'Mezzotint',
-                    'Oil on board', 'Oil on canvas', 'Oil on panel', 'Painting', 'Saltcellar',
-                    'Screensculpture', 'Table', 'Tankas (scrolls or banners)', 'Tempera',
-                    'Textile',
-                ].map((text) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton
-                            className="list-item-button"
-                            onClick={() => handleButtonClick(text)}
-                        >
-                            <ListItemIcon className="list-item-icon">
-                                {/* Add an icon or placeholder here */}
-                            </ListItemIcon>
+
+<img 
+  src="dist/image/thinkingMan.png" 
+ 
+/>
 
 
-                            <ListItemText
-                                primary={text}
-                                className="list-item-text"
-                            />
 
-                            
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-            <Divider className="divider" />
+          <List>
+            {[
+              'Acrylic paintings (visual works)', 'Altarpiece', 'Drawings (visual works)',
+              'Etching europeanpainting', 'Ewer (vessel)', 'Handscroll', 'Mezzotint',
+              'Oil on board', 'Oil on canvas', 'Oil on panel', 'Painting', 'Saltcellar',
+              'Screensculpture', 'Table', 'Tankas (scrolls or banners)', 'Tempera',
+              'Textile',
+            ].map((text, index) => (
+              <React.Fragment key={text}>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    className="list-item-button"
+                    onClick={() => handleButtonClick(text)}
+                  >
+                    <ListItemIcon className="list-item-icon">
+                      {/* icon here */}
+                    </ListItemIcon>
+
+                    <ListItemText className="list-item-text" primaryTypographyProps={{ style: { fontSize: "20px" } }} >
+                    {text}
+                    </ListItemText>
+
+                
+                  </ListItemButton>
+                </ListItem>
+                {index < 16 && <Divider className="list-divider" />} {/* Divider after each item except the last */}
+              </React.Fragment>
+            ))}
+          </List>
         </Box>
-    );
-
+      );
+      
     return (
         <Drawer
             open={props.open}
