@@ -5,7 +5,8 @@ export const myJournalEntries = createSlice({
     initialState: {
         entries: [], // Array to store journal entries
         latestEntryID:0,
-        selectedEntryID: ''
+        selectedEntryID: '',
+        selectedArtworkID:null
     },
     reducers:{
         addEntry: (state, action) => {
@@ -43,10 +44,13 @@ export const myJournalEntries = createSlice({
             entries: (state.entries.map((entry) => 
             entry.entryID === action.payload.entryID ? action.payload : entry
             ))}
-
+        
+        },
+        setSelectedArtworkID: (state, action) => { 
+            state.selectedArtworkID = action.payload
         }   
         }
     }
 )
 
-export const { addEntry, removeEntry, setEntries, increaseLatestEntryID, setSelectedEntryID, editEntry} = myJournalEntries.actions;
+export const { addEntry, removeEntry, setEntries, increaseLatestEntryID, setSelectedEntryID, editEntry, setSelectedArtworkID} = myJournalEntries.actions;

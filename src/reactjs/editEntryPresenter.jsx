@@ -11,6 +11,7 @@ function EntryEdit (props){
     let journalEntries = useSelector(state => state.myJournals.entries)
     let entryID = useSelector(state => state.myJournals.latestEntryID)
     let currentEntryID = useSelector(state => state.myJournals.selectedEntryID)
+    let imageID = useSelector(state => state.myJournals.selectedArtworkID)
 
     const [title, setTitle] = useState('');
     const [mood, setMood] = useState('');
@@ -103,6 +104,7 @@ function EntryEdit (props){
                             onSearchParamsSend={sendSearchParamACB}
 
                             entryID={currentEntryID}
+                            imageID={imageID}
                             inputTitle={title}
                             inputMood={mood}
                             inputActualText={actualText}>
