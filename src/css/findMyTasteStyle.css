@@ -1,7 +1,8 @@
 .topBarFMT{
+    position: relative;
     height: 30vh;
     width: 100%;
-    background-color: #dacdbf;
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20241106/pngtree-abstract-art-of-subtle-brushstrokes-in-light-gray-and-beige-color-image_16526904.jpg'); 
     border-radius: 20px;
     
 }
@@ -45,49 +46,33 @@
 }
 
 
-.backToHomeButton {
-    position: absolute;
-    left: 4%;
-    padding: 20px;
-    transform: translateX(-50%); 
-    cursor: pointer;
-    width: 60px;
-    height: 60px;
-    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));    
-    
-    
+.backToHome{
+    position: absolute;          
+    left: 15px;                  
+    top: 17%;                                  
+    cursor: pointer;   
+    border: bold;   
+    filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
+    width: 189px;
+    height: 45px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    background-color: #E7DCDC;
+
 }
 
-.dreamDescInputBox{
-    margin-left: 365px;
-    margin-top: 70px;
-    width: 700px;
-    height: 300px;
-    background: #FFFFFF;
-    border: 1px solid #000000;
-    border-radius: 15px;
-    padding: 15px;
-    background-color: #dacdbf;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 18px;    
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+.backToHome:hover {
+    background-color: rgb(219, 184, 145);  
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    transform: translateY(-3px); 
+    transition: all 0.3s ease; 
 }
 
-.seeDescResultsButton{
-    top: 90%;
-    left: 46%;
-    position: absolute;
-    font-family: "Junge";
-    font-size: 15px;
-    width: 128px;
-    height: 33px;
-    background: #F6F6F6;
-    border: 0.5px solid #000000;
-    border-radius: 10px;
-    background-color: #dacdbf;
-    cursor: pointer;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
 
 .quizQuestions{
     display: flex; 
@@ -104,9 +89,9 @@
 }
 
 .quizPreviousQuestion{
-    top: 87%;
-    left: 20%;
-    position: absolute;
+    position:fixed;
+    bottom: 2%;
+    left: 15%;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 25px;
     width: 160px;
@@ -119,10 +104,32 @@
 
 }
 
+.quizCompleted{
+    margin-right: 30px;
+    height: 200px;
+    width: 200px;
+}
+
+.quizBackButton {
+    position: fixed; 
+    top: 88%; 
+    left: 20px; 
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    width: 160px;
+    height: 60px;
+    background: #F6F6F6;
+    border: 0.2px solid #585757;
+    border-radius: 10px;
+    background-color: #dacdbf;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    z-index: 10; 
+}
+
 .quizNextQuestion{
-    top: 87%;
-    right: 20%;
-    position: absolute;
+    top: 89%;
+    right: 15%;
+    position: fixed;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 25px;
     width: 160px;
@@ -135,9 +142,9 @@
 }  
 
 .submitQuizButton{
-    top: 87%;
+    top: 88.9%;
     right: 44%;
-    position: absolute;
+    position: fixed;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 25px;
     width: 160px;
@@ -148,6 +155,10 @@
     background-color: #dacdbf;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 
+}
+
+.favoriteMediumsContainer {
+    margin-top: 5%
 }
 
 
@@ -164,7 +175,7 @@
     font-family: "Junge";
     font-size: 15px;
     width: 128px;
-    height: 33px;
+    height: fit-content + 2px;
     border: 0.5px solid #000000;
     border-radius: 10px;
     background-color: #f8f5f2;
@@ -178,7 +189,7 @@
     font-family: "Junge";
     font-size: 15px;
     width: 128px;
-    height: 33px;
+    height: fit-content + 2px;
     border: 0.5px solid #000000;
     border-radius: 10px;
     background-color: #f8f5f2;
@@ -189,20 +200,180 @@
     background-color: rgb(151, 194, 233); 
 }
 
-.quizProgress {
+.artDetails {
+    text-align: center; 
+    margin-top: 8px; 
+  }
+  
+  .artTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; 
+  }
+  
+  .artistTitle {
+    font-size: 17px;
+    font-style: italic; 
+    color: #555; 
+  }
+  
+  .quizProgress {
     position: relative; 
-    bottom: 42px;
-    left: 95px;
+    bottom: 13%;
+    left: 6.5%;
     font-family: 'Jacques Francois';
-    font-size: 13px; 
+    font-size: 20px; 
     color: #333333; 
     padding: 10px; 
     border-radius: 8px; 
     width: fit-content; 
 }
 
+.artQuizLogo{
 
-.quizPreviousQuestion:hover, .quizNextQuestion:hover, .seeDescResultsButton{
+    position: absolute; 
+    top: 30%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 442px;
+    height: 83px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    z-index: 10; 
+}
+
+
+.resultItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    cursor: pointer; 
+    box-sizing: border-box; 
+    height: fit-content;
+    width: fit-content
+}
+
+.resultItem:hover {
+    transform: scale(1.2); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); 
+}
+
+.resultsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 20px; 
+    justify-items: center; 
+    align-items: stretch; 
+    padding: 10px;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%; 
+    max-width: 1000px; 
+    margin: 0 auto; 
+}
+
+.resultImage {
+    width: 100%;
+    max-height: 200px; 
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    object-fit: cover; 
+    display: block;    
+}
+
+
+  .quizWelcomeContainer {
+    text-align: center;
+    margin: 10px auto 30px auto;
+    padding: 20px;
+    max-width: 600px;
+  }
+  
+  .quizWelcomeTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #3a3a3a;
+    margin-bottom: 20px;
+  }
+  
+  .quizDescription {
+    font-size: 1.4rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+
+  
+  .bodyBackground {
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20241106/pngtree-abstract-art-of-subtle-brushstrokes-in-light-gray-and-beige-color-image_16526904.jpg'); 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat; 
+    min-height: 100%; 
+    width: 100%; 
+    position: absolute; 
+
+}
+
+.error-message {
+    color: rgb(62, 60, 175);
+    font-size: 2rem;
+    margin-top: 1rem;
+    opacity: 1; 
+    transition: opacity 2s ease-in-out; 
+}
+
+.fade-out {
+    opacity: 0; 
+}
+
+.fade-in {
+    opacity: 1; 
+}
+
+
+  .resultsPageTitle {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px; 
+    text-align: center;
+    color: #333;
+  }
+  
+  .resultsPageSubtitle {
+    font-size: 25px;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+    margin-top: 40px; 
+    margin-bottom: 20px; 
+  }
+  
+
+  .separator {
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+    margin: 20px auto; 
+  }
+
+
+  .noResults{
+    font-size: 1.2rem; 
+    color: #843030; 
+    text-align: center; 
+    margin-top: 10px; 
+  }
+  
+
+  
+
+.quizPreviousQuestion:hover, .quizNextQuestion:hover, .seeDescResultsButton:hover, .submitQuizButton:hover, .quizBackButton:hover{
     transform: scale(1.1); 
     box-shadow: 0px 4px 10px #dacdbf; 
 }

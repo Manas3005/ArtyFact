@@ -1,3 +1,4 @@
+import { TopbarCollectionsView } from "../views/myCollectionViews/topbarCollectionsView"
 import { testingAnAPICallForMostSimilar } from "../apiCall";
 import { TopbarCollectionsView } from "../views/myCollectionViews/topbarMyCollectionsView"
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";

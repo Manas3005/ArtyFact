@@ -1,0 +1,100 @@
+.resultsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+    gap: 20px; 
+    justify-content: stretch; 
+    align-items: center; 
+    padding: 10px;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%; 
+    margin-top: 100px;
+    text-align: center;
+  }
+
+
+  .resultImage {
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease; 
+
+  }
+
+  .resultImage:hover {
+    background-color: #6E6A6A; 
+    transform: scale(1.2) rotate(-2deg); 
+}
+
+
+  .resultsContainer .artTitle {
+    font-size: 25px; 
+    font-weight: none;
+    color: #333; 
+    display: block; 
+    line-height: 1.2;
+
+
+
+
+
+font-family: 'Junge';
+font-style: normal;
+
+
+color: #000000;
+
+
+
+}
+
+ 
+
+ 
+
+  .homeButton {
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%; 
+    background-color: #8A8383; 
+    border: 3px solid #797979; 
+    color: white; 
+    font-size: 20px; 
+    font-weight: bold; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+    transition: transform 0.3s ease, background-color 0.3s ease; 
+    margin-top: -50px;
+    margin-left: 60;
+}
+
+.homeButton:hover {
+    background-color: #6E6A6A; 
+    transform: scale(1.2) rotate(-5deg); 
+}
+.divider {
+    border: none; 
+    border-top: 2px solid #ccc; 
+    margin-top: 50px; 
+    width: 50%; 
+}
+
+.artist{
+
+    margin-top:-20px;
+    font-size: 16px; 
+    font-weight: none;
+    color: #9e9d9d; 
+    display: block; 
+    font-family: 'Junge';
+    font-style: normal;
+
+
+
+}
