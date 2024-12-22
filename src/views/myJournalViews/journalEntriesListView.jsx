@@ -1,7 +1,7 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
-import { transformJournalTitleCB,conditionalRenderHelperCB } from "../../utilities";
-import { URLParamsForImage } from "../../apiCall";
+import { transformJournalTitleCB,renderEntryArtWorkPath } from "../../utilities";
+
 
 
 
@@ -9,12 +9,6 @@ import { useDispatch } from "react-redux";
 import { setSelectedEntryID } from "../../store/journalsSlice";
 
 export function JournalEntriesListView(props){
-
-    function renderEntryArtWorkPath (ID){
-        const imagePath = URLParamsForImage(ID)
-        console.log("IMAGE PATH IS", imagePath)
-        return conditionalRenderHelperCB(ID, "/image/starry-night.png", URLParamsForImage(ID))
-    }
 
     let dispatch = useDispatch()
 

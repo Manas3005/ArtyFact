@@ -1,5 +1,6 @@
 import { intercept } from 'mobx';
 import sanitizeHtml from 'sanitize-html';
+import { URLParamsForImage } from './apiCall';
 
 
 export const cleanHtmlContent = (html) => {
@@ -38,5 +39,10 @@ export function conditionalRenderHelperCB (entry, arg1, arg2) {
     }
 }
 
+export function renderEntryArtWorkPath (ID){
+    const imagePath = URLParamsForImage(ID)
+    console.log("IMAGE PATH IS", imagePath)
+    return conditionalRenderHelperCB(ID, "/image/starry-night.png", URLParamsForImage(ID))
+}
  
 

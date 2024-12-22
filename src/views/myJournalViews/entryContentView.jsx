@@ -1,7 +1,7 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
 import { URLParamsForImage } from "../../apiCall"
-import { conditionalRenderHelperCB } from "../../utilities"
+import { renderEntryArtWorkPath } from "../../utilities"
 
 export function EntryContentView(props){
 
@@ -14,13 +14,7 @@ export function EntryContentView(props){
         props.onEditEntryClick()
         return window.location.hash = "#/editentry"
     }
-
-    function renderArtWorkImagePathACB (){
-        const imagePath = URLParamsForImage(props.artworkID)
-        console.log("IMAGE PATH IS", imagePath)
-        return conditionalRenderHelperCB(props.artworkID, "/image/starry-night.png", URLParamsForImage(props.artworkID))
-}
-    
+   
     return (
         <div className="journalsHorizontalFlexParent">
 
@@ -59,7 +53,7 @@ export function EntryContentView(props){
 
                     <div className="topFlex commonCenterFlex">
                         <div className="artWorkBox commonCenterFlex">
-                            <img className="starryNightIcon" src={renderArtWorkImagePathACB()}></img>
+                            <img className="starryNightIcon" src={renderEntryArtWorkPath(props.artworkID)}></img>
                         </div>
                     </div>
 
