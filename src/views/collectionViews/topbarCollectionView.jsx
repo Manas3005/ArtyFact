@@ -62,6 +62,10 @@ export function TopbarCollectionView(props) {
     }
 
     function handleSaveChangesACB() {
+        if (!title || title.trim() === "") {
+            alert("Title is required for a collection!");
+            return;
+        }
         console.log("in handle");
         props.onSaveChanges();
     }

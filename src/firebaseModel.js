@@ -170,7 +170,7 @@ function modelToPersistenceForMyCollections(payload) {
     const newArray = payload.map(collection => ({
         collectionTitle: collection.collection_title,
         collectionId: collection.collection_id,
-        collectionDescription: collection.collection_description,
+        collectionDescription: collection.collection_description || "",
         artWorkIDs: [...collection.artWorks].map(artWork => artWork.artWork_id),
     }));
     console.log("newArray:", newArray);
@@ -184,7 +184,7 @@ function modelToPersistenceForSingleCollection(payload) {
     console.log("This is the payload, or change that we need to persist in the db (inside modelToPersistenceForSingleCollection)", payload);
     const newObject = {
         collectionTitle: payload.collection_title,
-        collectionDescription: payload.collection_description,
+        collectionDescription: payload.collection_description || "",
         collectionId: payload.collection_id,
         artWorkIDs: payload.artWorks.map(artWork => artWork.artWork_id)
         };
