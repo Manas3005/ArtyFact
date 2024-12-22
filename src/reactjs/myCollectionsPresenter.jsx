@@ -1,9 +1,8 @@
-import { TopbarCollectionsView } from "../views/myCollectionViews/topbarMyCollectionsView"
+import { TopbarMyCollectionsView } from "../views/myCollectionViews/topbarMyCollectionsView"
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCollectionsArray, setCollection } from "../store/collectionsSlice";
-import {TopbarMyCollectionsView} from "/src/views/myCollectionViews/TopbarMyCollectionsView";
 
 export function MyCollectionsPresenter(props) {
     const dispatch = useDispatch();
