@@ -126,6 +126,10 @@ function createURLParamsForArtWork(searchParams) {
     
 } 
 
+function createURLParamsForArtWorksByID(searchParams) {
+    console.log("this is the url for fetching the single artwork by selected artist or more", MAIN_URL + "artworks/" + searchParams);
+    return MAIN_URL + "artworks/" +  searchParams;
+}
 
 
 function createURLParamsForArtWorkSearch(searchParams) {

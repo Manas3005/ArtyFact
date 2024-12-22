@@ -4,8 +4,11 @@ import "/src/css/searchResultStyle.css";
 export function SearchTopBar(props) {
   console.log("THIS IS THE PROPS THAT IS SENT TO VIEW", props);
   const { artworks, artInfo, onSearchInitiated } = props;
-  const allData = artworks.data;
 
+  // Filter out artworks with null image_id
+  const validData = artworks.data.filter(
+    (result) => artInfo[result.id] && artInfo[result.id].image_id
+  );
 
   function eventHandlerForHomeClickACB() {
     window.location.hash = "#/homepage";
@@ -33,7 +36,6 @@ export function SearchTopBar(props) {
       props.setIndividualArt(allArtInformationToUpdate);
 
       window.location.hash = "#/searchChoosen";
-      
     }
 
     return (
