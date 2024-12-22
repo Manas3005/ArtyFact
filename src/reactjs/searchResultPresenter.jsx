@@ -61,7 +61,7 @@ function SearchResult(props) {
               console.log("Fetched Details for Artwork:", details);
   
               return {
-                id: artwork.id,
+                id: details.data.id,
                 image_id: details.data.image_id,
                 medium_display: details.data.medium_display,
                 artist_title: details.data.artist_title,
@@ -75,7 +75,9 @@ function SearchResult(props) {
           );
   
           const information = results.reduce((acc, curr) => {
+            console.log("This is the curr", curr);
             acc[curr.id] = {
+              artWork_id: curr.id,
               image_id: curr.image_id,
               medium_display: curr.medium_display,
               artist: curr.artist_title,

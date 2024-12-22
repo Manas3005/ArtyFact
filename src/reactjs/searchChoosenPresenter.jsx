@@ -11,6 +11,9 @@ function SearchChoosenPresent() {
 
     const currentArt = useSelector((state) => state.searchResults.currentArt);
     console.log("CURRENT ART THAT WILL BE DISPLAYED", currentArt)
+    /**
+     * Det saknas för närvarande artwork_id bland currentArt.
+     */
   
 
     const idParam = useSelector((state) => state.searchResults.idParam);

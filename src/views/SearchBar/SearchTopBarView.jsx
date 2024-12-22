@@ -22,6 +22,7 @@ export function SearchTopBar(props) {
       console.log("Image has been clicked for:", foundInformation.artist);
 
       const allArtInformationToUpdate = {
+        artWork_id: foundInformation.artWork_id,
         art_name: result.title,
         image_id: foundInformation.image_id,
         medium_display: foundInformation.medium_display,
