@@ -2,7 +2,7 @@ import { firebaseConfig } from "/src/firebaseConfig.js";
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, set } from "firebase/database";
 import { setEntries } from "./store/journalsSlice";
-import { setSearchQuery, setCollectionsArray, setCollection } from "./store/collectionsSlice";
+import { setSearchQuery, setCollectionsArray, setCollection, editCollectionDescription, editCollectionTitle } from "./store/collectionsSlice";
 import { listenerMiddleware } from "./middleware.js";
 import { getAuth } from "firebase/auth"
 
@@ -54,15 +54,23 @@ set(myRef, {
 set(myCollectionsRef, {
     collectionsArray: [
         {
+            collectionId: 1,
             collectionTitle: "Japanese Art",
             collectionDescription: "art that accompanied Yukio Mishima's travesty..",
             artWorkIDs: [34, 12981, 129884]
         },
         {
+            collectionId: 2,
             collectionTitle: "Impressionism.. oh",
             collectionDescription: "Long before death there was there was the Nile, and out of the Nile death sprung out.. blossomed and ready to kill... songs had not yet been invented, nor was love anywhere to be found.. only sickness.. Mefistofeles was simply not ready to accept Nazim Hikmet at this point in time, nor was Prague yet to be on a world map. The world was simply not ready..asdklj asd lkasjdkla  sdlkajskdj askldjalksd.. jaoksdjaisd osad... sdjaoidoiwoiausdoiu oiasjdkl kslkqw jelqwe... asdsadiooiqweu  yhej va dgl ryd le..laksdlsa dwq we asdlasd",
             artWorkIDs: [3123, 129885, 129887]
         },
+        {
+            collectionId: 3,
+            collectionTitle: "On the outskirts of death",
+            collectionDescription: "a collection of my father's art.",
+            artWorkIDs: [129, 140, 145, 146, 153]
+        }
     ]
 })
 
@@ -161,7 +169,8 @@ function modelToPersistenceForMyCollections(payload) {
     console.log("This is the payload, or change that we need to persist in the db (inside modelToPersistenceForMyCollections)", payload);
     const newArray = payload.map(collection => ({
         collectionTitle: collection.collection_title,
-        collectionDescription: collection.collection_description,
+        collectionId: collection.collection_id,
+        collectionDescription: collection.collection_description || "",
         artWorkIDs: [...collection.artWorks].map(artWork => artWork.artWork_id),
     }));
     console.log("newArray:", newArray);
@@ -175,7 +184,8 @@ function modelToPersistenceForSingleCollection(payload) {
     console.log("This is the payload, or change that we need to persist in the db (inside modelToPersistenceForSingleCollection)", payload);
     const newObject = {
         collectionTitle: payload.collection_title,
-        collectionDescription: payload.collection_description,
+        collectionDescription: payload.collection_description || "",
+        collectionId: payload.collection_id,
         artWorkIDs: payload.artWorks.map(artWork => artWork.artWork_id)
         };
     console.log("newObject:", newObject);
@@ -198,6 +208,7 @@ function modelToPersistenceForMyJournals() {
 function modelToPersistence(payload, type) {
     console.log("inside model to persistence");
     console.log("This is the payload", payload, " and this is the type", type);
+    console.log("This is the type:", type, " and this is the other type:", setCollectionsArray.type)
 
     if(type === setCollectionsArray.type) {
         console.log("vi är inuti if-check");
@@ -208,6 +219,14 @@ function modelToPersistence(payload, type) {
     }
     if(type === setCollection.type) {
         console.log("inside the type:", setCollection.type, " in the modelToPersistence if-check");
+        modelToPersistenceForSingleCollection(payload);
+    }
+    if(type === editCollectionDescription.type) {
+        console.log("inside the type:", editCollectionDescription.type, " in the modelToPersistence if-check");
+        modelToPersistenceForSingleCollection(payload);
+    }
+    if(type === editCollectionTitle.type) {
+        console.log("inside the type:", editCollectionTitle.type, " in the modelToPersistence if-check");
         modelToPersistenceForSingleCollection(payload);
     }
     //Need an if-check here as well to check the type.
@@ -239,6 +258,7 @@ async function generateObjectsForCollections(collections) {
             );
 
             return {
+                collection_id: collection.collectionId,
                 collection_title: collection.collectionTitle,
                 collection_description: collection.collectionDescription,
                 artWorks: resolvedArtWorks.filter((artwork) => artwork !== null),
@@ -265,12 +285,13 @@ async function generateObjectForSingleCollection(collection) {
                         };
                     } catch (error) {
                         console.error(`Error fetching artwork ID ${id}, perhaps it doesn't exist:`, error);
-                        return null;
+                        return [];
                     }
                 })
             );
 
             return {
+                collection_id: collection.collectionArray.collectionId,
                 collection_title: collection.collectionArray.collectionTitle,
                 collection_description: collection.collectionArray.collectionDescription,
                 artWorks: resolvedArtWorks.filter((artwork) => artwork !== null),
@@ -312,12 +333,20 @@ async function persistenceToModelForMyCollection(collections, dispatchHook) {
 }
 
 async function persistenceToModelForSingleCollection(collection, dispatchHook) {
-    console.log("These are artworks (from firebase) with the IDs we are going to search upon now", collection);
-    const artWorkPromises = await generateObjectForSingleCollection(collection);
-    console.log("Just got back the data: ", artWorkPromises);
-    console.log("Now i am about to dispatch the single collection to the store", artWorkPromises);
-    dispatchHook(setCollection(artWorkPromises));
-    return artWorkPromises;
+    console.log("This is a single collection (from firebase) with the IDs we are going to search upon now", collection);
+    if (!collection || !collection.collectionArray.artWorkIDs || collection.collectionArray.artWorkIDs.length === 0) {
+        return {
+        };
+    }
+    else {
+        console.log("we are in else");
+        const artWorkPromises = await generateObjectForSingleCollection(collection);
+        console.log("Just got back the data: ", artWorkPromises);
+        console.log("Now i am about to dispatch the single collection to the store", artWorkPromises);
+        dispatchHook(setCollection(artWorkPromises));
+        return artWorkPromises;
+    }
+
 
 
     
@@ -337,11 +366,12 @@ function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
 async function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
     console.log("This is firebaseData:", firebaseData);
     persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook);
-    const result = await persistenceToModelForMyCollection(firebaseData.collections, dispatchHook);
-    const resul2 = await persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
+    const [result, result2] = await Promise.all([
+        persistenceToModelForMyCollection(firebaseData.collections, dispatchHook),
+        persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook)
+    ]);
     //Insert a new persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
-    return result;  //Ändra denna till en return endast då Promise All
-    /**
+    return { result, result2 };     /**
      * Would call upon different functions with persistenceToModelforMyCollection(firebaseData.myCollection)
      *                                          persistenceToModelforMyJournal(firebaseData.myJournal)
      
@@ -447,6 +477,7 @@ function connectToFirebase(state, dispatchHook) {
         console.log("We are her1e", state.getState());
         console.log("the ttttt", setCollectionsArray.type);
 
+        
         listenerMiddleware.startListening({
             type: setCollectionsArray.type,
             effect(action, store) {
@@ -468,12 +499,42 @@ function connectToFirebase(state, dispatchHook) {
           listenerMiddleware.startListening({
             type: setCollection.type,
             effect(action, store) {
-              console.log("Action triggered: setCollection", action.payload);
+              console.log("Action triggered!: setCollection", action.payload);
               console.log("Action data: ", action.payload);
               console.log("This is the new state", store.getState());
               saveToFirebase(singleCollectionRef, action.payload, action.type);
             },
           });
+
+          listenerMiddleware.startListening({
+            type: editCollectionDescription.type,
+            effect(action, store) {
+              console.log("Action triggered!!!: editCollectionDescription", action.payload);
+              console.log("Action data: ", action.payload);
+              console.log("This is the new state", store.getState());
+              saveToFirebase(singleCollectionRef, action.payload, action.type);
+
+              const updatedCollectionsArray = store.getState().myCollections.collectionsArray;
+              console.log("we are inside editCollectionDescription listener and we have read the collectionsARRAY", updatedCollectionsArray);
+
+              //dispatchHook(setCollectionsArray(updatedCollectionsArray));
+            },
+          });
+          listenerMiddleware.startListening({
+            type: editCollectionTitle.type,
+            effect(action, store) {
+              console.log("Action triggered!!!!: editCollectionTitle", action.payload);
+              console.log("Action data: ", action.payload);
+              console.log("This is the new state", store.getState());
+              saveToFirebase(singleCollectionRef, action.payload, action.type);
+
+              const updatedCollectionsArray = store.getState().myCollections.collectionsArray;
+              console.log("we are inside editCollectionDescription listener and we have read the collectionsARRAY", updatedCollectionsArray);
+
+              //dispatchHook(setCollectionsArray(updatedCollectionsArray));
+            },
+          });
+ 
           
         
         /**
@@ -482,8 +543,8 @@ function connectToFirebase(state, dispatchHook) {
          */
 
         //A tester to trigger the listener to react and save to firebase. 
-        console.log("About to dispatch static array to store to trigger listener: This is the array im dispatching", testCollectionsArray);
-        dispatchHook(setCollectionsArray(testCollectionsArray));
+        //console.log("About to dispatch static array to store to trigger listener: This is the array im dispatching", testCollectionsArray);
+        //dispatchHook(setCollectionsArray(testCollectionsArray));
     });
 }
 

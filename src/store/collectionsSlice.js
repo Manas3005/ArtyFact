@@ -5,7 +5,7 @@ export const myCollections = createSlice({
     initialState: {
         searchQuery: [],
         collectionsArray: [],   //A list of collections
-        singleCollectionArray: [],  //A single collection
+        singleCollectionArray: [], //A single collection
     },
     reducers:{
         //Definiera de olika reducers som vi vill använda, och deras logik.
@@ -28,11 +28,25 @@ export const myCollections = createSlice({
             console.log("This is the collections array before storing", state.singleCollectionArray);
             state.singleCollectionArray = action.payload;
             console.log("This is the collections array after storing", state.singleCollectionArray);
+        },
+        editCollectionDescription: (state, action) => {
+            console.log("This is the payload in editColletionDescription", action.payload);
+            state.singleCollectionArray = action.payload;
+            console.log("the store after updating", state.singleCollectionArray);
+
+            console.log("This is the new description", action.payload.collection_description);
+            const collection_id = action.payload.collection_id;
+            const newDescription = action.payload.collection_description;            
+        },
+        editCollectionTitle: (state, action) => {
+            console.log("This is the payload in editCollectionTitle", action.payload);
+            state.singleCollectionArray = action.payload;
+            console.log("the store after updating", state.singleCollectionArray);
         }
         
     }
 })
 
 
-export const { setSearchQuery, setCollectionsArray, setCollection} = myCollections.actions;
+export const { setSearchQuery, setCollectionsArray, setCollection, editCollectionDescription, editCollectionTitle} = myCollections.actions;
 

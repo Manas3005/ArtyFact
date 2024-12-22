@@ -77,3 +77,37 @@ export function conditionalRenderHelperCB (entry, arg1, arg2) {
     }
 }
 
+export function updateSingleCollectionField(collection, field, value) {
+    return {
+        ...collection,
+        [field]: value
+    };
+}
+
+export function updateCollectionsArrayField(collections, id, field, value) {
+    return collections.map(collection => {
+        if (collection.collection_id === id) {
+            console.log(`Updating ${field} for collection with id: ${id}`);
+            return { ...collection, [field]: value };
+        }
+        return collection;
+    });
+}
+
+export function updateCollectionFields(collection, title, description) {
+    return {
+        ...collection,
+        collection_title: title,
+        collection_description: description,
+    };
+}
+
+export function removeArtworkById(collection, artWorkId) {
+    return {
+        ...collection,
+        artWorks: collection.artWorks.filter(artWork => artWork.artWork_id !== artWorkId)
+    };
+}
+
+
+
