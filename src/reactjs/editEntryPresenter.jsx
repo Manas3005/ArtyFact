@@ -45,7 +45,8 @@ function EntryEdit (props){
             date: dateString, // Default to today string for now
             mood: mood || 'Neutral',
             actualText: actualText || 'No text provided',
-            entryID: entryID
+            entryID: entryID,
+            artworkID: imageID
             
           };
 
@@ -65,6 +66,7 @@ function EntryEdit (props){
                 date: dateString,
                 mood: mood,
                 actualText: actualText,
+                artworkID:imageID
             };
             console.log("updated entry", updatedEntry)
             console.log(currentEntryID)
@@ -111,6 +113,7 @@ function EntryEdit (props){
             setActualText(temporaryEditContent.actualText);
         }
     }, [temporaryEditContent])
+    
     return (<div>
 
         <EntryEditTopBarView onSaveChanges={saveChangesACB}
