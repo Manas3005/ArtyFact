@@ -42,7 +42,7 @@ export function conditionalRenderHelperCB (entry, arg1, arg2) {
 export function renderEntryArtWorkPath (ID){
     const imagePath = URLParamsForImage(ID)
     console.log("IMAGE PATH IS", imagePath)
-    return conditionalRenderHelperCB(ID, "/image/starry-night.png", URLParamsForImage(ID))
+    return conditionalRenderHelperCB(ID, "/image/defaultArtwork.png", URLParamsForImage(ID))
 }
  
 

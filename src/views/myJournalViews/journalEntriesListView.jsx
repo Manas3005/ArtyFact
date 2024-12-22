@@ -29,7 +29,7 @@ export function JournalEntriesListView(props){
         <div className="entriesList commonCenterFlex">
             <img src="/image/thinkingMan.png"></img>
             <p className="alertText">No Journal Entries Added Yet. </p>
-            <p className="alertText">Add Journal Entries using the button above. </p>                       
+            <p className="alertText">"Capture your inspiration by adding detailed journal entries about the artworks you like the most! </p>                       
         </div>
 
     )}else{
