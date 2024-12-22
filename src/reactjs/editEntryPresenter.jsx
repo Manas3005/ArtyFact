@@ -103,6 +103,7 @@ function EntryEdit (props){
                             onSearchParamChange={setSearchParam}
                             onSearchParamsSend={sendSearchParamACB}
 
+
                             entryID={currentEntryID}
                             imageID={imageID}
                             inputTitle={title}

@@ -17,14 +17,6 @@ export function EntryEditContentView(props){
         props.onEntryTextChange(event.target.value)
     }
 
-    function renderDeleteTextACB (){
-        return conditionalRenderHelperCB(props.entryID, "Cancel", "Discard Changes")
-    }
-
-    function renderDeleteIconACB (){
-        return conditionalRenderHelperCB(props.entryID, "/image/minusIcon.png", "/image/deleteIcon.png")
-    }
-
     function renderArtWorkImagePathACB (){
             const imagePath = URLParamsForImage(props.imageID)
             console.log("IMAGE PATH IS", imagePath)
@@ -105,11 +97,6 @@ export function EntryEditContentView(props){
                         
                             <button id="addOrChangeArtwork" className="addArtwork commonText commonButtonBase"
                             onClick={handleAddOrChangeArtworkClick}>Add Artwork</button>
-
-                            <button className="deleteEntry commonText commonCenterFlex commonButtonBase">
-                                <img className="Icon" src = {renderDeleteIconACB()} />
-                                <text >{renderDeleteTextACB()}</text>
-                            </button>
                     
                         </div>    
                     
