@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get, set } from "firebase/database";
 import { setEntries } from "./store/journalsSlice";
 import { setSearchQuery, setCollectionsArray, setCollection, editCollectionDescription, editCollectionTitle } from "./store/collectionsSlice";
+import { setNewSearchParam } from "./store/searchResultSlice.js";
 import { listenerMiddleware } from "./middleware.js";
 import { getAuth } from "firebase/auth"
 
@@ -35,10 +36,11 @@ const rf = ref(db, PATH);
 
 // Initialise firebase app, database, ref
 const myBigRef = ref(db, PATH);
-const myRef = ref(db, PATH + "/test")
-const myCollectionsRef = ref(db, PATH + "/collections")
-const myJournalsRef = ref(db, PATH + "/myJournals")
-const singleCollectionRef = ref(db, PATH + "/singleCollection")
+const myRef = ref(db, PATH + "/test");
+const myCollectionsRef = ref(db, PATH + "/collections");
+const myJournalsRef = ref(db, PATH + "/myJournals");
+const singleCollectionRef = ref(db, PATH + "/singleCollection");
+const searchParamRef = ref(db, PATH + "/searchParams");
 
 // here is a test to try
 set(myRef, {
@@ -192,6 +194,11 @@ function modelToPersistenceForSingleCollection(payload) {
     set(singleCollectionRef, { collectionArray: newObject });
 }
 
+function modelToPersistenceForSearchParams(payload) {
+    console.log("this is the payload in MTP", payload);
+    set(searchParamRef, payload);
+}
+
 
 function modelToPersistenceForMyJournals() {
     //const selectedJournalEntries = useSelector(state => state.journalsSlice.entries);
@@ -228,6 +235,10 @@ function modelToPersistence(payload, type) {
     if(type === editCollectionTitle.type) {
         console.log("inside the type:", editCollectionTitle.type, " in the modelToPersistence if-check");
         modelToPersistenceForSingleCollection(payload);
+    }
+    if(type === setNewSearchParam.type) {
+        console.log("inside the type:", setNewSearchParam.type, " in the modelToPersistence if-check");
+        modelToPersistenceForSearchParams(payload);
     }
     //Need an if-check here as well to check the type.
     //modelToPersistenceForMyJournals(state)
@@ -361,11 +372,17 @@ function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
     console.log("These are the journal entries in persistenceToModelForMyJournals", journalEntries);
 }
 
+function persistenceToModelForSearchParams(searchParams, dispatchHook){
+    console.log("These are the search params when reading from firebase", searchParams);
+    dispatchHook(setNewSearchParam(searchParams));
+}
+
 
 
 async function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
     console.log("This is firebaseData:", firebaseData);
     persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook);
+    persistenceToModelForSearchParams(firebaseData.searchParams, dispatchHook);
     const [result, result2] = await Promise.all([
         persistenceToModelForMyCollection(firebaseData.collections, dispatchHook),
         persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook)
@@ -527,6 +544,21 @@ function connectToFirebase(state, dispatchHook) {
               console.log("Action data: ", action.payload);
               console.log("This is the new state", store.getState());
               saveToFirebase(singleCollectionRef, action.payload, action.type);
+
+              const updatedCollectionsArray = store.getState().myCollections.collectionsArray;
+              console.log("we are inside editCollectionDescription listener and we have read the collectionsARRAY", updatedCollectionsArray);
+
+              //dispatchHook(setCollectionsArray(updatedCollectionsArray));
+            },
+          });
+
+          listenerMiddleware.startListening({
+            type: setNewSearchParam.type,
+            effect(action, store) {
+              console.log("action for set new search param triggered!: setNewSearchParam", action.payload);
+              console.log("Action data: ", action.payload);
+              console.log("This is the new state", store.getState());
+              saveToFirebase(searchParamRef, action.payload, action.type);
 
               const updatedCollectionsArray = store.getState().myCollections.collectionsArray;
               console.log("we are inside editCollectionDescription listener and we have read the collectionsARRAY", updatedCollectionsArray);
