@@ -51,7 +51,7 @@ export function JournalTopBarView(props){
             <div className="topBar">
                 
                 <button className="myJournalsMyCollections commonText commonButtonBase" onClick={handletopRightButtonClickedACB}>{props.topRightButtonText}</button>
-                <button className="backToHome commonText commonButtonBase" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
+                <button className="backToHomeJournals commonText commonButtonBase" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
                 <div>{handleRenderPageTitleACB()}</div>
 
