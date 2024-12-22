@@ -2,7 +2,7 @@ import { MyJournalsButton } from "../customViewComponents/backToHomeButton";
 import "/src/css/collectionsStyle.css"
 import {BackToHomeButton} from "/src/views/customViewComponents/BackToHomeButton"
 
-function TopbarCollectionsView(props) {
+export function TopbarMyCollectionsView(props) {
 
    // console.log("These are the props in collections view", props);
 
@@ -73,5 +73,3 @@ function TopbarCollectionsView(props) {
     )
 
 }
-
-export {TopbarCollectionsView}

@@ -2,6 +2,7 @@ import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollec
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCollectionsArray, setCollection } from "../store/collectionsSlice";
+import {TopbarMyCollectionsView} from "/src/views/myCollectionViews/TopbarMyCollectionsView";
 
 export function MyCollectionsPresenter(props) {
     const dispatch = useDispatch();
@@ -417,7 +418,7 @@ export function MyCollectionsPresenter(props) {
 
     return(
         <div>
-            <TopbarCollectionsView
+            <TopbarMyCollectionsView
             setSearch={handleSearchACB}
             clearButton={clearButton}
             setClearButton={setClearButtonACB}
