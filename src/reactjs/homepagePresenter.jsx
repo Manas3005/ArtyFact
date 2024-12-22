@@ -25,10 +25,8 @@ function HomePage(props){
             title : setParam,
             limit :40
        }
-
-
+       
         dispatch(setNewSearchParam(serachparam)); 
-
     }
 
     

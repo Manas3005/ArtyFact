@@ -10,38 +10,37 @@ import ListItemText from '@mui/material/ListItemText';
 import { useState } from "react";
 import { useDispatch } from "react-redux"; // this is for the searched 
 import {setNewSearchParam} from "/src/store/searchResultSlice.js";
+import "/src/css/navBarStyle.css";
 
 
 export default function ExploreDrawer(props) {
-        console.log("PROPS IN EXPLORE",props)
+    console.log("PROPS IN EXPLORE", props);
 
+    const dispatch = useDispatch();
 
-        const dispatch = useDispatch();
+    function updateCurrentExplore(setParam) {
+        console.log("about to set params:", setParam);
 
-        function updateCurrentExplore(setParam) {
-            console.log("about to set params:", setParam);
-    
-            const searchParams1 = {
-                style_title: setParam,
-                limit: 60,
-            };
-    
-            dispatch(setNewSearchParam(searchParams1));
-        }
+        const searchParams1 = {
+            style_title: setParam,
+            limit: 60,
+        };
 
+        dispatch(setNewSearchParam(searchParams1));
+    }
 
     const handleButtonClick = (action) => {
         console.log("This is the text", action);
-
-       
         updateCurrentExplore(action); // Call the function passed as a prop
-        
-
         window.location.hash = "#/searchResult";
     };
 
     const DrawerList = (
-        <Box sx={{ width: 260 }} role="presentation" onClick={props.toggleDrawer(false)}>
+        <Box
+            className="drawer-box"
+            role="presentation"
+            onClick={props.toggleDrawer(false)}
+        >
             <List>
                 {[
                     'Acrylic paintings (visual works)', 'Altarpiece', 'Drawings (visual works)',
@@ -51,19 +50,40 @@ export default function ExploreDrawer(props) {
                     'Textile',
                 ].map((text) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton onClick={() => handleButtonClick(text)}>
-                            <ListItemIcon>{/* Add your icons here */}</ListItemIcon>
-                            <ListItemText primary={text} />
+                        <ListItemButton
+                            className="list-item-button"
+                            onClick={() => handleButtonClick(text)}
+                        >
+                            <ListItemIcon className="list-item-icon">
+                                {/* Add an icon or placeholder here */}
+                            </ListItemIcon>
+
+
+                            <ListItemText
+                                primary={text}
+                                className="list-item-text"
+                            />
+
+                            
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
-            <Divider />
+            <Divider className="divider" />
         </Box>
     );
 
-    return <Drawer open={props.open} onClose={props.toggleDrawer(false)}>{DrawerList}</Drawer>;
+    return (
+        <Drawer
+            open={props.open}
+            onClose={props.toggleDrawer(false)}
+            PaperProps={{
+                className: "drawer-paper",
+            }}
+        >
+            {DrawerList}
+        </Drawer>
+    );
 }
-
 
 
