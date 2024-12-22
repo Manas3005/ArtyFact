@@ -24,7 +24,6 @@ function HomePage(props){
 
        const serachparam = {
             title : setParam,
-            limit :40
        }
        
         dispatch(setNewSearchParam(serachparam)); 

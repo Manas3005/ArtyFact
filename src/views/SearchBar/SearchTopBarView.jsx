@@ -5,6 +5,23 @@ export function SearchTopBar(props) {
   console.log("THIS IS THE PROPS THAT IS SENT TO VIEW", props);
   const { artworks, artInfo, onSearchInitiated } = props;
 
+  if(props.isLoading) {
+    return (
+      <div>
+        loading results...
+      </div>
+    )
+  }
+
+  if(props.error) {
+    return (
+      <div>
+        There was an error fetching artworks..
+      </div>
+    )
+  }
+
+
   // Filter out artworks with null image_id
   const validData = artworks.data.filter(
     (result) => artInfo[result.id] && artInfo[result.id].image_id
