@@ -14,6 +14,14 @@ export function TopbarCollectionView(props) {
      * 
      */
 
+    if(!props.collection) {
+        return (
+            <div>
+                <p>No collection found!</p>
+            </div>
+        )
+    }
+
 
 
 

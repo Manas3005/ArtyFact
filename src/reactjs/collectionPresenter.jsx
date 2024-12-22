@@ -107,15 +107,6 @@ export function CollectionPresenter() {
     //Problemet nu är att 
     console.log("This is the selected collection in collectionPresenter", selectedCollection);
 
-    if(!selectedCollection ||selectedCollection.length === 0) {
-        return (
-            <div>
-                <TopbarCollectionView></TopbarCollectionView>
-                <p>No collection found!</p>
-            </div>
-        )
-    }
-
 
     return (
 
