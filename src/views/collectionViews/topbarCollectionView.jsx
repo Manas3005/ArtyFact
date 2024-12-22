@@ -8,6 +8,10 @@ export function TopbarCollectionView(props) {
     /**
      * Vi vill göra så att när man trycker på edit collection att det kommer upp lite extra saker på skärmen. 
      * Så vi behöver conditionally render baserat på isEditing. 
+     * 
+     * Hur ska vi särskilja på save changes och cancel?
+     * Vi inser att det är bättre om vi endast dispatchar efter vi tryckt på "save changes" för annars är den knappen meningslös.
+     * 
      */
 
   
@@ -30,9 +34,19 @@ export function TopbarCollectionView(props) {
         props.onToggleEdit();
     }
 
-    function handleEditField(collection_description, collection_id) {
+    function handleEditDescriptionACB(collection_description, collection_id) {
         console.log("This is the evt", collection_description);
         props.onEditDescription(collection_description, collection_id);
+    }
+
+    function handleEditTitleACB(collection_title, collection_id) {
+        console.log("This is the collection title we are changing to", collection_title);
+        props.onEditTitle(collection_title, collection_id);
+    }
+    
+    function handleSaveChangesACB() {
+        console.log("in handle");
+        props.onSaveChanges();
     }
     
 
@@ -44,15 +58,15 @@ export function TopbarCollectionView(props) {
                 <button className={"backToHomeCollection"} onClick={handleClickForBackToHomeACB}>Back To Home</button>
                 <button className={"MyJournalCollection"} onClick={handleclickForMyJournalACB}>Back slfkjdsf</button>
 
-                {props.isEditing ? (
+            {props.isEditing ? (
                 <>
-                    <input type="text" className="collectionTitle"></input>
+                    <input type="text" className="collectionTitle" onChange={(e) => handleEditTitleACB(e.target.value, props.collection.collection_id)}></input>
                     <textarea
                         style={{resize: 'none'}}
-                        onChange={(e) => handleEditField(e.target.value, props.collection.collection_id)}
+                        onChange={(e) => handleEditDescriptionACB(e.target.value, props.collection.collection_id)}
                         className="collectionName"
                     ></textarea>
-                    <button className="saveChanges">Save Changes</button>
+                    <button className="saveChanges" onClick={handleSaveChangesACB}>Save Changes</button>
                 </>
             ) : (
                 <>

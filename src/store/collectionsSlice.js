@@ -36,38 +36,17 @@ export const myCollections = createSlice({
 
             console.log("This is the new description", action.payload.collection_description);
             const collection_id = action.payload.collection_id;
-            const newDescription = action.payload.collection_description;
-
-           
-
-           /*
-            const collection_id = action.payload.id;
-            const newDescription = action.payload.description;
-            const currentCollection = action.payload.currentCollection;
-            console.log("This is the currentcollection", currentCollection);
-            console.log("collectionId:", collection_id, "new description", newDescription);
-            state.collectionsArray = [...state.collectionsArray].map(collection => {
-                if (collection.collection_id === collection_id) {
-                    console.log("updating the state");
-                    return { ...collection, collection_description: newDescription };
-                }
-                return collection;
-            });
-            console.log({
-                ...currentCollection,
-                collection_description: newDescription
-            })
-            state.singleCollectionArray = {
-                ...currentCollection,
-                collection_description: newDescription
-            };*/
-            
-            
+            const newDescription = action.payload.collection_description;            
         },
+        editCollectionTitle: (state, action) => {
+            console.log("This is the payload in editCollectionTitle", action.payload);
+            state.singleCollectionArray = action.payload;
+            console.log("the store after updating", state.singleCollectionArray);
+        }
         
     }
 })
 
 
-export const { setSearchQuery, setCollectionsArray, setCollection, editCollectionDescription} = myCollections.actions;
+export const { setSearchQuery, setCollectionsArray, setCollection, editCollectionDescription, editCollectionTitle} = myCollections.actions;
 

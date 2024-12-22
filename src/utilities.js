@@ -47,4 +47,13 @@ export function updateCollectionsArrayField(collections, id, field, value) {
     });
 }
 
+export function updateCollectionFields(collection, title, description) {
+    return {
+        ...collection,
+        collection_title: title,
+        collection_description: description,
+    };
+}
+
+
 
