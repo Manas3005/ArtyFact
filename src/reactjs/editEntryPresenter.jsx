@@ -2,7 +2,7 @@ import { EntryEditTopBarView } from "../views/myJournalViews/EntryEditTopBarView
 import { EntryEditContentView } from "../views/myJournalViews/EntryEditContentView";
 import { useDispatch } from "react-redux";
 import { useState,useEffect } from "react";
-import { addEntry, increaseLatestEntryID, editEntry } from "../store/journalsSlice";
+import { addEntry, increaseLatestEntryID, editEntry,setSelectedArtworkID, setTemporaryContent } from "../store/journalsSlice";
 import { useSelector } from "react-redux"
 import {setNewSearchParam} from "/src/store/searchResultSlice.js";
 
@@ -12,6 +12,7 @@ function EntryEdit (props){
     let entryID = useSelector(state => state.myJournals.latestEntryID)
     let currentEntryID = useSelector(state => state.myJournals.selectedEntryID)
     let imageID = useSelector(state => state.myJournals.selectedArtworkID)
+    let temporaryEditContent = useSelector(state => state.myJournals.temporaryContent)
 
     const [title, setTitle] = useState('');
     const [mood, setMood] = useState('');
@@ -68,8 +69,9 @@ function EntryEdit (props){
             console.log("updated entry", updatedEntry)
             console.log(currentEntryID)
             dispatch(editEntry(updatedEntry))
-
         }
+        dispatch(setSelectedArtworkID(null))
+        dispatch(setTemporaryContent(null))
     }
 
     function sendSearchParamACB (){
@@ -80,6 +82,19 @@ function EntryEdit (props){
 
         dispatch(setNewSearchParam(param))
     }
+
+    // Handles the scenario where the user exits the add/edit entry screen to select an  
+    // artwork for their journal entry and comes back to the edit entry page. 
+    // This enables it so that the already added content in the text input fields  does not reset 
+    function createTemporaryContentACB (){ 
+        const temporaryContent = {
+            title:title,
+            mood:mood,
+            actualText:actualText
+        }
+        console.log("TEMP CONTENT:", temporaryContent)
+        dispatch(setTemporaryContent(temporaryContent))
+    }
     
     useEffect(() => {
         if (selectedEntry) {
@@ -87,8 +102,15 @@ function EntryEdit (props){
             setMood(selectedEntry.mood);
             setActualText(selectedEntry.actualText);
         }
-    }, [selectedEntry]); 
-
+    }, [selectedEntry]);
+    
+    useEffect(() => {
+        if (temporaryEditContent) {
+            setTitle(temporaryEditContent.title);
+            setMood(temporaryEditContent.mood); // Set title if temporaryEditContent exists
+            setActualText(temporaryEditContent.actualText);
+        }
+    }, [temporaryEditContent])
     return (<div>
 
         <EntryEditTopBarView onSaveChanges={saveChangesACB}
@@ -102,7 +124,7 @@ function EntryEdit (props){
                             onEntryTextChange={setActualText}
                             onSearchParamChange={setSearchParam}
                             onSearchParamsSend={sendSearchParamACB}
-
+                            onEntryContentChange={createTemporaryContentACB}
 
                             entryID={currentEntryID}
                             imageID={imageID}

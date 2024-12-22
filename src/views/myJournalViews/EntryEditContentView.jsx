@@ -38,6 +38,7 @@ export function EntryEditContentView(props){
     }
 
     function handleSearchParamsSendACB (){
+        props.onEntryContentChange()
         props.onSearchParamsSend()
         window.location.hash="#/searchResult";
     }
@@ -64,7 +65,7 @@ export function EntryEditContentView(props){
 
                     <div>
 
-                        <input className="entryTextBox commonText" value={props.inputMood} placeholder="Current Mood (Optional)" onChange={onEntryMoodChangeACB}></input>
+                        <input className="entryTextBox commonText" value={props.inputMood} placeholder="Current Mood" onChange={onEntryMoodChangeACB}></input>
 
                     </div>
                 </div>
