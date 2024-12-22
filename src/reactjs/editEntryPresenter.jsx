@@ -114,11 +114,15 @@ function EntryEdit (props){
         }
     }, [temporaryEditContent])
     
+    function defaultSelectedArtworkIDACB (){
+        dispatch(setSelectedArtworkID(null))
+    }
     return (<div>
 
         <EntryEditTopBarView onSaveChanges={saveChangesACB}
-                             entryID={currentEntryID}>
-
+                             entryID={currentEntryID}
+                             onEditEntryPageExit={defaultSelectedArtworkIDACB}>
+                                
                              </EntryEditTopBarView>
         
         <EntryEditContentView onEntryTitleChange={setTitle} 

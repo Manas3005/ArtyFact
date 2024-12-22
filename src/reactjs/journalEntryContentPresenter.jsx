@@ -25,17 +25,23 @@ function JournalEntryContent (props){
     console.log("Selected Entry:", selectedEntry);
     
     function onDeleteEntryClickedACB (){
+        dispatch(setSelectedArtworkID(null))
         dispatch(removeEntry())
     }
 
     function setCurrentEntryArtworkIDACB (){
         dispatch(setSelectedArtworkID(selectedEntry.artworkID))
     }
+
+    function defaultSelectedArtworkIDACB (){
+        dispatch(setSelectedArtworkID(null))
+    }
         return (<div>
         
             <JournalTopBarView isJournalEntrySelected={true} 
                                 pageHeading={selectedEntry.title} 
-                                topRightButtonText={"Back To My Journals"}>
+                                topRightButtonText={"Back To My Journals"}
+                                onExitContentPage={defaultSelectedArtworkIDACB}>    
 
                                 </JournalTopBarView>
             

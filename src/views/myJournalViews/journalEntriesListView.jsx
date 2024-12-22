@@ -1,11 +1,20 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
-import { transformJournalTitleCB } from "../../utilities";
+import { transformJournalTitleCB,conditionalRenderHelperCB } from "../../utilities";
+import { URLParamsForImage } from "../../apiCall";
+
+
 
 import { useDispatch } from "react-redux";
 import { setSelectedEntryID } from "../../store/journalsSlice";
 
 export function JournalEntriesListView(props){
+
+    function renderEntryArtWorkPath (ID){
+        const imagePath = URLParamsForImage(ID)
+        console.log("IMAGE PATH IS", imagePath)
+        return conditionalRenderHelperCB(ID, "/image/starry-night.png", URLParamsForImage(ID))
+    }
 
     let dispatch = useDispatch()
 
@@ -48,7 +57,7 @@ export function JournalEntriesListView(props){
                         
                         <div key={index} className="journalEntryListDiv" onClick={() => handleJournalEntryClickedACB(entry)}>
                             
-                            <img src="/image/starry-night.png" className="journalEntryListImage" />
+                            <img src={renderEntryArtWorkPath(entry.artworkID)} className="journalEntryListImage" />
                             <span className="journalEntryListText commonText">{transformJournalTitleCB(entry)}</span>
                             
                         </div>

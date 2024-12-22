@@ -4,6 +4,7 @@ import "/src/css/journalsStyle.css"
 export function JournalTopBarView(props){
     
     function handleBackToHomeClickedACB (){
+        props.onExitContentPage()
         return window.location.hash = '#/homepage'
     }
 
@@ -13,6 +14,7 @@ export function JournalTopBarView(props){
     }
 
     function handletopRightButtonClickedACB (){
+        props.onExitContentPage()
        
         if (!props.isJournalEntrySelected){
             return window.location.hash = '#/collections'
