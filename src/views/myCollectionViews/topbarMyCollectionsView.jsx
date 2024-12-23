@@ -7,7 +7,7 @@ import "/src/css/journalsStyle.css"
 
 export function TopbarMyCollectionsView(props) {
 
-    // console.log("These are the props in collections view", props);
+    console.log("These are the props in collections view", props);
 
   
 

@@ -31,9 +31,9 @@ export function SearchChoose(props) {
 
   function handleCollectionChangeACB(event) {
     console.log("This is the event target value", event.target.value);
-    const selectedCollectionID = event.target.value; 
-    props.onCollectionIDChange(selectedCollectionID); 
-}
+    const selectedCollectionID = event.target.value;
+    props.onCollectionIDChange(selectedCollectionID);
+  }
 
 
   function handleAddArtworkToCollectionACB() {
@@ -42,6 +42,7 @@ export function SearchChoose(props) {
       props.onAddArtWorkToCollection(props.selectedCollectionID, props.art);
       const selectCollectionModal = document.getElementById("selectCollectionModal")
       selectCollectionModal.style.display = "none";
+      alert("Artwork saved successfully to collection!");
     } else {
       alert("Please select a collection first.");
     }
@@ -122,16 +123,18 @@ export function SearchChoose(props) {
         <div className="modal-content">
           <h2 className="commonText">Select the Collection you would like to add this Artwork to:</h2>
 
-          <select className="dropdown" size="1" onChange={handleCollectionChangeACB}>
+          <select className="dropdown" size="1" onChange={handleCollectionChangeACB} defaultValue="">
+            <option value="" disabled>
+              Choose a collection
+            </option>
             {props.parsedCollectionsForDropDown.map((collection) => (
-              <option
-                key={collection.collection_id}
-                value={collection.collection_id}
-              >
+              <option key={collection.collection_id} value={collection.collection_id}>
                 {collection.collection_title}
               </option>
             ))}
           </select>
+
+
 
 
           <div className="modalButtonDiv">
