@@ -81,6 +81,7 @@
     box-sizing: border-box;
     padding: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
 }
 
 .theCollectionSingleFrame:hover {
@@ -165,59 +166,63 @@ color: #000000;
 }
 
 .saveChanges{
-    background: none;
-    border: 1px solid #000;
-    border-radius: 4px;
-    padding: 5px 10px;
-    color: #454545; /* Blue for visibility */
-    font-size: 1rem;
-    cursor: pointer;
-    font-family: 'Junge';
-    font-style: normal;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-        margin-top: 10;
+
+margin-top: 10  ;
+background: none;
+border: 1px solid #8b8b8b;
+border-radius: 50px;
+padding: 5px 10px;
+cursor: pointer;
+color: #646464;
+font-size: 1rem;
+transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 
 }
-
-.saveChanges:hover {
-    background-color: #f0f0f0;
-    color: #787878; /* Darker blue on hover */
-    transform: scale(1.05); /* Slight enlargement */
-}
-
-.saveChanges:active {
-    transform: scale(0.95); /* Slight reduction on click */
-}
-
-
 
 .editCollection {
     background: none;
-    border: 1px solid #000;
-    border-radius: 4px;
+    border: 1px solid #8b8b8b;
+    border-radius: 50px;
     padding: 5px 10px;
     cursor: pointer;
-    color: #454545; /* Blue for visibility */
+    color: #646464;
     font-size: 1rem;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    position: flex;
-    margin-left: 1700;
-    margin-top: -100;
     position: relative;
-    font-family: 'Junge';
-    font-style: normal;
+    margin-left: 1750; /* Automatically align to the right */
+    margin-top: -65px; /* Adjust vertical spacing */
+    display: flex;
+    align-items: center; /* Center align the SVG */
+    justify-content: center; /* Center align the SVG */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
 
+.editCollection svg {
+    width: 25px; /* Icon size */
+    height: 25px;
+    fill: #afafaf; /* Default color */
+    margin: 0; /* Remove extra space */
+    transition: fill 0.3s ease, transform 0.3s ease;
 }
 
 .editCollection:hover {
     background-color: #f0f0f0;
-    color: #787878; /* Darker blue on hover */
+    color: #787878;
     transform: scale(1.05); /* Slight enlargement */
+}
+
+.editCollection:hover svg {
+    fill: #787878; /* Hover color for SVG */
 }
 
 .editCollection:active {
     transform: scale(0.95); /* Slight reduction on click */
 }
+
+.editCollection:active svg {
+    fill: #505050; /* Active state color for SVG */
+}
+
 
 
 @keyframes wiggle {
@@ -239,6 +244,7 @@ color: #000000;
     font-size: 1.5em;
     margin-top: -1px;
     margin-bottom: 10;
+    margin-right: -100;
     transition: transform 0.3s ease, color 0.3s ease;
     animation: wiggle 0.5s ease-out; 
 
