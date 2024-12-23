@@ -8,7 +8,7 @@ export function SearchTopBar({ artworks, artInfo, setIndividualArt }) {
   );
 
   function eventHandlerForHomeClickACB() {
-    window.location.hash = "#/homepage";
+     window.location.hash = "#/homepage";
   }
 
   function renderSearchResultsCB(result) {
@@ -59,6 +59,7 @@ export function SearchTopBar({ artworks, artInfo, setIndividualArt }) {
             fill="white"
             viewBox="0 0 16 16"
           >
+            HELLO
             <path
               fillRule="evenodd"
               d="M11.354 1.146a.5.5 0 0 1 0 .708L5.207 8l6.147 6.146a.5.5 0 0 1-.708.708l-6.5-6.5a.5.5 0 0 1 0-.708l6.5-6.5a.5.5 0 0 1 .708 0z"
