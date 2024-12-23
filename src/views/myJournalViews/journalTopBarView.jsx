@@ -1,5 +1,6 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
+import { conditionalRenderHelperCB } from "../../utilities";
 
 export function JournalTopBarView(props){
     
@@ -15,6 +16,14 @@ export function JournalTopBarView(props){
         return window.location.hash = '#/collections'
     }
 
+    function renderProfilIcon (){
+        return conditionalRenderHelperCB(props.userID, "/image/signinIcon.png", props.userProfilePicURL)
+    }
+
+    function renderDisplayNameText (){
+        return conditionalRenderHelperCB(props.userID,"Guest", props.userName)
+    }
+
     return (
         <div>
             
@@ -26,8 +35,8 @@ export function JournalTopBarView(props){
                 <img  className = "logo" src = "/image/myJournalsLogo.png" />
                 
                 <button className="buttonWithIcon">
-                    <img className="Icon" src = "/image/signinIcon.png" />
-                    <text className="loggedInText">Logged In</text>
+                    <img className="Icon" src = {renderProfilIcon()} />
+                    <text className="loggedInText">{renderDisplayNameText()}</text>
                 </button>
 
                 <button className="addNewEntry" onClick={handleAddNewEntryClickedACB}>
