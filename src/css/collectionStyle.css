@@ -64,6 +64,8 @@
 
 /* Single Collection Frame */
 .theCollectionSingleFrame {
+    cursor: pointer;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,7 +80,14 @@
     background-color: rgba(240, 240, 240, 1);
     box-sizing: border-box;
     padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
 }
+
+.theCollectionSingleFrame:hover {
+
+    transform: scale(1) rotate(-2deg); 
+}
+
 
 /* Collection Image */
 .theCollection-image {
@@ -155,6 +164,32 @@ line-height: 21px;
 color: #000000;
 }
 
+.saveChanges{
+    background: none;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #454545; /* Blue for visibility */
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Junge';
+    font-style: normal;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        margin-top: 10;
+
+}
+
+.saveChanges:hover {
+    background-color: #f0f0f0;
+    color: #787878; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight enlargement */
+}
+
+.saveChanges:active {
+    transform: scale(0.95); /* Slight reduction on click */
+}
+
+
 
 .editCollection {
     background: none;
@@ -168,6 +203,9 @@ color: #000000;
     position: flex;
     margin-left: 1700;
     margin-top: -100;
+    position: relative;
+    font-family: 'Junge';
+    font-style: normal;
 
 }
 

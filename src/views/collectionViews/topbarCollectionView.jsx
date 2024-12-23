@@ -96,7 +96,7 @@ export function TopbarCollectionView(props) {
 
 
 
-  {props.isEditing ? (
+                    {props.isEditing ? (
                     <>
                         <input type="text" className="collectionTitle" onChange={(e) => handleEditTitleACB(e.target.value, props.collection.collection_id)} value={title}
                         ></input>
@@ -117,6 +117,7 @@ export function TopbarCollectionView(props) {
                       </div>
                     </>
                 )}
+
                     </span>
 
               
@@ -124,11 +125,11 @@ export function TopbarCollectionView(props) {
 
 
                <span>
-              
-                <SignInButton className={"signInLogo"}></SignInButton>
-                <button className="editCollection" onClick={handleToggleACB}>
+               <button className="editCollection" onClick={handleToggleACB}>
                     {props.isEditing ? "Cancel" : "Edit Collection"}
                 </button>
+
+                <SignInButton className={"signInLogo"}></SignInButton>
 
                </span>
               
