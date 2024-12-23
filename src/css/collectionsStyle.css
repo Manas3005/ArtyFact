@@ -39,6 +39,7 @@
     font-size: 18px;
     background-color: rgb(236, 191, 133);
     transition: all 0.22s ease; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
 } 
 .MyJournalCollection:hover {
     background-color: rgb(244, 201, 145); 
@@ -56,6 +57,7 @@
     font-size: 18px;
     background-color: rgb(236, 191, 133);
     transition: all 0.22s ease; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
 
 .collectionsSearchBar {
@@ -105,8 +107,20 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    color: #000000;     
+    color: #000000;    
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */ 
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
 }
+
+.signInlogo:hover {
+
+    background-color: #f0f0f0;
+    
+    transform: scale(1.05); /* Slight enlargement */
+}
+
+
 
 .collectionsLogo{
     position: center;          
@@ -131,6 +145,7 @@
     gap: 100px; 
     padding: 20px;
     justify-items: center; 
+    
 }
 
 .collection-item {
@@ -144,7 +159,19 @@
     border-radius: 10px; 
     overflow: hidden; 
     background-color: rgba(240, 240, 240, 1); 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
+
 }
+.collection-item:hover {
+
+    background-color: #f0f0f0;
+    color: #787878;
+    transform: scale(1.05); /* Slight enlargement */
+}
+
+
 
 .image-title {
     font-size: 25px;
@@ -162,7 +189,9 @@
     height: 100%; 
     overflow: hidden; 
     border-radius: 10px;
+    
 }
+
 
 .collection-image {
     width: 100%;
