@@ -99,6 +99,6 @@
 }
 
 .imageLoading {
-  max-width: 500px; /* Optional: Limit the size of the loading image */
-  max-height: 500px;
+  max-width: 400px; /* Optional: Limit the size of the loading image */
+  max-height: 400px;
 }
