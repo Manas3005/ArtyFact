@@ -11,6 +11,7 @@ export function CollectionPresenter() {
     //När vi ändrar i decsription osv.
     const selectedCollection = useSelector((state) => state.myCollections.singleCollectionArray);
     const allCollections = useSelector((state) => state.myCollections.collectionsArray);
+    console.log("all collections in store, given to collectionPresenter", allCollections);
 
     console.log("selected Collection", selectedCollection);
 
