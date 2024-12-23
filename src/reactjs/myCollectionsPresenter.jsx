@@ -356,7 +356,7 @@ export function MyCollectionsPresenter(props) {
         function filterCollections(searchText) {
             console.log("Filtering collections:", searchText);
             return selectedCollectionsArray.filter((collection) =>
-                collection.title.toLowerCase().includes(searchText.toLowerCase())
+                collection.collection_title.toLowerCase().includes(searchText.toLowerCase())
             );
         }
         

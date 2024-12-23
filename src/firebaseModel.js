@@ -285,7 +285,6 @@ async function generateObjectsForCollections(collections) {
         collections.collectionsArray.map(async (collection) => {
             console.log("This is a single collection123", collection);
 
-            // Safely handle the case where artWorkIDs is undefined
             const resolvedArtWorks = await Promise.all(
                 (collection.artWorkIDs || []).map(async (id) => {
                     try {
@@ -406,7 +405,6 @@ async function persistenceToModelForSingleCollection(collection, dispatchHook) {
 function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
 
     dispatchHook(setEntries(journalEntries.entries));
-    //dispatches here, set action in journal slice
     console.log("These are the journal entries in persistenceToModelForMyJournals", journalEntries);
 }
 
@@ -422,7 +420,7 @@ function persistenceToModelForCurrentArtDetails(currentArtDetails, dispatchHook)
 
 
 
-async function persistenceToModel(firebaseData, dispatchHook) { // we get the snapshot and call the relevant
+async function persistenceToModel(firebaseData, dispatchHook) { 
     console.log("This is firebaseData:", firebaseData);
     persistenceToModelForMyJournals(firebaseData.myJournals, dispatchHook);
     persistenceToModelForSearchParams(firebaseData.searchParams, dispatchHook);
