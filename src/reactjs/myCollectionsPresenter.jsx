@@ -2,7 +2,8 @@ import { TopbarMyCollectionsView } from "../views/myCollectionViews/topbarMyColl
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { setCollectionsArray, setCollection } from "../store/collectionsSlice";
+import { setCollectionsArray, setCollection, createNewCollection } from "../store/collectionsSlice";
+import { increaseLatestEntryID } from "../store/journalsSlice";
 
 export function MyCollectionsPresenter(props) {
     const dispatch = useDispatch();
@@ -10,6 +11,8 @@ export function MyCollectionsPresenter(props) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [filteredCollections, setFilteredCollections] = useState(null);
     const [clearButton, setClearButton] = useState(false);
+    const [title, setTitle] = useState(null);
+    const [description, setDescription] = useState(null);
 
     const collections = [
         {
@@ -416,12 +419,29 @@ export function MyCollectionsPresenter(props) {
             setClearButton(value);
         }
 
+        function handleCreateCollectionACB() {
+            console.log("About to create the collection");
+            console.log("The title is:", title, " and the description is: ", description);
+           /* dispatch(createNewCollection(
+                {
+                    collection_title: title,
+                    collection_description: description,
+            }));*/
+        }
+
+
+
     return(
         <div>
             <TopbarMyCollectionsView
             setSearch={handleSearchACB}
             clearButton={clearButton}
             setClearButton={setClearButtonACB}
+            setTitle={setTitle}
+            title={title}
+            setDescription={setDescription}
+            description={description}
+            onCreateCollection={handleCreateCollectionACB}
             />
             <ListOfCollectionsView 
             activeIndex={activeIndex}
