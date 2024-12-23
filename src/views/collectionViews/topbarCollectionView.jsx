@@ -18,14 +18,11 @@ export function TopbarCollectionView(props) {
 
     console.log("This is the props in topbarcollectionview", props);
 
-    const [title, setTitle] = useState(props.collection ? props.collection.collection_title : "");
-    const [description, setDescription] = useState(props.collection ? props.collection.collection_description : "");
-
 
     useEffect(() => {
         // If the collection props change, update the local state
-        setTitle(props.collection ? props.collection.collection_title : "");
-        setDescription(props.collection ? props.collection.collection_description : "");
+        props.setTitle(props.collection ? props.collection.collection_title : "");
+        props.setDescription(props.collection ? props.collection.collection_description : "");
     }, [props.collection]);
 
     if (!props.collection) {
@@ -42,26 +39,26 @@ export function TopbarCollectionView(props) {
 
     function handleToggleACB() {
         if (props.isEditing) {  //Om vi cancellerar då vill vi få tillbaka samma text som innan vi försökte ändra.
-            setTitle(props.collection.collection_title || "");
-            setDescription(props.collection.collection_description || "");
+            props.setTitle(props.collection.collection_title || "");
+            props.setDescription(props.collection.collection_description || "");
         }
         props.onToggleEdit();
     }
 
     function handleEditDescriptionACB(collection_description, collection_id) {
         console.log("This is the evt", collection_description);
-        setDescription(collection_description);
+        props.setDescription(collection_description);
         props.onEditDescription(collection_description, collection_id);
     }
 
     function handleEditTitleACB(collection_title, collection_id) {
         console.log("This is the collection title we are changing to", collection_title);
-        setTitle(collection_title);
+        props.setTitle(collection_title);
         props.onEditTitle(collection_title, collection_id);
     }
 
     function handleSaveChangesACB() {
-        if (!title || title.trim() === "") {
+        if (!props.title || props.title.trim() === "") {
             alert("Title is required for a collection!");
             return;
         }
@@ -100,13 +97,13 @@ export function TopbarCollectionView(props) {
 
                     {props.isEditing ? (
                     <>
-                        <input type="text" className="collectionTitle" onChange={(e) => handleEditTitleACB(e.target.value, props.collection.collection_id)} value={title}
+                        <input type="text" className="collectionTitle" onChange={(e) => handleEditTitleACB(e.target.value, props.collection.collection_id)} value={props.title}
                         ></input>
                         <textarea
                             style={{ resize: 'none' }}
                             onChange={(e) => handleEditDescriptionACB(e.target.value, props.collection.collection_id)}
                             className="collectionName"
-                            value={description}
+                            value={props.description}
 
                         ></textarea>
                         <button className="saveChanges" onClick={handleSaveChangesACB}>Save Changes</button>

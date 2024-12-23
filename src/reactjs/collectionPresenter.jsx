@@ -21,6 +21,9 @@ export function CollectionPresenter() {
     const [editedTitle, setEditedTitle] = useState(selectedCollection.collection_title);
     const [editedDescription, setEditedDescription] = useState(selectedCollection.collection_description);
 
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+
     function toggleEditingACB() {
         console.log("About to toggle edit button");
         setIsEditing((prev) => !prev);
@@ -119,6 +122,10 @@ export function CollectionPresenter() {
             onEditDescription={handleEditDescriptionACB}
             onEditTitle={handleEditTitleACB}
             onSaveChanges={handleSaveChangesACB}
+            title={title}
+            setTitle={setTitle}
+            description={description}
+            setDescription={setDescription}
             ></TopbarCollectionView>
             <CollectionListview
             collection={selectedCollection}
