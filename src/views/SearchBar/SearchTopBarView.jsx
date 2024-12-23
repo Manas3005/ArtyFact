@@ -1,8 +1,11 @@
-import React from "react";
 import { URLParamsForImage } from "/src/apiCall.js";
 import "/src/css/searchResultStyle.css";
 
-export function SearchTopBar({ artworks, artInfo, setIndividualArt }) {
+export function SearchTopBar(props) {
+  console.log("THIS IS THE PROPS THAT IS SENT TO VIEW", props);
+  const { artworks, artInfo, onSearchInitiated } = props;
+
+  // Filter out artworks with null image_id
   const validData = artworks.data.filter(
     (result) => artInfo[result.id] && artInfo[result.id].image_id
   );
@@ -12,10 +15,14 @@ export function SearchTopBar({ artworks, artInfo, setIndividualArt }) {
   }
 
   function renderSearchResultsCB(result) {
-    const foundInformation = artInfo[result.id];
+    const foundInformation = artInfo[result.id]; // Get image_id from props
+    console.log("This is the found info ", foundInformation);
 
     function onClickImageEventACB() {
+      console.log("Image has been clicked for:", foundInformation.artist);
+
       const allArtInformationToUpdate = {
+        artWork_id: foundInformation.artWork_id,
         art_name: result.title,
         image_id: foundInformation.image_id,
         medium_display: foundInformation.medium_display,
@@ -27,7 +34,7 @@ export function SearchTopBar({ artworks, artInfo, setIndividualArt }) {
         date_display: foundInformation.date_display,
       };
 
-      setIndividualArt(allArtInformationToUpdate);
+      props.setIndividualArt(allArtInformationToUpdate);
 
       window.location.hash = "#/searchChoosen";
     }
@@ -50,7 +57,8 @@ export function SearchTopBar({ artworks, artInfo, setIndividualArt }) {
   return (
     <div>
       <div>
-        <img src="https://i.imgur.com/viSeXcY.png" className="logoArty" />
+        <img src="https://i.imgur.com/viSeXcY.png" className="logoArty" onClick={() => window.location.hash="/"}/>
+
         <button onClick={eventHandlerForHomeClickACB} className="homeButton">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +75,9 @@ export function SearchTopBar({ artworks, artInfo, setIndividualArt }) {
           </svg>
         </button>
       </div>
+
       <hr className="divider" />
+
       <div className="resultsContainer">{validData.map(renderSearchResultsCB)}</div>
     </div>
   );
