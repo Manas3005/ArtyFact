@@ -15,6 +15,7 @@ export function MyCollectionsPresenter(props) {
     const [clearButton, setClearButton] = useState(false);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [searchField, setSearchField] = useState("");
 
     const collections = [
         {
@@ -464,6 +465,8 @@ export function MyCollectionsPresenter(props) {
             setDescription={setDescription}
             description={description}
             onCreateCollection={handleCreateCollectionACB}
+            searchField={searchField}
+            setSearchField={setSearchField}
             />
             <ListOfCollectionsView 
             activeIndex={activeIndex}

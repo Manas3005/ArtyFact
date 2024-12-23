@@ -22,6 +22,8 @@ export function TopbarMyCollectionsView(props) {
     function handleClearButtonACB(evt) {
         console.log("inside handle clear");
         props.setClearButton(false);
+        props.setSearch("");
+        props.setSearchField("");
         //Vi vill även att tryckningen ska deleta texten inuti searchBar
     }
 
@@ -31,6 +33,7 @@ export function TopbarMyCollectionsView(props) {
         console.log("Setting the search query to: ", evt.target.value);
         //setCollectionSearchQuery(evt.target.value);
         props.setSearch(evt.target.value);
+        props.setSearchField(evt.target.value);
         //console.log("This is the current search query", collectionSearchQuery);
     }
     /**
@@ -78,7 +81,7 @@ export function TopbarMyCollectionsView(props) {
                 <MyJournalsButton className="myJournalCollection"></MyJournalsButton>
 
                 <BackToHomeButton className="backToHomeCollection" ></BackToHomeButton>
-                <input className="collectionsSearchBar" placeholder="Search Collections..." onChange={handleSearchACB} />
+                <input className="collectionsSearchBar" placeholder="Search Collections..." onChange={handleSearchACB} value={props.searchField}/>
                 <button className="buttonX"
                     onClick={handleClearButtonACB}
                     style={{ display: props.clearButton ? 'block' : 'none' }}>
