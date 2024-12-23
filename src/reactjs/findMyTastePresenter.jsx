@@ -321,7 +321,7 @@ export function FindMyTaste(props){
                                                                         onBeginLoadingQuiz = {loadQuizACB}
                                                                         onSubmitButtonClicked = {getArtworksByResponsesACB}
                                                                         onBackToQuizButtonClicked = {setResultsBackToPendingACB}
-                                                                        onQuizArtworkChosen  = {getArtworkDetailsById}
+                                                                        onQuizArtworkChosen  = {extractArtworkDetails}
                                                                         
                                                                         updatedProgress = {updatedProgress} //passing down the updated progress to the ArtQuiz view
                                                                         selectedArtists = {selectedArtists} 
