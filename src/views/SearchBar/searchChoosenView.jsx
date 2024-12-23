@@ -119,11 +119,11 @@ export function SearchChoose(props) {
 
       </div>
 
-      <div id="selectCollectionModal" className="modal" >
-        <div className="modal-content">
+      <div id="selectCollectionModal" className="modal1" >
+        <div className="modal-content1">
           <h2 className="commonText">Select the Collection you would like to add this Artwork to:</h2>
 
-          <select className="dropdown" size="1" onChange={handleCollectionChangeACB} defaultValue="">
+          <select size="1" onChange={handleCollectionChangeACB} defaultValue="">
             <option value="" disabled>
               Choose a collection
             </option>
@@ -137,7 +137,7 @@ export function SearchChoose(props) {
 
 
 
-          <div className="modalButtonDiv">
+          <div className="modalButtonDiv1">
             <button className="goButton commonText commonButtonBase" onClick={handleAddArtworkToCollectionACB}>Save</button>
             <button className="cancel commonText commonButtonBase" onClick={closeModalACB}>Cancel</button>
           </div>
