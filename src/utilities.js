@@ -44,12 +44,11 @@ export function fetchAndProcessArtworks(selectedItems, constructSearchParams, on
 }              
 
 
-export async function getArtworkDetailsById(artworkId) {
+export async function getArtworkDetailsByObject(artworkDetails) {
     try {
 
-        const artworkDetails = await getArtWorkByID(artworkId);
-        
-        const data = artworkDetails.data;
+        debugger;
+        const data = artworkDetails;
         
         const allArtInformationToUpdate = {
             art_name: data.title || '',

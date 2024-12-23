@@ -4,7 +4,9 @@ import { useState } from "react";
 import { getArtWorkImageModified, fetchAllArtworks} from '/src/apiCall.js';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
-import { fetchAndProcessArtworks, toggleSelection, getArtworkDetailsById} from "../utilities";
+import { fetchAndProcessArtworks, toggleSelection, getArtworkDetailsByObject} from "../utilities";
+import { setCurrentArt } from "/src/store/searchResultSlice.js";
+
 
 
 export function FindMyTaste(props){
@@ -33,6 +35,7 @@ export function FindMyTaste(props){
     const [artTitlesByMediums, setArtTitlesByMediums] = useState([]);
     const [artistTitlesByMediums, setArtistTitlesByMediums] = useState([]);
     const [mediumTitles, setMediumTitles] = useState([]);
+    const [allArtDetails, setAllArtDetails] = useState([]);
     
     const [quizReady, setQuizReady] = useState(false);
     const [resultsReady, setResultsReady] = useState(false);
@@ -139,7 +142,9 @@ export function FindMyTaste(props){
             selectedArtists, 
             (currentArtist) => ({ artist_title: currentArtist }), //construct search params for artists
             filterAndSetResultsACB, //callback to process the filtered data
-            "artists" //this is so the filterAndSetResultsACB method knows which filters to run
+            "artists", //this is so the filterAndSetResultsACB method knows which filters to run
+            allArtDetails,
+            setAllArtDetails,
         );
     };
 
@@ -150,7 +155,9 @@ export function FindMyTaste(props){
             selectedStyles, 
             (currentStyle) => ({ style_title: currentStyle }), 
             filterAndSetResultsACB, 
-            "styles"
+            "styles",
+            allArtDetails,
+            setAllArtDetails,
         );
     }
 
@@ -160,7 +167,9 @@ export function FindMyTaste(props){
             selectedMediums, 
             (currentMedium) => ({ classification_title: currentMedium }), 
             filterAndSetResultsACB, 
-            "mediums"
+            "mediums",
+            allArtDetails,
+            setAllArtDetails,
         );
     }
 
@@ -181,8 +190,15 @@ export function FindMyTaste(props){
         }
     }
 
-    function extractArtworkDetails(artwork_id){
-        getArtworkDetailsById(artwork_id);
+    async function extractArtworkDetailsACB(artworkObject){
+        try{
+        const artInformation = await getArtworkDetailsByObject(artworkObject);
+        dispatch(setCurrentArt(artInformation)); //when artwork is clicked, searchChoosenView will take the current artwork's information
+        
+        } catch (error){
+            console.error("Error extracting artwork details", error);
+        }
+
     }
 
                 
@@ -215,6 +231,8 @@ export function FindMyTaste(props){
                 return selectedArtists.includes(artwork.artist_title);
             });
 
+            setAllArtDetails(...allArtDetails, filteredArtistArtworks)
+
             console.log("FILTERED ARTWORKS BY ARTISTS: ", filteredArtistArtworks); //for debugging
             
             filteredArtistArtworks.forEach(function (artwork) {
@@ -241,7 +259,8 @@ export function FindMyTaste(props){
           });
 
           console.log("FILTERED ARTWORKS BY STYLES: ", filteredStyleArtworks); 
-
+          
+          setAllArtDetails(...allArtDetails, filteredStyleArtworks)
 
           filteredStyleArtworks.forEach(function (artwork) {
               const imageURL = getArtWorkImageModified(artwork.image_id); //using the function from apiCall.js to get the imageURL
@@ -276,7 +295,8 @@ export function FindMyTaste(props){
   
           console.log("FILTERED ARTWORKS BY MEDIUMS: ", filteredMediumArtworks); 
   
-  
+          setAllArtDetails(...allArtDetails, filteredMediumArtworks)
+
           filteredMediumArtworks.forEach(function (artwork) {
               const imageURL = getArtWorkImageModified(artwork.image_id); //using the function from apiCall.js to get the imageURL
               const imageTitle = artwork.title;         //same process as above but for the image titles
@@ -294,7 +314,6 @@ export function FindMyTaste(props){
             });
           console.log("IMAGE URLS FOR ART BY MEDIUMS: ", newMediumImageURLs) //for debugging
   
-            console.log("WOWWOWOWO: ", newArtistImageURLs)
           setImageByMediumsURLs(newMediumImageURLs);
           setArtTitlesByMediums(newMediumImageTitles);
           setArtistTitlesByMediums(newArtistTitlesByMediums);
@@ -321,13 +340,14 @@ export function FindMyTaste(props){
                                                                         onBeginLoadingQuiz = {loadQuizACB}
                                                                         onSubmitButtonClicked = {getArtworksByResponsesACB}
                                                                         onBackToQuizButtonClicked = {setResultsBackToPendingACB}
-                                                                        onQuizArtworkChosen  = {extractArtworkDetails}
+                                                                        onQuizArtworkChosen  = {extractArtworkDetailsACB}
                                                                         
                                                                         updatedProgress = {updatedProgress} //passing down the updated progress to the ArtQuiz view
                                                                         selectedArtists = {selectedArtists} 
                                                                         selectedStyles = {selectedStyles}
                                                                         selectedMediums = {selectedMediums}
-
+                                                                        
+                                                                        allArtDetails = {allArtDetails}
                                                                         artTitlesByArtists = {artTitlesByArtists}
                                                                         artistTitlesByArtists = {artistTitlesByArtists}
                                                                         imageByArtistsURLs = {imageByArtistsURLs}

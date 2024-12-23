@@ -14,8 +14,9 @@ function SearchResult(props) {
   const searchParamSend = useSelector((state) => state.searchResults.searchParam);
 
   const dispatch = useDispatch();
-
   function setCurrentArtACB(artInformation) {
+    debugger;
+
     dispatch(setCurrentArt(artInformation));
   }
 

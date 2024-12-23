@@ -4,6 +4,9 @@ import LinearWithValueLabel from "../ThirdPartyWrittenComponents/LinearProgressW
 
 export function ArtQuizView (props){
 
+
+    const allArtDetails = props.allArtDetails;
+
     const artTitlesByArtists = props.artTitlesByArtists;
     const artistTitlesByArtists = props.artistTitlesByArtists;
     const imageByArtistsURLs = props.imageByArtistsURLs;
@@ -148,9 +151,9 @@ export function ArtQuizView (props){
 
    
 
-    function handleChosenArtworkClickACB (){
+    function handleChosenArtworkClickACB (artworkData){
       window.location.hash = "#/searchChoosen";
-      props.onQuizArtworkChosen();
+      props.onQuizArtworkChosen(artworkData);
     }
 
 
@@ -164,18 +167,14 @@ export function ArtQuizView (props){
     
             <div className="quizResultsContainer">
               {imageByArtistsURLs.map((url, index) => {
-                const artworkDetails = {
-                  art_name: artTitlesByArtists[index],
-                  image_id: url,
-                  artist: artistTitlesByArtists[index],
-                };
+              const idData = allArtDetails[index];
     
                 return (
                   url ? (
                     <div
                       key={index}
                       className="quizResultItem"
-                      onClick={() => handleChosenArtworkClickACB(artworkDetails)}
+                      onClick={() => handleChosenArtworkClickACB(idData)}
                     >
                       <img
                         src={url}
