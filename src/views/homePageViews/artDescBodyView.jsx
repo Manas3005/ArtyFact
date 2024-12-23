@@ -1,11 +1,9 @@
 import "/src/css/style.css"
 
 function ArtDescBodyView (props) {
-    console.log("-----THIS IS PROPS", props)
-    console.log(props.image)
 
     function limitTextLength (inputtedText){
-        const maxLength = 635;
+        const maxLength = 1500;
 
         if (inputtedText.length < maxLength){
             return inputtedText

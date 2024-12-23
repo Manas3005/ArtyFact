@@ -79,7 +79,7 @@ export function TopBarView(props){
 
 
                 
-               <input className="searchBar" placeholder = "Search..." onKeyDown={handleEnterKey}/> 
+               <input className="searchBar" placeholder = "Search by artwork, artist name, origin, date, medium, style..." onKeyDown={handleEnterKey}/> 
 
 
                 <img  className = "logo" src = "/image/Logo.png" />
