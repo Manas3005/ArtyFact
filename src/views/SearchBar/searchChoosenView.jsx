@@ -1,6 +1,7 @@
 import { URLParamsForImage } from "/src/apiCall.js";
 import "/src/css/searchChoosenStyle.css";
 import "/src/css/searchResultStyle.css"
+import "/src/css/journalsStyle.css"
 
 export function SearchChoose(props) {
   console.log("WE ARE IN THE CHOOSEN VIEW", props);
@@ -13,16 +14,22 @@ export function SearchChoose(props) {
     )
   }
 
-  
+  function closeModalACB(){
+    const selectCollectionModal= document.getElementById("selectCollectionModal")
+    selectCollectionModal.style.display = "none";
+  } 
   
 
-  function handleAddToCollectionACB(artWork){
-    console.log("This is the artwork we are going to add to collection", artWork);
-    alert("Added to Collection!");
-    props.onAddArtWorkToCollection(1 ,artWork.artWork_id)
+  function handleAddToCollectionACB(){
+    if (props.parsedCollectionsForDropDown){
+      const selectCollectionModal= document.getElementById("selectCollectionModal")
+      selectCollectionModal.style.display = "flex";
+    }else{
+      alert("No collections exist yet!");
+    }
   }
 
-
+  
   const htmlString = props.art.description;
 
   // Create a temporary DOM element to parse the HTML
@@ -54,8 +61,8 @@ export function SearchChoose(props) {
         <div className="artTitle">{props.art.art_name}</div>
 
         <div className="buttonGroup">
-          <button className="addCollection" onClick={()=> handleAddToCollectionACB(props.art)}>Add to collection</button>
-          <button className="addJournal">Add to journal</button>
+          <button className="addCollection" onClick={()=> handleAddToCollectionACB()}>Add To Collection</button>
+          <button className="addJournal">Add To Journal</button>
         </div>
 
         <div className="info">
@@ -94,6 +101,25 @@ export function SearchChoose(props) {
 
 
       </div>
+
+            <div id="selectCollectionModal" class="modal" >
+                <div class="modal-content">
+                    <h2 className="commonText">Select the Collection you would like to add this Artwork to:</h2>
+                    
+                    <select className="dropdown" size="1"> 
+                            {props.parsedCollectionsForDropDown.map((collection) => (
+                                 <option key={collection.collection_id} 
+                                 onClick={props.onAddArtWorkToCollection(collection.collection_id ,props.art.artWork_id)}
+                                 >{collection.collection_title}</option>
+                            ))}
+                        </select>
+                        
+                    <div className="modalButtonDiv">
+                        <button  className="cancel commonText commonButtonBase" onClick={closeModalACB}>Cancel</button>
+                    </div>
+
+                </div>
+            </div>
     </div>
   );
 }
