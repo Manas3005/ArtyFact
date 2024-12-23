@@ -54,7 +54,7 @@ set(myRef, {
 /**
  * Necessary for reading from firebase and being able to derive data.
  */
-set(myCollectionsRef, {
+/*set(myCollectionsRef, {
     collectionsArray: [
         {
             collectionId: 1,
@@ -75,7 +75,7 @@ set(myCollectionsRef, {
             artWorkIDs: [129, 140, 145, 146, 153]
         }
     ]
-})
+})*/
 
 set(myJournalsRef, {
     entries: [
