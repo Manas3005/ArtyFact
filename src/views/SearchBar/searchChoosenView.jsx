@@ -13,6 +13,11 @@ export function SearchChoose(props) {
     )
   }
 
+  function handleAddToJournalClickACB () {
+    props.onAddToJournalClick()
+    return window.location.hash = '#/editentry'
+  }
+
 
   const htmlString = props.art.description;
 
@@ -46,7 +51,7 @@ export function SearchChoose(props) {
 
         <div className="buttonGroup">
           <button className="addCollection">Add to collection</button>
-          <button className="addJournal">Add to journal</button>
+          <button className="addJournal" onClick={handleAddToJournalClickACB}>Add to journal</button>
         </div>
 
         <div className="info">

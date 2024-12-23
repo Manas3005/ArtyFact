@@ -1,6 +1,6 @@
 import { EntryContentView } from "../views/myJournalViews/entryContentView";
 import { JournalTopBarView } from "../views/myJournalViews/journalTopBarView";
-import { removeEntry } from "../store/journalsSlice";
+import { removeEntry,setSelectedArtworkID } from "../store/journalsSlice";
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
 
@@ -25,21 +25,33 @@ function JournalEntryContent (props){
     console.log("Selected Entry:", selectedEntry);
     
     function onDeleteEntryClickedACB (){
+        dispatch(setSelectedArtworkID(null))
         dispatch(removeEntry())
+    }
+
+    function setCurrentEntryArtworkIDACB (){
+        dispatch(setSelectedArtworkID(selectedEntry.artworkID))
+    }
+
+    function defaultSelectedArtworkIDACB (){
+        dispatch(setSelectedArtworkID(null))
     }
         return (<div>
         
             <JournalTopBarView isJournalEntrySelected={true} 
                                 pageHeading={selectedEntry.title} 
-                                topRightButtonText={"Back To My Journals"}>
+                                topRightButtonText={"Back To My Journals"}
+                                onExitContentPage={defaultSelectedArtworkIDACB}>    
 
                                 </JournalTopBarView>
             
             <EntryContentView lastUpdated={selectedEntry.date}
                                 mood={selectedEntry.mood}
                                 content={selectedEntry.actualText}
-                                onDeleteEntryClick={onDeleteEntryClickedACB} >
-
+                                artworkID={selectedEntry.artworkID}
+                                onDeleteEntryClick={onDeleteEntryClickedACB} 
+                                onEditEntryClick={setCurrentEntryArtworkIDACB}>
+                                
                                 </EntryContentView>
         
         </div>)   

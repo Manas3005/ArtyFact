@@ -2,10 +2,14 @@
 import { SearchChoose } from "/src/views/SearchBar/searchChoosenView.jsx";
 import { useSelector } from "react-redux"
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedArtworkID } from "../store/journalsSlice";
 
 
 
 function SearchChoosenPresent() {
+
+    let dispatch = useDispatch();
 
     const [idData, setIdData] = useState(null);
 
@@ -37,14 +41,17 @@ function SearchChoosenPresent() {
     }
 
 
-
+    function addToJournalACB() {
+       dispatch(setSelectedArtworkID(currentArt.image_id)) 
+    }
 
 
     //console.log(data)
 
     return (
         <div>
-            <SearchChoose art={currentArt} />
+            <SearchChoose art={currentArt}
+            onAddToJournalClick={addToJournalACB} />
         </div>
 
     )

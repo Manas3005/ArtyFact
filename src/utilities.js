@@ -1,6 +1,6 @@
 import { intercept } from 'mobx';
 import sanitizeHtml from 'sanitize-html'; 
-import { getArtWorkByID, getArtWorksSearch} from './apiCall';
+import { getArtWorkByID, getArtWorksSearch, URLParamsForImage} from './apiCall';
 
 export const cleanHtmlContent = (html) => {
     return sanitizeHtml(html, {
@@ -110,4 +110,10 @@ export function removeArtworkById(collection, artWorkId) {
 }
 
 
+export function renderEntryArtWorkPath (ID){
+    const imagePath = URLParamsForImage(ID)
+    console.log("IMAGE PATH IS", imagePath)
+    return conditionalRenderHelperCB(ID, "/image/defaultArtwork.png", URLParamsForImage(ID))
+}
+ 
 
