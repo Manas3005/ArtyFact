@@ -5,7 +5,9 @@ import LinearWithValueLabel from "../ThirdPartyWrittenComponents/LinearProgressW
 export function ArtQuizView (props){
 
 
-    const allArtDetails = props.allArtDetails;
+    const allArtDetailsByArtists = props.allArtDetailsByArtists;
+    const allArtDetailsByMediums = props.allArtDetailsByMediums;
+    const allArtDetailsByStyles = props.allArtDetailsByStyles
 
     const artTitlesByArtists = props.artTitlesByArtists;
     const artistTitlesByArtists = props.artistTitlesByArtists;
@@ -167,7 +169,7 @@ export function ArtQuizView (props){
     
             <div className="quizResultsContainer">
               {imageByArtistsURLs.map((url, index) => {
-              const idData = allArtDetails[index];
+              const idData = allArtDetailsByArtists[index];
     
                 return (
                   url ? (
@@ -207,77 +209,78 @@ export function ArtQuizView (props){
     }
 
 
-    function renderArtByStylesACB(){
-
-      if(selectedStyles.length!==0 && imageByStylesURLs.length!==0){
-
+    function renderArtByStylesACB() {
+      if (selectedStyles.length !== 0 && imageByStylesURLs.length !== 0) {
         return (
-        <div>
-
-              <div className="resultsPageSubtitle">Based on your preferred styles</div>
-              <div className="separator"></div>
-
-              <div className="quizResultsContainer">
-
-              {imageByStylesURLs.map((url, index) => (
-                
-               url ? (
-               <div key={index} className="quizResultItem">
-                 <img
-                   src={url}
-                   className="quizResultImage"
-                   alt={`Couldn't fetch Artwork ${index + 1}`}
-                   onError={(e) => {
-                     e.target.closest(".quizResultItem").style.display = "none"; 
-                   }}
-                 />
-                 <div className="quizArtDetails">
-                   <div className="quizArtTitle">{artTitlesByStyles[index]}</div>
-                   <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
-                   <div className="artistTitle">Style: {styleTitles[index]}</div>
-                 </div>
-               </div>
-              ) : null
-              ))}
-
-
-              </div>
-
-          </div>
-          )
-      } else if(selectedStyles.length===0 && imageByStylesURLs.length===0){
-        return;
-      } else if(selectedStyles.length!==0 && imageByStylesURLs.length===0){
-        return (
-          <p className = "noResults">Oops! No results found for the selected styles. Try selecting different styles to discover artworks you'll love</p>
-
-        )
-      }
-    }
-
-
-    function renderArtByMediumACB(){
-
-      if(selectedMediums.length!==0 && imageByMediumsURLs.length!==0){
-        
-        return (
-        <div>
-
-              <div className="resultsPageSubtitle">Based on the mediums you liked</div>
-              <div className="separator"></div>
-
-
-              <div className="quizResultsContainer">
-
-              {imageByMediumsURLs.map((url, index) => (
-                url ? (
-                  <div key={index} className="quizResultItem">
+          <div>
+            <div className="resultsPageSubtitle">Based on your preferred styles</div>
+            <div className="separator"></div>
+    
+            <div className="quizResultsContainer">
+              {imageByStylesURLs.map((url, index) => {
+                const idData = allArtDetailsByStyles[index]; // Assuming the corresponding style data exists here
+    
+                return url ? (
+                  <div
+                    key={index}
+                    className="quizResultItem"
+                    onClick={() => handleChosenArtworkClickACB(idData)} // Pass styleData when clicked
+                  >
                     <img
                       src={url}
                       className="quizResultImage"
                       alt={`Couldn't fetch Artwork ${index + 1}`}
                       onError={(e) => {
-                        e.target.closest(".quizResultItem").style.display = "none"; 
+                        e.target.closest(".quizResultItem").style.display = "none";
+                      }}
+                    />
+                    <div className="quizArtDetails">
+                      <div className="quizArtTitle">{artTitlesByStyles[index]}</div>
+                      <div className="artistTitle">by {artistTitlesByStyles[index]}</div>
+                      <div className="artistTitle">Style: {styleTitles[index]}</div>
+                    </div>
+                  </div>
+                ) : null;
+              })}
+            </div>
+          </div>
+        );
+      } else if (selectedStyles.length === 0 && imageByStylesURLs.length === 0) {
+        return;
+      } else if (selectedStyles.length !== 0 && imageByStylesURLs.length === 0) {
+        return (
+          <p className="noResults">
+            Oops! No results found for the selected styles. Try selecting different styles to discover artworks you'll love
+          </p>
+        );
+      }
+    }
+    
+
+
+    function renderArtByMediumACB() {
+      if (selectedMediums.length !== 0 && imageByMediumsURLs.length !== 0) {
+        return (
+          <div>
+            <div className="resultsPageSubtitle">Based on the mediums you liked</div>
+            <div className="separator"></div>
+    
+            <div className="quizResultsContainer">
+              {imageByMediumsURLs.map((url, index) => {
+                const idData = allArtDetailsByMediums[index]; // Assuming the corresponding medium data exists here
+    
+                return url ? (
+                  <div
+                    key={index}
+                    className="quizResultItem"
+                    onClick={() => handleChosenArtworkClickACB(idData)} // Pass mediumData when clicked
+                  >
+                    <img
+                      src={url}
+                      className="quizResultImage"
+                      alt={`Couldn't fetch Artwork ${index + 1}`}
+                      onError={(e) => {
+                        e.target.closest(".quizResultItem").style.display = "none";
                       }}
                     />
                     <div className="quizArtDetails">
@@ -286,24 +289,22 @@ export function ArtQuizView (props){
                       <div className="artistTitle">Medium: {mediumTitles[index]}</div>
                     </div>
                   </div>
-                ) : null
-              ))}
-
-
-              </div>
-
+                ) : null;
+              })}
+            </div>
           </div>
-          )
-      }else if(selectedMediums.length===0 && imageByMediumsURLs.length===0){
+        );
+      } else if (selectedMediums.length === 0 && imageByMediumsURLs.length === 0) {
         return;
-
-      } else if(selectedMediums.length!==0 && imageByMediumsURLs.length===0){
-        
+      } else if (selectedMediums.length !== 0 && imageByMediumsURLs.length === 0) {
         return (
-          <p className = "noResults">Oops! No results found for the selected mediums. Try selecting different mediums to discover artworks you'll love</p>
-        )
+          <p className="noResults">
+            Oops! No results found for the selected mediums. Try selecting different mediums to discover artworks you'll love
+          </p>
+        );
       }
     }
+    
 
 
 
