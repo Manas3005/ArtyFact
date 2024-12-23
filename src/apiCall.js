@@ -56,6 +56,16 @@ export function getCollection(searchParams) {
     return fetch(createURLParamsForCollection(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
 
+export function getArtistDetailsById(artist_id) {
+    console.log("This is the artist id", artist_id);
+    return fetch(createURLParamsForArtistDetailsById(artist_id), options).then(gotResponseACB).then(printResponseACB);
+}
+
+export function createURLParamsForArtistDetailsById(artist_id) {
+    console.log("this is the url for fetching the artist details by id", MAIN_URL + "agents/" + artist_id);
+    return MAIN_URL + "agents/" +  artist_id;
+}
+
 
 
 
@@ -154,27 +164,3 @@ function createURLParamsForSpecificArtWork(id, searchParams1) {
 }
 
 //Create API calls for gathering images
-
-export function testingAnAPICallForMostSimilar() {
-    return fetch("https://www.artic.edu/artworks/129884/exploreFurther?ef-most-similar_ids=most-similar", options)
-    .then(gotResponseACB).then(printGotImageACB);
-}
-
-
-
-
-export function fetch20Artworks() { 
-    return fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=20")
-        .then(function(response) {
-            if (!response.ok) {
-                throw new Error("HTTP error! status:" , response.status);
-            }
-            return response.json();
-        })
-}
-
-
-
-
-
-
