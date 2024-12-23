@@ -13,7 +13,7 @@
 
 .addNewCollection{
     position:absolute;
-    margin-top: 120px;
+    margin-top: 100px;
     width: 250px;
     height: 60px;
     font-size: 24px;
@@ -21,10 +21,15 @@
     font-family: 'Jacques Francois';
     background-color:cornsilk;
     transition: all 0.22s ease; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+
 }
 .addNewCollection:hover {
     background-color: rgb(244, 201, 145); 
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); 
+ 
+    color: #787878;
+    transform: scale(1.05); /* Slight enlargement */
 }
 
 .MyJournalCollection {
@@ -39,6 +44,7 @@
     font-size: 18px;
     background-color: rgb(236, 191, 133);
     transition: all 0.22s ease; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
 } 
 .MyJournalCollection:hover {
     background-color: rgb(244, 201, 145); 
@@ -47,16 +53,19 @@
 }
 
 .backToHomeCollection {
-    margin-right: 1700px; 
+    border-radius: 25px; /* Adjust to keep the roundness proportional */
+    height: 50px; /* Reduce height to 50px */
+    width: 50px; /* Reduce width to 50px */
+    margin-right: 1700px; /* Keep the same or adjust for positioning */
+    margin-left:-100 ;
+    margin-top: -100;
     position: absolute;
-    width: 159px;
-    height: 37.2px;
     cursor: pointer;
-    font-family: 'Jacques Francois';
-    font-size: 18px;
-    background-color: rgb(236, 191, 133);
     transition: all 0.22s ease; 
-}
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  background-color: #474747;
+  }
+  
 
 .collectionsSearchBar {
     position: absolute;
@@ -87,9 +96,10 @@
 }
 
 .backToHomeCollection:hover{
-    background-color: rgb(244, 201, 145); 
+    background-color: rgb(172, 172, 172); 
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); 
     transform: translateY(-0.3px); 
+    transform: scale(1) rotate(-2deg); 
 }
 
 .signInlogo {
@@ -105,8 +115,20 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    color: #000000;     
+    color: #000000;    
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */ 
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
 }
+
+.signInlogo:hover {
+
+    background-color: #f0f0f0;
+    
+    transform: scale(1.05); /* Slight enlargement */
+}
+
+
 
 .collectionsLogo{
     position: center;          
@@ -128,9 +150,10 @@
 .myCollectionBox {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 100px; 
+    gap: 60px; 
     padding: 20px;
     justify-items: center; 
+    
 }
 
 .collection-item {
@@ -144,16 +167,31 @@
     border-radius: 10px; 
     overflow: hidden; 
     background-color: rgba(240, 240, 240, 1); 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
+
 }
+.collection-item:hover {
+
+    background-color: #f0f0f0;
+    color: #787878;
+    transform: scale(1.05); /* Slight enlargement */
+}
+
+
 
 .image-title {
     font-size: 25px;
-    font-weight: bold;
+    font-weight: none;
+    font-family: 'Junge';
+    font-style: normal;
     padding: 10px;
     background-color: rgba(255, 255, 255, 1); 
     width: 100%; 
     box-sizing: border-box; 
     border-bottom: 1px solid #ccc; 
+    
 }
 
 .slideshow-container {
@@ -162,7 +200,9 @@
     height: 100%; 
     overflow: hidden; 
     border-radius: 10px;
+    
 }
+
 
 .collection-image {
     width: 100%;
