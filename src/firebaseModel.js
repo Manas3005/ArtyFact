@@ -378,7 +378,9 @@ async function persistenceToModelForSingleCollection(collection, dispatchHook) {
 function persistenceToModelForMyJournals(journalEntries, dispatchHook) {
     console.log("These are the journal entries in persistenceToModelForMyJournals", journalEntries);
     dispatchHook(setLatestEntryID(journalEntries.latestEntryID))
-    dispatchHook(setEntries(journalEntries.entries));
+    if(journalEntries.entries){
+        dispatchHook(setEntries(journalEntries.entries))
+    };
 }
 
 function persistenceToModelForSearchParams(searchParams, dispatchHook){

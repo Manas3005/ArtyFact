@@ -1,6 +1,7 @@
 import "/src/css/collectionsStyle.css"
 import { conditionalRenderHelperCB } from "../../utilities";
 import "/src/css/collectionsStyle.css"
+import "/src/css/journalsStyle.css"
 
 
 export function TopbarMyCollectionsView(props) {
@@ -99,7 +100,7 @@ export function TopbarMyCollectionsView(props) {
                     style={{display: props.clearButton ? 'block' : 'none' }}>
                     x</button> 
 
-                <button className="buttonWithIcon">
+                <button className="buttonWithIcon commonButtonBase ">
                     <img className="Icon" src = {renderProfilIcon()} />
                     <text className="loggedInText">{renderDisplayNameText()}</text>
                 </button>

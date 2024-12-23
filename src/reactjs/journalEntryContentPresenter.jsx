@@ -10,6 +10,10 @@ function JournalEntryContent (props){
     let journalEntries = useSelector(state => state.myJournals.entries)
     let selectedID = useSelector(state => state.myJournals.selectedEntryID)
 
+    let userUID = useSelector(state => state.user.uid)
+    let userDisplayName = useSelector(state => state.user.displayName)
+    let userProfilePicURL = useSelector(state => state.user.profilePicURL)
+
     let dispatch = useDispatch()
 
     //helper function to finding matching entryID as current selected Journal entry
@@ -41,7 +45,11 @@ function JournalEntryContent (props){
             <JournalTopBarView isJournalEntrySelected={true} 
                                 pageHeading={selectedEntry.title} 
                                 topRightButtonText={"Back To My Journals"}
-                                onExitContentPage={defaultSelectedArtworkIDACB}>    
+                                onExitContentPage={defaultSelectedArtworkIDACB}
+                                
+                                userID={userUID} 
+                                userName={userDisplayName} 
+                                userProfilePicURL={userProfilePicURL}>    
 
                                 </JournalTopBarView>
             

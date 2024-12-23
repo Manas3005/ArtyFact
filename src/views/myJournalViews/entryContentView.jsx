@@ -80,8 +80,8 @@ export function EntryContentView(props){
                 </div>
             </div>
 
-            <div id="deleteEntryModal" class="modal" >
-                <div class="modal-content">
+            <div id="deleteEntryModal" class="journalModal" >
+                <div class="journalModalContent">
                     <h2 className="commonText">Are you sure you want to delete this journal entry?</h2>
                     <img className="Icon" src = "/image/deleteIcon.png" />
                     <div className="modalButtonDiv">

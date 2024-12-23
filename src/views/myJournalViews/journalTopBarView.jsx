@@ -32,7 +32,7 @@ export function JournalTopBarView(props){
             return (
             
             <div>
-            <img  className = "logo" style={{cursor:"pointer"}}src = "/image/myJournalsLogo.png" onClick={() => window.location.hash="/"}/>
+            <img  className = "myJournalsMainTitle" style={{cursor:"pointer"}}src = "/image/myJournalsLogo.png" onClick={() => window.location.hash="/"}/>
                 
             <button className="addNewEntry commonText" onClick={handleAddNewEntryClickedACB}>
                     <img className="Icon" src = "/image/plusIcon.png" />
@@ -59,7 +59,7 @@ export function JournalTopBarView(props){
     return (
         <div>
             
-            <div className="topBar">
+            <div className="journalTopBar">
                 
                 <button className="myJournalsMyCollections commonText commonButtonBase" 
                     onClick={handletopRightButtonClickedACB}>{props.topRightButtonText}</button>
@@ -69,7 +69,7 @@ export function JournalTopBarView(props){
                
                 <div>{handleRenderPageTitleACB()}</div>
                 
-                <button className="buttonWithIcon commonButtonBase">
+                <button className="buttonWithIcon commonButtonBase ">
                     <img className="Icon" src = {renderProfilIcon()} />
                     <text className="loggedInText">{renderDisplayNameText()}</text>
                 </button>

@@ -88,7 +88,7 @@ export function SearchChoose(props) {
         <div className="artTitle">{props.art.art_name}</div>
 
         <div className="buttonGroup">
-          <button className="addCollection" onClick={handleAddToCollectionACB}>Add To Collection</button>
+          <button className="addCollection" onClick={handleAddToCollectionACB} >Add To Collection</button>
           <button className="addJournal" onClick={(() => handleAddToJournalClickACB())}>Add To Journal</button>
         </div>
 

@@ -49,9 +49,7 @@ export function TopBarView(props){
         return conditionalRenderHelperCB(props.userID, "Sign In", "Sign Out")
     }
 
-    function renderDisplayNameText (){
-        return conditionalRenderHelperCB(props.userID,"Guest", props.userName)
-    }
+    
 
     function handleEnterKey(evt) {
         if(evt.which == "13") { 
@@ -86,7 +84,7 @@ export function TopBarView(props){
                 
                 <div className="signInDiv">    
                     <img className="profilePic" src = {renderProfilIcon()} />
-                    <label className="displayName">{renderDisplayNameText()}  </label>
+                    
 
                     <button id="signInOutButton" className="signInButton" onClick={handleSignInClick}> 
                         <img className="Icon" src = "/image/google.png" />
@@ -110,5 +108,6 @@ export function TopBarView(props){
 
 }
     
+
 
 

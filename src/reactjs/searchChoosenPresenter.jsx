@@ -18,6 +18,7 @@ function SearchChoosenPresent() {
 
     const currentArt = useSelector((state) => state.searchResults.currentArt);
     const allCollections = useSelector((state) => state.myCollections.collectionsArray);
+     
     console.log("CURRENT ART THAT WILL BE DISPLAYED", currentArt)
     /**
      * Det saknas för närvarande artwork_id bland currentArt.
@@ -78,8 +79,7 @@ function SearchChoosenPresent() {
         console.log("New all collections", newAllCollections);
     }
 
-
-
+  
 
 
     //console.log(data)

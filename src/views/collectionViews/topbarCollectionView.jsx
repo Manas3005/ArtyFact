@@ -134,13 +134,10 @@ export function TopbarCollectionView(props) {
     )}
   </button>
 
-                <SignInButton className={"signInLogo"}></SignInButton>
+                
 
                </span>
               
-                <button className="signInIcon">
-                    <img src="/image/signinIcon.png" />
-                </button>
             </div>
         </div>
 

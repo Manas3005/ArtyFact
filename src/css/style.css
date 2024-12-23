@@ -132,9 +132,9 @@ height: 300px;
 
 
 .findMyTaste {
-    position: absolute;
-    left: 3.8%;
-    top: 63%;
+    position: relative;
+    left: 4.5%;
+    margin-top: 10px;
     width: 227px;
     height: 50px;
     background: rgba(63, 110, 202, 0.89);
@@ -160,9 +160,9 @@ height: 300px;
     
 
 .confusedText {
-    position: absolute;
-    top: 54%; 
-    left: 3.15%; 
+    position: relative;
+    margin-top: -130px; 
+    left: 4%; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 18px; 
     color: #2E3B4E;
@@ -226,9 +226,8 @@ height: 300px;
 }
 
 .explorePanel {
-    flex: 0.9;
+    flex: 0.5;
     
-
 }
 
 .exploreImage{
@@ -291,3 +290,4 @@ height: 36.54px;
     background-color: rgb(218, 161, 180); 
     box-shadow: 0px 4px 10px rgba(203, 21, 164, 0.5); 
 }
+

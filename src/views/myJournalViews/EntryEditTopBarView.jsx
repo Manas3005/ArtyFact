@@ -49,7 +49,7 @@ export function EntryEditTopBarView(props){
     
     return (
         <div>
-            <div className="topBar">
+            <div className="journalTopBar">
                 
                 <button className="backToMyJournals commonText commonButtonBase" onClick={handleNavigationBackACB}> {renderBackButtonTitleACB()}</button> 
                
