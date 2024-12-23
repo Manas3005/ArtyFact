@@ -46,12 +46,12 @@ function SearchChoosenPresent() {
         }
     }
 
-    function handleAddArtWorkToCollectionACB(collection_id, artWork_id) {
-        console.log("This is the artWork_id we are going to add to the collection", artWork_id);
+    function handleAddArtWorkToCollectionACB(collection_id, artWork) {
+        console.log("This is the artwork we are going to add to the collection", artWork);
         //Now we assume that we have knowledge of the collection_id, so we call upon the utility function.
         //Vi behöver skicka in hela collections array, men hur kan vi hämta den? useSelector
         console.log("These are all the collections", allCollections);
-        const newAllCollections = addArtWorkToCollection(allCollections, artWork_id, collection_id);
+        const newAllCollections = addArtWorkToCollection(allCollections, artWork, collection_id);
         dispatch(setCollectionsArray(newAllCollections));
         console.log("New all collections", newAllCollections);
     }

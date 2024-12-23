@@ -110,14 +110,12 @@ const testCollectionsArray =
                 {
                     artWorkTitle: "Joseph Sold by his Brothers",
                     artWork_id: 34,
-                    artistDate: "1530-1560",
                     artistName: "Master of the Die",
                     image_URL: "https://www.artic.edu/iiif/2/2238572f-ad2a-110e-0eda-78dc50b8e13d/full/843,/0/default.jpg",
                 },
                 {
                     artWorkTitle: "Covered Box",
                     artWork_id: 12981,
-                    artistDate: "1321-5122",    //should be ""
                     artistName: "Anna Thomas", //should be null
                     image_URL: "https://www.artic.edu/iiif/2/d802ad5d-9cc9-688b-930c-e9082db1665c/full/843,/0/default.jpg",
 
@@ -125,7 +123,6 @@ const testCollectionsArray =
                 {
                     artWorkTitle: "Starry Night and the Astronauts",
                     artWork_id: 129884,
-                    artistDate: "1891-1978",
                     artistName: "Alma Thomas",
                     image_URL: "https://www.artic.edu/iiif/2/e966799b-97ee-1cc6-bd2f-a94b4b8bb8f9/full/843,/0/default.jpg",
                 }
@@ -138,14 +135,12 @@ const testCollectionsArray =
                 {
                     artWorkTitle: "The Bath",
                     artWork_id: 3123,
-                    artistDate: "1876-1938",
                     artistName: "Charles Georges Dufresne",
                     image_URL: "https://www.artic.edu/iiif/2/7c7ba2a6-b604-e49c-4517-f156c6fb53e6/full/843,/0/default.jpg",
                 },
                 {
                     artWorkTitle: "Ragini Vibhas, Page from a Jaipur Ragamala Set",
                     artWork_id: 129885,
-                    artistDate: "1921-1973",    //should be ""
                     artistName: "Anna", //should be null
                     image_URL: "https://www.artic.edu/iiif/2/bbe7f9d1-eea1-85b5-d71a-20433a9b55da/full/843,/0/default.jpg",
 
@@ -153,7 +148,6 @@ const testCollectionsArray =
                 {
                     artWorkTitle: "Ragini Bangali, Page from a Jaipur Ragamala Set",
                     artWork_id: 129887,
-                    artistDate: "1223-4311", //should be ""
                     artistName: "James", //should be null
                     image_URL: "https://www.artic.edu/iiif/2/3f70f565-39e6-7e32-4ae2-75e1e34c9846/full/843,/0/default.jpg",
                 }
@@ -262,14 +256,13 @@ async function generateObjectsForCollections(collections) {
                 collection.artWorkIDs.map(async (id) => {
                     try {
                         const result = await getArtWorkByID(id);
-                        console.log("this is result", result);
-                        const dateInterval = extractDateInterval(result.data.artist_display) || "";
+                        console.log("this is result from api", result);
+
                         return {
                             artWork_id: id,
                             artistName: result.data.artist_title,
                             artWorkTitle: result.data.title,
                             image_URL: URLParamsForImage(result.data.image_id),
-                            artistDate: dateInterval,
                         };
                     } catch (error) {
                         console.error(`Error fetching artwork ID ${id}, perhaps it doesn't exist:`, error);
@@ -296,13 +289,11 @@ async function generateObjectForSingleCollection(collection) {
                     try {
                         const result = await getArtWorkByID(id);
                         console.log("this is result", result);
-                        const dateInterval = extractDateInterval(result.data.artist_display) || "";
                         return {
                             artWork_id: id,
                             artistName: result.data.artist_title,
                             artWorkTitle: result.data.title,
                             image_URL: URLParamsForImage(result.data.image_id),
-                            artistDate: dateInterval,
                         };
                     } catch (error) {
                         console.error(`Error fetching artwork ID ${id}, perhaps it doesn't exist:`, error);

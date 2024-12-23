@@ -71,7 +71,7 @@ export function CollectionListview(props) {
                 <img className="theCollection-image" src={artWork.image_URL} alt={artWork.artWorkTitle}></img>
                 <div className="theCollection-title">{artWork.artWorkTitle}</div>
                 <div className="theCollection-year">{artWork.year}</div>
-                <div className="artistName">{artWork.artistName + " " + artWork.artistDate}</div>
+                <div className="artistName">{artWork.artistName}</div>
 
             </div>
         ));

@@ -19,7 +19,7 @@ export function SearchChoose(props) {
   function handleAddToCollectionACB(artWork){
     console.log("This is the artwork we are going to add to collection", artWork);
     alert("Added to Collection!");
-    props.onAddArtWorkToCollection(1 ,artWork.artWork_id)
+    props.onAddArtWorkToCollection(1, artWork);
   }
 
 

@@ -1,6 +1,7 @@
 import { intercept } from 'mobx';
 import sanitizeHtml from 'sanitize-html'; 
 import { getArtWorkByID, getArtWorksSearch} from './apiCall';
+import { URLParamsForImage } from './apiCall';
 
 export const cleanHtmlContent = (html) => {
     return sanitizeHtml(html, {
@@ -102,18 +103,22 @@ export function updateCollectionFields(collection, title, description) {
     };
 }
 
-export function addArtWorkToCollection(collections, artWork_id, collection_id) {
+export function addArtWorkToCollection(collections, artWork, collection_id) {
     console.log(
         "These are the collections:", collections,
-        "This is the art work id:", artWork_id,
-        "and this is the collection id:", collection_id
+        "This is the artWork:", artWork
     );
 
     return collections.map(collection => {
         if (collection.collection_id === collection_id) {
             return {
                 ...collection,
-                artWorks: [...collection.artWorks, { artWork_id }]
+                artWorks: [...collection.artWorks, { 
+                    artWork_id: artWork.artWork_id,
+                    artistName: artWork.artist,
+                    artWorkTitle: artWork.art_name,
+                    image_URL: URLParamsForImage(artWork.image_id),
+                }]
             };
         }
         return collection; 

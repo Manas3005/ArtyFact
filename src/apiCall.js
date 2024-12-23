@@ -56,6 +56,16 @@ export function getCollection(searchParams) {
     return fetch(createURLParamsForCollection(searchParams), options).then(gotResponseACB).then(printResponseACB);
 }
 
+export function getArtistDetailsById(artist_id) {
+    console.log("This is the artist id", artist_id);
+    return fetch(createURLParamsForArtistDetailsById(artist_id), options).then(gotResponseACB).then(printResponseACB);
+}
+
+export function createURLParamsForArtistDetailsById(artist_id) {
+    console.log("this is the url for fetching the artist details by id", MAIN_URL + "agents/" + artist_id);
+    return MAIN_URL + "agents/" +  artist_id;
+}
+
 
 
 
