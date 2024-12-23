@@ -6,6 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCollectionsArray } from "../store/collectionsSlice";
 
 export function MyCollectionsPresenter(props) {
+
+    let userUID = useSelector(state => state.user.uid)
+    let userDisplayName = useSelector(state => state.user.displayName)
+    let userProfilePicURL = useSelector(state => state.user.profilePicURL)
+    
     const dispatch = useDispatch();
     
     const [activeIndex, setActiveIndex] = useState(0);
@@ -228,6 +233,9 @@ export function MyCollectionsPresenter(props) {
             setSearch={handleSearchACB}
             clearButton={clearButton}
             setClearButton={setClearButtonACB}
+            userID={userUID} 
+            userName={userDisplayName} 
+            userProfilePicURL={userProfilePicURL}
             />
             <ListOfCollectionsView 
             activeIndex={activeIndex}

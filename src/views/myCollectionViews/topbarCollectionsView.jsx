@@ -1,4 +1,5 @@
 import "/src/css/collectionsStyle.css"
+import { conditionalRenderHelperCB } from "../../utilities";
 
 function TopbarCollectionsView(props) {
 
@@ -36,7 +37,13 @@ function TopbarCollectionsView(props) {
      * Vi behöver (väl) funktioner som tolka datan från firebase.
      */
 
+    function renderProfilIcon (){
+        return conditionalRenderHelperCB(props.userID, "/image/signinIcon.png", props.userProfilePicURL)
+    }
 
+    function renderDisplayNameText (){
+        return conditionalRenderHelperCB(props.userID,"Guest", props.userName)
+    }
   
 
 
@@ -54,10 +61,12 @@ function TopbarCollectionsView(props) {
                     onClick={handleClearButtonACB} 
                     style={{display: props.clearButton ? 'block' : 'none' }}>
                     x</button> 
-                <button className="signInlogo">Sign in</button>
-                <button className="signInIcon" >
-                <img src = "/image/signinIcon.png"/>
+
+                <button className="buttonWithIcon">
+                    <img className="Icon" src = {renderProfilIcon()} />
+                    <text className="loggedInText">{renderDisplayNameText()}</text>
                 </button>
+
                 <img className = "collectionsLogo" src="/image/collectionsLogo.png" />
 
                 <button className="addNewCollection">Create New Collection</button>

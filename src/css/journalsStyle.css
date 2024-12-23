@@ -86,7 +86,7 @@
     gap: 10px;                    
     padding: 10px;                
     border: bold;                
-    background-color: BACD92; 
+    background-color: D2E0FB; 
     cursor: pointer;              
 }
 
@@ -104,7 +104,7 @@
 
     flex: 0.7;
     font-size: 16px;              
-    color: rgb(255, 255, 255);                 
+    color: black;                 
 }
 
 .addNewEntry{
