@@ -37,8 +37,8 @@ export const myJournalEntries = createSlice({
         },
         editEntry: (state,action) => {
             return {...state, 
-            // creates a shallow copy of the entire state, and only edits the parts of the which are 
-            // changed, leaving the other parts of the state as it is 
+                // creates a shallow copy of the entire state, and only edits the parts of the which are 
+                // changed, leaving the other parts of the state as it is 
         
             // sets edited entry to the entry that is currently selected, i.e. has the same id, then updates the entries array
             //action.payload is the updated entry object 
