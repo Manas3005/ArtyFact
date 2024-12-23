@@ -3,63 +3,38 @@ import { getArtWorksSearch, getArtWorkByID } from "/src/apiCall.js";
 import { SearchTopBar } from "/src/views/SearchBar/SearchTopBarView.jsx";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {setCurrentArt} from "/src/store/searchResultSlice.js";
-
+import { setCurrentArt } from "/src/store/searchResultSlice.js";
 
 function SearchResult(props) {
   const [artData, setArtData] = useState(null); // For main artworks data
   const [artInfo, setArtInformation] = useState({}); // For art Information mapping
+  const [loading, setLoading] = useState(true); // Track loading state
   const [error, setError] = useState(null);
 
-  const searchparamsTester = { // this is for testing 
-    title: "Two Sisters",
-    limit: 40,
-  };
-
-  function isEmptyObject(firebaseData) {
-    return firebaseData && (typeof firebaseData === "object" && Object.keys(firebaseData).length === 0);
-  }
-  
   const searchParamSend = useSelector((state) => state.searchResults.searchParam);
-  if(isEmptyObject(searchParamSend)) {
-    console.log("truthy");
-  }
-    console.log( "waiting...");
-  console.log("THESE ARE THE SEARCH PARAMS", searchParamSend);
 
   const dispatch = useDispatch();
 
   function setCurrentArtACB(artInformation) {
-    console.log("ARTINFO RENDERED",artInformation)
     dispatch(setCurrentArt(artInformation));
-        //dispatch(setNewSearchParam(evt.target.value));
   }
-
 
   useEffect(() => {
     (async () => {
-      if (isEmptyObject(searchParamSend)) {
+      if (!searchParamSend || Object.keys(searchParamSend).length === 0) {
         console.log("Waiting for valid search parameters...");
         return;
       }
-  
+
       try {
-        //Hämta artworks när vi laddat klart från firebase
-        //debugger;
-        console.log("starting to fetch now with the params", searchParamSend);
+        setLoading(true); // Set loading to true while fetching
         const data = await getArtWorksSearch(searchParamSend);
         setArtData(data);
-        console.log("Fetched Artworks Data:", data);
-  
-        //Hämtar image IDs efter artworks data is fetched
+
         if (data && data.data) {
-          console.log("Inside if");
           const results = await Promise.all(
             data.data.map(async (artwork) => {
-              console.log("about to fetch artworks by id");
               const details = await getArtWorkByID(artwork.id);
-              console.log("Fetched Details for Artwork:", details);
-  
               return {
                 id: artwork.id,
                 image_id: details.data.image_id,
@@ -73,7 +48,7 @@ function SearchResult(props) {
               };
             })
           );
-  
+
           const information = results.reduce((acc, curr) => {
             acc[curr.id] = {
               image_id: curr.image_id,
@@ -87,27 +62,26 @@ function SearchResult(props) {
             };
             return acc;
           }, {});
-  
+
           setArtInformation(information);
         }
       } catch (err) {
         setError(err.message);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
-    })(); 
+    })();
   }, [searchParamSend]);
 
+  if (loading) return <div>Loading images, please wait...</div>;
   if (error) return <div>Error: {error}</div>;
-  if (!artData || !artInfo) return <div>Loading...</div>;
-
-  console.log("Fetched Art Images:", artInfo);
 
   return (
     <div>
       <SearchTopBar
         artworks={artData}
-        artInfo={artInfo} 
+        artInfo={artInfo}
         setIndividualArt={setCurrentArtACB}
-        searchParams={searchParamSend}
       />
     </div>
   );

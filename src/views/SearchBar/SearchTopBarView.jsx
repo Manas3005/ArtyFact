@@ -1,11 +1,8 @@
+import React from "react";
 import { URLParamsForImage } from "/src/apiCall.js";
 import "/src/css/searchResultStyle.css";
 
-export function SearchTopBar(props) {
-  console.log("THIS IS THE PROPS THAT IS SENT TO VIEW", props);
-  const { artworks, artInfo, onSearchInitiated } = props;
-
-  // Filter out artworks with null image_id
+export function SearchTopBar({ artworks, artInfo, setIndividualArt }) {
   const validData = artworks.data.filter(
     (result) => artInfo[result.id] && artInfo[result.id].image_id
   );
@@ -15,12 +12,9 @@ export function SearchTopBar(props) {
   }
 
   function renderSearchResultsCB(result) {
-    const foundInformation = artInfo[result.id]; // Get image_id from props
-    console.log("This is the found info ", foundInformation);
+    const foundInformation = artInfo[result.id];
 
     function onClickImageEventACB() {
-      console.log("Image has been clicked for:", foundInformation.artist);
-
       const allArtInformationToUpdate = {
         art_name: result.title,
         image_id: foundInformation.image_id,
@@ -33,7 +27,7 @@ export function SearchTopBar(props) {
         date_display: foundInformation.date_display,
       };
 
-      props.setIndividualArt(allArtInformationToUpdate);
+      setIndividualArt(allArtInformationToUpdate);
 
       window.location.hash = "#/searchChoosen";
     }
@@ -57,7 +51,6 @@ export function SearchTopBar(props) {
     <div>
       <div>
         <img src="https://i.imgur.com/viSeXcY.png" className="logoArty" />
-
         <button onClick={eventHandlerForHomeClickACB} className="homeButton">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,9 +66,7 @@ export function SearchTopBar(props) {
           </svg>
         </button>
       </div>
-
       <hr className="divider" />
-
       <div className="resultsContainer">{validData.map(renderSearchResultsCB)}</div>
     </div>
   );
