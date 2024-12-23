@@ -8,10 +8,10 @@ export function CollectionListview(props) {
     
     console.log("This is the props in collection page", props);
 
-    if(!props.collection || props.collection.length === 0) {
+    if(!props.collection.artWorks || props.collection.artWorks.length === 0) {
         return (
             <div>
-                <p>No collection found!</p>
+                <p>No Artworks For This Collection!</p>
             </div>
         )
     }
@@ -71,7 +71,7 @@ export function CollectionListview(props) {
                 <img className="theCollection-image" src={artWork.image_URL} alt={artWork.artWorkTitle}></img>
                 <div className="theCollection-title">{artWork.artWorkTitle}</div>
                 <div className="theCollection-year">{artWork.year}</div>
-                <div className="artistName">{artWork.artistName + " " + artWork.artistDate}</div>
+                <div className="artistName">{artWork.artistName}</div>
 
             </div>
         ));
