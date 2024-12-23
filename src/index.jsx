@@ -19,6 +19,7 @@ export const store = configureStore({
         myJournals: myJournalEntries.reducer,
         searchResults: searchResults.reducer,
         findMyTaste: findMyTaste.reducer,
+        user: user.reducer
         //to be added as separate slices
         //artWorks: artWorks.reducer,
         //journalEntryName: journalEntryName.reducer,

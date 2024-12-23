@@ -53,10 +53,13 @@ export const myJournalEntries = createSlice({
         setTemporaryContent: (state, action) => { 
             state.temporaryContent = action.payload
             console.log(state.temporaryContent)
+        },
+        setLatestEntryID: (state,action) => {
+            state.latestEntryID = action.payload;
         } 
         }
     }
 )
 
 export const { addEntry, removeEntry, setEntries, increaseLatestEntryID, setSelectedEntryID, 
-                editEntry, setSelectedArtworkID, setTemporaryContent} = myJournalEntries.actions;
+                editEntry, setSelectedArtworkID, setTemporaryContent, setLatestEntryID} = myJournalEntries.actions;

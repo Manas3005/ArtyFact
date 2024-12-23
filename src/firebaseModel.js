@@ -390,7 +390,7 @@ async function persistenceToModel(firebaseData, dispatchHook) { // we get the sn
     persistenceToModelForSearchParams(firebaseData.search.params, dispatchHook);
     persistenceToModelForCurrentArtDetails(firebaseData.search.currentArt, dispatchHook);
     const [result, result2] = await Promise.all([
-        persistenceToModelForMyCollection(firebaseData.collections.collectionsArray, dispatchHook),
+        persistenceToModelForMyCollection(firebaseData.collections, dispatchHook),
         persistenceToModelForSingleCollection(firebaseData.collections.singleCollection, dispatchHook)
     ]);
     //Insert a new persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
@@ -509,7 +509,7 @@ function connectToFirebase(dispatchHook) {
             effect(action, store) {
               console.log("Action triggered: setCollectionsArray", action.payload);
               console.log("This is the new state", store.getState());
-              const userCollectionsRef = ref(db, `${userPath}/collections/collectionsArray`)
+              const userCollectionsRef = ref(db, `${userPath}/collections`)
               saveToFirebase(userCollectionsRef, action.payload, action.type);
             },
           });

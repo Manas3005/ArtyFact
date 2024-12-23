@@ -53,6 +53,14 @@ export function TopBarView(props){
         return conditionalRenderHelperCB(props.userID,"Guest", props.userName)
     }
 
+    function handleEnterKey(evt) {
+        if(evt.which == "13") { 
+            
+        props.onSearched(evt.target.value)    
+        window.location.hash="#/searchResult";
+
+        }
+    }
 
 
     return (
