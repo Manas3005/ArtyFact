@@ -89,8 +89,8 @@ export function TopbarMyCollectionsView(props) {
             </div>
 
 
-            <div id="selectCollectionModal" class="modal" >
-                <div class="modal-content">
+            <div id="selectCollectionModal" className="modal" >
+                <div className="modal-content">
                     <h2 className="commonText">Create A New Collection...!!</h2>
 
                     <label htmlFor="collectionTitle">Title *</label>

@@ -118,8 +118,8 @@ export function SearchChoose(props) {
 
       </div>
 
-      <div id="selectCollectionModal" class="modal" >
-        <div class="modal-content">
+      <div id="selectCollectionModal" className="modal" >
+        <div className="modal-content">
           <h2 className="commonText">Select the Collection you would like to add this Artwork to:</h2>
 
           <select className="dropdown" size="1" onChange={handleCollectionChangeACB}>

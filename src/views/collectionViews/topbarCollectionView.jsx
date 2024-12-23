@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 
 export function TopbarCollectionView(props) {
 
+    console.log("This is the props in tobarCollectionView", props);
+
     /**
      * Vi vill göra så att när man trycker på edit collection att det kommer upp lite extra saker på skärmen. 
      * Så vi behöver conditionally render baserat på isEditing. 
@@ -14,13 +16,7 @@ export function TopbarCollectionView(props) {
      * 
      */
 
-    if(!props.collection) {
-        return (
-            <div>
-                <p>No collection found!</p>
-            </div>
-        )
-    }
+    
 
 
 

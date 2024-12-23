@@ -2,8 +2,10 @@ import { TopbarMyCollectionsView } from "../views/myCollectionViews/topbarMyColl
 import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollectionsView";
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { setCollectionsArray, setCollection, createNewCollection } from "../store/collectionsSlice";
+import { setCollectionsArray, setCollection } from "../store/collectionsSlice";
 import { increaseLatestEntryID } from "../store/journalsSlice";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export function MyCollectionsPresenter(props) {
     const dispatch = useDispatch();
@@ -11,8 +13,8 @@ export function MyCollectionsPresenter(props) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [filteredCollections, setFilteredCollections] = useState(null);
     const [clearButton, setClearButton] = useState(false);
-    const [title, setTitle] = useState(null);
-    const [description, setDescription] = useState(null);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
     const collections = [
         {
@@ -422,11 +424,31 @@ export function MyCollectionsPresenter(props) {
         function handleCreateCollectionACB() {
             console.log("About to create the collection");
             console.log("The title is:", title, " and the description is: ", description);
-           /* dispatch(createNewCollection(
+            console.log("about to convert to int");
+            const uuid = uuidv4();
+            const strippedUUID = uuid.replace(/-/g, ''); 
+            if(!selectedCollectionsArray){
+                const obj = {
+                    collection_title: title,
+                    collection_description: description,
+                    collection_id: strippedUUID,
+                    artWorks: [],
+                };
+                dispatch(setCollectionsArray(obj));
+            }
+            else{
+            const obj = [...selectedCollectionsArray,
                 {
                     collection_title: title,
                     collection_description: description,
-            }));*/
+                    collection_id: strippedUUID,
+                    artWorks: [],
+                }
+            ]
+            dispatch(setCollectionsArray(obj));
+        }
+            console.log("the NEW OBJ", obj);
+            dispatch(setCollectionsArray(obj));
         }
 
 

@@ -42,6 +42,8 @@ const myJournalsRef = ref(db, PATH + "/myJournals");
 const singleCollectionRef = ref(db, PATH + "/singleCollection");
 const searchParamRef = ref(db, PATH + "/searchParams");
 const currentArtDetailsRef = ref(db, PATH + "/currentArtDetails");
+const myCollectionsRef1 = ref(db, PATH + "/collectionsTeoman");
+
 
 // here is a test to try
 set(myRef, {
@@ -54,7 +56,30 @@ set(myRef, {
 /**
  * Necessary for reading from firebase and being able to derive data.
  */
-/*set(myCollectionsRef, {
+set(myCollectionsRef, {
+    collectionsArray: [
+        {
+            collectionId: 1,
+            collectionTitle: "Japanese Art",
+            collectionDescription: "art that accompanied Yukio Mishima's travesty..",
+            artWorkIDs: [34, 12981, 129884]
+        },
+        {
+            collectionId: 2,
+            collectionTitle: "Impressionism.. oh",
+            collectionDescription: "Long before death there was there was the Nile, and out of the Nile death sprung out.. blossomed and ready to kill... songs had not yet been invented, nor was love anywhere to be found.. only sickness.. Mefistofeles was simply not ready to accept Nazim Hikmet at this point in time, nor was Prague yet to be on a world map. The world was simply not ready..asdklj asd lkasjdkla  sdlkajskdj askldjalksd.. jaoksdjaisd osad... sdjaoidoiwoiausdoiu oiasjdkl kslkqw jelqwe... asdsadiooiqweu  yhej va dgl ryd le..laksdlsa dwq we asdlasd",
+            artWorkIDs: [3123, 129885, 129887]
+        },
+        {
+            collectionId: 3,
+            collectionTitle: "On the outskirts of death",
+            collectionDescription: "a collection of my father's art.",
+            artWorkIDs: [129, 140, 145, 146, 153]
+        }
+    ]
+})
+
+/*set(myCollectionsRef1, {
     collectionsArray: [
         {
             collectionId: 1,
@@ -171,7 +196,7 @@ function modelToPersistenceForMyCollections(payload) {
         artWorkIDs: [...collection.artWorks].map(artWork => artWork.artWork_id),
     }));
     console.log("newArray:", newArray);
-    set(myCollectionsRef, { collectionsArray: newArray });
+    set(myCollectionsRef1, { collectionsArray: newArray });
 }
 
 //Denna är endast till för reloading, eftersom denna fylls ju när vi trycker på den i hemsidan.
@@ -249,14 +274,23 @@ function modelToPersistence(payload, type) {
 }
 
 async function generateObjectsForCollections(collections) {
+    if (!collections || !Array.isArray(collections.collectionsArray) || collections.collectionsArray.length === 0) {
+        console.log("No collections provided or collectionsArray is empty.");
+        return [];
+    }
+
+    console.log("These are the collections", collections);
+
     const populatedCollections = await Promise.all(
         collections.collectionsArray.map(async (collection) => {
             console.log("This is a single collection123", collection);
+
+            // Safely handle the case where artWorkIDs is undefined
             const resolvedArtWorks = await Promise.all(
-                collection.artWorkIDs.map(async (id) => {
+                (collection.artWorkIDs || []).map(async (id) => {
                     try {
                         const result = await getArtWorkByID(id);
-                        console.log("this is result from api", result);
+                        console.log("This is result from API", result);
 
                         return {
                             artWork_id: id,
@@ -279,8 +313,11 @@ async function generateObjectsForCollections(collections) {
             };
         })
     );
+
     return populatedCollections;
 }
+
+
 
 async function generateObjectForSingleCollection(collection) {
             console.log("This is a single collection in generateObjectForSingleCollection:", collection);
@@ -391,7 +428,7 @@ async function persistenceToModel(firebaseData, dispatchHook) { // we get the sn
     persistenceToModelForSearchParams(firebaseData.searchParams, dispatchHook);
     persistenceToModelForCurrentArtDetails(firebaseData.currentArtDetails, dispatchHook);
     const [result, result2] = await Promise.all([
-        persistenceToModelForMyCollection(firebaseData.collections, dispatchHook),
+        persistenceToModelForMyCollection(firebaseData.collectionsTeoman, dispatchHook),
         persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook)
     ]);
     //Insert a new persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
