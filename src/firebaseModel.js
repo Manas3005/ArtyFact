@@ -56,7 +56,7 @@ set(myRef, {
 /**
  * Necessary for reading from firebase and being able to derive data.
  */
-set(myCollectionsRef, {
+/*set(myCollectionsRef, {
     collectionsArray: [
         {
             collectionId: 1,
@@ -77,7 +77,7 @@ set(myCollectionsRef, {
             artWorkIDs: [129, 140, 145, 146, 153]
         }
     ]
-})
+})*/
 
 /*set(myCollectionsRef1, {
     collectionsArray: [
@@ -196,7 +196,7 @@ function modelToPersistenceForMyCollections(payload) {
         artWorkIDs: [...collection.artWorks].map(artWork => artWork.artWork_id),
     }));
     console.log("newArray:", newArray);
-    set(myCollectionsRef1, { collectionsArray: newArray });
+    set(myCollectionsRef, { collectionsArray: newArray });
 }
 
 //Denna är endast till för reloading, eftersom denna fylls ju när vi trycker på den i hemsidan.
@@ -431,7 +431,7 @@ async function persistenceToModel(firebaseData, dispatchHook) {
     persistenceToModelForSearchParams(firebaseData.searchParams, dispatchHook);
     persistenceToModelForCurrentArtDetails(firebaseData.currentArtDetails, dispatchHook);
     const [result, result2] = await Promise.all([
-        persistenceToModelForMyCollection(firebaseData.collectionsTeoman, dispatchHook),
+        persistenceToModelForMyCollection(firebaseData.collections, dispatchHook),
         persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook)
     ]);
     //Insert a new persistenceToModelForSingleCollection(firebaseData.singleCollection, dispatchHook);
