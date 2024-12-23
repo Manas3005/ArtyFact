@@ -5,7 +5,7 @@ import { conditionalRenderHelperCB } from "../../utilities";
 export function JournalTopBarView(props){
     
     function handleBackToHomeClickedACB (){
-        props.onExitContentPage()
+        props.onExitContentPage();
         return window.location.hash = '#/homepage'
     }
 
@@ -15,7 +15,7 @@ export function JournalTopBarView(props){
     }
 
     function handletopRightButtonClickedACB (){
-        props.onExitContentPage()
+        props.onExitContentPage();
        
         if (!props.isJournalEntrySelected){
             return window.location.hash = '#/collections'
@@ -32,7 +32,7 @@ export function JournalTopBarView(props){
             return (
             
             <div>
-            <img  className = "logo" src = "/image/myJournalsLogo.png" />
+            <img  className = "logo" style={{cursor:"pointer"}}src = "/image/myJournalsLogo.png" onClick={() => window.location.hash="/"}/>
                 
             <button className="addNewEntry commonText" onClick={handleAddNewEntryClickedACB}>
                     <img className="Icon" src = "/image/plusIcon.png" />
