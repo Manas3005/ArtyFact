@@ -2,7 +2,7 @@
 
 The site is a place for the user to explore new art, and read about various artworks. Users can create and edit art collections that store multiple artworks, allowing the user to group artworks accordinding to their liking. Users will be able to create journal entries, these journal entries serve as a place to write down their thoughts about art pieces. Users will have to login to be able to save their collections and journal entries so that they can check it again when they login. Users who are not sure of what they like can take the art quiz, so that they can get recommended artworks that would be interesting to their taste and appreciation. Users can search for artworks, or “explore” by category to get to know more about artpieces and increase their knowledge!
 
-Project Setup Instructions
+# Project Setup Instructions
 
 ### **Step 1: Install Node.js**
 
