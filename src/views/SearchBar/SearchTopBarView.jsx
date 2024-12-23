@@ -57,7 +57,7 @@ export function SearchTopBar(props) {
   return (
     <div>
       <div>
-        <img src="https://i.imgur.com/viSeXcY.png" className="logoArty" />
+        <img src="https://i.imgur.com/viSeXcY.png" className="logoArty" onClick={() => window.location.hash="/"}/>
 
         <button onClick={eventHandlerForHomeClickACB} className="homeButton">
           <svg

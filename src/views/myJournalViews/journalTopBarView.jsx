@@ -29,7 +29,7 @@ export function JournalTopBarView(props){
             return (
             
             <div>
-            <img  className = "logo" src = "/image/myJournalsLogo.png" />
+            <img  className = "logo" style={{cursor:"pointer"}}src = "/image/myJournalsLogo.png" onClick={() => window.location.hash="/"}/>
                 
             <button className="addNewEntry commonText" onClick={handleAddNewEntryClickedACB}>
                     <img className="Icon" src = "/image/plusIcon.png" />

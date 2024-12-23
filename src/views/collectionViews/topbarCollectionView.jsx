@@ -103,7 +103,7 @@ export function TopbarCollectionView(props) {
 
                 <button className="editCollection" onClick={handleToggleACB}>{props.isEditing ? "Cancel" : "Edit Collection"}</button>
                 <SignInButton className={"signInLogo"}></SignInButton>
-                <button className="signInIcon">
+                <button className="signInIcon" >
                     <img src="/image/signinIcon.png" />
                 </button>
             </div>
