@@ -10,6 +10,7 @@ function SearchResult(props) {
   const [artData, setArtData] = useState(null); // For main artworks data
   const [artInfo, setArtInformation] = useState({}); // For art Information mapping
   const [error, setError] = useState(null);
+  const [fullData, setFullData] = useState({});
 
   const searchparamsTester = { // this is for testing 
     title: "Two Sisters",
@@ -59,9 +60,11 @@ function SearchResult(props) {
               console.log("about to fetch artworks by id");
               const details = await getArtWorkByID(artwork.id);
               console.log("Fetched Details for Artwork:", details);
-  
               return {
+                //Add another object that sends down the full data as prop??
                 id: details.data.id,
+                title: details.data.title,
+                artist_display: details.data.artist_display,
                 image_id: details.data.image_id,
                 medium_display: details.data.medium_display,
                 artist_title: details.data.artist_title,
@@ -73,11 +76,16 @@ function SearchResult(props) {
               };
             })
           );
+          console.log("This is ALL", results);
+          setFullData(results);
+
   
           const information = results.reduce((acc, curr) => {
             console.log("This is the curr", curr);
             acc[curr.id] = {
               artWork_id: curr.id,
+              title: curr.title,
+              artist_display: curr.artist_display,
               image_id: curr.image_id,
               medium_display: curr.medium_display,
               artist: curr.artist_title,
@@ -89,7 +97,7 @@ function SearchResult(props) {
             };
             return acc;
           }, {});
-  
+          console.log("This is the full data", fullData);
           setArtInformation(information);
         }
       } catch (err) {

@@ -102,6 +102,38 @@ export function updateCollectionFields(collection, title, description) {
     };
 }
 
+export function addArtWorkToCollection(collections, artWork_id, collection_id) {
+    console.log(
+        "These are the collections:", collections,
+        "This is the art work id:", artWork_id,
+        "and this is the collection id:", collection_id
+    );
+
+    return collections.map(collection => {
+        if (collection.collection_id === collection_id) {
+            return {
+                ...collection,
+                artWorks: [...collection.artWorks, { artWork_id }]
+            };
+        }
+        return collection; 
+    });
+}
+
+export function parseCollectionDropDown(collections) {
+    console.log("These are the collections in utility", collections);
+    return [...collections].map((collection) => {
+        return {
+            collection_id: collection.collection_id,
+            collection_title: collection.collection_title,
+        }
+    });
+}
+
+
+
+
+
 export function removeArtworkById(collection, artWorkId) {
     return {
         ...collection,

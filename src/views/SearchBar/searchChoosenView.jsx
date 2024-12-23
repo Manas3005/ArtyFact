@@ -13,6 +13,15 @@ export function SearchChoose(props) {
     )
   }
 
+  
+  
+
+  function handleAddToCollectionACB(artWork){
+    console.log("This is the artwork we are going to add to collection", artWork);
+    alert("Added to Collection!");
+    props.onAddArtWorkToCollection(1 ,artWork.artWork_id)
+  }
+
 
   const htmlString = props.art.description;
 
@@ -26,7 +35,7 @@ export function SearchChoose(props) {
 
   return (
     <div>
-      <img  src="https://i.imgur.com/viSeXcY.png" className="logoArty"/>  
+      <img  src="https://i.imgur.com/viSeXcY.png" className="logoArty" onClick={() => window.location.hash = "/"}/>  
 
 
       <button  className="homeButton"> 
@@ -45,7 +54,7 @@ export function SearchChoose(props) {
         <div className="artTitle">{props.art.art_name}</div>
 
         <div className="buttonGroup">
-          <button className="addCollection">Add to collection</button>
+          <button className="addCollection" onClick={()=> handleAddToCollectionACB(props.art)}>Add to collection</button>
           <button className="addJournal">Add to journal</button>
         </div>
 
