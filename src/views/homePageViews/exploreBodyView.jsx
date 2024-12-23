@@ -24,8 +24,8 @@ function ExploreBodyView () {
                 src= "/image/exploreNewArtPanel.png" 
                 className = "exploreNewArtPanel"
                 />
-                <div className="confusedText">Not sure what you like yet?</div>
-                <button className = "findMyTaste" onClick = {handleFindMyTasteClickACB}>Find My Taste!</button>
+                <div className="confusedText">Want to explore works that resonate with your aesthetic?</div>
+                <button className = "findMyTaste" onClick = {handleFindMyTasteClickACB}>Take the Art Quiz!</button>
                 {renderQuizProgressACB()}
             </div>
 

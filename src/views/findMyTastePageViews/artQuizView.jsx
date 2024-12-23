@@ -218,13 +218,13 @@ export function ArtQuizView (props){
     
             <div className="quizResultsContainer">
               {imageByStylesURLs.map((url, index) => {
-                const idData = allArtDetailsByStyles[index]; // Assuming the corresponding style data exists here
+                const idData = allArtDetailsByStyles[index]; 
     
                 return url ? (
                   <div
                     key={index}
                     className="quizResultItem"
-                    onClick={() => handleChosenArtworkClickACB(idData)} // Pass styleData when clicked
+                    onClick={() => handleChosenArtworkClickACB(idData)} 
                   >
                     <img
                       src={url}
@@ -267,13 +267,13 @@ export function ArtQuizView (props){
     
             <div className="quizResultsContainer">
               {imageByMediumsURLs.map((url, index) => {
-                const idData = allArtDetailsByMediums[index]; // Assuming the corresponding medium data exists here
+                const idData = allArtDetailsByMediums[index]; 
     
                 return url ? (
                   <div
                     key={index}
                     className="quizResultItem"
-                    onClick={() => handleChosenArtworkClickACB(idData)} // Pass mediumData when clicked
+                    onClick={() => handleChosenArtworkClickACB(idData)} 
                   >
                     <img
                       src={url}

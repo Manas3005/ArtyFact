@@ -29,10 +29,7 @@ export function TopBarView(props){
         if(evt.which == "13") { 
             
         props.onSearched(evt.target.value)    
-        console.log("--------------------- This is the evt",evt.target.value)
-        console.log(" PROPS IN TOPBAR",props)
-        console.log("button has been pressed")
-           window.location.hash="#/searchResult";
+        window.location.hash="#/searchResult";
 
         }
     }

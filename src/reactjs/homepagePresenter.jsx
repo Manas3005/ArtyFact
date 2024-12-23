@@ -72,7 +72,7 @@ function HomePage(props){
     console.log("Selected random art:", randomArt);
     console.log("The image URL:", image);
    
-    return <div>
+    return( <>
         <TopBarView   
         onSearched={updateCurrentSearch}
 
@@ -89,7 +89,7 @@ function HomePage(props){
                 description={cleanedDescription}
                 
                 />
-        </div>
+        </>)
 }
 
 export {HomePage}

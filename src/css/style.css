@@ -1,14 +1,18 @@
 .topBar {
     display: flex;
-    justify-content: center; 
-    align-items: center;    
-    height: 200px;     
-    background-color: #f5f5f5; 
-    font-size: 36px;        
-    font-weight: bold;      
-    color: #333;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #FFFFFF;
     position: relative;
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20241106/pngtree-abstract-art-of-subtle-brushstrokes-in-light-gray-and-beige-color-image_16526904.jpg'); /* Replace with your image path */
+    background-size: cover; 
+    background-position: center; 
 }
+
+
 
 .logo{
     position: center;          
@@ -17,7 +21,7 @@
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     max-height:83px ;
     max-width: 450px;
-
+    
 
 }
 
@@ -28,72 +32,172 @@
     cursor: pointer;   
     border: bold;   
     filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
-
-    width: 189px;
-    height: 45px;
-
-    position: absolute;
-
-    font-family: 'Jomolhari';
+    width: 230px;
+    height: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 26px;
     color: #000000;
-    background-color: ABB4C1;
-
-
-
-
+    background-color: #E7DCDC;
 }
+
+.Explore:hover {
+    background-color: rgb(219, 184, 145);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+}
+
+.Explore:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.Mycollections {
+    margin-right: 200px;
+    margin-top: 120px;
+    position: absolute;
+    width: 189px;
+    height: 45px;
+    background-color: #E7DCDC;
+    color: #000000;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 25px;
+    border: bold;
+    cursor: pointer;
+    filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
+    transition: all 0.3s ease;
+}
+
+.Mycollections:hover {
+    background-color: rgb(219, 184, 145);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+}
+
+.Mycollections:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.Myjournal {
+    margin-left: 200px;
+    margin-top: 120px;
+    position: absolute;
+    width: 189px;
+    height: 45px;
+    background-color: #E7DCDC;
+    color: #000000;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 25px;
+    border: bold;
+    cursor: pointer;
+    filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25));
+    transition: all 0.3s ease;
+}
+
+.Myjournal:hover {
+    background-color: rgb(219, 184, 145);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+}
+
+.Myjournal:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+
 .searchBar {
     position: absolute;
     border: bold;        
     left: 15px;                   
-    top: 30%;   
-    width: 197px;
-    height: 33px;                               
+    top: 40%;   
+    width: 230px;
+    height: 50px;                               
     cursor: text;
 }
 
 .signInlogo {
     position: absolute;
-    border: bold;        
-    right: 50px;                   
-    top: 3%;                                  
+    left: 1315px;
     cursor: pointer;
-   
-
-width: 92px;
-height: 38px;
-
-
-font-family: 'Junge';
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 15px;
-
-color: #000000;
-          
+    color: #000000;
+    background-color: #E7DCDC; /* Soft background color */
+    text-align: center; /* Center the text */
+    filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25)); /* Drop shadow effect */
+    transition: all 0.3s ease; /* Smooth transition */
+    width: 300px; /* Increased width */
+    height: 80px; /* Increased height */
+    border-radius: 25px; /* Rounded corners */
+    border: none; /* Remove default button border */
 }
+
+.signInlogo:hover {
+    background-color: rgb(219, 184, 145); /* Hover background color */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+    transform: translateY(-3px); /* Hover effect */
+}
+
+.signInlogo:active {
+    transform: translateY(-1px); /* Press effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Lighter shadow on click */
+}
+
+
+
 
 .signInIcon {
     position: absolute;
-    border: none;        
-    right: 150;                   
-    top: 3%;                                  
+    top: 5%;
     cursor: pointer;
+    color: #000000;
+    background-color: #E7DCDC; 
+    text-align: center; 
+    filter: drop-shadow(0px 4px 4px rgba(255, 255, 255, 0.25)); 
+    transition: all 0.3s ease; 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 25px; 
+    border: none; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
 
-.Mycollections{
-margin-right: 200px;
-margin-top: 120px;
-position: absolute;
-width: 151px;
-height: 34px;
-
+.signInIcon img {
+    width: 30px; 
+    height: 30px; 
 }
+
+.signInIcon:hover {
+    background-color: rgb(219, 184, 145); 
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
+    transform: translateY(-3px); 
+}
+
+.signInIcon:active {
+    transform: translateY(-1px); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+}
+
+
 
 .exploreNewArtPanel{
 
@@ -101,46 +205,64 @@ width: 900px;
 height: 300px;
 }
 
+
 .findMyTaste {
-    margin-top: 70;
-    top: 50%;                     
-    left: 4%;                    
+    display: inline-block;
     position: absolute;
+    left: 3.8%;
+    top: 63%;
     width: 227px;
     height: 50px;
     background: rgba(63, 110, 202, 0.89);
-    border-radius: 10px;
-    font-family: 'Jacques Francois';
-    font-style: normal;
+    border-radius: 10px; 
+    font-family: 'Jacques Francois', serif;
     font-weight: 400;
     font-size: 18px;
-    color: #000000;
-    border-color: rgba(63, 110, 202, 0.89);
-    }
-
-.Myjournal {
-margin-left: 200px;
-margin-top: 120px;
-position: absolute;
-width: 159px;
-height: 33.2px;
+    color: #000000; 
+    text-align: center;
+    line-height: 50px; 
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; 
+    letter-spacing: 1px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+    padding: 0 15px; 
 }
+
+.findMyTaste:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); 
+}
+    
+
+
+
+
 
 
 
 .confusedText {
     position: absolute;
-    top: 55%; 
-    left: 4%; 
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 19px; 
-    color: #000000; 
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
+    top: 54%; 
+    left: 3.15%; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px; 
+    color: #2E3B4E;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    letter-spacing: 1px; 
+    line-height: 1.5; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    padding: 8px; 
+    border-radius: 5px; 
 }
+
+
 
 .horizontalFlexParent{
     display:flex;  
     flex-direction:row;
+    
 }
 
 .ArtDescImage{
@@ -171,6 +293,7 @@ height: 33.2px;
     font-weight: normal;
     font-size: 20px;
     color: #000000;
+    
 }
 
 .ArtContext{
@@ -178,15 +301,19 @@ height: 33.2px;
     font-weight: normal;
     font-size: 15px;
     text-align: right;
+    
 }
 
-.explorePanel{
-    flex: 0.4;
+.explorePanel {
+    flex: 0.9;
+    
+
 }
 
 .exploreImage{
     flex: 0.6;
     height: 300px;
+    
 }
 
 .backToHome{
