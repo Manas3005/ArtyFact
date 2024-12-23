@@ -54,9 +54,8 @@ function SearchChoosenPresent() {
         console.log("These are all the collections", allCollections);
         const newAllCollections = addArtWorkToCollection(allCollections, artWork, collection_id);
         dispatch(setCollectionsArray(newAllCollections));
+        console.log("This is the collection_id we are changing", collection_id);
         console.log("New all collections", newAllCollections);
-        dispatch(setCollectionsArray(newAllCollections));
-        
     }
 
 

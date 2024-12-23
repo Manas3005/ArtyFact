@@ -104,13 +104,15 @@ export function updateCollectionFields(collection, title, description) {
 }
 
 export function addArtWorkToCollection(collections, artWork, collection_id) {
-    console.log(
+    /*console.log(
         "These are the collections:", collections,
-        "This is the artWork:", artWork
-    );
+        "This is the artWork:", artWork,
+        "this is the id: ", collection_id
+    );*/
 
     return collections.map(collection => {
-        if (collection.collection_id === collection_id) {
+        console.log(collection.collection_id);
+        if (collection.collection_id == collection_id) {
             return {
                 ...collection,
                 artWorks: [...collection.artWorks, { 
