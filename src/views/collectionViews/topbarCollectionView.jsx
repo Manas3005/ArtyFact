@@ -105,13 +105,16 @@ export function TopbarCollectionView(props) {
                     </>
                 ) : (
                     <>
-                        <h1 className="collectionTitle">{props.collection.collection_title || ""}</h1>
-                        <div className="collectionName">{props.collection.collection_description || ""}</div>
+                       <div className="topbarCollection">
+                       <h1 className="collectionTitle">{props.collection.collection_title || ""}</h1>
+                       <div className="collectionName">{props.collection.collection_description || ""}</div>
+                      </div>
                     </>
                 )}
 
                 <button className="editCollection" onClick={handleToggleACB}>{props.isEditing ? "Cancel" : "Edit Collection"}</button>
                 <SignInButton className={"signInLogo"}></SignInButton>
+                
                 <button className="signInIcon">
                     <img src="/image/signinIcon.png" />
                 </button>
