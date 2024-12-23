@@ -1,7 +1,6 @@
 import { MyJournalsButton } from "../customViewComponents/backToHomeButton";
 import "/src/css/collectionsStyle.css"
 import { BackToHomeButton } from "/src/views/customViewComponents/BackToHomeButton"
-import { useState } from "react";
 import "/src/css/journalsStyle.css"
 
 
@@ -55,9 +54,14 @@ export function TopbarMyCollectionsView(props) {
 
     //Should be handleCreateCollection
     function handleAddArtworkToCollectionACB() {
+        if(props.title == "") {
+            alert("Collection must have title!")
+        }
+        else {
         const selectCollectionModal = document.getElementById("selectCollectionModal")
         selectCollectionModal.style.display = "none";
         props.onCreateCollection();
+        }
     }
 
     function closeModalACB() {
@@ -83,7 +87,7 @@ export function TopbarMyCollectionsView(props) {
                 <button className="signInIcon" >
                     <img src="/image/signinIcon.png" />
                 </button>
-                <img className="collectionsLogo" src="/image/collectionsLogo.png" />
+                <img className="collectionsLogo" style={{cursor:"pointer"}} src="/image/collectionsLogo.png" onClick={() => window.location.hash="/homepage"}/>
 
                 <button className="addNewCollection" onClick={handleCreateNewCollectionACB}>Create New Collection</button>
             </div>
@@ -114,7 +118,7 @@ export function TopbarMyCollectionsView(props) {
 
 
                     <div className="modalButtonDiv">
-                        <button className="goButton commonText commonButtonBase" onClick={handleAddArtworkToCollectionACB}>Save</button>
+                        <button className="goButton commonText commonButtonBase" onClick={handleAddArtworkToCollectionACB}>Save New Collection</button>
                         <button className="cancel commonText commonButtonBase" onClick={closeModalACB}>Cancel</button>
                     </div>
 
