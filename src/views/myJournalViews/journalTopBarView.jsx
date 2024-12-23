@@ -1,5 +1,6 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
+import { conditionalRenderHelperCB } from "../../utilities";
 
 export function JournalTopBarView(props){
     
@@ -47,21 +48,33 @@ export function JournalTopBarView(props){
         }    
     }
 
+    function renderProfilIcon (){
+        return conditionalRenderHelperCB(props.userID, "/image/signinIcon.png", props.userProfilePicURL)
+    }
+
+    function renderDisplayNameText (){
+        return conditionalRenderHelperCB(props.userID,"Guest", props.userName)
+    }
+
     return (
         <div>
             
             <div className="topBar">
                 
-                <button className="myJournalsMyCollections commonText commonButtonBase" onClick={handletopRightButtonClickedACB}>{props.topRightButtonText}</button>
-                <button className="backToHomeJournals commonText commonButtonBase" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
+                <button className="myJournalsMyCollections commonText commonButtonBase" 
+                    onClick={handletopRightButtonClickedACB}>{props.topRightButtonText}</button>
+                    
+                <button className="backToHomeJournals commonText commonButtonBase" 
+                    onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
                 <div>{handleRenderPageTitleACB()}</div>
-
+                
                 <button className="buttonWithIcon commonButtonBase">
-                    <img className="Icon" src = "/image/signinIcon.png" />
-                    <text className="loggedInText commonText">Logged In</text>
+                    <img className="Icon" src = {renderProfilIcon()} />
+                    <text className="loggedInText">{renderDisplayNameText()}</text>
                 </button>
-                            
+
+                              
             </div>
 
         </div>

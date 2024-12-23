@@ -79,8 +79,10 @@
     display: flex;                
     align-items: center;          
     gap: 10px;                    
-    padding: 10px;                               
-    background-color: BACD92;              
+    padding: 10px;                
+                    
+    background-color: D2E0FB; 
+                 
 }
 
 .Icon{
@@ -93,7 +95,7 @@
     font-size: 25px;
     flex: 0.7;
     font-size: 16px;              
-    color: rgb(255, 255, 255);                 
+    color: black;                 
 }
 
 .addNewEntry.commonText{

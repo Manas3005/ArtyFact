@@ -7,15 +7,19 @@ import { TopBarView } from "../views/homePageViews/topbarView";
 import { ExploreBodyView } from "/src/views/homePageViews/exploreBodyView.jsx";
 
 import { useDispatch } from "react-redux"; // this is for the searched 
-
 import {setNewSearchParam} from "/src/store/searchResultSlice.js";
+import { useSelector } from "react-redux"
+
+import { auth } from "../firebaseModel";
+import {signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut} from "firebase/auth";
 
 function HomePage(props){ 
 
-  
+    let userUID = useSelector(state => state.user.uid)
+    let userDisplayName = useSelector(state => state.user.displayName)
+    let userProfilePicURL = useSelector(state => state.user.profilePicURL)
     // here will be the logic for updating the searchReusltSlice 
   
-    
     const dispatch = useDispatch(); 
 
     function updateCurrentSearch(setParam){
@@ -27,9 +31,6 @@ function HomePage(props){
        
         dispatch(setNewSearchParam(serachparam)); 
     }
-
-    
-
 
     //Redux specific hooks
     //const selector = useSelector(); //Allows you to observe the latest data in the store (model)
@@ -71,25 +72,42 @@ function HomePage(props){
     console.log("this is artData", artData);
     console.log("Selected random art:", randomArt);
     console.log("The image URL:", image);
+
+    //authentication related ----------
+    
+    
+    const provider = new GoogleAuthProvider();
+
+    function onSignInClickedACB (){
+        signInWithPopup(auth, provider);
+    } 
+
+    function onSignOutClickedACB (){
+        signOut(auth).then(() => {
+            window.location.reload()}); //reloads page upon sign out
+    }
+
+    //----------------------------------
    
-    return( <>
-        <TopBarView   
-        onSearched={updateCurrentSearch}
-
-        />  
-
-        <ExploreBodyView     
-           
-
-        />
-        
+    return (<div>
+       
+        <TopBarView onSearched={updateCurrentSearch}
+                    onSignUpClick={onSignInClickedACB}
+                    onSignOutClick={onSignOutClickedACB} 
+                    userID={userUID} 
+                    userName={userDisplayName} 
+                    userProfilePicURL={userProfilePicURL}> 
+                    
+                    </TopBarView>
+        <ExploreBodyView> </ExploreBodyView>
         <ArtDescBodyView 
                 artData={randomArt} 
                 image={image}
                 description={cleanedDescription}
                 
                 />
-        </>)
+                
+        </div>)
 }
 
 export {HomePage}

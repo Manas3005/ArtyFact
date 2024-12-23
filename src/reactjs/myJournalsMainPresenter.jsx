@@ -7,8 +7,13 @@ import { setSelectedEntryID, setSelectedArtworkID } from "../store/journalsSlice
 
 function MyJournalsMain (props){
 
-    let journalEntries = useSelector(state => state.myJournals.entries)
     let dispatch = useDispatch()
+    let journalEntries = useSelector(state => state.myJournals.entries)
+    
+    /*Login details after user logged in */ 
+    let userUID = useSelector(state => state.user.uid)
+    let userDisplayName = useSelector(state => state.user.displayName)
+    let userProfilePicURL = useSelector(state => state.user.profilePicURL)
 
     //invoked when a new entry is being added and the user is directed to the edit journal entry page
     function onAddNewEntryClickACB (){ 
@@ -24,7 +29,11 @@ function MyJournalsMain (props){
                                 pageHeading={"My Journals"} 
                                 topRightButtonText={"My Collections"}
                                 onAddNewEntryClick={onAddNewEntryClickACB}
-                                onExitContentPage={defaultSelectedArtworkIDACB}>
+                                onExitContentPage={defaultSelectedArtworkIDACB}
+                                
+                                userID={userUID} 
+                                userName={userDisplayName} 
+                                userProfilePicURL={userProfilePicURL}>
 
                                 </JournalTopBarView>
 

@@ -3,23 +3,23 @@ import { createSlice } from "@reduxjs/toolkit";
 export const user = createSlice({
     name : "user",
     initialState: {
-        user: undefined, // initially, user is undefined
-        ready: false,  // Initially, the app is not ready
-        uid: undefined,  // Initially, we don't know the auth state
+        profilePicURL: null, // profile picture URL of currently logged in user
+        uid: null,  // uid of the current user that is logged in
+        displayName: null // displayName of user, intially set to guest when not logged in
     },
     reducers:{
-        setReady: (state, action) => { 
-            state.ready = action.payload
-          },
-
         setUID: (state, action) => { 
+            console.log("This is the UID in slice:", action.payload)
             state.uid = action.payload;
         },
-        setUser: (state, action) => { 
-            state.user = action.payload;
+        setProfilePicURL: (state, action) => { 
+            state.profilePicURL = action.payload;
+        },
+        setDisplayName: (state, action) => { 
+            state.displayName= action.payload;
         }
         }
     }
 )
 
-export const { setReady, setUID, setUser } = user.actions;
+export const {setUID, setProfilePicURL, setDisplayName} = user.actions;
