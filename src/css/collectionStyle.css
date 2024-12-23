@@ -156,14 +156,31 @@ color: #000000;
 }
 
 
-.editCollection{
-
-
-        position: relative;
-
-        margin-top: -1;
+.editCollection {
+    background: none;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #454545; /* Blue for visibility */
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    position: flex;
+    margin-left: 1700;
+    margin-top: -100;
 
 }
+
+.editCollection:hover {
+    background-color: #f0f0f0;
+    color: #787878; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight enlargement */
+}
+
+.editCollection:active {
+    transform: scale(0.95); /* Slight reduction on click */
+}
+
 
 @keyframes wiggle {
     0% { transform: rotate(0deg); }
