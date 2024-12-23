@@ -2,7 +2,7 @@ import { JournalTopBarView } from "../views/myJournalViews/journalTopBarView";
 import { JournalEntriesListView } from "../views/myJournalViews/journalEntriesListView";
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
-import { setSelectedEntryID, setSelectedArtworkID } from "../store/journalsSlice";
+import { setSelectedEntryID, setSelectedArtworkID  } from "../store/journalsSlice";
 
 
 function MyJournalsMain (props){
@@ -15,14 +15,15 @@ function MyJournalsMain (props){
     let userDisplayName = useSelector(state => state.user.displayName)
     let userProfilePicURL = useSelector(state => state.user.profilePicURL)
 
+    function defaultSelectedArtworkIDACB (){
+        dispatch(setSelectedArtworkID(null))
+    }
+
     //invoked when a new entry is being added and the user is directed to the edit journal entry page
     function onAddNewEntryClickACB (){ 
         dispatch(setSelectedEntryID(null))
     }
 
-    function defaultSelectedArtworkIDACB (){
-        dispatch(setSelectedArtworkID(null))
-    }
         return (<div>
         
             <JournalTopBarView isJournalEntrySelected={false} 
