@@ -1,7 +1,5 @@
-import { MyJournalsButton } from "../customViewComponents/backToHomeButton";
 import "/src/css/collectionsStyle.css"
 import { conditionalRenderHelperCB } from "../../utilities";
-import { BackToHomeButton } from "/src/views/customViewComponents/BackToHomeButton"
 import "/src/css/collectionsStyle.css"
 
 

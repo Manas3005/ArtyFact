@@ -1,4 +1,3 @@
-import { BackToHomeButton, MyJournalsButton, Button, SignInButton } from "../customViewComponents/backToHomeButton";
 import "/src/css/collectionsStyle.css"
 import "/src/css/collectionStyle.css"
 import { useState, useEffect } from "react";
