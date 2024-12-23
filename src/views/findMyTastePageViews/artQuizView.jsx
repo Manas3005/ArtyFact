@@ -146,53 +146,64 @@ export function ArtQuizView (props){
       props.onBeginLoadingQuiz();
     }
 
+   
+
+    function handleChosenArtworkClickACB (){
+      window.location.hash = "#/searchChoosen";
+      props.onQuizArtworkChosen();
+    }
 
 
     
-    function renderArtByArtistsACB(){
-
-      if(selectedArtists.length!==0 && imageByArtistsURLs.length!==0 ){
-
+    function renderArtByArtistsACB() {
+      if (selectedArtists.length !== 0 && imageByArtistsURLs.length !== 0) {
         return (
-        <div>
-
-          <div className="resultsPageSubtitle">Based on your favorite artists</div>
-          <div className="separator"></div>
-
+          <div>
+            <div className="resultsPageSubtitle">Based on your favorite artists</div>
+            <div className="separator"></div>
+    
             <div className="quizResultsContainer">
-
-
-            {imageByArtistsURLs.map((url, index) => (
-              url ? (
-                <div key={index} className="quizResultItem">
-                  <img
-                    src={url}
-                    className="quizResultImage"
-                    alt={`Couldn't fetch Artwork ${index + 1}`}
-                    onError={(e) => {
-                      e.target.closest(".quizResultItem").style.display = "none";  //this is so entire grid item is hidden if there is an error in displaying the image
-                    }}
-                  />
-                  <div className="quizArtDetails">
-                    <div className="quizArtTitle">{artTitlesByArtists[index]}</div>
-                    <div className="artistTitle">by {artistTitlesByArtists[index]}</div>
-                  </div>
-                </div>
-              ) : null
-            ))}
-
-
-
-            </div>  
-
+              {imageByArtistsURLs.map((url, index) => {
+                const artworkDetails = {
+                  art_name: artTitlesByArtists[index],
+                  image_id: url,
+                  artist: artistTitlesByArtists[index],
+                };
+    
+                return (
+                  url ? (
+                    <div
+                      key={index}
+                      className="quizResultItem"
+                      onClick={() => handleChosenArtworkClickACB(artworkDetails)}
+                    >
+                      <img
+                        src={url}
+                        className="quizResultImage"
+                        alt={`Couldn't fetch Artwork ${index + 1}`}
+                        onError={(e) => {
+                          e.target.closest(".quizResultItem").style.display = "none";
+                        }}
+                      />
+                      <div className="quizArtDetails">
+                        <div className="quizArtTitle">{artTitlesByArtists[index]}</div>
+                        <div className="artistTitle">by {artistTitlesByArtists[index]}</div>
+                      </div>
+                    </div>
+                  ) : null
+                );
+              })}
+            </div>
           </div>
-          )
-      }else if(selectedArtists.length===0 && imageByArtistsURLs.length===0){
+        );
+      } else if (selectedArtists.length === 0 && imageByArtistsURLs.length === 0) {
         return;
-      } else if(selectedArtists.length!==0 && imageByArtistsURLs.length===0){
+      } else if (selectedArtists.length !== 0 && imageByArtistsURLs.length === 0) {
         return (
-      <p className = "noResults">Oops! No results found for the selected artists. Try selecting different artists to discover artworks you'll love</p>
-        )
+          <p className="noResults">
+            Oops! No results found for the selected artists. Try selecting different artists to discover artworks you'll love
+          </p>
+        );
       }
     }
 
@@ -210,6 +221,7 @@ export function ArtQuizView (props){
               <div className="quizResultsContainer">
 
               {imageByStylesURLs.map((url, index) => (
+                
                url ? (
                <div key={index} className="quizResultItem">
                  <img

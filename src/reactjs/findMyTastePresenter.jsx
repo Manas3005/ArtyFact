@@ -4,7 +4,7 @@ import { useState } from "react";
 import { getArtWorkImageModified, fetchAllArtworks} from '/src/apiCall.js';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementProgress, decrementProgress } from "../store/findMyTasteSlice";
-import { fetchAndProcessArtworks, toggleSelection} from "../utilities";
+import { fetchAndProcessArtworks, toggleSelection, getArtworkDetailsById} from "../utilities";
 
 
 export function FindMyTaste(props){
@@ -117,6 +117,7 @@ export function FindMyTaste(props){
     }
 
 
+
     function decrementQuizProgressACB(){
         if(updatedProgress===100){
             dispatch(decrementProgress(34));
@@ -178,6 +179,10 @@ export function FindMyTaste(props){
             getArtworksByStylesACB();
             getArtworksByMediumsACB();
         }
+    }
+
+    function extractArtworkDetails(artwork_id){
+        getArtworkDetailsById(artwork_id);
     }
 
                 
@@ -316,6 +321,7 @@ export function FindMyTaste(props){
                                                                         onBeginLoadingQuiz = {loadQuizACB}
                                                                         onSubmitButtonClicked = {getArtworksByResponsesACB}
                                                                         onBackToQuizButtonClicked = {setResultsBackToPendingACB}
+                                                                        onQuizArtworkChosen  = {getArtworkDetailsById}
                                                                         
                                                                         updatedProgress = {updatedProgress} //passing down the updated progress to the ArtQuiz view
                                                                         selectedArtists = {selectedArtists} 

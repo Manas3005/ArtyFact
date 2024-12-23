@@ -40,6 +40,36 @@ export function fetchAndProcessArtworks(selectedItems, constructSearchParams, on
     });
 }              
 
+
+export async function getArtworkDetailsById(artworkId) {
+    try {
+
+        const artworkDetails = await getArtWorkByID(artworkId);
+        
+        const data = artworkDetails.data;
+        
+        const allArtInformationToUpdate = {
+            art_name: data.title || '',
+            image_id: data.image_id || '',
+            medium_display: data.medium_display || '',
+            artist: data.artist_title || '',
+            place_of_origin: data.place_of_origin || '',
+            dimensions: data.dimensions || '',
+            description: data.description || '',
+            style_title: data.style_title || '',
+            date_display: data.date_display || '',
+        };
+
+        return allArtInformationToUpdate;
+    } catch (error) {
+        console.error("Error fetching artwork details by ID:", error);
+        throw error;
+    }
+}
+
+
+
+
 export function toggleSelection(item, selectedItems, setSelectedItems) { //Filters such that if the same option is clicked on then updatedSelections will exclude it (to deselect)
     if (selectedItems.includes(item)) {
         const updatedSelections = selectedItems.filter(currentItem => currentItem !== item);
