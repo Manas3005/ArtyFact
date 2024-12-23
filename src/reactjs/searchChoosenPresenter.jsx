@@ -1,30 +1,43 @@
 
 import { SearchChoose } from "/src/views/SearchBar/searchChoosenView.jsx";
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { addArtWorkToCollection } from "/src/utilities";
+import { setCollectionsArray } from "../store/collectionsSlice";
+import { parseCollectionDropDown } from "../utilities";
 import { setSelectedArtworkID } from "../store/journalsSlice";
+
 
 
 
 function SearchChoosenPresent() {
 
-    let dispatch = useDispatch();
-
     const [idData, setIdData] = useState(null);
+    const dispatch = useDispatch();
+    const [selectedCollectionID, setSelectedCollectionID] = useState(null);
 
     const currentArt = useSelector((state) => state.searchResults.currentArt);
+    const allCollections = useSelector((state) => state.myCollections.collectionsArray);
     console.log("CURRENT ART THAT WILL BE DISPLAYED", currentArt)
+    /**
+     * Det saknas för närvarande artwork_id bland currentArt.
+     */
   
 
     const idParam = useSelector((state) => state.searchResults.idParam);
+
+        const parsedCollectionsForDropDown = parseCollectionDropDown(allCollections);
 
     if (idParam.id !== "") {
         getArtWorkByID(idParam).then((data) => {
             setIdData(data);
             const currentArt = generateObjectForCurrentArt(idData);
         });
-    } 
+    }
+
+    function addToJournalACB() {
+        dispatch(setSelectedArtworkID(currentArt.image_id));
+    }
 
     function generateObjectForCurrentArt(idData) {
         return {
@@ -38,11 +51,6 @@ function SearchChoosenPresent() {
             style_title: idData.style_title,
             date_display: idData.date_display,
         }
-    }
-
-
-    function addToJournalACB() {
-       dispatch(setSelectedArtworkID(currentArt.image_id)) 
     }
 
     function parseDescription(description){
@@ -59,6 +67,21 @@ function SearchChoosenPresent() {
           
     }
 
+    function handleAddArtWorkToCollectionACB(collection_id, artWork) {
+        console.log("This is the artwork we are going to add to the collection", artWork);
+        //Now we assume that we have knowledge of the collection_id, so we call upon the utility function.
+        //Vi behöver skicka in hela collections array, men hur kan vi hämta den? useSelector
+        console.log("These are all the collections", allCollections);
+        const newAllCollections = addArtWorkToCollection(allCollections, artWork, collection_id);
+        dispatch(setCollectionsArray(newAllCollections));
+        console.log("This is the collection_id we are changing", collection_id);
+        console.log("New all collections", newAllCollections);
+    }
+
+
+
+
+
     //console.log(data)
 
     return (
@@ -67,7 +90,11 @@ function SearchChoosenPresent() {
             art={currentArt}
             onAddToJournalClick={addToJournalACB}
             onParseDescription={parseDescription}
-             />
+            onAddArtWorkToCollection={handleAddArtWorkToCollectionACB}
+            parsedCollectionsForDropDown={parsedCollectionsForDropDown}
+            onCollectionIDChange={setSelectedCollectionID}
+            selectedCollectionID={selectedCollectionID}
+            />
         </div>
 
     )
@@ -75,4 +102,4 @@ function SearchChoosenPresent() {
 
 }
 
-export { SearchChoosenPresent }
+export { SearchChoosenPresent } 
