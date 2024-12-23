@@ -12,6 +12,7 @@ function SearchChoosenPresent() {
 
     const [idData, setIdData] = useState(null);
     const dispatch = useDispatch();
+    const [selectedCollectionID, setSelectedCollectionID] = useState(null);
 
     const currentArt = useSelector((state) => state.searchResults.currentArt);
     const allCollections = useSelector((state) => state.myCollections.collectionsArray);
@@ -54,6 +55,8 @@ function SearchChoosenPresent() {
         const newAllCollections = addArtWorkToCollection(allCollections, artWork, collection_id);
         dispatch(setCollectionsArray(newAllCollections));
         console.log("New all collections", newAllCollections);
+        dispatch(setCollectionsArray(newAllCollections));
+        
     }
 
 
@@ -68,6 +71,8 @@ function SearchChoosenPresent() {
             art={currentArt}
             onAddArtWorkToCollection={handleAddArtWorkToCollectionACB}
             parsedCollectionsForDropDown={parsedCollectionsForDropDown}
+            onCollectionIDChange={setSelectedCollectionID}
+            selectedCollectionID={selectedCollectionID}
             />
         </div>
 
