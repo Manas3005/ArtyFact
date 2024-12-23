@@ -3,6 +3,9 @@ import { ListOfCollectionsView } from "/src/views/myCollectionViews/listOfCollec
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { setCollectionsArray, setCollection } from "../store/collectionsSlice";
+import { increaseLatestEntryID } from "../store/journalsSlice";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export function MyCollectionsPresenter(props) {
 
@@ -15,6 +18,9 @@ export function MyCollectionsPresenter(props) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [filteredCollections, setFilteredCollections] = useState(null);
     const [clearButton, setClearButton] = useState(false);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [searchField, setSearchField] = useState("");
 
     const collections = [
         {
@@ -356,7 +362,7 @@ export function MyCollectionsPresenter(props) {
         function filterCollections(searchText) {
             console.log("Filtering collections:", searchText);
             return selectedCollectionsArray.filter((collection) =>
-                collection.title.toLowerCase().includes(searchText.toLowerCase())
+                collection.collection_title.toLowerCase().includes(searchText.toLowerCase())
             );
         }
         
@@ -421,15 +427,57 @@ export function MyCollectionsPresenter(props) {
             setClearButton(value);
         }
 
+        function handleCreateCollectionACB() {
+            console.log("About to create the collection");
+            console.log("The title is:", title, " and the description is: ", description);
+            console.log("about to convert to int");
+            const uuid = uuidv4();
+            const strippedUUID = uuid.replace(/-/g, ''); 
+            if(!selectedCollectionsArray){
+                const obj = {
+                    collection_title: title,
+                    collection_description: description,
+                    collection_id: strippedUUID,
+                    artWorks: [],
+                };
+                dispatch(setCollectionsArray(obj));
+            }
+            else{
+            const obj = [...selectedCollectionsArray,
+                {
+                    collection_title: title,
+                    collection_description: description,
+                    collection_id: strippedUUID,
+                    artWorks: [],
+                }
+            ]
+            dispatch(setCollectionsArray(obj));
+        }
+            console.log("the NEW OBJ", obj);
+            dispatch(setCollectionsArray(obj));
+        }
+
+
+
     return(
         <div>
             <TopbarMyCollectionsView
             setSearch={handleSearchACB}
             clearButton={clearButton}
             setClearButton={setClearButtonACB}
+<<<<<<< HEAD
             userID={userUID} 
             userName={userDisplayName} 
             userProfilePicURL={userProfilePicURL}
+=======
+            setTitle={setTitle}
+            title={title}
+            setDescription={setDescription}
+            description={description}
+            onCreateCollection={handleCreateCollectionACB}
+            searchField={searchField}
+            setSearchField={setSearchField}
+>>>>>>> feature/myCollections
             />
             <ListOfCollectionsView 
             activeIndex={activeIndex}
