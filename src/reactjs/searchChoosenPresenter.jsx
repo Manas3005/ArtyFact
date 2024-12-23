@@ -12,6 +12,7 @@ function SearchChoosenPresent() {
 
     const [idData, setIdData] = useState(null);
     const dispatch = useDispatch();
+    const [selectedCollectionID, setSelectedCollectionID] = useState(null);
 
     const currentArt = useSelector((state) => state.searchResults.currentArt);
     const allCollections = useSelector((state) => state.myCollections.collectionsArray);
@@ -47,13 +48,15 @@ function SearchChoosenPresent() {
     }
 
     function handleAddArtWorkToCollectionACB(collection_id, artWork_id) {
+        console.log(collection_id)
         console.log("This is the artWork_id we are going to add to the collection", artWork_id);
         //Now we assume that we have knowledge of the collection_id, so we call upon the utility function.
         //Vi behöver skicka in hela collections array, men hur kan vi hämta den? useSelector
         console.log("These are all the collections", allCollections);
         const newAllCollections = addArtWorkToCollection(allCollections, artWork_id, collection_id);
-        dispatch(setCollectionsArray(newAllCollections));
         console.log("New all collections", newAllCollections);
+        dispatch(setCollectionsArray(newAllCollections));
+        
     }
 
 
@@ -68,6 +71,8 @@ function SearchChoosenPresent() {
             art={currentArt}
             onAddArtWorkToCollection={handleAddArtWorkToCollectionACB}
             parsedCollectionsForDropDown={parsedCollectionsForDropDown}
+            onCollectionIDChange={setSelectedCollectionID}
+            selectedCollectionID={selectedCollectionID}
             />
         </div>
 

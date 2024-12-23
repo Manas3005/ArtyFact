@@ -29,6 +29,18 @@ export function SearchChoose(props) {
     }
   }
 
+  function handleCollectionChangeACB(event) {
+    props.onCollectionIDChange(event.target.value);
+  }
+
+  function handleAddArtworkToCollectionACB() {
+    if (props.selectedCollectionID) {
+      props.onAddArtWorkToCollection(props.selectedCollectionID, props.art.artWork_id);
+    } else {
+      alert("Please select a collection first.");
+    }
+  }
+
   
   const htmlString = props.art.description;
 
@@ -106,15 +118,16 @@ export function SearchChoose(props) {
                 <div class="modal-content">
                     <h2 className="commonText">Select the Collection you would like to add this Artwork to:</h2>
                     
-                    <select className="dropdown" size="1"> 
+                    <select className="dropdown" size="1" onChange={handleCollectionChangeACB}> 
                             {props.parsedCollectionsForDropDown.map((collection) => (
                                  <option key={collection.collection_id} 
-                                 onClick={props.onAddArtWorkToCollection(collection.collection_id ,props.art.artWork_id)}
-                                 >{collection.collection_title}</option>
+              
+                                 >{collection.collection_title} </option>
                             ))}
                         </select>
                         
                     <div className="modalButtonDiv">
+                        <button className="goButton commonText commonButtonBase" onClick={handleAddArtworkToCollectionACB}>Go</button>
                         <button  className="cancel commonText commonButtonBase" onClick={closeModalACB}>Cancel</button>
                     </div>
 
