@@ -32,11 +32,6 @@ export function SearchChoose(props) {
   // Extract the text content
   const readableText = tempDiv.textContent || tempDiv.innerText;
   
-  function handleAddToJournalClickACB () {
-    props.onAddToJournalClick()
-    return window.location.hash = '#/editentry'
-  }
-
 
   return (
     <div>
@@ -61,8 +56,6 @@ export function SearchChoose(props) {
         <div className="buttonGroup">
           <button className="addCollection" onClick={()=> handleAddToCollectionACB(props.art)}>Add to collection</button>
           <button className="addJournal">Add to journal</button>
-          <button className="addCollection">Add to collection</button>
-          <button className="addJournal" onClick={handleAddToJournalClickACB}>Add to journal</button>
         </div>
 
         <div className="info">
@@ -72,7 +65,7 @@ export function SearchChoose(props) {
   </div>
   <div>
     <span className="title">Description:</span>
-    <span className="value">{props.onParseDescription(props.art.description) || " Description not found "}</span>
+    <span className="value">{readableText || " Description not found "}</span>
   </div>
 
   <div>

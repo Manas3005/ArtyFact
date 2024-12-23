@@ -4,7 +4,6 @@ import "/src/css/journalsStyle.css"
 export function JournalTopBarView(props){
     
     function handleBackToHomeClickedACB (){
-        props.onExitContentPage()
         return window.location.hash = '#/homepage'
     }
 
@@ -14,7 +13,6 @@ export function JournalTopBarView(props){
     }
 
     function handletopRightButtonClickedACB (){
-        props.onExitContentPage()
        
         if (!props.isJournalEntrySelected){
             return window.location.hash = '#/collections'
@@ -53,7 +51,7 @@ export function JournalTopBarView(props){
             <div className="topBar">
                 
                 <button className="myJournalsMyCollections commonText commonButtonBase" onClick={handletopRightButtonClickedACB}>{props.topRightButtonText}</button>
-                <button className="backToHomeJournals commonText commonButtonBase" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
+                <button className="backToHome commonText commonButtonBase" onClick={handleBackToHomeClickedACB}> Back To Home</button> 
                
                 <div>{handleRenderPageTitleACB()}</div>
 

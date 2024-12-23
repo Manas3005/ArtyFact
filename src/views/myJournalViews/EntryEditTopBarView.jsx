@@ -5,7 +5,6 @@ import { conditionalRenderHelperCB } from "../../utilities"
 export function EntryEditTopBarView(props){
 
     function handleNavigationBackACB (){
-        props.onEditEntryPageExit()
         if (props.entryID === null){
             return window.location.hash = '#/myjournals'
         }
@@ -14,11 +13,6 @@ export function EntryEditTopBarView(props){
         const path = "#/journalEntryContent/" + idString
         return window.location.hash = path
     }
-
-    function handleCancelClickedACB (){
-        handleNavigationBackACB();
-    }
-
 
     function handleSaveChangesClickedACB (){
         props.onSaveChanges();
@@ -55,19 +49,12 @@ export function EntryEditTopBarView(props){
                
                 
                 <div className="editJournalEntryLogo commonText commonCenterFlex">{renderPageTitleACB()}</div>
+                <button className="saveChanges commonText commonButtonBase" onClick={handleSaveChangesClickedACB}>
+                    <img className="Icon" src = {renderSaveChangesIconACB()} />
+                    <text >{renderSaveTextACB()}</text>
+                </button>
+
                 
-                <div className="saveAndCancelDiv commonCenterFlex">
-                    <button className="saveChanges commonText commonButtonBase" onClick={handleSaveChangesClickedACB}>
-                        <img className="Icon" src = {renderSaveChangesIconACB()} />
-                        <text >{renderSaveTextACB()}</text>
-                    </button>
-
-                    <button className="deleteEntry commonText commonCenterFlex commonButtonBase" onClick={handleCancelClickedACB}>
-                            <img className="Icon" src = "/image/minusIcon.png" />
-                            <text >Discard Changes</text>
-                    </button>
-
-                </div>
                             
             </div>
                                

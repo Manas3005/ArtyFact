@@ -5,9 +5,7 @@ export const myJournalEntries = createSlice({
     initialState: {
         entries: [], // Array to store journal entries
         latestEntryID:0,
-        selectedEntryID: '',
-        selectedArtworkID:null,
-        temporaryContent:null
+        selectedEntryID: ''
     },
     reducers:{
         addEntry: (state, action) => {
@@ -37,26 +35,18 @@ export const myJournalEntries = createSlice({
         },
         editEntry: (state,action) => {
             return {...state, 
-            // creates a shallow copy of the entire state, and only edits the parts of the which are 
-            // changed, leaving the other parts of the state as it is 
+                // creates a shallow copy of the entire state, and only edits the parts of the which are 
+                // changed, leaving the other parts of the state as it is 
         
             // sets edited entry to the entry that is currently selected, i.e. has the same id, then updates the entries array
             //action.payload is the updated entry object 
             entries: (state.entries.map((entry) => 
             entry.entryID === action.payload.entryID ? action.payload : entry
             ))}
-        
-        },
-        setSelectedArtworkID: (state, action) => { 
-            state.selectedArtworkID = action.payload
-        }, 
-        setTemporaryContent: (state, action) => { 
-            state.temporaryContent = action.payload
-            console.log(state.temporaryContent)
-        } 
+
+        }   
         }
     }
 )
 
-export const { addEntry, removeEntry, setEntries, increaseLatestEntryID, setSelectedEntryID, 
-                editEntry, setSelectedArtworkID, setTemporaryContent} = myJournalEntries.actions;
+export const { addEntry, removeEntry, setEntries, increaseLatestEntryID, setSelectedEntryID, editEntry} = myJournalEntries.actions;

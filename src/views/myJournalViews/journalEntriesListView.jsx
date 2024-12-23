@@ -1,9 +1,6 @@
 import "/src/css/style.css"
 import "/src/css/journalsStyle.css"
-import { transformJournalTitleCB,renderEntryArtWorkPath } from "../../utilities";
-
-
-
+import { transformJournalTitleCB } from "../../utilities";
 
 import { useDispatch } from "react-redux";
 import { setSelectedEntryID } from "../../store/journalsSlice";
@@ -29,7 +26,7 @@ export function JournalEntriesListView(props){
         <div className="entriesList commonCenterFlex">
             <img src="/image/thinkingMan.png"></img>
             <p className="alertText">No Journal Entries Added Yet. </p>
-            <p className="alertText">"Capture your inspiration by adding detailed journal entries about the artworks you like the most! </p>                       
+            <p className="alertText">Add Journal Entries using the button above. </p>                       
         </div>
 
     )}else{
@@ -51,7 +48,7 @@ export function JournalEntriesListView(props){
                         
                         <div key={index} className="journalEntryListDiv" onClick={() => handleJournalEntryClickedACB(entry)}>
                             
-                            <img src={renderEntryArtWorkPath(entry.artworkID)} className="journalEntryListImage" />
+                            <img src="/image/starry-night.png" className="journalEntryListImage" />
                             <span className="journalEntryListText commonText">{transformJournalTitleCB(entry)}</span>
                             
                         </div>

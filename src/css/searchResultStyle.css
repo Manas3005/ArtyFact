@@ -88,17 +88,3 @@
 
 
 }
-
-.loading-container {
-  display: flex;
-  justify-content: center; /* Horizontally centers the content */
-  align-items: center; /* Vertically centers the content */
-  height: 100vh; /* Full height of the viewport */
-  width: 100vw; /* Full width of the viewport */
-  background-color: #ffffff; /* Optional: Light background for better visibility */
-}
-
-.imageLoading {
-  max-width: 400px; /* Optional: Limit the size of the loading image */
-  max-height: 400px;
-}
