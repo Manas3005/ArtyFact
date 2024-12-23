@@ -24,7 +24,7 @@ function SearchChoosenPresent() {
             setIdData(data);
             const currentArt = generateObjectForCurrentArt(idData);
         });
-    }
+    } 
 
     function generateObjectForCurrentArt(idData) {
         return {
@@ -45,13 +45,29 @@ function SearchChoosenPresent() {
        dispatch(setSelectedArtworkID(currentArt.image_id)) 
     }
 
+    function parseDescription(description){
+
+        const htmlString = description;
+
+        // Create a temporary DOM element to parse the HTML
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = htmlString;
+        
+        // Extract the text content
+        return tempDiv.textContent || tempDiv.innerText;
+        
+          
+    }
 
     //console.log(data)
 
     return (
         <div>
-            <SearchChoose art={currentArt}
-            onAddToJournalClick={addToJournalACB} />
+            <SearchChoose 
+            art={currentArt}
+            onAddToJournalClick={addToJournalACB}
+            onParseDescription={parseDescription}
+             />
         </div>
 
     )

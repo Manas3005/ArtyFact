@@ -19,16 +19,6 @@ export function SearchChoose(props) {
   }
 
 
-  const htmlString = props.art.description;
-
-  // Create a temporary DOM element to parse the HTML
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = htmlString;
-  
-  // Extract the text content
-  const readableText = tempDiv.textContent || tempDiv.innerText;
-  
-
   return (
     <div>
       <img  src="https://i.imgur.com/viSeXcY.png" className="logoArty"/>  
@@ -61,7 +51,7 @@ export function SearchChoose(props) {
   </div>
   <div>
     <span className="title">Description:</span>
-    <span className="value">{readableText || " Description not found "}</span>
+    <span className="value">{props.onParseDescription(props.art.description) || " Description not found "}</span>
   </div>
 
   <div>
