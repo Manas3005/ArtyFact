@@ -45,8 +45,8 @@ export function TopbarCollectionView(props) {
         window.location.hash = "#/";
     }
 
-    function handleclickForMyJournalACB() {
-        window.location.hash = "#/myJournal";
+    function handleClickForBackACB() {
+        window.location.hash = "#/collections";
     }
 
     function handleToggleACB() {
@@ -89,8 +89,20 @@ export function TopbarCollectionView(props) {
             <div className="topbarCollection">
 
                 
-                <button className={"backToHomeCollection"} onClick={handleClickForBackToHomeACB}>Back To Home</button>
-                <button className={"MyJournalCollection"} onClick={handleclickForMyJournalACB}>Back slfkjdsf</button>
+            <button onClick={handleClickForBackACB} className="backToHomeCollection">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="white"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.354 1.146a.5.5 0 0 1 0 .708L5.207 8l6.147 6.146a.5.5 0 0 1-.708.708l-6.5-6.5a.5.5 0 0 1 0-.708l6.5-6.5a.5.5 0 0 1 .708 0z"
+            />
+          </svg>
+        </button>
 
 
                     <span>
@@ -120,7 +132,7 @@ export function TopbarCollectionView(props) {
                     </span>
 
                <span>
-               <button className="editCollection" onClick={handleToggleACB}>
+                <button className="editCollection" onClick={handleToggleACB}>
     {props.isEditing ? (
       "Cancel"
     ) : (
