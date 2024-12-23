@@ -73,7 +73,7 @@ function SearchResult(props) {
     })();
   }, [searchParamSend]);
 
-  if (loading) return <div>Loading images, please wait...</div>;
+  if (loading) return <img className="imageLoading"  src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2xveG51ZmJoOWxxZGIyNTRsenN2cTl4ajgxeXNjajl3NmI3OWZyMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3nWhI38IWDofyDrW/giphy.gif" />;
   if (error) return <div>Error: {error}</div>;
 
   return (
