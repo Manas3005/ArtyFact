@@ -1,0 +1,68 @@
+.drawer-box {
+    width: 260px;
+   
+    height: 500%;
+    padding: 10px;
+   background-color: #929292;
+}
+
+.picture{
+
+    margin-top:-30;
+    margin-left: 80;
+    
+}
+
+.drawer-paper {
+   
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+   
+}
+
+.list-item-button {
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease; 
+    padding: 10px;
+  
+}
+
+.list-item-button:hover {
+    background-color: #007bff; /* Default color */
+    transition: background-color 0.3s ease; 
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1); 
+}
+
+.list-item-icon {
+    color: #616161;
+    transition: color 0.3s ease; 
+}
+
+.list-item-button:hover .list-item-icon {
+    color: #a8a8a8; 
+}
+
+.list-item-text {
+    font-family: 'Junge';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5; /* Adjust line height for better spacing */
+    color: #2f2f2f;
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-left:-20;
+size: 16px
+}
+
+.list-item-button:hover .list-item-text {
+    color: #e2e2e2;
+    font-size: 16px; /* Slightly larger font size on hover */
+    font-weight: 600; /* Bolder weight for emphasis */
+}
+
+.divider {
+    margin-top: 10px;
+    background-color: #313131;
+    height: 2px; 
+    margin-bottom: 5px;
+}

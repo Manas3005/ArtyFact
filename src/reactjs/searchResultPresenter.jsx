@@ -3,12 +3,12 @@ import { getArtWorksSearch, getArtWorkByID } from "/src/apiCall.js";
 import { SearchTopBar } from "/src/views/SearchBar/SearchTopBarView.jsx";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {setCurrentArt} from "/src/store/searchResultSlice.js";
-
+import { setCurrentArt } from "/src/store/searchResultSlice.js";
 
 function SearchResult(props) {
   const [artData, setArtData] = useState(null); // For main artworks data
   const [artInfo, setArtInformation] = useState({}); // For art Information mapping
+  const [loading, setLoading] = useState(true); // Track loading state
   const [error, setError] = useState(null);
   const [fullData, setFullData] = useState({});
 
@@ -22,42 +22,28 @@ function SearchResult(props) {
   }
   
   const searchParamSend = useSelector((state) => state.searchResults.searchParam);
-  if(isEmptyObject(searchParamSend)) {
-    console.log("truthy");
-  }
-    console.log( "waiting...");
-  console.log("THESE ARE THE SEARCH PARAMS", searchParamSend);
 
   const dispatch = useDispatch();
 
   function setCurrentArtACB(artInformation) {
-    console.log("ARTINFO RENDERED",artInformation)
     dispatch(setCurrentArt(artInformation));
-        //dispatch(setNewSearchParam(evt.target.value));
   }
-
 
   useEffect(() => {
     (async () => {
-      if (isEmptyObject(searchParamSend)) {
+      if (!searchParamSend || Object.keys(searchParamSend).length === 0) {
         console.log("Waiting for valid search parameters...");
         return;
       }
-  
+
       try {
-        //Hämta artworks när vi laddat klart från firebase
-        //debugger;
-        console.log("starting to fetch now with the params", searchParamSend);
+        setLoading(true); // Set loading to true while fetching
         const data = await getArtWorksSearch(searchParamSend);
         setArtData(data);
-        console.log("Fetched Artworks Data:", data);
-  
-        //Hämtar image IDs efter artworks data is fetched
+
         if (data && data.data) {
-          console.log("Inside if");
           const results = await Promise.all(
             data.data.map(async (artwork) => {
-              console.log("about to fetch artworks by id");
               const details = await getArtWorkByID(artwork.id);
               console.log("Fetched Details for Artwork:", details);
               return {
@@ -76,9 +62,6 @@ function SearchResult(props) {
               };
             })
           );
-          console.log("This is ALL", results);
-          setFullData(results);
-
   
           const information = results.reduce((acc, curr) => {
             console.log("This is the curr", curr);
@@ -97,27 +80,38 @@ function SearchResult(props) {
             };
             return acc;
           }, {});
-          console.log("This is the full data", fullData);
+  
           setArtInformation(information);
         }
       } catch (err) {
         setError(err.message);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
-    })(); 
+    })();
   }, [searchParamSend]);
 
-  if (error) return <div>Error: {error}</div>;
-  if (!artData || !artInfo) return <div>Loading...</div>;
+  
+  if (loading) 
+    return (
+      <div className="loading-container">
+        <img 
+          className="imageLoading" 
+          src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2xveG51ZmJoOWxxZGIyNTRsenN2cTl4ajgxeXNjajl3NmI3OWZyMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3nWhI38IWDofyDrW/giphy.gif" 
+          alt="Loading..." 
+        />
+      </div>
+    );
 
-  console.log("Fetched Art Images:", artInfo);
+
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
       <SearchTopBar
         artworks={artData}
-        artInfo={artInfo} 
+        artInfo={artInfo}
         setIndividualArt={setCurrentArtACB}
-        searchParams={searchParamSend}
       />
     </div>
   );

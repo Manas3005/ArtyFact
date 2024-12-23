@@ -164,3 +164,27 @@ function createURLParamsForSpecificArtWork(id, searchParams1) {
 }
 
 //Create API calls for gathering images
+
+export function testingAnAPICallForMostSimilar() {
+    return fetch("https://www.artic.edu/artworks/129884/exploreFurther?ef-most-similar_ids=most-similar", options)
+    .then(gotResponseACB).then(printGotImageACB);
+}
+
+
+
+
+export function fetch20Artworks() { 
+    return fetch("https://api.artic.edu/api/v1/artworks?page=1&limit=20")
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error("HTTP error! status:" , response.status);
+            }
+            return response.json();
+        })
+}
+
+
+
+
+
+

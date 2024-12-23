@@ -5,10 +5,14 @@ import { useState } from "react";
 import { addArtWorkToCollection } from "/src/utilities";
 import { setCollectionsArray } from "../store/collectionsSlice";
 import { parseCollectionDropDown } from "../utilities";
+import { useDispatch } from "react-redux";
+import { setSelectedArtworkID } from "../store/journalsSlice";
 
 
 
 function SearchChoosenPresent() {
+
+    let dispatch = useDispatch();
 
     const [idData, setIdData] = useState(null);
     const dispatch = useDispatch();
@@ -30,7 +34,7 @@ function SearchChoosenPresent() {
             setIdData(data);
             const currentArt = generateObjectForCurrentArt(idData);
         });
-    }
+    } 
 
     function generateObjectForCurrentArt(idData) {
         return {
@@ -46,19 +50,24 @@ function SearchChoosenPresent() {
         }
     }
 
-    function handleAddArtWorkToCollectionACB(collection_id, artWork) {
-        console.log("This is the artwork we are going to add to the collection", artWork);
-        //Now we assume that we have knowledge of the collection_id, so we call upon the utility function.
-        //Vi behöver skicka in hela collections array, men hur kan vi hämta den? useSelector
-        console.log("These are all the collections", allCollections);
-        const newAllCollections = addArtWorkToCollection(allCollections, artWork, collection_id);
-        dispatch(setCollectionsArray(newAllCollections));
-        console.log("New all collections", newAllCollections);
+
+    function addToJournalACB() {
+       dispatch(setSelectedArtworkID(currentArt.image_id)) 
     }
 
+    function parseDescription(description){
 
+        const htmlString = description;
 
-
+        // Create a temporary DOM element to parse the HTML
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = htmlString;
+        
+        // Extract the text content
+        return tempDiv.textContent || tempDiv.innerText;
+        
+          
+    }
 
     //console.log(data)
 
@@ -69,6 +78,11 @@ function SearchChoosenPresent() {
             onAddArtWorkToCollection={handleAddArtWorkToCollectionACB}
             parsedCollectionsForDropDown={parsedCollectionsForDropDown}
             />
+            <SearchChoose 
+            art={currentArt}
+            onAddToJournalClick={addToJournalACB}
+            onParseDescription={parseDescription}
+             />
         </div>
 
     )
