@@ -465,11 +465,9 @@ export function MyCollectionsPresenter(props) {
             setSearch={handleSearchACB}
             clearButton={clearButton}
             setClearButton={setClearButtonACB}
-<<<<<<< HEAD
             userID={userUID} 
             userName={userDisplayName} 
             userProfilePicURL={userProfilePicURL}
-=======
             setTitle={setTitle}
             title={title}
             setDescription={setDescription}
@@ -477,7 +475,6 @@ export function MyCollectionsPresenter(props) {
             onCreateCollection={handleCreateCollectionACB}
             searchField={searchField}
             setSearchField={setSearchField}
->>>>>>> feature/myCollections
             />
             <ListOfCollectionsView 
             activeIndex={activeIndex}

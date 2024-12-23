@@ -454,7 +454,7 @@
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
 }
 
-.modal {
+.modal1 {
     display: none; 
     position: fixed;
     top: 0;
@@ -467,7 +467,7 @@
     z-index: 1000; 
   }
   
-  .modal-content {
+  .modal-content1 {
     background-color: white;
     
     padding: 20px;

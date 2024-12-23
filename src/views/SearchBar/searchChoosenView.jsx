@@ -24,13 +24,19 @@ export function SearchChoose(props) {
  }
 
 
-  function handleAddToCollectionACB() {
-    if (props.parsedCollectionsForDropDown) {
-      const selectCollectionModal = document.getElementById("selectCollectionModal")
-      selectCollectionModal.style.display = "flex";
-    } else {
-      alert("No collections exist yet!");
-    }
+ function handleAddToCollectionACB() {
+  if (props.parsedCollectionsForDropDown) {
+    const selectCollectionModal = document.getElementById("selectCollectionModal")
+    selectCollectionModal.style.display = "flex";
+  } else {
+    alert("No collections exist yet!");
+  }
+}
+
+  function handleAddToJournalClickACB() {
+    console.log("hej");
+    props.onAddToJournalClick()
+    return window.location.hash = '#/editentry'
   }
 
   function handleCollectionChangeACB(event) {
@@ -66,19 +72,11 @@ export function SearchChoose(props) {
       <img src="https://i.imgur.com/viSeXcY.png" className="logoArty" onClick={() => window.location.hash = "/"} />
 
 
-<<<<<<< HEAD
-      <button  className="homeButton" onClick = {eventHandlerForHomeClickACB}> 
+      <button  className="homeButton" onClick = {() => eventHandlerForHomeClickACB}> 
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
                <path fillRule="evenodd" d="M11.354 1.146a.5.5 0 0 1 0 .708L5.207 8l6.147 6.146a.5.5 0 0 1-.708.708l-6.5-6.5a.5.5 0 0 1 0-.708l6.5-6.5a.5.5 0 0 1 .708 0z"/>
                </svg>
           </button>
-=======
-      <button className="homeButton">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
-          <path fillRule="evenodd" d="M11.354 1.146a.5.5 0 0 1 0 .708L5.207 8l6.147 6.146a.5.5 0 0 1-.708.708l-6.5-6.5a.5.5 0 0 1 0-.708l6.5-6.5a.5.5 0 0 1 .708 0z" />
-        </svg>
-      </button>
->>>>>>> feature/myCollections
 
 
       <div className="chooseImage">
@@ -90,8 +88,8 @@ export function SearchChoose(props) {
         <div className="artTitle">{props.art.art_name}</div>
 
         <div className="buttonGroup">
-          <button className="addCollection" onClick={() => handleAddToCollectionACB()}>Add To Collection</button>
-          <button className="addJournal">Add To Journal</button>
+          <button className="addCollection" onClick={handleAddToCollectionACB}>Add To Collection</button>
+          <button className="addJournal" onClick={(() => handleAddToJournalClickACB())}>Add To Journal</button>
         </div>
 
         <div className="info">

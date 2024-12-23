@@ -1,6 +1,5 @@
 import { intercept } from 'mobx';
 import sanitizeHtml from 'sanitize-html'; 
-import { URLParamsForImage } from './apiCall';
 import { getArtWorkByID, getArtWorksSearch, URLParamsForImage} from './apiCall';
 
 
