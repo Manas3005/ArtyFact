@@ -27,6 +27,7 @@
         "react-router-dom": "^6.28.0",
         "sanitize-html": "^2.13.1",
         "use-count-up": "^3.0.1",
+        "uuid": "^11.0.3",
         "vite-plugin-react": "^4.0.1"
     }
 }
