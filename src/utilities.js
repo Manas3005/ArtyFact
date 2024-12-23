@@ -1,6 +1,7 @@
 import { intercept } from 'mobx';
 import sanitizeHtml from 'sanitize-html'; 
-import { getArtWorkByID, getArtWorksSearch, URLParamsForImage} from './apiCall';
+import { getArtWorkByID, getArtWorksSearch} from './apiCall';
+import { URLParamsForImage } from './apiCall';
 
 export const cleanHtmlContent = (html) => {
     return sanitizeHtml(html, {
@@ -134,6 +135,44 @@ export function updateCollectionFields(collection, title, description) {
     };
 }
 
+export function addArtWorkToCollection(collections, artWork, collection_id) {
+    /*console.log(
+        "These are the collections:", collections,
+        "This is the artWork:", artWork,
+        "this is the id: ", collection_id
+    );*/
+
+    return collections.map(collection => {
+        console.log(collection.collection_id);
+        if (collection.collection_id == collection_id) {
+            return {
+                ...collection,
+                artWorks: [...collection.artWorks, { 
+                    artWork_id: artWork.artWork_id,
+                    artistName: artWork.artist,
+                    artWorkTitle: artWork.art_name,
+                    image_URL: URLParamsForImage(artWork.image_id),
+                }]
+            };
+        }
+        return collection; 
+    });
+}
+
+export function parseCollectionDropDown(collections) {
+    console.log("These are the collections in utility", collections);
+    return [...collections].map((collection) => {
+        return {
+            collection_id: collection.collection_id,
+            collection_title: collection.collection_title,
+        }
+    });
+}
+
+
+
+
+
 export function removeArtworkById(collection, artWorkId) {
     return {
         ...collection,
@@ -142,10 +181,4 @@ export function removeArtworkById(collection, artWorkId) {
 }
 
 
-export function renderEntryArtWorkPath (ID){
-    const imagePath = URLParamsForImage(ID)
-    console.log("IMAGE PATH IS", imagePath)
-    return conditionalRenderHelperCB(ID, "/image/defaultArtwork.png", URLParamsForImage(ID))
-}
- 
 
