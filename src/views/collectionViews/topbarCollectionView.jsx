@@ -16,11 +16,6 @@ export function TopbarCollectionView(props) {
      * 
      */
 
-    
-
-
-
-
     console.log("This is the props in topbarcollectionview", props);
 
     const [title, setTitle] = useState(props.collection ? props.collection.collection_title : "");

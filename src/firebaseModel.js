@@ -383,7 +383,13 @@ async function persistenceToModelForMyCollection(collections, dispatchHook) {
 async function persistenceToModelForSingleCollection(collection, dispatchHook) {
     console.log("This is a single collection (from firebase) with the IDs we are going to search upon now", collection);
     if (!collection || !collection.collectionArray.artWorkIDs || collection.collectionArray.artWorkIDs.length === 0) {
-        dispatchHook(setCollection(collection));
+        const obj =  {
+            collection_id: collection.collectionArray.collectionId,
+            collection_title: collection.collectionArray.collectionTitle,
+            collection_description: collection.collectionArray.collectionDescription,
+            artWorks: [],
+        };
+        dispatchHook(setCollection(obj));
     }
     else {
         console.log("we are in else");
