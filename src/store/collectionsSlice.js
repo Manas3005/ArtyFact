@@ -42,7 +42,19 @@ export const myCollections = createSlice({
             console.log("This is the payload in editCollectionTitle", action.payload);
             state.singleCollectionArray = action.payload;
             console.log("the store after updating", state.singleCollectionArray);
-        }
+        },
+        addArtWorkToCollection: (state, action) => {
+            /**
+             * I denna lägger vi till för en single collection? Men singleColletion är endast till för att visa en single collection,
+             * alltså är det inte den vi vill uppdatera. Det är collectionsArray, vi behöver alltså UI för att visa vilka collections det finns
+             * och när man trycker på en av de collections så ska fylla den specifika collection med vår 
+             * Vad förväntar vi oss få in i denna?
+             * Vi kan tänka oss få in en ny collectionsArray som vi vill spara.
+             */
+            console.log("This is the payload in addArtWorkToCollection", action.payload);
+            state.singleCollectionArray = action.payload;
+            console.log("the store after updating", state.singleCollectionArray);
+        },
         
     }
 })
