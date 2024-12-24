@@ -5,7 +5,7 @@ export const myJournalEntries = createSlice({
     initialState: {
         entries: [], // Array to store journal entries
         latestEntryID:0,
-        selectedEntryID: '',
+        selectedEntryID: null,
         selectedArtworkID:null,
         temporaryContent:null
     },

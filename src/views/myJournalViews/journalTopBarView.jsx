@@ -6,7 +6,11 @@ export function JournalTopBarView(props){
     
     function handleBackToHomeClickedACB (){
         props.onExitContentPage();
+        if(props.isJournalEntrySelected){
+        props.defaultSelectedEntryID()
+        };
         return window.location.hash = '#/homepage'
+        
     }
 
     function handleAddNewEntryClickedACB (){
@@ -20,6 +24,7 @@ export function JournalTopBarView(props){
         if (!props.isJournalEntrySelected){
             return window.location.hash = '#/collections'
         } else {
+            props.defaultSelectedEntryID();
             return window.location.hash = '#/myjournals'
         }
     }
@@ -82,3 +87,4 @@ export function JournalTopBarView(props){
     ) 
 
 }
+

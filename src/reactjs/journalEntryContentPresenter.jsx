@@ -1,6 +1,6 @@
 import { EntryContentView } from "../views/myJournalViews/entryContentView";
 import { JournalTopBarView } from "../views/myJournalViews/journalTopBarView";
-import { removeEntry,setSelectedArtworkID } from "../store/journalsSlice";
+import { removeEntry,setSelectedArtworkID,setSelectedEntryID } from "../store/journalsSlice";
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
 
@@ -40,12 +40,18 @@ function JournalEntryContent (props){
     function defaultSelectedArtworkIDACB (){
         dispatch(setSelectedArtworkID(null))
     }
+
+    function defaultSelectedEntryIDACB (){
+        dispatch(setSelectedEntryID(null))
+    }
+
         return (<div>
         
             <JournalTopBarView isJournalEntrySelected={true} 
                                 pageHeading={selectedEntry.title} 
                                 topRightButtonText={"Back To My Journals"}
                                 onExitContentPage={defaultSelectedArtworkIDACB}
+                                defaultSelectedEntryID={defaultSelectedEntryIDACB}
                                 
                                 userID={userUID} 
                                 userName={userDisplayName} 
@@ -66,3 +72,4 @@ function JournalEntryContent (props){
 }
 
 export {JournalEntryContent}
+
