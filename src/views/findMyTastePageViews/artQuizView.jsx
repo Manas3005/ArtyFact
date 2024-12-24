@@ -441,7 +441,7 @@ export function ArtQuizView (props){
               <div style={{ textAlign: 'center' }}>
 
                   <img 
-                  src="public/image/artQuizBackground.gif" 
+                  src="/image/artQuizBackground.gif" 
                   className="quizCompleted" 
                   alt="Loading Quiz Results" 
                   />
@@ -481,7 +481,7 @@ export function ArtQuizView (props){
         <div style={{ textAlign: 'center' }}>
 
             <img 
-            src="public/image/artQuizBackground.gif" 
+            src="/image/artQuizBackground.gif" 
             className="quizCompleted" 
             alt="Loading Art Quiz" 
             />
